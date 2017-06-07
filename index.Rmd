@@ -1,7 +1,6 @@
 --- 
-title: "Methods for air data analysis"
+title: ""
 author: ""
-date: 'Updated `r format(Sys.Date(),"%b %d, %Y")`'
 knit: "bookdown::render_book"
 fontsize: 14pt
 monofont: "Source Code Pro"
@@ -16,21 +15,26 @@ github-repo: MPCA-air/air-methods
 cover-image: images/cover.jpeg 
 ---
 
-# Introduction {-}
 
+
+
+# Introduction {-}
+<div style= "margin-top: -25px;">
+_Updated `r format(Sys.Date(),"%b %d, %Y")`_
+</div>  
 ```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), fig.link='https://www.crcpress.com/product/isbn/9781138700109'}
 knitr::include_graphics('images/cover.jpeg', dpi = NA)
 ```
 
 
-This guide describes the methods used at the MPCA to analyze air monitoring and modeling data. The charts and code found in this guide were produced using the freely available R statistical software. To follow along with the examples, you can download a copy of R to your computer from the [r-project](https://cran.r-project.org/) or open [R-Fiddle](http://www.r-fiddle.org/#/) in your browser. 
+This guide describes the methods used at the MPCA to analyze air monitoring and modeling data. The charts and code found in this guide were produced using the freely available R statistical software. To follow along with the examples, you can download a copy of R to your computer from the [r-project](https://cran.r-project.org/) or by using [R-Fiddle](http://www.r-fiddle.org/#/) in your browser. 
 
 
 ## Edit this document {-}
 This guide lives on GitHub.  
 
-- To make changes go to [github.com/MPCA-air/air-methods](https://github.com/rstudio/MPCA-air/edit/master/air-methods/index.Rmd) and click [ _Fork_ ].  
--  To suggest edits go to [github.com/MPCA-air/air-methods/issues](https://github.com/MPCA-air/air-methods/issues) and click [ _New issue_ ].
+- To make changes go to [github.com/MPCA-air/air-methods](https://github.com/rstudio/MPCA-air/edit/master/air-methods/index.Rmd) and click [ Fork ].  
+-  To suggest edits go to [github.com/MPCA-air/air-methods/issues](https://github.com/MPCA-air/air-methods/issues) and click [ New issue ].
 
 
         

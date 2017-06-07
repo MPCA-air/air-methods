@@ -4,6 +4,7 @@ bookdown::gitbook:
     sharing: false
     download: pdf
     toc:
+      collapse: section
       before: |
         <li><a href="./">Methods for air data analysis</a></li>
       after: |
