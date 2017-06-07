@@ -1,0 +1,240 @@
+\documentclass[14pt,]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+    \setmonofont[Mapping=tex-ansi,Scale=0.7]{Source Code Pro}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Methods for air data analysis},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Methods for air data analysis}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{}
+  \preauthor{}\postauthor{}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{Updated Jun 07, 2017}
+
+\usepackage{booktabs}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter*{Introduction}\label{introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+This guide describes the methods used at the MPCA to analyze air
+monitoring and modeling data. The charts and code found in this guide
+were produced using the freely available R statistical software. To
+follow along with the examples, you can download a copy of R to your
+computer from the \href{https://cran.r-project.org/}{r-project} or open
+\href{http://www.r-fiddle.org/\#/}{R-Fiddle} in your browser.
+
+\section*{Edit this document}\label{edit-this-document}
+\addcontentsline{toc}{section}{Edit this document}
+
+This guide lives on GitHub. To suggest edits go to
+\href{https://github.com/MPCA-air/air-methods/issues}{github.com/MPCA-air/air-methods/issues}
+and click on \textbf{New issue}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\item
+\begin{verbatim}
+Data cleaning  
+\end{verbatim}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Duplicates\\
+  \item
+    POCs
+  \end{enumerate}
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\item
+\begin{verbatim}
+Detection limits  
+  - Below detection 
+  - Multiple detection limits  
+\end{verbatim}
+\item
+\begin{verbatim}
+Confidence limits  
+\end{verbatim}
+\item
+\begin{verbatim}
+Site comparisons  
+\end{verbatim}
+\item
+\begin{verbatim}
+Pollution rose  
+i.    openair  
+\end{verbatim}
+\item
+\begin{verbatim}
+Calendar plots  
+\end{verbatim}
+\item
+\begin{verbatim}
+ Boxplots  
+i.    Log  
+ii.   Outliers  
+\end{verbatim}
+\item
+\begin{verbatim}
+Time series trends  
+i.    Seasonality  
+ii.    Year to year  
+\end{verbatim}
+\item
+\begin{verbatim}
+Change points (before & after intervention)  
+\end{verbatim}
+\item
+\begin{verbatim}
+  Maps  
+i.    Zonal averaging  
+ii.    Kriging  
+\end{verbatim}
+\end{enumerate}
+
+\chapter{Data cleaning}\label{data-cleaning}
+
+\protect\hyperlink{start}{Start}
+
+\hypertarget{start}{\section{Duplicate obersvations}\label{start}}
+
+You can label chapter and section titles using \texttt{\{\#label\}}
+after them, e.g., we can reference \ref{start}. If you do not manually
+label them, there will be automatic labels anyway, e.g., \ref{methods}.
+
+Figures and tables with captions will be placed in \texttt{figure} and
+\texttt{table} environments, respectively.
+
+You can write citations, too. For example, we are using the
+\textbf{bookdown} package \citep{R-bookdown} in this sample book, which
+was built on top of R Markdown and \textbf{knitr} \citep{xie2015}. ddd
+aaa
+
+\section{Multiple monitors (POCs)}\label{multiple-monitors-pocs}
+
+\chapter{Detection limits}\label{detection-limits}
+
+Here is a review of existing methods.
+
+\section{Below detection}\label{below-detection}
+
+\section{Multiple detection limits}\label{multiple-detection-limits}
+
+\chapter{Confidence limits}\label{confidence-limits}
+
+We describe our methods in this chapter.
+
+\chapter{Site comparisons}\label{site-comparisons}
+
+Some \emph{significant} applications are demonstrated in this chapter.
+
+\section{Example one}\label{example-one}
+
+\chapter{Wind \& pollution roses}\label{wind-pollution-roses}
+
+We have finished a nice book.
+
+\section{\texorpdfstring{\emph{openair}
+package}{openair package}}\label{openair-package}
+
+\bibliography{packages,book}
+
+
+\end{document}
