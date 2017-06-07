@@ -1,0 +1,5 @@
+book_filename: "air-methods"
+chapter_name: !expr function(i) gsub(".*", "", i)
+edit:
+  link: https://github.com/mpca-air/air-methods/edit/master/%s
+  text: "Edit"
