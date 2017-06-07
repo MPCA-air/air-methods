@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Methods for air data analysis</title>
+  <meta name="description" content="Methods for air data analysis">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Methods for air data analysis" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/MPCA-air/air-methods" />
+  <meta property="og:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
+  
+  <meta name="github-repo" content="MPCA-air/air-methods" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Methods for air data analysis" />
+  
+  
+  <meta name="twitter:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="boxplots.html">
+<link rel="next" href="maps.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Methods for air data analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#edit-this-document"><i class="fa fa-check"></i>Edit this document</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="data-cleaning.html"><a href="data-cleaning.html"><i class="fa fa-check"></i><b>1</b> Data cleaning</a><ul>
+<li class="chapter" data-level="1.1" data-path="data-cleaning.html"><a href="data-cleaning.html#start"><i class="fa fa-check"></i><b>1.1</b> Duplicate obersvations</a></li>
+<li class="chapter" data-level="1.2" data-path="data-cleaning.html"><a href="data-cleaning.html#multiple-monitors-pocs"><i class="fa fa-check"></i><b>1.2</b> Multiple monitors (POCs)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>2</b> Detection limits</a><ul>
+<li class="chapter" data-level="2.1" data-path="detection-limits.html"><a href="detection-limits.html#below-detection"><i class="fa fa-check"></i><b>2.1</b> Below detection</a></li>
+<li class="chapter" data-level="2.2" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>2.2</b> Multiple detection limits</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="confidence-limits.html"><a href="confidence-limits.html"><i class="fa fa-check"></i><b>3</b> Confidence limits</a></li>
+<li class="chapter" data-level="4" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>4</b> Site comparisons</a><ul>
+<li class="chapter" data-level="4.1" data-path="site-comparisons.html"><a href="site-comparisons.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="wind-pollution-roses.html"><a href="wind-pollution-roses.html"><i class="fa fa-check"></i><b>5</b> Wind &amp; pollution roses</a><ul>
+<li class="chapter" data-level="5.1" data-path="wind-pollution-roses.html"><a href="wind-pollution-roses.html#openair-package"><i class="fa fa-check"></i><b>5.1</b> <em>openair</em> package</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="calendar-plots.html"><a href="calendar-plots.html"><i class="fa fa-check"></i><b>6</b> Calendar plots</a><ul>
+<li class="chapter" data-level="6.1" data-path="calendar-plots.html"><a href="calendar-plots.html#tableau"><i class="fa fa-check"></i><b>6.1</b> Tableau</a></li>
+<li class="chapter" data-level="6.2" data-path="calendar-plots.html"><a href="calendar-plots.html#r"><i class="fa fa-check"></i><b>6.2</b> R</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="boxplots.html"><a href="boxplots.html"><i class="fa fa-check"></i><b>7</b> Boxplots</a><ul>
+<li class="chapter" data-level="7.1" data-path="boxplots.html"><a href="boxplots.html#log-boxplot"><i class="fa fa-check"></i><b>7.1</b> Log boxplot</a></li>
+<li class="chapter" data-level="7.2" data-path="boxplots.html"><a href="boxplots.html#outliers"><i class="fa fa-check"></i><b>7.2</b> Outliers</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time series</a><ul>
+<li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>8.1</b> Seasonality</a></li>
+<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#change-points-before-after"><i class="fa fa-check"></i><b>8.2</b> Change points (before &amp; after)</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>9</b> Maps</a><ul>
+<li class="chapter" data-level="9.1" data-path="maps.html"><a href="maps.html#kriging"><i class="fa fa-check"></i><b>9.1</b> Kriging</a></li>
+<li class="chapter" data-level="9.2" data-path="maps.html"><a href="maps.html#spatial-averaging-or-aggregation"><i class="fa fa-check"></i><b>9.2</b> Spatial averaging or aggregation</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>10</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Methods for air data analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="time-series" class="section level1">
+<h1><span class="header-section-number"></span> Time series</h1>
+<p>The trend is up.</p>
+<div id="seasonality" class="section level2">
+<h2><span class="header-section-number">8.1</span> Seasonality</h2>
+</div>
+<div id="change-points-before-after" class="section level2">
+<h2><span class="header-section-number">8.2</span> Change points (before &amp; after)</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="boxplots.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="maps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/MPCA-air/air-methods/edit/master/08-time_series.Rmd",
+"text": "Edit"
+},
+"download": ["air-methods.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
