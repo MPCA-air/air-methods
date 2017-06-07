@@ -1,0 +1,9 @@
+# Time series
+
+The trend is up.
+
+
+## Seasonality
+
+
+## Change points (before & after)
