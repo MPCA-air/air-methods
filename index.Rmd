@@ -16,8 +16,6 @@ cover-image: images/cover.jpeg
 ---
 
 
-
-
 # Introduction {-}
 <div style= "margin-top: -25px;">
 _Updated `r format(Sys.Date(),"%b %d, %Y")`_
@@ -33,7 +31,7 @@ This guide describes the methods used at the MPCA to analyze air monitoring and 
 ## Edit this document {-}
 This guide lives on GitHub.  
 
-- To make changes go to [github.com/MPCA-air/air-methods](https://github.com/rstudio/MPCA-air/edit/master/air-methods/index.Rmd) and click [ Fork ].  
+- To make changes go to [github.com/MPCA-air/air-methods](https://github.com/MPCA-air/air-methods) and click [ Fork ].  
 -  To suggest edits go to [github.com/MPCA-air/air-methods/issues](https://github.com/MPCA-air/air-methods/issues) and click [ New issue ].
 
 

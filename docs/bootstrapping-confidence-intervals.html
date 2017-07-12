@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/MPCA-air/air-methods" />
+  <meta property="og:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
+  
+  <meta name="github-repo" content="MPCA-air/air-methods" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="" />
+  
+  
+  <meta name="twitter:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="summary-statistics.html">
+<link rel="next" href="site-comparisons.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Methods for air data analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#edit-this-document"><i class="fa fa-check"></i>Edit this document</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="data-cleaning.html"><a href="data-cleaning.html"><i class="fa fa-check"></i><b>1</b> Data cleaning</a><ul>
+<li class="chapter" data-level="1.1" data-path="data-cleaning.html"><a href="data-cleaning.html#start"><i class="fa fa-check"></i><b>1.1</b> Duplicate obersvations</a></li>
+<li class="chapter" data-level="1.2" data-path="data-cleaning.html"><a href="data-cleaning.html#multiple-monitors-pocs"><i class="fa fa-check"></i><b>1.2</b> Multiple monitors (POCs)</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>2</b> Detection limits</a><ul>
+<li class="chapter" data-level="2.1" data-path="detection-limits.html"><a href="detection-limits.html#below-detection"><i class="fa fa-check"></i><b>2.1</b> Below detection</a></li>
+<li class="chapter" data-level="2.2" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>2.2</b> Multiple detection limits</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>3</b> Summary statistics</a></li>
+<li class="chapter" data-level="4" data-path="bootstrapping-confidence-intervals.html"><a href="bootstrapping-confidence-intervals.html"><i class="fa fa-check"></i><b>4</b> Bootstrapping confidence intervals</a><ul>
+<li class="chapter" data-level="4.0.1" data-path="bootstrapping-confidence-intervals.html"><a href="bootstrapping-confidence-intervals.html#packages"><i class="fa fa-check"></i><b>4.0.1</b> Packages</a></li>
+<li class="chapter" data-level="4.0.2" data-path="bootstrapping-confidence-intervals.html"><a href="bootstrapping-confidence-intervals.html#data-table"><i class="fa fa-check"></i><b>4.0.2</b> Data Table</a></li>
+<li class="chapter" data-level="4.0.3" data-path="bootstrapping-confidence-intervals.html"><a href="bootstrapping-confidence-intervals.html#bootstrapping"><i class="fa fa-check"></i><b>4.0.3</b> Bootstrapping</a></li>
+<li class="chapter" data-level="4.0.4" data-path="bootstrapping-confidence-intervals.html"><a href="bootstrapping-confidence-intervals.html#automate"><i class="fa fa-check"></i><b>4.0.4</b> Automate</a></li>
+<li class="chapter" data-level="4.0.5" data-path="bootstrapping-confidence-intervals.html"><a href="bootstrapping-confidence-intervals.html#results"><i class="fa fa-check"></i><b>4.0.5</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>5</b> Site comparisons</a><ul>
+<li class="chapter" data-level="5.1" data-path="site-comparisons.html"><a href="site-comparisons.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="boxplots.html"><a href="boxplots.html"><i class="fa fa-check"></i><b>6</b> Boxplots</a><ul>
+<li class="chapter" data-level="6.1" data-path="boxplots.html"><a href="boxplots.html#log-boxplot"><i class="fa fa-check"></i><b>6.1</b> Log boxplot</a></li>
+<li class="chapter" data-level="6.2" data-path="boxplots.html"><a href="boxplots.html#outliers"><i class="fa fa-check"></i><b>6.2</b> Outliers</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="calendar-plots.html"><a href="calendar-plots.html"><i class="fa fa-check"></i><b>7</b> Calendar plots</a><ul>
+<li class="chapter" data-level="7.1" data-path="calendar-plots.html"><a href="calendar-plots.html#tableau"><i class="fa fa-check"></i><b>7.1</b> Tableau</a></li>
+<li class="chapter" data-level="7.2" data-path="calendar-plots.html"><a href="calendar-plots.html#r"><i class="fa fa-check"></i><b>7.2</b> R</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="wind-pollution-roses.html"><a href="wind-pollution-roses.html"><i class="fa fa-check"></i><b>8</b> Wind &amp; pollution roses</a><ul>
+<li class="chapter" data-level="8.1" data-path="wind-pollution-roses.html"><a href="wind-pollution-roses.html#openair-package"><i class="fa fa-check"></i><b>8.1</b> <em>openair</em> package</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>9</b> Time series</a><ul>
+<li class="chapter" data-level="9.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>9.1</b> Seasonality</a></li>
+<li class="chapter" data-level="9.2" data-path="time-series.html"><a href="time-series.html#change-points-before-after"><i class="fa fa-check"></i><b>9.2</b> Change points (before &amp; after)</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>10</b> Maps</a><ul>
+<li class="chapter" data-level="10.1" data-path="maps.html"><a href="maps.html#kriging"><i class="fa fa-check"></i><b>10.1</b> Kriging</a></li>
+<li class="chapter" data-level="10.2" data-path="maps.html"><a href="maps.html#spatial-averaging-or-aggregation"><i class="fa fa-check"></i><b>10.2</b> Spatial averaging or aggregation</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bootstrapping-confidence-intervals" class="section level1">
+<h1><span class="header-section-number"></span> Bootstrapping confidence intervals</h1>
+<style type="text/css">
+  body, td {font-size: 18px;}
+  code.r{font-size: 18px;}
+  pre {font-size: 18px} 
+</style>
+<div id="packages" class="section level3">
+<h3><span class="header-section-number">4.0.1</span> Packages</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(readr)</code></pre></div>
+</div>
+<div id="data-table" class="section level3">
+<h3><span class="header-section-number">4.0.2</span> Data Table</h3>
+<p>Our data is organized by monitoring site and date. Here’s a sample.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">AQS_ID</th>
+<th align="left">Date</th>
+<th align="right">Conc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">270535501</td>
+<td align="left">2009-07-30</td>
+<td align="right">0.00148</td>
+</tr>
+<tr class="even">
+<td align="right">270535501</td>
+<td align="left">2009-09-30</td>
+<td align="right">0.00064</td>
+</tr>
+<tr class="odd">
+<td align="right">270535501</td>
+<td align="left">2009-11-30</td>
+<td align="right">0.34256</td>
+</tr>
+<tr class="even">
+<td align="right">270535501</td>
+<td align="left">2009-12-30</td>
+<td align="right">0.00064</td>
+</tr>
+<tr class="odd">
+<td align="right">270535502</td>
+<td align="left">2009-03-30</td>
+<td align="right">0.26219</td>
+</tr>
+<tr class="even">
+<td align="right">270535502</td>
+<td align="left">2009-07-30</td>
+<td align="right">0.01113</td>
+</tr>
+<tr class="odd">
+<td align="right">270535502</td>
+<td align="left">2009-09-30</td>
+<td align="right">0.00044</td>
+</tr>
+<tr class="even">
+<td align="right">270535502</td>
+<td align="left">2009-11-30</td>
+<td align="right">0.00127</td>
+</tr>
+<tr class="odd">
+<td align="right">270535502</td>
+<td align="left">2009-12-30</td>
+<td align="right">0.00113</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="bootstrapping" class="section level3">
+<h3><span class="header-section-number">4.0.3</span> Bootstrapping</h3>
+<p>We currently use the <code>EnvStats</code> package to generate our summary values. It has built in functions to accunt for non-detect data and allows for different distributions. However, if you’re not dealing with non-detects it’s probably simple enough to boot things yourself.</p>
+<p>Before you start you’ll want to set the random number generator to ensure you’ll be able to reproduce your results. I’ll use <code>#27</code> below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">27</span>)</code></pre></div>
+<p></br><br />
+The general idea is to take a random sample from the data set, generate the statistic that you’re interested in, record it, then rinse and repeat. Below is the code for how to resample a single site.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filter data to a single site</span>
+df_site1 &lt;-<span class="st"> </span><span class="kw">filter</span>(df, AQS_ID ==<span class="st"> </span>AQS_ID[<span class="dv">1</span>])
+
+<span class="co"># Pull random sample</span>
+<span class="co"># `replace=T` allows for the same value to be pulled multiple times</span>
+<span class="co"># `size=nrow(df)` ensures the number of observations in the new table to match the original </span>
+random_df &lt;-<span class="st"> </span><span class="kw">sample</span>(df_site1$Conc, <span class="dt">replace=</span>T)
+
+<span class="co"># Generate summary statistic</span>
+<span class="kw">quantile</span>(random_df, <span class="fl">0.1</span>)</code></pre></div>
+<pre><code>##     10% 
+## 0.00064</code></pre>
+<p>To repeat this 3,000 times we can wrap these steps into a <code>resample</code> function, and then use <code>sapply</code> to collect the results.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create  resample function</span>
+resample_Conc &lt;-<span class="st"> </span>function(<span class="dt">data=</span> df_site1$Conc, <span class="dt">Conc_pct=</span> <span class="fl">0.10</span>){
+
+random_df &lt;-<span class="st"> </span><span class="kw">sample</span>(data, <span class="dt">replace=</span>T)
+
+<span class="kw">quantile</span>(random_df, Conc_pct, <span class="dt">na.rm=</span>T)[[<span class="dv">1</span>]]
+
+}
+
+<span class="co"># Repeat using `sapply`</span>
+repeats &lt;-<span class="st"> </span><span class="dv">3000</span>
+
+booted_10pct &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span>:repeats, <span class="dt">FUN=</span>function(x) <span class="kw">resample_Conc</span>(df_site1$Conc))
+
+<span class="co"># The 50th percentile or median Conc</span>
+<span class="kw">median</span>(booted_10pct, <span class="dt">na.rm=</span>T)</code></pre></div>
+<pre><code>## [1] 0.00064</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Return the 95th percentile of the booted concentrations</span>
+<span class="kw">quantile</span>(booted_10pct, <span class="fl">0.95</span>, <span class="dt">na.rm=</span>T)[[<span class="dv">1</span>]]</code></pre></div>
+<pre><code>## [1] 0.00148</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Force the 95th percentile to be a recorded value</span>
+<span class="kw">sort</span>(booted_10pct)[repeats*.<span class="dv">95</span> +<span class="dv">1</span>]</code></pre></div>
+<pre><code>## [1] 0.00148</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Upper and lower confidence interval around the median</span>
+<span class="kw">quantile</span>(booted_10pct, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="dt">na.rm=</span>T)</code></pre></div>
+<pre><code>##     2.5%      50%    97.5% 
+## 0.000640 0.000640 0.103216</code></pre>
+</div>
+<div id="automate" class="section level3">
+<h3><span class="header-section-number">4.0.4</span> Automate</h3>
+<p>To finish up, throw these steps into your personal <code>boot</code> function, and then run it on each site using <code>group_by</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create boot function</span>
+boot_low_Conc &lt;-<span class="st"> </span>function(<span class="dt">data=</span>df$Conc, <span class="dt">Conc_pct=</span><span class="fl">0.10</span>, <span class="dt">conf_int=</span><span class="fl">0.95</span>, <span class="dt">repeats=</span><span class="dv">3000</span>){
+
+alpha &lt;-<span class="st"> </span>(<span class="dv">1</span> -<span class="st"> </span>conf_int)/<span class="dv">2</span>
+
+booted_10pct &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span>:repeats, <span class="dt">FUN=</span>function(x) <span class="kw">resample_Conc</span>(data, Conc_pct))
+
+<span class="co"># Upper and lower confidence interval around the median</span>
+<span class="kw">list</span>(<span class="kw">quantile</span>(booted_10pct, <span class="kw">c</span>(alpha, <span class="fl">0.5</span>, <span class="dv">1</span>-alpha), <span class="dt">na.rm=</span>T))
+
+}
+
+<span class="co"># Use `group_by` to send data for each site to your boot function</span>
+conc_summary &lt;-<span class="st"> </span><span class="kw">group_by</span>(df, AQS_ID) %&gt;%<span class="st"> </span>
+<span class="kw">mutate</span>(<span class="dt">boot_results =</span> <span class="kw">boot_low_Conc</span>(Conc, <span class="dt">Conc_pct=</span><span class="fl">0.10</span>, <span class="dt">conf_int=</span><span class="fl">0.95</span>)) %&gt;%
+<span class="kw">summarize</span>(<span class="dt">Conc_10pct  =</span>  <span class="kw">quantile</span>(Conc, <span class="fl">0.10</span>, <span class="dt">na.rm=</span>T)[[<span class="dv">1</span>]],
+<span class="dt">Low_CL95_conc   =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">1</span>]], 
+<span class="dt">Boot_conc       =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">2</span>]], 
+<span class="dt">Upper_CL95_conc =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">3</span>]])  </code></pre></div>
+</div>
+<div id="results" class="section level3">
+<h3><span class="header-section-number">4.0.5</span> Results</h3>
+<p>The booted confidence limits</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">AQS_ID</th>
+<th align="right">Conc_10pct</th>
+<th align="right">Low_CL95_conc</th>
+<th align="right">Boot_conc</th>
+<th align="right">Upper_CL95_conc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">270535501</td>
+<td align="right">0.000640</td>
+<td align="right">0.00064</td>
+<td align="right">0.000640</td>
+<td align="right">0.103216</td>
+</tr>
+<tr class="even">
+<td align="right">270535502</td>
+<td align="right">0.000716</td>
+<td align="right">0.00044</td>
+<td align="right">0.000716</td>
+<td align="right">0.005214</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="summary-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="site-comparisons.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/MPCA-air/air-methods/edit/master/31-Bootstrapping.Rmd",
+"text": "Edit"
+},
+"download": ["air-methods.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
