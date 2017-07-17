@@ -1,6 +1,6 @@
 # Data cleaning
 
-[Start](#start)
+
 
 ## Duplicate obersvations {#start}
 
@@ -12,5 +12,9 @@ Figures and tables with captions will be placed in `figure` and `table` environm
 You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015]. ddd aaa
 
 
-## Multiple monitors (POCs)  
+## Multiple air monitors (POCs)   
+
+Click the link below to jump to the top of the page.
+
+[Jump to top](#start)
 

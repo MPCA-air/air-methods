@@ -1,20 +1,13 @@
-# Bootstrapping
+## Bootstrapping
 
-  
-<style type="text/css">
-  body, td {font-size: 18px;}
-  code.r{font-size: 18px;}
-  pre {font-size: 18px} 
-</style>
-  
-  
+
 ### Packages
 ```{r message=F}
 library(dplyr)
 library(readr)
 ```
 
-### Data Table
+### Ex. data table
 
 Our data is organized by monitoring site and date. Here's a sample.
 
@@ -36,7 +29,7 @@ df <- read_csv(
 kable(df)
 ```
 
-### Bootstrapping
+### Bootstrap function
 
 We currently use the `EnvStats` package to generate our summary values. It has built in functions to accunt for non-detect data and allows for different distributions. However, if you're not dealing with non-detects it is simple enough to boot things yourself.
 

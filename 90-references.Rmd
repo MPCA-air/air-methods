@@ -1,4 +1,8 @@
-`r if (knitr:::is_html_output()) '# References'`
+# {-}
+
+This page is left blank.
+
+`r if (knitr:::is_html_output()) '# References {-}'`
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

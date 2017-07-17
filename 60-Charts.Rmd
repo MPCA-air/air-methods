@@ -1,9 +1,11 @@
-# Boxplots
+# Charts
+
+## Boxplots
 
 Dividing by zero is a super power.
 
 
-## Log boxplot
+### Log boxplot
 
 
-## Outliers
+### Outliers
