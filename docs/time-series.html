@@ -45,6 +45,11 @@
 
 
 
+<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -101,28 +106,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Methods for air data analysis</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#edit-this-book"><i class="fa fa-check"></i>Edit this book</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="data-cleaning.html"><a href="data-cleaning.html"><i class="fa fa-check"></i><b>1</b> Data cleaning</a><ul>
-<li class="chapter" data-level="1.1" data-path="data-cleaning.html"><a href="data-cleaning.html#start"><i class="fa fa-check"></i><b>1.1</b> Duplicate obersvations</a></li>
-<li class="chapter" data-level="1.2" data-path="data-cleaning.html"><a href="data-cleaning.html#multiple-air-monitors-pocs"><i class="fa fa-check"></i><b>1.2</b> Multiple air monitors (POCs)</a></li>
+<li class="chapter" data-level="1.1" data-path="data-cleaning.html"><a href="data-cleaning.html#missing"><i class="fa fa-check"></i><b>1.1</b> Remove blank, NULL, and missing values</a></li>
+<li class="chapter" data-level="1.2" data-path="data-cleaning.html"><a href="data-cleaning.html#quals"><i class="fa fa-check"></i><b>1.2</b> Remove <code>Qualified</code> data</a></li>
+<li class="chapter" data-level="1.3" data-path="data-cleaning.html"><a href="data-cleaning.html#dups"><i class="fa fa-check"></i><b>1.3</b> Duplicate obersvations</a></li>
+<li class="chapter" data-level="1.4" data-path="data-cleaning.html"><a href="data-cleaning.html#pocs"><i class="fa fa-check"></i><b>1.4</b> Multiple air monitors (POCs)</a></li>
+<li class="chapter" data-level="1.5" data-path="data-cleaning.html"><a href="data-cleaning.html#outs"><i class="fa fa-check"></i><b>1.5</b> Outliers</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>2</b> Detection limits</a><ul>
 <li class="chapter" data-level="2.1" data-path="detection-limits.html"><a href="detection-limits.html#below-detection"><i class="fa fa-check"></i><b>2.1</b> Below detection</a></li>
 <li class="chapter" data-level="2.2" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>2.2</b> Multiple detection limits</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>3</b> Summary statistics</a><ul>
-<li class="chapter" data-level="3.1" data-path="summary-statistics.html"><a href="summary-statistics.html#bootstrapping"><i class="fa fa-check"></i><b>3.1</b> Bootstrapping</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="summary-statistics.html"><a href="summary-statistics.html#packages"><i class="fa fa-check"></i><b>3.1.1</b> Packages</a></li>
-<li class="chapter" data-level="3.1.2" data-path="summary-statistics.html"><a href="summary-statistics.html#ex.-data-table"><i class="fa fa-check"></i><b>3.1.2</b> Ex. data table</a></li>
-<li class="chapter" data-level="3.1.3" data-path="summary-statistics.html"><a href="summary-statistics.html#bootstrap-function"><i class="fa fa-check"></i><b>3.1.3</b> Bootstrap function</a></li>
-<li class="chapter" data-level="3.1.4" data-path="summary-statistics.html"><a href="summary-statistics.html#automate"><i class="fa fa-check"></i><b>3.1.4</b> Automate</a></li>
-<li class="chapter" data-level="3.1.5" data-path="summary-statistics.html"><a href="summary-statistics.html#results"><i class="fa fa-check"></i><b>3.1.5</b> Results</a></li>
-</ul></li>
+<li class="chapter" data-level="3.1" data-path="summary-statistics.html"><a href="summary-statistics.html#bootstrapping"><i class="fa fa-check"></i><b>3.1</b> Bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>4</b> Site comparisons</a><ul>
 <li class="chapter" data-level="4.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals</a></li>
 </ul></li>
-<li><a href="section.html#section"></a></li>
 <li class="chapter" data-level="5" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>5</b> Charts</a><ul>
 <li class="chapter" data-level="5.1" data-path="charts.html"><a href="charts.html#boxplots"><i class="fa fa-check"></i><b>5.1</b> Boxplots</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="charts.html"><a href="charts.html#log-boxplot"><i class="fa fa-check"></i><b>5.1.1</b> Log boxplot</a></li>
@@ -142,11 +145,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="7" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>7</b> Maps</a><ul>
 <li class="chapter" data-level="7.1" data-path="maps.html"><a href="maps.html#kriging"><i class="fa fa-check"></i><b>7.1</b> Kriging</a></li>
-<li class="chapter" data-level="7.2" data-path="maps.html"><a href="maps.html#spatial-averaging-or-aggregation"><i class="fa fa-check"></i><b>7.2</b> Spatial averaging or aggregation</a></li>
+<li class="chapter" data-level="7.2" data-path="maps.html"><a href="maps.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>7.2</b> Spatial averaging and aggregation</a></li>
 </ul></li>
-<li><a href="section-1.html#section-1"></a></li>
+<li class="chapter" data-level="" data-path="edit-this-book-1.html"><a href="edit-this-book-1.html"><i class="fa fa-check"></i>Edit this book</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="" data-path="edit-this-document.html"><a href="edit-this-document.html"><i class="fa fa-check"></i>Edit this document</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
 

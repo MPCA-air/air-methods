@@ -2,4 +2,5 @@
 
 ## Confidence intervals 
 
-Some _significant_ applications are demonstrated in this chapter.
+Some _significant_ applications are demonstrated in this chapter.  
+

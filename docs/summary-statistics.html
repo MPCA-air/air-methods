@@ -45,6 +45,11 @@
 
 
 
+<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -101,28 +106,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Methods for air data analysis</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#edit-this-book"><i class="fa fa-check"></i>Edit this book</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="data-cleaning.html"><a href="data-cleaning.html"><i class="fa fa-check"></i><b>1</b> Data cleaning</a><ul>
-<li class="chapter" data-level="1.1" data-path="data-cleaning.html"><a href="data-cleaning.html#start"><i class="fa fa-check"></i><b>1.1</b> Duplicate obersvations</a></li>
-<li class="chapter" data-level="1.2" data-path="data-cleaning.html"><a href="data-cleaning.html#multiple-air-monitors-pocs"><i class="fa fa-check"></i><b>1.2</b> Multiple air monitors (POCs)</a></li>
+<li class="chapter" data-level="1.1" data-path="data-cleaning.html"><a href="data-cleaning.html#missing"><i class="fa fa-check"></i><b>1.1</b> Remove blank, NULL, and missing values</a></li>
+<li class="chapter" data-level="1.2" data-path="data-cleaning.html"><a href="data-cleaning.html#quals"><i class="fa fa-check"></i><b>1.2</b> Remove <code>Qualified</code> data</a></li>
+<li class="chapter" data-level="1.3" data-path="data-cleaning.html"><a href="data-cleaning.html#dups"><i class="fa fa-check"></i><b>1.3</b> Duplicate obersvations</a></li>
+<li class="chapter" data-level="1.4" data-path="data-cleaning.html"><a href="data-cleaning.html#pocs"><i class="fa fa-check"></i><b>1.4</b> Multiple air monitors (POCs)</a></li>
+<li class="chapter" data-level="1.5" data-path="data-cleaning.html"><a href="data-cleaning.html#outs"><i class="fa fa-check"></i><b>1.5</b> Outliers</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>2</b> Detection limits</a><ul>
 <li class="chapter" data-level="2.1" data-path="detection-limits.html"><a href="detection-limits.html#below-detection"><i class="fa fa-check"></i><b>2.1</b> Below detection</a></li>
 <li class="chapter" data-level="2.2" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>2.2</b> Multiple detection limits</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>3</b> Summary statistics</a><ul>
-<li class="chapter" data-level="3.1" data-path="summary-statistics.html"><a href="summary-statistics.html#bootstrapping"><i class="fa fa-check"></i><b>3.1</b> Bootstrapping</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="summary-statistics.html"><a href="summary-statistics.html#packages"><i class="fa fa-check"></i><b>3.1.1</b> Packages</a></li>
-<li class="chapter" data-level="3.1.2" data-path="summary-statistics.html"><a href="summary-statistics.html#ex.-data-table"><i class="fa fa-check"></i><b>3.1.2</b> Ex. data table</a></li>
-<li class="chapter" data-level="3.1.3" data-path="summary-statistics.html"><a href="summary-statistics.html#bootstrap-function"><i class="fa fa-check"></i><b>3.1.3</b> Bootstrap function</a></li>
-<li class="chapter" data-level="3.1.4" data-path="summary-statistics.html"><a href="summary-statistics.html#automate"><i class="fa fa-check"></i><b>3.1.4</b> Automate</a></li>
-<li class="chapter" data-level="3.1.5" data-path="summary-statistics.html"><a href="summary-statistics.html#results"><i class="fa fa-check"></i><b>3.1.5</b> Results</a></li>
-</ul></li>
+<li class="chapter" data-level="3.1" data-path="summary-statistics.html"><a href="summary-statistics.html#bootstrapping"><i class="fa fa-check"></i><b>3.1</b> Bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>4</b> Site comparisons</a><ul>
 <li class="chapter" data-level="4.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals</a></li>
 </ul></li>
-<li><a href="section.html#section"></a></li>
 <li class="chapter" data-level="5" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>5</b> Charts</a><ul>
 <li class="chapter" data-level="5.1" data-path="charts.html"><a href="charts.html#boxplots"><i class="fa fa-check"></i><b>5.1</b> Boxplots</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="charts.html"><a href="charts.html#log-boxplot"><i class="fa fa-check"></i><b>5.1.1</b> Log boxplot</a></li>
@@ -142,11 +145,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="7" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>7</b> Maps</a><ul>
 <li class="chapter" data-level="7.1" data-path="maps.html"><a href="maps.html#kriging"><i class="fa fa-check"></i><b>7.1</b> Kriging</a></li>
-<li class="chapter" data-level="7.2" data-path="maps.html"><a href="maps.html#spatial-averaging-or-aggregation"><i class="fa fa-check"></i><b>7.2</b> Spatial averaging or aggregation</a></li>
+<li class="chapter" data-level="7.2" data-path="maps.html"><a href="maps.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>7.2</b> Spatial averaging and aggregation</a></li>
 </ul></li>
-<li><a href="section-1.html#section-1"></a></li>
+<li class="chapter" data-level="" data-path="edit-this-book-1.html"><a href="edit-this-book-1.html"><i class="fa fa-check"></i>Edit this book</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="" data-path="edit-this-document.html"><a href="edit-this-document.html"><i class="fa fa-check"></i>Edit this document</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
 
@@ -170,16 +172,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="summary-statistics" class="section level1">
 <h1><span class="header-section-number"></span> Summary statistics</h1>
 <p>We describe our methods in this chapter.</p>
-
 <div id="bootstrapping" class="section level2">
 <h2><span class="header-section-number">3.1</span> Bootstrapping</h2>
-<div id="packages" class="section level3">
-<h3><span class="header-section-number">3.1.1</span> Packages</h3>
+<p>Bootstrapping provides methods for calculating summary statistics without the neccessity to make assumptions about whether the data is derived from a normal dirstribution.</p>
+<p>Packages</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(readr)</code></pre></div>
-</div>
-<div id="ex.-data-table" class="section level3">
-<h3><span class="header-section-number">3.1.2</span> Ex. data table</h3>
 <p>Our data is organized by monitoring site and date. Here’s a sample.</p>
 <table>
 <thead>
@@ -237,14 +235,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 </tbody>
 </table>
-</div>
-<div id="bootstrap-function" class="section level3">
-<h3><span class="header-section-number">3.1.3</span> Bootstrap function</h3>
-<p>We currently use the <code>EnvStats</code> package to generate our summary values. It has built in functions to accunt for non-detect data and allows for different distributions. However, if you’re not dealing with non-detects it is simple enough to boot things yourself.</p>
+<p>Bootstrap function</p>
+<p>We currently use the <code>EnvStats</code> package to generate our summary values. It has built in functions to accunt for non-detect data and allows for different distributions. However, if you’re not dealing with non-detects you can use a simple loop to boot things yourself.</p>
 <p>Before you start you’ll want to set the random number generator to ensure you’ll be able to reproduce your results. I’ll use <code>#27</code> below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">27</span>)</code></pre></div>
-<p></br><br />
-The general idea is to take a random sample from the data set, generate the statistic that you’re interested in, record it, then rinse and repeat. Below is the code for how to resample a single site.</p>
+<p>The general idea is to take a random sample from the data set, generate the statistic that you’re interested in, record it, then rinse and repeat. Below is the code for how to resample a single site.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filter data to a single site</span>
 df_site1 &lt;-<span class="st"> </span><span class="kw">filter</span>(df, AQS_ID ==<span class="st"> </span>AQS_ID[<span class="dv">1</span>])
 
@@ -285,9 +280,7 @@ booted_10pct &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span 
 <span class="kw">quantile</span>(booted_10pct, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="dt">na.rm=</span>T)</code></pre></div>
 <pre><code>##     2.5%      50%    97.5% 
 ## 0.000640 0.000640 0.103216</code></pre>
-</div>
-<div id="automate" class="section level3">
-<h3><span class="header-section-number">3.1.4</span> Automate</h3>
+<p>Automate</p>
 <p>To finish up, throw these steps into your personal <code>boot</code> function, and then run it on each site using <code>group_by</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create boot function</span>
 boot_low_Conc &lt;-<span class="st"> </span>function(<span class="dt">data=</span>df$Conc, <span class="dt">Conc_pct=</span><span class="fl">0.10</span>, <span class="dt">conf_int=</span><span class="fl">0.95</span>, <span class="dt">repeats=</span><span class="dv">3000</span>){
@@ -308,9 +301,7 @@ conc_summary &lt;-<span class="st"> </span><span class="kw">group_by</span>(df, 
 <span class="dt">Low_CL95_conc   =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">1</span>]], 
 <span class="dt">Boot_conc       =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">2</span>]], 
 <span class="dt">Upper_CL95_conc =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">3</span>]])  </code></pre></div>
-</div>
-<div id="results" class="section level3">
-<h3><span class="header-section-number">3.1.5</span> Results</h3>
+<p>Results</p>
 <p>The booted confidence limits</p>
 <table>
 <thead>
@@ -340,7 +331,6 @@ conc_summary &lt;-<span class="st"> </span><span class="kw">group_by</span>(df, 
 </tbody>
 </table>
 
-</div>
 </div>
 </div>
             </section>

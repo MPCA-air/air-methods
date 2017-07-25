@@ -1,8 +1,0 @@
-## Wind & pollution roses
-
-We have finished a nice book.
-
-## _openair_ package  
-
-`library("openair")`  
-

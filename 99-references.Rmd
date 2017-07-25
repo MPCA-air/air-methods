@@ -1,13 +1,10 @@
-# {-}
+# References {-}
 
-This page is left blank.
-
-`r if (knitr:::is_html_output()) '# References {-}'`
-
-```{r include=FALSE}
+```{r echo=F}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown'
 ), 'packages.bib')
 ```
+
 

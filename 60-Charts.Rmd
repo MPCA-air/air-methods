@@ -2,10 +2,16 @@
 
 ## Boxplots
 
-Dividing by zero is a super power.
+Dividing by zero is an amazing super power. Unfortunately for you your computer does not have this power. Making a log boxplot with data containing zeros or negative values will result in your computer melting itself. Obviously, it will never forgive you.
 
 
 ### Log boxplot
 
+Coming soon... 
 
-### Outliers
+
+### Outliers  
+
+Coming soon...   
+
+

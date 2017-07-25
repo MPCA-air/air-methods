@@ -1,20 +1,344 @@
 # Data cleaning
 
+```{r out.width='55%', echo=F}
+knitr::include_graphics("images/data-cleaning.jpg")
+```
+ 
+Before jumping into your analysis you'll want to clean it up with some helpful quality checks and formatting procedures.  
+
+These procedures include steps to:  
+
+- \@ref(missing) __Remove blank, NULL, and missing values__  
+- \@ref(quals)   __Evaluate qualified data__     
+- \@ref(dups)    __Remove duplicate observations__ 
+- \@ref(pocs)    __Prioritize observations from multiple monitors (POCs)__   
+- \@ref(outs)    __Evaluate outliers__
+
+## Remove blank, NULL, and missing values {#missing}
+
+__Description__  
+Large monitoring data sets often contain observations with missing concentrations, detection limits or other labeling errors that can lead to incorrect summary statistics if not removed.  
+
+<br> __Recommended steps__
+
+1. Identify blank, NULL, `-999`, and missing values.
+1. Remove those observations.
+
+<br> __Why not keep them?__
+
+Unless you can confirm what the missing values are meant to represent, such as observations below the detection limit, there is not an accurate means to determine the meaning of a missing value.  
 
 
-## Duplicate obersvations {#start}
+<br> __Sample `R` script__ 
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference \@ref(start). If you do not manually label them, there will be automatic labels anyway, e.g., \@ref(methods).
+<a id="displayText" href="javascript:toggle(1);"> > Show the R code</a>
+  <div id="toggleText1" style="display: none">
+  
+```{r echo=F, message=F, warning=F}  
+library(knitr)
+library(DT)
+```
 
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
+Load the sample monitoring data.
+```{r eval=T, message=F, warning=F}
+library(dplyr)
+
+data <- read.csv(text = '
+aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
+271231003,1,12101,"2004-01-04",-999.99,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-01-10",0.23,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-01-16",0.35,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-01-22",0.22,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-01-28",NA,NA,0.08,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-03",0.07,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-09",0.02,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-15"," ",NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-21",0.03,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-27",0.21,NA,0.06,"Aluminum","7429-90-5"
+271377001,1,12101,"2007-09-21",NULL,a,0.04,"Aluminum","7429-90-5"
+271377001,1,12101,"2007-09-21",0.14,NA,0.04,"Aluminum","7429-90-5"
+', stringsAsFactor = F)
+```
+  
+_Table: Sample monitoring data_ 
+```{r, eval=T, echo=F, message=F, warning=F}
+#kable(head(data), booktabs = T, caption = "Sample monitoring data.")
+datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F))
+```
+  
+  
+Create a function to test for missing concentration values.
+```{r eval=T, message=F, warning=F}
+
+# Test for missing concentrations, non-numeric values, and -999
+missing_conc <- function(x) {
+    is.na(as.numeric(x)) || as.numeric(x) < -900
+}
+
+```
+  
+   
+Use the `missing_conc()` function to search for observations with missing concentrations.
+```{r eval=T, message=F, warning=F}
+
+# Create a new TRUE/FALSE column labeling each result as missing or not
+data <- data %>% rowwise() %>% mutate(conc_missing = missing_conc(conc))
+
+# Select all missing observations
+missing_values <- filter(data, conc_missing == TRUE) 
+```
+  
+  
+_Table: Missing values_
+```{r, eval=T, echo=F, message=F, warning=F}
+#kable(head(data), booktabs = T, caption = "Sample monitoring data.")
+datatable(missing_values, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F))
+```
+  
+  
+Remove the blank, NULL, `-999`, and missing values from the data set.
+```{r eval=T, message=F, warning=F}
+
+data <- filter(data, conc_missing == FALSE)
+
+```
+  
+  
+_Table: The new and improved cleaner data_  
+```{r, eval=T, echo=F, message=F, warning=F}
+#kable(head(data), booktabs = T, caption = "Sample monitoring data.")
+datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F))
+```
+  
+  
+Create similar functions to test for missing dates, site IDs, detection limits, and parameter codes.  
+```{r eval=T, message=F, warning=F}
+
+# Test for missing dates
+missing_dates <- function(x) {
+    is.na(as.character(x)) || nchar(as.character(x)) > 11 || nchar(as.character(x)) < 6
+}
+
+# Test for missing site IDs
+missing_sites <- function(x) {
+    is.na(as.character(x)) || nchar(as.character(x)) < 5 
+}
+
+# Test for missing detection limits
+missing_dls <- function(x) {
+    is.na(as.numeric(x)) || as.numeric(x) < -900
+}
+
+# Test for missing parameter code
+missing_param <- function(x) {
+    is.na(as.numeric(x)) || as.numeric(x) < -900 || nchar(as.character(x)) < 5 || nchar(as.character(x)) > 9
+}
+
+```
+  
+
+To apply all these functions at once, the following script can be used.
+```{r eval=T, message=F, warning=F}
+  
+# Create new TRUE/FALSE columns labeling each result as missing or not
+data <- data %>% 
+        rowwise() %>% 
+        mutate(conc_missing   = missing_conc(conc),
+               date_missing   = missing_dates(date),
+               site_missing   = missing_sites(aqs_id),
+               dl_missing     = missing_dls(md_limit),
+               param_missing  = missing_param(param_code)) %>%
+        filter(sum(c(conc_missing, 
+                     date_missing, 
+                     site_missing, 
+                     dl_missing, 
+                     param_missing), na.rm = T) < 1)
+
+   
+```  
+
+_Table: The super cleaner data_  
+```{r, eval=T, echo=F, message=F, warning=F}
+#kable(head(data), booktabs = T, caption = "Sample monitoring data.")
+datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F))
+```
+   
+   </div>
+   
+<br> __Contributors__  
+
+> Dorian Kvale  
 
 
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015]. ddd aaa
+
+## Remove `Qualified` data {#quals}
+
+__Description__  
+
+<br> __Recommended steps__  
+
+<br> __Contributors__    
+
+> Not me
 
 
-## Multiple air monitors (POCs)   
+## Duplicate obersvations {#dups}
 
-Click the link below to jump to the top of the page.
+__Description__  
+Large monitoring data sets often contain a few instances when multiple observations occur over the same time period at the same site. When multiples observations do occur they tend to be identified by a unique monitor POC (parameter occurrence code) or by a qualifier describing why the second observation was recorded (e.g. a duplicate for quality control). 
 
+<br> __Recommended steps__  
+
+1. Identify duplicate observations.
+1. If both values are detected, calculate the mean of the duplicates.  
+1. If values are identical, use the observation with a lower detection limit.  
+
+<br> __Why not keep them all?__
+If more data is more better, why not keep both values? 
+
+Leaving both observations in the data set is likely to bias calculated summary statistics. For example, consider a scenario where two monitors were operating on a site during the winter months, but only one monitor was operating the rest of the year. If we were to calculate the annual average for this site using all the observations, the mean would be biased by having twice as many observations from the winter months. By limiting the number of observations to 1 per day, the weighting of the seasons will be balanced. 
+
+
+<br> __Sample `R` script__  
+  
+<a id="displayText" href="javascript:toggle(1);"> > Show R code</a>
+  <div id="toggleText1" style="display: none">
+
+```{r echo=F, message=F, warning=F}  
+library(knitr)
+library(DT)
+#write.csv(select(ungroup(data_bk), -Unique, -Key, -Duplicate)[1:10, ], row.names = F)
+```
+
+Load the sample monitoring data.
+```{r eval=T, message=F, warning=F}
+library(dplyr)
+
+data <- read.csv(text = '
+aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
+271231003,1,12101,"2004-01-04",0.05,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-01-10",0.23,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-01-16",0.35,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-01-22",0.22,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-01-28",0.01,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-03",0.07,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-09",0.02,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-15",0.07,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-21",0.03,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-27",0.21,NA,0.06,"Aluminum","7429-90-5"
+271377001,1,12101,"2007-09-21",0.14,NA,0.04,"Aluminum","7429-90-5"
+271377001,1,12101,"2007-09-21",0.14,NA,0.04,"Aluminum","7429-90-5"
+', stringsAsFactor = F)
+```
+
+##### Table: Sample monitoring data {-}  
+```{r, eval=T, echo=F, message=F, warning=F}
+#kable(head(data), booktabs = T, caption = "Sample monitoring data.")
+datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)
+```
+  
+  
+##### Add a unique column identifier to each observation {-}  
+```{r, eval=T, message=F, warning=F}
+
+# Add unique key to each row
+data$key <- 1:nrow(data)
+
+# Create s unique ID for each site/poc/param code/day combination
+data$unique_sample_id <- paste(data$aqs_id, data$poc, data$param_code, data$date, sep = "_")
+```
+  
+  
+```{r, eval=T, echo=F, message=F, warning=F, fig.cap ="Unique ID column added."}
+datatable(head(data[, c(10:11,1:9)]), options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)
+```
+
+   
+##### Test for duplicate observations {-}  
+```{r, eval=T, message=F, warning=F}
+# Label duplicate samples
+data <- group_by(data, unique_sample_id) %>% mutate(duplicate = n() > 1)
+
+# Create duplicate table
+dupes <- filter(data, duplicate == T)
+```
+  
+  
+Duplicate observations
+```{r, eval=T, echo=F, message=F, warning=F}
+datatable(head(dupes), options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)
+```
+  
+
+##### If duplicates are found, use the following hierarchy to remove duplicates: {-}   
+  
+1. Calculate the mean concentration of all detected observations.
+1. If no observations are detected, select the observation with the lower detection limit.
+1. If no obsercations are detected and the detection limits are all equal, select a single observation.  
+
+    
+```{r, eval=T, message=F, warning=F}
+dupes <- group_by(dupes, unique_sample_id) %>% 
+         arrange(desc(conc), md_limit) %>% 
+         filter(key == key[1])
+
+# Remove Unique IDs with duplicates from data
+data <- filter(data, !duplicate)
+
+# Attach the selected duplicates with highest result and lowest detection limit
+data <- rbind(data, dupes)
+```
+
+
+```{r, eval=T, echo=F, message=F, warning=F, fig.cap ="Final data set with 1 duplicate removed."}
+datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)
+```
+
+  </div>  
+    
+<br> __Contributors__   
+
+> Dorian Kvale 
+
+
+
+## Multiple air monitors (POCs) {#pocs}  
+
+__Description__  
+
+<br> __Recommended steps__   
+
+<br> __Contributors__    
+
+> Not me  
+  
+
+  
+## Outliers {#outs}  
+
+__Description__  
+
+<br> __Recommended steps__  
+
+<br> __Contributors__    
+
+> Not me
+
+   
 [Jump to top](#start)
 
+<script language="javascript"> 
+    function toggle(num) {
+      var ele = document.getElementById("toggleText" + num);
+      var text = document.getElementById("displayText" + num);
+      if(ele.style.display == "block") {
+        ele.style.display = "none";
+        text.innerHTML = "show";
+      }
+      else {
+        ele.style.display = "block";
+        text.innerHTML = "hide";
+      }
+   } 
+  </script>
+  

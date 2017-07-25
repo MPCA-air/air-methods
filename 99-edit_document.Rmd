@@ -1,5 +1,0 @@
-# Edit this document {-}
-This guide lives on GitHub.  
-
-- To make changes go to [github.com/MPCA-air/air-methods](https://github.com/MPCA-air/air-methods) and click [ Fork ].  
--  To suggest edits go to [github.com/MPCA-air/air-methods/issues](https://github.com/MPCA-air/air-methods/issues) and click [ New issue ].
