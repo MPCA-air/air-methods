@@ -1,7 +1,7 @@
 ## Pollution roses and love poems
 
 
-```r
+
 #Generates
 pollution roses for all air toxics for a site and saves them in a folder
 defined by output_path
@@ -233,5 +233,4 @@ site_name) )
 }
 
 site_save,".png"), height=png_h
-```
 
