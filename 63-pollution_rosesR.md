@@ -1,5 +1,7 @@
+## Pollution roses and love poems
 
 
+```{r warning=F}
 #Generates
 pollution roses for all air toxics for a site and saves them in a folder
 defined by output_path
@@ -218,8 +220,7 @@ for(i in
 1:nrow(pollutants_site)) {
 
   png(paste0(output_path,"/Pollution Rose
-for ", pollutants_site$Pollutant[i]," ",
-site_save,".png"), height=png_height, width=png_width)
+for ", pollutants_site$Pollutant[i]," ",eight, width=png_width)
 
   pollutionRose(data_site, statistic =
 "abs.count", pollutant = pollutants_site$Pollutant[i], breaks =
@@ -230,4 +231,7 @@ site_name) )
   dev.off()
 
 }
+
+site_save,".png"), height=png_h
+```
 
