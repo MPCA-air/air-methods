@@ -3,6 +3,29 @@
 ```{r out.width='55%', echo=F}
 knitr::include_graphics("images/data-cleaning.jpg")
 ```
+
+<style>
+.showopt {
+  background-color: #4183c4;
+  color: #FFFFFF; 
+  width: 104px;
+  height: 26px;
+  text-align: center;
+  vertical-align: middle !important;
+  float: right;
+  font-family: sans-serif;
+  border-radius: 9px;
+}
+
+.showopt:hover {
+    background-color: #dfe4f2;
+    color: #004c93;
+}
+
+pre.plot {
+  background-color: white !important;
+}
+</style>
  
 Before jumping into your analysis you'll want to clean it up with some helpful quality checks and formatting procedures.  
 
@@ -31,15 +54,17 @@ Unless you can confirm what the missing values are meant to represent, such as o
 
 <br> __Sample `R` script__ 
 
-<a id="displayText" href="javascript:toggle(1);"> > Show the R code</a>
-  <div id="toggleText1" style="display: none">
-  
+
 ```{r echo=F, message=F, warning=F}  
 library(knitr)
 library(DT)
 ```
 
-Load the sample monitoring data.
+
+
+<br> Load the sample monitoring data.
+
+<div class="fold s o">  
 ```{r eval=T, message=F, warning=F}
 library(dplyr)
 
@@ -59,15 +84,20 @@ aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
 271377001,1,12101,"2007-09-21",0.14,NA,0.04,"Aluminum","7429-90-5"
 ', stringsAsFactor = F)
 ```
-  
-_Table: Sample monitoring data_ 
+
+</div>
+
+
+_Table: Sample monitoring data_   
 ```{r, eval=T, echo=F, message=F, warning=F}
 #kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F))
 ```
-  
-  
-Create a function to test for missing concentration values.
+
+
+<br> Create function to test for missing concentration values.
+
+<div class="fold s o">
 ```{r eval=T, message=F, warning=F}
 
 # Test for missing concentrations, non-numeric values, and -999
@@ -76,9 +106,11 @@ missing_conc <- function(x) {
 }
 
 ```
-  
+</div>
+
    
-Use the `missing_conc()` function to search for observations with missing concentrations.
+<br> Use the `missing_conc()` function to search for observations with missing concentrations.
+<div class="fold s o">
 ```{r eval=T, message=F, warning=F}
 
 # Create a new TRUE/FALSE column labeling each result as missing or not
@@ -87,36 +119,42 @@ data <- data %>% rowwise() %>% mutate(conc_missing = missing_conc(conc))
 # Select all missing observations
 missing_values <- filter(data, conc_missing == TRUE) 
 ```
+</div>  
   
-  
-_Table: Missing values_
+   
+<br> _Table: Missing values_
 ```{r, eval=T, echo=F, message=F, warning=F}
 #kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(missing_values, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F))
 ```
   
   
-Remove the blank, NULL, `-999`, and missing values from the data set.
+<br> Remove the blank, NULL, `-999`, and missing values from the data set.
+<div class="fold s o">
 ```{r eval=T, message=F, warning=F}
 
 data <- filter(data, conc_missing == FALSE)
 
 ```
+</div> 
   
   
-_Table: The new and improved cleaner data_  
+<br> _Table: The new and improved cleaner data_   
 ```{r, eval=T, echo=F, message=F, warning=F}
 #kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F))
 ```
   
   
-Create similar functions to test for missing dates, site IDs, detection limits, and parameter codes.  
+<br> Create similar functions to test for missing dates, site IDs, detection limits, and parameter codes.
+
+<div class="fold s o">
 ```{r eval=T, message=F, warning=F}
 
 # Test for missing dates
 missing_dates <- function(x) {
-    is.na(as.character(x)) || nchar(as.character(x)) > 11 || nchar(as.character(x)) < 6
+    is.na(as.character(x)) || 
+    nchar(as.character(x)) > 11 || nchar(as.character(x)) < 6
 }
 
 # Test for missing site IDs
@@ -131,16 +169,21 @@ missing_dls <- function(x) {
 
 # Test for missing parameter code
 missing_param <- function(x) {
-    is.na(as.numeric(x)) || as.numeric(x) < -900 || nchar(as.character(x)) < 5 || nchar(as.character(x)) > 9
+    is.na(as.numeric(x)) || as.numeric(x) < -900 || 
+    nchar(as.character(x)) < 5 || nchar(as.character(x)) > 9
 }
 
 ```
-  
+</div>  
 
-To apply all these functions at once, the following script can be used.
+
+<br> To apply all these functions at once, use the following script.
+
+<div class="fold s o">
 ```{r eval=T, message=F, warning=F}
   
 # Create new TRUE/FALSE columns labeling each result as missing or not
+# Filter to remove any rows with a missing value
 data <- data %>% 
         rowwise() %>% 
         mutate(conc_missing   = missing_conc(conc),
@@ -156,14 +199,14 @@ data <- data %>%
 
    
 ```  
+</div>
 
-_Table: The super cleaner data_  
+<br> _Table: The super cleaner data_  
 ```{r, eval=T, echo=F, message=F, warning=F}
 #kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F))
 ```
    
-   </div>
    
 <br> __Contributors__  
 
@@ -201,16 +244,13 @@ Leaving both observations in the data set is likely to bias calculated summary s
 
 <br> __Sample `R` script__  
   
-<a id="displayText" href="javascript:toggle(1);"> > Show R code</a>
-  <div id="toggleText1" style="display: none">
-
 ```{r echo=F, message=F, warning=F}  
 library(knitr)
 library(DT)
 #write.csv(select(ungroup(data_bk), -Unique, -Key, -Duplicate)[1:10, ], row.names = F)
 ```
 
-Load the sample monitoring data.
+<br> Load the sample monitoring data.
 ```{r eval=T, message=F, warning=F}
 library(dplyr)
 
@@ -231,14 +271,14 @@ aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
 ', stringsAsFactor = F)
 ```
 
-##### Table: Sample monitoring data {-}  
+<br> _Table: Sample monitoring data_ 
 ```{r, eval=T, echo=F, message=F, warning=F}
 #kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)
 ```
   
   
-##### Add a unique column identifier to each observation {-}  
+<br> Add a unique column identifier to each observation.
 ```{r, eval=T, message=F, warning=F}
 
 # Add unique key to each row
@@ -254,7 +294,7 @@ datatable(head(data[, c(10:11,1:9)]), options = list(scrollX = T, autoWidth = T,
 ```
 
    
-##### Test for duplicate observations {-}  
+<br> Test for duplicate observations. 
 ```{r, eval=T, message=F, warning=F}
 # Label duplicate samples
 data <- group_by(data, unique_sample_id) %>% mutate(duplicate = n() > 1)
@@ -264,13 +304,13 @@ dupes <- filter(data, duplicate == T)
 ```
   
   
-Duplicate observations
+<br> _Table: Duplicate observations_ 
 ```{r, eval=T, echo=F, message=F, warning=F}
 datatable(head(dupes), options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)
 ```
   
 
-##### If duplicates are found, use the following hierarchy to remove duplicates: {-}   
+<br> If duplicates are found, use the following hierarchy to remove duplicates:
   
 1. Calculate the mean concentration of all detected observations.
 1. If no observations are detected, select the observation with the lower detection limit.
@@ -290,11 +330,11 @@ data <- rbind(data, dupes)
 ```
 
 
+<br> _Table: The new cleaner data_  
 ```{r, eval=T, echo=F, message=F, warning=F, fig.cap ="Final data set with 1 duplicate removed."}
 datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)
 ```
 
-  </div>  
     
 <br> __Contributors__   
 
@@ -327,18 +367,52 @@ __Description__
    
 [Jump to top](#start)
 
-<script language="javascript"> 
-    function toggle(num) {
-      var ele = document.getElementById("toggleText" + num);
-      var text = document.getElementById("displayText" + num);
-      if(ele.style.display == "block") {
-        ele.style.display = "none";
-        text.innerHTML = "show";
-      }
-      else {
-        ele.style.display = "block";
-        text.innerHTML = "hide";
-      }
-   } 
-  </script>
+
+Reference: https://stackoverflow.com/questions/37755037/how-to-add-code-folding-to-output-chunks-in-rmarkdown-html-documents/37839683#37839683
+
+
+<script src="jquery-1.9.0.min.js"></script>
+<script>
+$(document).ready(function() {
+
+  $chunks = $('.fold');
+
+  $chunks.each(function () {
+
+    // add button to source code chunks
+    if ( $(this).hasClass('s') ) {
+      $('pre.r', this).prepend("<div class=\"showopt\">Show code</div><br style=\"line-height:22px;\"/>");
+      $('pre.r', this).children('code').attr('class', 'folded');
+    }
+
+    // add button to output chunks
+    if ( $(this).hasClass('o') ) {
+      $('pre:not(.r)', this).has('code').prepend("<div class=\"showopt\">Show output</div><br style=\"line-height:22px;\"/>");
+      $('pre:not(.r)', this).children('code:not(r)').addClass('folded');
+
+      // add button to plots
+      $(this).find('img').wrap('<pre class=\"plot\"></pre>');
+      $('pre.plot', this).prepend("<div class=\"showopt\">Show plot</div><br style=\"line-height:22px;\"/>");
+      $('pre.plot', this).children('img').addClass('folded');
+
+    }
+  });
+
+  // hide all chunks when document is loaded
+  $('.folded').css('display', 'none')
+
+  // function to toggle the visibility
+  $('.showopt').click(function() {
+    var label = $(this).html();
+    if (label.indexOf("Show") >= 0) {
+      $(this).html(label.replace("Show", "Hide"));
+    } else {
+      $(this).html(label.replace("Hide", "Show"));
+    }
+    $(this).siblings('code, img').slideToggle('fast', 'swing');
+  });
+});
+</script>
+
+
   

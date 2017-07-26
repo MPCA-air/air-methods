@@ -172,6 +172,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="data-cleaning" class="section level1">
 <h1><span class="header-section-number"></span> Data cleaning</h1>
 <p><img src="images/data-cleaning.jpg" width="55%" /></p>
+<style>
+.showopt {
+  background-color: #4183c4;
+  color: #FFFFFF; 
+  width: 104px;
+  height: 26px;
+  text-align: center;
+  vertical-align: middle !important;
+  float: right;
+  font-family: sans-serif;
+  border-radius: 9px;
+}
+
+.showopt:hover {
+    background-color: #dfe4f2;
+    color: #004c93;
+}
+
+pre.plot {
+  background-color: white !important;
+}
+</style>
 <p>Before jumping into your analysis you’ll want to clean it up with some helpful quality checks and formatting procedures.</p>
 <p>These procedures include steps to:</p>
 <ul>
@@ -196,9 +218,8 @@ Large monitoring data sets often contain observations with missing concentration
 <p><br> <strong>Why not keep them?</strong></p>
 <p>Unless you can confirm what the missing values are meant to represent, such as observations below the detection limit, there is not an accurate means to determine the meaning of a missing value.</p>
 <p><br> <strong>Sample <code>R</code> script</strong></p>
-<a id="displayText" href="javascript:toggle(1);"> &gt; Show the R code</a>
-<div id="toggleText1" style="display: none">
-<p>Load the sample monitoring data.</p>
+<p><br> Load the sample monitoring data.</p>
+<div class="fold s o">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 
 data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">text =</span> <span class="st">&#39;</span>
@@ -216,30 +237,40 @@ data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class=
 <span class="st">271377001,1,12101,&quot;2007-09-21&quot;,NULL,a,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span>
 <span class="st">271377001,1,12101,&quot;2007-09-21&quot;,0.14,NA,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span>
 <span class="st">&#39;</span>, <span class="dt">stringsAsFactor =</span> F)</code></pre></div>
-<p><em>Table: Sample monitoring data</em> <div id="htmlwidget-99550a856e2efff8b48b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-99550a856e2efff8b48b">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12"],[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001,271377001],[1,1,1,1,1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15","2004-02-21","2004-02-27","2007-09-21","2007-09-21"],["-999.99","0.23","0.35","0.22",null,"0.07","0.02"," ","0.03","0.21","NULL","0.14"],[null,null,null,null,null,null,null,null,null,null,"a",null],[0.06,0.06,0.06,0.06,0.08,0.06,0.06,0.06,0.06,0.06,0.04,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,7]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
-<p>Create a function to test for missing concentration values.</p>
+</div>
+<p><em>Table: Sample monitoring data</em><br />
+<div id="htmlwidget-b2d40888fda94f465e41" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b2d40888fda94f465e41">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12"],[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001,271377001],[1,1,1,1,1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15","2004-02-21","2004-02-27","2007-09-21","2007-09-21"],["-999.99","0.23","0.35","0.22",null,"0.07","0.02"," ","0.03","0.21","NULL","0.14"],[null,null,null,null,null,null,null,null,null,null,"a",null],[0.06,0.06,0.06,0.06,0.08,0.06,0.06,0.06,0.06,0.06,0.04,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,7]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<p><br> Create function to test for missing concentration values.</p>
+<div class="fold s o">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Test for missing concentrations, non-numeric values, and -999</span>
 missing_conc &lt;-<span class="st"> </span>function(x) {
     <span class="kw">is.na</span>(<span class="kw">as.numeric</span>(x)) ||<span class="st"> </span><span class="kw">as.numeric</span>(x) &lt;<span class="st"> </span>-<span class="dv">900</span>
 }</code></pre></div>
-<p>Use the <code>missing_conc()</code> function to search for observations with missing concentrations.</p>
+</div>
+<br> Use the <code>missing_conc()</code> function to search for observations with missing concentrations.
+<div class="fold s o">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a new TRUE/FALSE column labeling each result as missing or not</span>
 data &lt;-<span class="st"> </span>data %&gt;%<span class="st"> </span><span class="kw">rowwise</span>() %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">conc_missing =</span> <span class="kw">missing_conc</span>(conc))
 
 <span class="co"># Select all missing observations</span>
 missing_values &lt;-<span class="st"> </span><span class="kw">filter</span>(data, conc_missing ==<span class="st"> </span><span class="ot">TRUE</span>) </code></pre></div>
-<p><em>Table: Missing values</em> <div id="htmlwidget-ed15709a2c3d15311ea0" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ed15709a2c3d15311ea0">{"x":{"filter":"none","data":[["1","2","3","4"],[271231003,271231003,271231003,271377001],[1,1,1,1],[12101,12101,12101,12101],["2004-01-04","2004-01-28","2004-02-15","2007-09-21"],["-999.99",null," ","NULL"],[null,null,null,"a"],[0.06,0.08,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[true,true,true,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,7]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
-<p>Remove the blank, NULL, <code>-999</code>, and missing values from the data set.</p>
+</div>
+<p><br> <em>Table: Missing values</em> <div id="htmlwidget-ea1eab54d15aacf921ed" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ea1eab54d15aacf921ed">{"x":{"filter":"none","data":[["1","2","3","4"],[271231003,271231003,271231003,271377001],[1,1,1,1],[12101,12101,12101,12101],["2004-01-04","2004-01-28","2004-02-15","2007-09-21"],["-999.99",null," ","NULL"],[null,null,null,"a"],[0.06,0.08,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[true,true,true,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,7]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<br> Remove the blank, NULL, <code>-999</code>, and missing values from the data set.
+<div class="fold s o">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">filter</span>(data, conc_missing ==<span class="st"> </span><span class="ot">FALSE</span>)</code></pre></div>
-<p><em>Table: The new and improved cleaner data</em><br />
-<div id="htmlwidget-55d384fad6a7d50a0e0b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-55d384fad6a7d50a0e0b">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8"],[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-10","2004-01-16","2004-01-22","2004-02-03","2004-02-09","2004-02-21","2004-02-27","2007-09-21"],["0.23","0.35","0.22","0.07","0.02","0.03","0.21","0.14"],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[false,false,false,false,false,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,7]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
-<p>Create similar functions to test for missing dates, site IDs, detection limits, and parameter codes.</p>
+</div>
+<p><br> <em>Table: The new and improved cleaner data</em><br />
+<div id="htmlwidget-ca449170e6369c82ac48" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ca449170e6369c82ac48">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8"],[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-10","2004-01-16","2004-01-22","2004-02-03","2004-02-09","2004-02-21","2004-02-27","2007-09-21"],["0.23","0.35","0.22","0.07","0.02","0.03","0.21","0.14"],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[false,false,false,false,false,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,7]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<p><br> Create similar functions to test for missing dates, site IDs, detection limits, and parameter codes.</p>
+<div class="fold s o">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Test for missing dates</span>
 missing_dates &lt;-<span class="st"> </span>function(x) {
-    <span class="kw">is.na</span>(<span class="kw">as.character</span>(x)) ||<span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) &gt;<span class="st"> </span><span class="dv">11</span> ||<span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) &lt;<span class="st"> </span><span class="dv">6</span>
+    <span class="kw">is.na</span>(<span class="kw">as.character</span>(x)) ||<span class="st"> </span>
+<span class="st">    </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) &gt;<span class="st"> </span><span class="dv">11</span> ||<span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) &lt;<span class="st"> </span><span class="dv">6</span>
 }
 
 <span class="co"># Test for missing site IDs</span>
@@ -254,10 +285,14 @@ missing_dls &lt;-<span class="st"> </span>function(x) {
 
 <span class="co"># Test for missing parameter code</span>
 missing_param &lt;-<span class="st"> </span>function(x) {
-    <span class="kw">is.na</span>(<span class="kw">as.numeric</span>(x)) ||<span class="st"> </span><span class="kw">as.numeric</span>(x) &lt;<span class="st"> </span>-<span class="dv">900</span> ||<span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) &lt;<span class="st"> </span><span class="dv">5</span> ||<span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) &gt;<span class="st"> </span><span class="dv">9</span>
+    <span class="kw">is.na</span>(<span class="kw">as.numeric</span>(x)) ||<span class="st"> </span><span class="kw">as.numeric</span>(x) &lt;<span class="st"> </span>-<span class="dv">900</span> ||<span class="st"> </span>
+<span class="st">    </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) &lt;<span class="st"> </span><span class="dv">5</span> ||<span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) &gt;<span class="st"> </span><span class="dv">9</span>
 }</code></pre></div>
-<p>To apply all these functions at once, the following script can be used.</p>
+</div>
+<p><br> To apply all these functions at once, use the following script.</p>
+<div class="fold s o">
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create new TRUE/FALSE columns labeling each result as missing or not</span>
+<span class="co"># Filter to remove any rows with a missing value</span>
 data &lt;-<span class="st"> </span>data %&gt;%<span class="st"> </span>
 <span class="st">        </span><span class="kw">rowwise</span>() %&gt;%<span class="st"> </span>
 <span class="st">        </span><span class="kw">mutate</span>(<span class="dt">conc_missing   =</span> <span class="kw">missing_conc</span>(conc),
@@ -270,10 +305,10 @@ data &lt;-<span class="st"> </span>data %&gt;%<span class="st"> </span>
                      site_missing, 
                      dl_missing, 
                      param_missing), <span class="dt">na.rm =</span> T) &lt;<span class="st"> </span><span class="dv">1</span>)</code></pre></div>
-<p><em>Table: The super cleaner data</em><br />
-<div id="htmlwidget-539571688ba72b148eaa" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-539571688ba72b148eaa">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8"],[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-10","2004-01-16","2004-01-22","2004-02-03","2004-02-09","2004-02-21","2004-02-27","2007-09-21"],["0.23","0.35","0.22","0.07","0.02","0.03","0.21","0.14"],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n      <th>date_missing<\/th>\n      <th>site_missing<\/th>\n      <th>dl_missing<\/th>\n      <th>param_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,7]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 </div>
+<p><br> <em>Table: The super cleaner data</em><br />
+<div id="htmlwidget-1a39db799d73ed45d7f2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1a39db799d73ed45d7f2">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8"],[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-10","2004-01-16","2004-01-22","2004-02-03","2004-02-09","2004-02-21","2004-02-27","2007-09-21"],["0.23","0.35","0.22","0.07","0.02","0.03","0.21","0.14"],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n      <th>date_missing<\/th>\n      <th>site_missing<\/th>\n      <th>dl_missing<\/th>\n      <th>param_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,7]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 <p><br> <strong>Contributors</strong></p>
 <blockquote>
 <p>Dorian Kvale</p>
@@ -302,9 +337,7 @@ Large monitoring data sets often contain a few instances when multiple observati
 <p><br> <strong>Why not keep them all?</strong> If more data is more better, why not keep both values?</p>
 <p>Leaving both observations in the data set is likely to bias calculated summary statistics. For example, consider a scenario where two monitors were operating on a site during the winter months, but only one monitor was operating the rest of the year. If we were to calculate the annual average for this site using all the observations, the mean would be biased by having twice as many observations from the winter months. By limiting the number of observations to 1 per day, the weighting of the seasons will be balanced.</p>
 <p><br> <strong>Sample <code>R</code> script</strong></p>
-<a id="displayText" href="javascript:toggle(1);"> &gt; Show R code</a>
-<div id="toggleText1" style="display: none">
-<p>Load the sample monitoring data.</p>
+<p><br> Load the sample monitoring data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 
 data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">text =</span> <span class="st">&#39;</span>
@@ -322,31 +355,30 @@ data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class=
 <span class="st">271377001,1,12101,&quot;2007-09-21&quot;,0.14,NA,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span>
 <span class="st">271377001,1,12101,&quot;2007-09-21&quot;,0.14,NA,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span>
 <span class="st">&#39;</span>, <span class="dt">stringsAsFactor =</span> F)</code></pre></div>
-<h5 id="table-sample-monitoring-data" class="unnumbered">Table: Sample monitoring data</h5>
-<div id="htmlwidget-a8d84f376d7c1ac67a4b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a8d84f376d7c1ac67a4b">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001,271377001],[1,1,1,1,1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15","2004-02-21","2004-02-27","2007-09-21","2007-09-21"],[0.05,0.23,0.35,0.22,0.01,0.07,0.02,0.07,0.03,0.21,0.14,0.14],[null,null,null,null,null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-<h5 id="add-a-unique-column-identifier-to-each-observation" class="unnumbered">Add a unique column identifier to each observation</h5>
+<p><br> <em>Table: Sample monitoring data</em> <div id="htmlwidget-39f02b56675e97bbdd6a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-39f02b56675e97bbdd6a">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001,271377001],[1,1,1,1,1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15","2004-02-21","2004-02-27","2007-09-21","2007-09-21"],[0.05,0.23,0.35,0.22,0.01,0.07,0.02,0.07,0.03,0.21,0.14,0.14],[null,null,null,null,null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<p><br> Add a unique column identifier to each observation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add unique key to each row</span>
 data$key &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="kw">nrow</span>(data)
 
 <span class="co"># Create s unique ID for each site/poc/param code/day combination</span>
 data$unique_sample_id &lt;-<span class="st"> </span><span class="kw">paste</span>(data$aqs_id, data$poc, data$param_code, data$date, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-18"></span>
-<div id="htmlwidget-0259fa98e37565f154e5" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0259fa98e37565f154e5">{"x":{"filter":"none","data":[[1,2,3,4,5,6],["271231003_1_12101_2004-01-04","271231003_1_12101_2004-01-10","271231003_1_12101_2004-01-16","271231003_1_12101_2004-01-22","271231003_1_12101_2004-01-28","271231003_1_12101_2004-02-03"],[271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03"],[0.05,0.23,0.35,0.22,0.01,0.07],[null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>key<\/th>\n      <th>unique_sample_id<\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,2,3,4,6,8]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-3d932c5d468ef9b25ac4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3d932c5d468ef9b25ac4">{"x":{"filter":"none","data":[[1,2,3,4,5,6],["271231003_1_12101_2004-01-04","271231003_1_12101_2004-01-10","271231003_1_12101_2004-01-16","271231003_1_12101_2004-01-22","271231003_1_12101_2004-01-28","271231003_1_12101_2004-02-03"],[271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03"],[0.05,0.23,0.35,0.22,0.01,0.07],[null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>key<\/th>\n      <th>unique_sample_id<\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,2,3,4,6,8]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 1.1: Unique ID column added.
 </p>
 </div>
-<h5 id="test-for-duplicate-observations" class="unnumbered">Test for duplicate observations</h5>
+<p><br> Test for duplicate observations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Label duplicate samples</span>
 data &lt;-<span class="st"> </span><span class="kw">group_by</span>(data, unique_sample_id) %&gt;%<span class="st"> </span><span class="kw">mutate</span>(<span class="dt">duplicate =</span> <span class="kw">n</span>() &gt;<span class="st"> </span><span class="dv">1</span>)
 
 <span class="co"># Create duplicate table</span>
 dupes &lt;-<span class="st"> </span><span class="kw">filter</span>(data, duplicate ==<span class="st"> </span>T)</code></pre></div>
-<p>Duplicate observations <div id="htmlwidget-9155a06cc34d0836554e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9155a06cc34d0836554e">{"x":{"filter":"none","data":[[271377001,271377001],[1,1],[12101,12101],["2007-09-21","2007-09-21"],[0.14,0.14],[null,null],[0.04,0.04],["Aluminum","Aluminum"],["7429-90-5","7429-90-5"],[11,12],["271377001_1_12101_2007-09-21","271377001_1_12101_2007-09-21"],[true,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>key<\/th>\n      <th>unique_sample_id<\/th>\n      <th>duplicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,9]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
-<h5 id="if-duplicates-are-found-use-the-following-hierarchy-to-remove-duplicates" class="unnumbered">If duplicates are found, use the following hierarchy to remove duplicates:</h5>
+<p><br> <em>Table: Duplicate observations</em> <div id="htmlwidget-7ce40a6c4e83d2c313f8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7ce40a6c4e83d2c313f8">{"x":{"filter":"none","data":[[271377001,271377001],[1,1],[12101,12101],["2007-09-21","2007-09-21"],[0.14,0.14],[null,null],[0.04,0.04],["Aluminum","Aluminum"],["7429-90-5","7429-90-5"],[11,12],["271377001_1_12101_2007-09-21","271377001_1_12101_2007-09-21"],[true,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>key<\/th>\n      <th>unique_sample_id<\/th>\n      <th>duplicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,9]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<p><br> If duplicates are found, use the following hierarchy to remove duplicates:</p>
 <ol style="list-style-type: decimal">
 <li>Calculate the mean concentration of all detected observations.</li>
 <li>If no observations are detected, select the observation with the lower detection limit.</li>
@@ -361,13 +393,14 @@ data &lt;-<span class="st"> </span><span class="kw">filter</span>(data, !duplica
 
 <span class="co"># Attach the selected duplicates with highest result and lowest detection limit</span>
 data &lt;-<span class="st"> </span><span class="kw">rbind</span>(data, dupes)</code></pre></div>
+<br> <em>Table: The new cleaner data</em><br />
+
 <div class="figure"><span id="fig:unnamed-chunk-22"></span>
-<div id="htmlwidget-d859e7b5de36c5ecbb43" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d859e7b5de36c5ecbb43">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001],[1,1,1,1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15","2004-02-21","2004-02-27","2007-09-21"],[0.05,0.23,0.35,0.22,0.01,0.07,0.02,0.07,0.03,0.21,0.14],[null,null,null,null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[1,2,3,4,5,6,7,8,9,10,11],["271231003_1_12101_2004-01-04","271231003_1_12101_2004-01-10","271231003_1_12101_2004-01-16","271231003_1_12101_2004-01-22","271231003_1_12101_2004-01-28","271231003_1_12101_2004-02-03","271231003_1_12101_2004-02-09","271231003_1_12101_2004-02-15","271231003_1_12101_2004-02-21","271231003_1_12101_2004-02-27","271377001_1_12101_2007-09-21"],[false,false,false,false,false,false,false,false,false,false,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>key<\/th>\n      <th>unique_sample_id<\/th>\n      <th>duplicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,9]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-0d2a70e1b4dfc3cbf7e2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0d2a70e1b4dfc3cbf7e2">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001],[1,1,1,1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15","2004-02-21","2004-02-27","2007-09-21"],[0.05,0.23,0.35,0.22,0.01,0.07,0.02,0.07,0.03,0.21,0.14],[null,null,null,null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[1,2,3,4,5,6,7,8,9,10,11],["271231003_1_12101_2004-01-04","271231003_1_12101_2004-01-10","271231003_1_12101_2004-01-16","271231003_1_12101_2004-01-22","271231003_1_12101_2004-01-28","271231003_1_12101_2004-02-03","271231003_1_12101_2004-02-09","271231003_1_12101_2004-02-15","271231003_1_12101_2004-02-21","271231003_1_12101_2004-02-27","271377001_1_12101_2007-09-21"],[false,false,false,false,false,false,false,false,false,false,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>key<\/th>\n      <th>unique_sample_id<\/th>\n      <th>duplicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,9]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 1.2: Final data set with 1 duplicate removed.
 </p>
-</div>
 </div>
 <p><br> <strong>Contributors</strong></p>
 <blockquote>
@@ -392,20 +425,49 @@ Figure 1.2: Final data set with 1 duplicate removed.
 <p>Not me</p>
 </blockquote>
 <p><a href="#start">Jump to top</a></p>
-<script language="javascript"> 
-    function toggle(num) {
-      var ele = document.getElementById("toggleText" + num);
-      var text = document.getElementById("displayText" + num);
-      if(ele.style.display == "block") {
-        ele.style.display = "none";
-        text.innerHTML = "show";
-      }
-      else {
-        ele.style.display = "block";
-        text.innerHTML = "hide";
-      }
-   } 
-  </script>
+<p>Reference: <a href="https://stackoverflow.com/questions/37755037/how-to-add-code-folding-to-output-chunks-in-rmarkdown-html-documents/37839683#37839683" class="uri">https://stackoverflow.com/questions/37755037/how-to-add-code-folding-to-output-chunks-in-rmarkdown-html-documents/37839683#37839683</a></p>
+<script src="jquery-1.9.0.min.js"></script>
+<script>
+$(document).ready(function() {
+
+  $chunks = $('.fold');
+
+  $chunks.each(function () {
+
+    // add button to source code chunks
+    if ( $(this).hasClass('s') ) {
+      $('pre.r', this).prepend("<div class=\"showopt\">Show code</div><br style=\"line-height:22px;\"/>");
+      $('pre.r', this).children('code').attr('class', 'folded');
+    }
+
+    // add button to output chunks
+    if ( $(this).hasClass('o') ) {
+      $('pre:not(.r)', this).has('code').prepend("<div class=\"showopt\">Show output</div><br style=\"line-height:22px;\"/>");
+      $('pre:not(.r)', this).children('code:not(r)').addClass('folded');
+
+      // add button to plots
+      $(this).find('img').wrap('<pre class=\"plot\"></pre>');
+      $('pre.plot', this).prepend("<div class=\"showopt\">Show plot</div><br style=\"line-height:22px;\"/>");
+      $('pre.plot', this).children('img').addClass('folded');
+
+    }
+  });
+
+  // hide all chunks when document is loaded
+  $('.folded').css('display', 'none')
+
+  // function to toggle the visibility
+  $('.showopt').click(function() {
+    var label = $(this).html();
+    if (label.indexOf("Show") >= 0) {
+      $(this).html(label.replace("Show", "Hide"));
+    } else {
+      $(this).html(label.replace("Hide", "Show"));
+    }
+    $(this).siblings('code, img').slideToggle('fast', 'swing');
+  });
+});
+</script>
 
 </div>
 </div>

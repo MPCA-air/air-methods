@@ -42,5 +42,18 @@ We are using the R **bookdown** package [@R-bookdown] in this book, which was bu
 
 Code folding reference: https://stackoverflow.com/questions/34784121/interactively-show-hide-code-r-markdown-knitr-report
 
-  
+<script language="javascript"> 
+    function toggle(num) {
+      var ele = document.getElementById("toggleText" + num);
+      var text = document.getElementById("displayText" + num);
+      if(ele.style.display == "block") {
+        ele.style.display = "none";
+        text.innerHTML = "show";
+      }
+      else {
+        ele.style.display = "block";
+        text.innerHTML = "hide";
+      }
+   } 
+  </script>  
   
