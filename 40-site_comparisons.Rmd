@@ -1,5 +1,6 @@
-# Site comparisons
+# Site comparisons 
 
-Some _significant_ applications are demonstrated in this chapter.
+## Confidence intervals 
 
-## Example one  
+Some _significant_ applications are demonstrated in this chapter.  
+

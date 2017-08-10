@@ -1,0 +1,20 @@
+## Calendar plots
+
+We have finished a nice book.
+
+
+## Tableau
+
+
+## R
+
+
+## Wind & pollution roses
+
+Coming soon... 
+
+## _openair_ package  
+
+`r library(openair)`  
+
+Coming soon... 

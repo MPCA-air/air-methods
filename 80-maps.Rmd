@@ -1,9 +1,11 @@
 # Maps
 
-
-
-
 ## Kriging
 
+Coming soon...   
 
-## Spatial averaging or aggregation
+
+## Spatial averaging and aggregation  
+
+To average across...  
+
