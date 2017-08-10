@@ -6,7 +6,7 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">Methods for air data analysis</a></li>
+        <li><a href="https://mpca-air.github.io/air-methods">Methods for air data analysis</a></li>
       after: |
         <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
     edit:

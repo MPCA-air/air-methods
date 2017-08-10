@@ -1,9 +1,13 @@
 # Edit this book {-}  
 
-This guide lives on GitHub.  
+This guide lives online at GitHub.  
 
-To make _changes_ go to [github.com/MPCA-air/air-methods](https://github.com/MPCA-air/air-methods) and click `[ Fork ]`.   
+- To make _changes_ go to [github.com/MPCA-air/air-methods](https://github.com/MPCA-air/air-methods) and click `[ Fork ]`.   
 
-To make _suggestions_ go to [github.com/MPCA-air/air-methods/issues](https://github.com/MPCA-air/air-methods/issues) and click `[ New issue ]`.  
+- To make _suggestions_ go to [github.com/MPCA-air/air-methods/issues](https://github.com/MPCA-air/air-methods/issues) and click `[ New issue ]`.  
 
 
+We are using the R **bookdown** package [@R-bookdown] in this book, which was built on top of _R-Markdown_ and _knitr_ [@xie2015]. 
+
+
+Code folding reference: https://stackoverflow.com/questions/34784121/interactively-show-hide-code-r-markdown-knitr-report
