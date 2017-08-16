@@ -1,0 +1,119 @@
+# Collocated monitors
+
+```{r out.width='55%', echo=F}
+knitr::include_graphics("https://imgs.xkcd.com/comics/box_plot.png")
+```
+
+
+
+## Evaluate multiple air monitors (POCs) {#evalpocs}  
+
+__Description__  
+
+<br> __Recommended steps__   
+
+<br> __Sample `R` script__ 
+
+POC_check generates scatterplots comparing all POCs in the data.
+Data must have columns with "AQS_ID", "POC", "Param_Code", "Date","Concentration",
+"Null_Data_Code", "MDL", "Pollutant", "Year", "CAS" in order from left to right.
+```{r}
+POC_check = function(data) {
+  library(dplyr)
+  library(tidyr)
+  library(lubridate)
+  library(ggplot2)
+  
+  POC_ratio = function(Concentration.x, Concentration.y, MDL) {
+    
+    if(!is.na(Concentration.x) & Concentration.x > MDL & !is.na(Concentration.y) & Concentration.y > MDL) {
+      return (Concentration.y / Concentration.x )
+    }
+    else {
+      return (NA)
+    }
+    
+  }
+  
+  names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration",
+                   "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
+  data = select(data, AQS_ID, POC, Date, Concentration, MDL, Pollutant)
+  data = distinct(data)
+  #data = distinct(data, AQS_ID, POC, Date, MDL, Pollutant, .keep_all = T)
+  POCs = filter(data, POC > 1)
+  data = filter(data, POC == 1)
+  POCs = full_join(data, POCs, by = c("AQS_ID", "Pollutant", "Date", "MDL"))
+  POCs = POCs %>% mutate(Conc = Concentration.y / Concentration.x * (Concentration.x > MDL) * (Concentration.y > MDL))
+  POCs = filter(POCs, !is.na(Conc) & Conc != 0)
+  POCs$Unique <- paste(POCs$AQS_ID, POCs$Pollutant)
+  POCs$Date = as.Date(POCs$Date)
+  
+  ggplot(POCs, aes(Date, Conc)) +
+    geom_point() + scale_x_date() + scale_y_log10() +
+    facet_wrap ( ~ Unique) +
+    ylab("POC 2 / POC 1 (log scale") +
+    theme(axis.title.x=element_blank(),
+      axis.text.x=element_blank(),
+      axis.ticks.x=element_blank())
+}
+```
+
+
+
+<br> __Contributors__    
+
+> Derek 
+  
+<br> __References__    
+
+
+
+## Prioritize multiple air monitors (POCs) {#pripocs}  
+
+__Description__  
+
+<br> __Recommended steps__   
+
+
+<br> __Sample `R` script__ 
+
+Averages POCs. All POCs with valid measurements >= MDL are averaged. If no POC has a valid measurement >= MDL, then all valid measurements are averaged (result will be < MDL and estimated using MLE approximation). If there are no valid measurements, then result will be NA and filtered out later.
+
+Data must have columns with "AQS_ID", "POC", "Param_Code", "Date","Concentration",
+"Null_Data_Code", "MDL", "Pollutant", "Year", "CAS" in order from left to right.
+```{r}
+POC_average = function(data) {
+  library(dplyr)
+  library(tidyr)
+  
+  POC_averaging = function(Concentration, MDL) {
+    
+    if(all(Concentration < MDL)) {
+      return (mean(Concentration, na.rm = T))
+    }
+    else {
+      return (mean(Concentration[Concentration > MDL], na.rm = T ) )
+    }
+    
+  }
+  
+  names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration",
+                   "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
+  data = data %>% group_by(AQS_ID, Param_Code, Date, MDL, Pollutant, Year, CAS) %>% summarise(Concentration = POC_averaging(Concentration, MDL) )
+  return (select(data, AQS_ID, Param_Code, Date, Concentration, MDL, Pollutant, Year, CAS) )
+  
+  return(data)
+}
+```  
+
+
+
+
+
+<br> __Contributors__    
+
+> Derek 
+  
+<br> __References__    
+
+  
