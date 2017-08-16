@@ -3,7 +3,6 @@
 ```{r out.width='55%', echo=F}
 knitr::include_graphics("images/data-cleaning.jpg")
 ```
-
  
 Before jumping into your analysis you'll want to clean it up with some helpful quality checks and formatting procedures.  
 
@@ -16,7 +15,6 @@ These procedures include steps to:
 - \@ref(evalpocs) __Evaluate sites with multiple monitors (POCs)__   
 - \@ref(pocs)     __Prioritize observations from multiple monitors (POCs)__   
 - \@ref(outs)     __Check for outliers, leaks, and contamination__
-
 
 
 ## Remove blank, `NULL`, and missing values {#missing}
