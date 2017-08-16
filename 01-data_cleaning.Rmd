@@ -43,29 +43,26 @@ library(DT)
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
 ```
 
-
-```{r demo, eval=T, message=F, warning=F, id = "demo", class = "collapse"}
+<br> Load example monitoring data
+```{r demo, eval=T, message=F, warning=F, class = "collapse"}
 library(dplyr)
+library(readr)
 
-data <- read.csv(text = '
-                 aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
-                 271231003,1,12101,"2004-01-04",-999.99,NA,0.06,"Aluminum","7429-90-5"
-                 271231003,1,12101,"2004-01-10",0.23,NA,0.06,"Aluminum","7429-90-5"
-                 271231003,1,12101,"2004-01-16",0.35,NA,0.06,"Aluminum","7429-90-5"
-                 271231003,1,12101,"2004-01-22",0.22,NA,0.06,"Aluminum","7429-90-5"
-                 271231003,1,12101,"2004-01-28",NA,NA,0.08,"Aluminum","7429-90-5"
-                 271231003,1,12101,"2004-02-03",0.07,NA,0.06,"Aluminum","7429-90-5"
-                 271231003,1,12101,"2004-02-09",0.02,NA,0.06,"Aluminum","7429-90-5"
-                 271231003,1,12101,"2004-02-15"," ",NA,0.06,"Aluminum","7429-90-5"
-                 271231003,1,12101,"2004-02-21",0.03,NA,0.06,"Aluminum","7429-90-5"
-                 271231003,1,12101,"2004-02-27",0.21,NA,0.06,"Aluminum","7429-90-5"
-                 271377001,1,12101,"2007-09-21",NULL,a,0.04,"Aluminum","7429-90-5"
-                 271377001,1,12101,"2007-09-21",0.14,NA,0.04,"Aluminum","7429-90-5"', 
-                 stringsAsFactor = F)
-
-datatable(data, options = dt_options)
-
+data <- read_csv('aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
+                  271231003,1,12101,"2004-01-04",-999.99,NA,0.06,"Aluminum","7429-90-5"
+                  271231003,1,12101,"2004-01-10",0.23,NA,0.06,"Aluminum","7429-90-5"
+                  271231003,1,12101,"2004-01-16",0.35,NA,0.06,"Aluminum","7429-90-5"
+                  271231003,1,12101,"2004-01-22",0.22,NA,0.06,"Aluminum","7429-90-5"
+                  271231003,1,12101,"2004-01-28",NA,NA,0.08,"Aluminum","7429-90-5"
+                  271231003,1,12101,"2004-02-03",0.07,NA,0.06,"Aluminum","7429-90-5"
+                  271231003,1,12101,"2004-02-09",0.02,NA,0.06,"Aluminum","7429-90-5"
+                  271231003,1,12101,"2004-02-15"," ",NA,0.06,"Aluminum","7429-90-5"
+                  271231003,1,12101,"2004-02-21",0.03,NA,0.06,"Aluminum","7429-90-5"
+                  271231003,1,12101,"2004-02-27",0.21,NA,0.06,"Aluminum","7429-90-5"
+                  271377001,1,12101,"2007-09-21",NULL,a,0.04,"Aluminum","7429-90-5"
+                  271377001,1,12101,"2007-09-21",0.14,NA,0.04,"Aluminum","7429-90-5"')
 ```
+
 
 <br> _Table: Sample monitoring data_   
 ```{r, eval=T, echo=F, message=F, warning=F}
@@ -79,7 +76,9 @@ datatable(data, options = dt_options)
 
 # Test for missing concentrations, non-numeric values, and -999
 missing_conc <- function(x) {
+  
   is.na(as.numeric(x)) || as.numeric(x) < -900
+  
 }
 
 ```
@@ -187,8 +186,6 @@ datatable(data, options = dt_options)
 <br> __References__    
 
 
-
-
 ## Remove `Qualified` data {#quals}
 
 __Description__  
@@ -205,27 +202,6 @@ __Description__
 
 <br> __References__    
 
-
-
-  
-## Machine errors, sticking values, and sample leaks {#sticky}  
-
-__Description__  
-
-<br> __Recommended steps__  
-
-<br> __Sample `R` script__ 
-
-```r
-data %>% group_by(param_code, cas, aqs_id, conc) %>% summarize(count = n())
-
-```
-
-<br> __Contributors__    
-
-> Not me
-
-<br> __References__    
 
 
 ## Duplicate obersvations {#dups}
@@ -348,62 +324,6 @@ datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, orderi
 
 
 
-## Evaluate multiple air monitors (POCs) {#evalpocs}  
-
-__Description__  
-
-<br> __Recommended steps__   
-
-<br> __Sample `R` script__ 
-
-<br> __Contributors__    
-
-> Not me  
-  
-<br> __References__    
-
-
-
-## Prioritize multiple air monitors (POCs) {#pocs}  
-
-__Description__  
-
-<br> __Recommended steps__   
-
-
-<br> __Sample `R` script__ 
-
-<br> __Contributors__    
-
-> Not me  
-  
-<br> __References__    
-
-  
-## Outliers, leaks, and contamination {#outs}  
-
-__Description__  
-
-<br> __Recommended steps__  
-
-
-<br> __Sample `R` script__ 
-
-```{r}
-
-# Value should not be 20% below background
-
-
-```
-
-
-<br> __Contributors__    
-
-> Not me
-
-<br> __References__    
-
-   
 [Jump to top](#start)
 
 

@@ -1,0 +1,132 @@
+# Data validation 
+
+```{r out.width='55%', echo=F}
+knitr::include_graphics("https://xkcd.com/1024/")
+```
+
+__Description__  
+Environmental monitoring data, typical of all chemical analysis, can be subject to error. Three important errors to track are loss of sample (leaks), intrument issues (concing in duplicated concs), or extreme values (high values). 
+
+<br> __Recommended steps__
+
+1. Identify exceptionally high values.
+1. Identify 3 sequential identical values.
+1. Identify potential instrument drift.
+1. Report findings to laboratory for further investigation.
+
+<br> __Why not average these exceptional data into the year and assume the problem will go away?__
+
+Further investigation by laboratory staff is required if the laboratory equipment or system is in error. If the laboratory is not in error, these concs require additional investigation by data analysts and potentially by air pollution source specialists. For these reasons, these data validation steps are critical. A decreasing signal or repeated sequential measurement means that the data are not interpretable. An exceptionally high value could mean laboratory contamination or potentially could contribute to human health impacts if the high value is accurate.    
+
+
+<br> __Sample `R` script__ 
+
+
+```{r validate, eval=T, message=F, warning=F, id = "demo", class = "collapse"}
+library(dplyr)
+library(data.table)
+library(knitr)
+library(DT)
+library(RODBC)
+library(stringr)
+library(RcppRoll)
+library(lubridate)
+library(tidyr)
+
+
+##need to confirm that this data set has sequential repeats, some high values and at least 10 dates with numbers
+data <- read.csv("X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods/airtoxics_data_2009_2013.csv", stringsAsFactor = F)
+colnames(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
+
+
+```
+
+<br> _Table: Sample monitoring data_   
+```{r, eval=T, echo=F, message=F, warning=F}
+#kable(head(data), booktabs = T, caption = "Sample monitoring data.")
+datatable(head(data, 20), options = dt_options)
+```
+
+
+### Identifying Instrument drift or leaks in a system. The test looks for a mean difference on a rolling basis between 2 sets of five day concs. {#leaks} 
+
+```{r echo=F, message=F, warning=F}  
+
+data$conc <- as.numeric(data$conc)
+data$md_limit <- as.numeric(data$md_limit)
+sites <- unique(data$aqs_id)
+years <- unique(data$year)
+
+#data = data[,c(1:8,10,9)]
+
+clean_values = function(data) {
+  data$conc = as.numeric(as.character(data$conc))
+  data$conc[abs(data$conc) >= 999] = NA
+  return(data)
+}
+
+data = clean_values(data)
+for(j in sites) {
+  data_carbontet <- filter(data, pollutant=="Carbon Tetrachloride")
+  data_carbontet$quarter <- quarter(data_carbontet$date)
+  data_carbontet = data_carbontet %>% group_by(aqs_id, pollutant, poc, year, quarter) %>% mutate(mean = mean(conc)) %>% ungroup()
+  
+  ##order(date) %>% filter(n() >= 5) %>% mutate(mean_of_past_5days = roll_mean(conc,5,align="right",fill = NA, na.rm = T) ) %>% slice(5 * 1:(n() %/% 5) )
+  data_sub = data_sub %>% group_by(aqs_id, pollutant, poc) %>% mutate(mean_ratio = mean_of_past_5days / lead(mean_of_past_5days), Leak_Test = mean_ratio > 1.5)
+  leak_table <- data_sub[, c("date", "pollutant", "aqs_id", "Leak_Test")]
+}
+
+leak_table$Warning_Type <- "Decrease_in_Measurements"
+leak_table <- filter(leak_table, Leak_Test == TRUE)
+leak_table <- leak_table[, c("date", "pollutant", "aqs_id", "Warning_Type")]
+datatable(leak_table, options = dt_options)
+```
+
+
+## Exceptional and extreme values aka outliers {#outs} 
+
+
+```{r eval=T, message=F, warning=F}
+
+# Test for exceptionally high values [above 75th percentile X 3]
+#Generic script for identifying high values
+high_data <- group_by(data, year, aqs_id, pollutant) %>% mutate(AR_Mean = mean(conc, na.rm=T), Percentile_75 = quantile(conc, 0.75, na.rm=T), Percentile_75_X3 = Percentile_75*3) %>% ungroup()
+high_data <- filter(high_data, conc>Percentile_75_X3, !is.na(conc), AR_Mean>md_limit, Percentile_75>0)
+high_data$Warning_Type <- "Exceptionally_High_Value_Test"
+datatable(high_data, options = dt_options)
+high_data <- high_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
+##Toxics - Multiplying by 3 returns ~4000/1176818 values as extreme, multiplying by 1.5 returns >20,000. Multiplying by 3 returns between 2 and 45% of analyte/site/year groups.
+##UFP - Multiplying by 3 returns 28894 of 1335083 total values. Multiplying by 3 returns between 2 and 15% of analyte/site/year groups.
+##PAHs - Multiplying by 3 returns 168 of 39298 total values. Multiplying by 3 returns between 3 and 10% of analyte/site/year groups.
+```
+
+
+## Sequential repeats aka "sticky" numbers aka machine errors {#sticky}
+
+```{r eval=T, message=F, warning=F}
+
+# Test for exceptionally high values [above 75th percentile X 3]
+repeat_data <- group_by(data, year, aqs_id, pollutant) %>% arrange(year, aqs_id, pollutant, date) %>% mutate(Previous_Day = lag(conc, 1), Two_Days_Prior = lag(conc, 2)) %>% ungroup()
+repeat_data <- mutate(repeat_data, Repeat_Test = ifelse(round(conc, digits=4)==round(Previous_Day, digits=4) & round(Previous_Day, digits=4)==round(Two_Days_Prior, digits=4), "TRUE", "FALSE"))
+repeat_data$Warning_Type <- "Repeat_Test"
+repeat_data <- filter(repeat_data, conc>0 &  Repeat_Test==TRUE)
+datatable(repeat_data, options = dt_options)
+repeat_data <- repeat_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
+###There are many repeating values in the Toxics data. None in PAHs. Approximately 3200 for UFPs, but this is 15 minute data. We may need a more stringent test for UFPs.
+```
+
+
+<br> _Table: Dates and pollutants to check including the potential issue_   
+```{r, eval=T, echo=F, message=F, warning=F}
+warnings_table <- rbind(repeat_data, leak_table, high_data)
+datatable(select(warnings_table, -null_code), options = dt_options, rownames = FALSE)
+```
+
+<br> __Contributors__  
+
+> Dorian Kvale; Derek Nagel, Kristie Ellickson, Cassie McMahon 
+
+
+<br> __References__    
+

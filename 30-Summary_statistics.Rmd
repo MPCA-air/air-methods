@@ -1,5 +1,11 @@
 # Summary statistics
 
+```{r out.width='55%', echo=F}
+knitr::include_graphics("https://s-media-cache-ak0.pinimg.com/736x/6c/3b/20/6c3b208e49b035cd7caffa18240ba5d2--cloud-data-tech-humor.jpg
+")
+```
+
+
 We describe our methods in this chapter.
 
 ## Bootstrapping  
