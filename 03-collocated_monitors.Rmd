@@ -1,6 +1,6 @@
 # Collocated monitors
 
-```{r out.width='55%', echo=F}
+```{r out.width='95%', echo=F}
 knitr::include_graphics("https://imgs.xkcd.com/comics/box_plot.png")
 ```
 
