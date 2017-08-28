@@ -1,6 +1,8 @@
 ### Pollution roses and love poems (Derek)
 
+Pollution roses are a visual display of pollutant concentrations and wind directions correspnding to those concentrations. The length of each "paddle" is correlated with the percentage of days of valid measurements taken when the wind was blowing from that direction. So if the longest paddle the one extending upward, then the wind blew from the North on average more times than any other direction for days with valid measurements of a pollutant. The colors on a paddle correspond to the concentration of the pollutant. Blue means lower concentrations up to red which are the highest concentrations.
 
+Note that for 24-hour samples, wind direction is the vector averaged wind direction of each hour in a day.
 
 <br> __Sample `R` script__ 
 

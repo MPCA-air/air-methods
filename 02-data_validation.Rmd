@@ -6,58 +6,58 @@ knitr::include_graphics("https://imgs.xkcd.com/comics/error_code.png")
 ```
 
 
-Environmental monitoring data can be subject to error. Three important errors to look out for are:
-
-  1. Loss of sample (leaks).
-  2. Instrument issues such as sequential repeated results.
-  3. Extreme values.
+Environmental monitoring data can be subject to error. Three important errors to look for are:
 
 
-Validation includes steps to:
-
-- \@ref(leaks)    __Identify leaks and sample contamination__
-- \@ref(sticky)   __Check for instrument errors (sticking values)__ 
-- \@ref(outs)     __Check for outliers__
+- \@ref(leaks)    __Leaks and sample contamination__
+- \@ref(sticky)   __Instrument errors such as drift or repeated results (sticking values)__ 
+- \@ref(outs)     __Outliers or extreme values__
 
 
-<br> __Recommended steps__
+<br> __Validation steps__
 
-1. Identify exceptionally high values.
-1. Identify 3 sequential identical values (sticking).
+1. Identify exceptional values.
+1. Identify sequential identical values (sticking).
 1. Identify potential instrument drift.
 1. Report findings to laboratory for further investigation.
 
-<br> __Why not average these exceptional data into the year and assume the problem will go away?__
+
+<br> __Why not average the exceptional data over the year and assume the problem will go away?__
 
 Further investigation by laboratory staff is required if the laboratory equipment or system is in error. If the laboratory is not in error, these concentrations require additional investigation by data analysts and potentially by air pollution source specialists. For these reasons, these data validation steps are critical. A decreasing signal or repeated sequential measurement means that the data are not interpretable. An exceptionally high value could mean laboratory contamination or potentially could contribute to human health impacts if the high value is accurate.    
 
 
 <br> __Notes__  
 
-Issues:  
 
 - Possible Contamination Issues-by site and pollutant
-  -  3*IQR: I used as a simple outlier identifier in EU guidelines. This includes a lot of data for UFPs.
-- Cassie has experimented with: 
-  -  3*75th percentile(UFP) - quantiles from previous year of data
-  -  2.5 *75th percentile of the data (put in Derek's explanation) this is for integrated air toxics data
-  -  3*SD (Poor performance)
-  -  Site mean more than twice the second highest site mean(NO)
-  -  Sites with maxima over 2X the next highest value(NO)
-  -  Only one detection at a site (special case)
-    -  And Detection was greater than 3X the MDL
-    -  And Detection was within 10% of state maximum that year
-- Recommendation 
-- __[75th percentile * 3] for all pollutants__
+  - 3*IQR: I used as a simple outlier identifier in EU guidelines. This includes a lot of data for UFPs.
 
-Possible Sample loss issues (leak)-by site and pollutant
-	Check for several (2,3) below MDL values when values have been above MDLs previously (need discussion). MDL would be from the previous year. 
-o	I tried taking the mean of 5 sequential values, and then the 5 sequential values after the first 5. Then, if the second set of means was 1.5 times less than the first mean I flagged the values for a check.
+Cassie has tried:  
 
-o   Instrument issues
-  Check for 3 sequential duplicated values.
- 
-o   Goals are: 1. Simple to run, 2. To find extreme values that may be in error or from contamination, 3. Find 2 repeating values that are exactly the same, 4. Find low values where this is not common., 5. Do this in a routine way [identify frequency of validation checks].
+  - 3*75th percentile(UFP) - quantiles from previous year of data
+  - 2.5 *75th percentile of the data (put in Derek's explanation) this is for integrated air toxics data
+  - 3*SD (Poor performance)
+  - Site mean more than twice the second highest site mean(NO)
+  - Sites with maxima over 2X the next highest value(NO)
+  - Only one detection at a site (special case)
+    - And Detection was greater than 3X the MDL
+    - And Detection was within 10% of state maximum that year  
+
+
+Possible Sample loss issues (leaks) by site and pollutant  
+
+- Check for several (2,3) below MDL values when values have been above MDLs previously (need discussion). MDL would be from the previous year.  
+- I tried taking the mean of 5 sequential values, and then the next 5 sequential values. If the second set of means was 1.5 times less than the first mean I flagged the values.  
+- __Recommendation:__ Use the `[75th percentile * 3]` for all pollutants.  
+
+
+__Goals:__ 
+
+1. Find extreme values that may be in error or from contamination.
+1. Find 3 repeating values that are exactly the same.
+1. Find low values where this is not common.
+1. Do this in a routine way (identify frequency of validation checks).
 
 
 

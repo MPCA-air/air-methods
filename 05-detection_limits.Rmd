@@ -1,11 +1,14 @@
 # Detection limits (Kristie & Cassie) 
 
+
+```{r out.width='40%', echo=F, fig.align="center"}
+knitr::include_graphics("https://pbs.twimg.com/media/CyW_of8XAAAbKul.jpg")
+```
+
+
 Detection limit methods.
 
-
 <br> __Notes__  
-
-Topics:  
 
 - Types of detection limits (what detection limit the lab calculates, where it is, where it is not and when not to use what lims has) [Cassie]
 - Does a value equal to the detection limit count as detected? __“YES!”__ 

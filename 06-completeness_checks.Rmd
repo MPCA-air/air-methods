@@ -13,7 +13,9 @@ Completeness checks inlcude tests for:
     - “Criteria to calculate annual mean not met.”
 - More than 3 unique values (cite this)
     - 3 per year? 3 per quarter?
-- What can we do for incomplete seasons or years: Compare to acute? Summarize based on number of values above detection?   (Cassie did this)
+- Minimum samples.
+
+What can we do for incomplete seasons or years: Compare to acute? Summarize based on number of values above detection?   (Cassie did this)
 
 
 <br> __Annual reporting rules__
