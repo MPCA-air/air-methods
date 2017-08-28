@@ -1,13 +1,10 @@
 # Summary statistics
 
-```{r out.width='30%', echo=F}
+```{r out.width='40%', echo=F, fig.align="center"}
 knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/12936/large/1464301097/number-rcatladies.png")
 ```
 
-
-We describe summary methods in this chapter.
-
-These methods inlcude:  
+The summary methods described in this chapter inlcude:  
 
 - \@ref(boots)       __Bootstrapping__  
 - \@ref(confidence)  __Confidence intervals__  

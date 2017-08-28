@@ -1,4 +1,4 @@
-# Data cleaning (Dorian)
+# Data cleaning (Dorian & Cassie)
 
 ```{r out.width='55%', echo=F}
 knitr::include_graphics("images/data-cleaning.jpg")
@@ -12,6 +12,10 @@ These procedures include steps to:
 - \@ref(quals)    __Evaluate qualified data__     
 - \@ref(dups)     __Remove duplicate observations__ 
  
+
+__Text summary__
+
+
 
 
 ## Remove blank, `NULL`, and missing values {#missing}
@@ -182,13 +186,12 @@ datatable(data, options = dt_options)
 <br> __References__    
 
 
-## Remove `Qualified` data {#quals}
+## Remove `Qualified` data (Cassie) {#quals}
+
 
 __Description__  
 
 <br> __Recommended steps__  
-
-<br> __Why not this...?__  
 
 <br> __Sample `R` script__ 
 

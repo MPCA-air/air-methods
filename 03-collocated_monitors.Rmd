@@ -127,8 +127,8 @@ POC_check = function(data) {
 
 > Derek   
    
-   
-<br> __References__     
+
+__References__
 
 
 
@@ -184,9 +184,9 @@ POC_average = function(data) {
 
 > Derek   
   
-    
-    
-<br> __References__   
+  
+  
+__References__   
 
 
 
