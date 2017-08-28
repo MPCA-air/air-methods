@@ -1,16 +1,30 @@
 # Summary statistics
 
-```{r out.width='55%', echo=F}
-knitr::include_graphics("https://s-media-cache-ak0.pinimg.com/736x/6c/3b/20/6c3b208e49b035cd7caffa18240ba5d2--cloud-data-tech-humor.jpg
-")
+```{r out.width='30%', echo=F}
+knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/12936/large/1464301097/number-rcatladies.png")
 ```
 
 
-We describe our methods in this chapter.
+We describe summary methods in this chapter.
 
-## Bootstrapping  
+These methods inlcude:  
 
-Bootstrapping provides methods for calculating summary statistics without the neccessity to make assumptions about whether the data is derived from a normal dirstribution.
+- \@ref(boots)       __Bootstrapping__  
+- \@ref(confidence)  __Confidence intervals__  
+
+__Notes__
+
+Means 
+
+- When to use arithmetic / geometric
+  -  Use an arithmetic mean when your data are normal and there are less than 5% below detection limit values per year/analyte/site [I made up the 5%, but there is an EPA document looking at the impacts of BDL data we can cite and incorporate. I’ll look for it] generic test for normality AND 5% BDL.
+  -  For non-automated scripts: Use a geometric mean if your data are log-normally distributed and there are less than 5% below detection limit values per year/analyte/site.
+
+
+
+## Bootstrapping  (Dorian) {#boots}
+
+Bootstrapping provides methods for calculating summary statistics without making assumptions about whether the data is sampled from a normal dirstribution.
 
 Packages
 ```{r message=F}
@@ -21,7 +35,7 @@ library(readr)
 
 Our data is organized by monitoring site and date. Here's a sample.
 
-```{r kable, message=F, echo=F, fig.cap = "Sample data table."}
+```{r message=F, echo=F, fig.cap = "Sample data table."}
 library(knitr)
 
 df <- read_csv(
@@ -126,8 +140,12 @@ Boot_conc       = unlist(boot_results[1])[[2]],
 Upper_CL95_conc = unlist(boot_results[1])[[3]])  
 ```
 
+
 Results
 
-The booted confidence limits
-`r kable(conc_summary)`
+The booted confidence limits `r kable(conc_summary)`
+
+
+
+## Confidence intervals (Derek) {#confidence}
 

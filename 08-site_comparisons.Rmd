@@ -1,0 +1,17 @@
+# Site comparisons (Derek & Kristie)
+
+
+__Notes__
+
+Steps:  
+
+- Chart data with box and whisker plots. Some site differences might be very apparent and not require statistical comparisons. [Need to think about what is apparent enough for a visual test, maybe no overlap of box, or only half or less overlap] look at cenboxplot with NADA packages, or use Kristies boxplot with censored values.
+- Check for normality Chi-squared test (Is normality a valid assumption?). If the data are normal, and there is equal variance [Levenes test--generic script here] complete an ANOVA to compare sites. If there are more than 2 sites, follow with a post hoc test [I say Tukey, but Derek weigh in here].
+- If the data are not normal, and there is not equal variance [see generic script from above] complete a Kruskal wallis test (but there are other ones if you have < or > 50 samples…look into this). If there are more than 2 sites to compare, use Dunns test for post hoc site by site comparisons [Kristie has a script for this, will make it generic]. 
+- Bayesian ANOVA?  [Derek likes this!]
+
+
+## Confidence intervals 
+
+Some _significant_ applications are demonstrated in this chapter.  
+

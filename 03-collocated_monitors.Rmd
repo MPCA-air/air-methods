@@ -1,16 +1,57 @@
-# Collocated monitors
+# Collocated monitors (Derek)
 
 ```{r out.width='95%', echo=F}
 knitr::include_graphics("https://imgs.xkcd.com/comics/box_plot.png")
 ```
 
 
+Analysis steps for collocated monitors include:
 
-## Evaluate multiple air monitors (POCs) {#evalpocs}  
+- \@ref(evalpocs) __Evaluate sites with collocated monitors (POCs)__   
+- \@ref(pripocs)  __Prioritize observations from collocated monitors (POCs)__ 
 
-__Description__  
+
+## Evaluate collocated air monitors (POCs) {#evalpocs}  
+
+__Description__ 
+
+Collocated samples are multiple samples taken for a pollutant from the same monitoring site at the same time. Collocated samples provide an extra layer of quality assurance by taking multiple measurements under very similar conditions which helps detect machine, lab, and human error. Depending on the results from collocated monitors, only one of the monitors, or potentially neither may be considered as valid measurements.
+
 
 <br> __Recommended steps__   
+
+Viewing a scatterplot of collocated measurements is suggested as it helps to view both obvious and subtle irregularities between collocated measurements. If there is evidence of bias in one of the monitors (values from one collocated monitor are usually higher than the other), or there is large variance between the collocated monitors (values differ from each other by significant margins), then both collocated monitors need to be investigated further.
+
+EPA recommends that collocated monitors have no higher than a 15% coefficient of variation between their measurements. Calculating the CV for every measurement pair does not make sense as small differences (i.e. 0.001 and 0.002) have the same CV as large differences (i.e. 10 and 20). Therefore, we chose to look at the median CV for each site, pollutant, and year then flag collocated monitors if the median CV is greater than 15 which suggests differences between the collocated monitors are systematic. We only calculate the CV for collocated monitors on days which both have valid measurements greater than or equal to the MDL since there is lower confidence in values below the MDL. We only compare the median CV to the threshold of 15 if there are at least 10 calculated CV values since it does not make sense to flag monitors where only a few values are above detection.
+
+If collocated monitors do not agree, then consult with the lab or quality assurance team to determine if there is a problem with one of the POCs. If they determine that one of POCs is reliable and the other is not, then only use data from the reliable POC. If they cannot determine which POC is the problem, then confidence in the measurements from both collocated monitors is reduced and no measurements taken from either collocated monitor should be used.
+
+
+<br> __Notes__  
+
+Identify bias  
+
+- Pairwise t-test for the POC means? Look at quantiles of differences?
+- Who should we notify if one POC is higher than the other? Develop a process for this potentially in Air Vision with email notifications to field and lab.
+- Default option if one is biased higher than the other: Go with higher POC? Go with lower POC? Use mean? Exclude both POCs?
+  -  This might be pollutant dependent. Carbon tetrachloride, for example, we can determine which monitor is correct. Formaldehyde is stable enough to somewhat know what is correct. Maybe this is true for 1,3 butadiene too. 
+  -  Otherwise, take the mean.
+  -  Exclude  extreme values for the POC or all values for the POC? Need input from laboratory or see the decision criteria above.
+- Variance: Minimum correlation for both POCs to be valid? Possibly use a R2 of 0.99 (2 significant digits). 
+  -  May require unique COV for each pollutant or pollutant group.  
+  
+
+One value above detection, one value below? 
+
+- Derek suggests going with the value above detection. We don’t want to do substitutions unless we have to, so if there are not any problems with the POC above detection, then use the actual measured value. (EPA Data Analysis Workbook?)
+
+One value above acute IHB and one value below?  
+
+-  First check validity of monitors to see if there are problems with one of the monitors.
+- If both POCs seem valid, use the mean? (I suggest this because I think it’s the most defensible thing to do. The true concentration is likely between the POCs and the mean is the most unbiased estimate given the 2 POC measurements. If one POC is well above the IHB and one is just barely below, then the true concentration is likely above the IHB. If one POC is just barely above the IHB and the other is well below, then the true concentration is likely below the IHB. We could go with the higher POC if we want to be conservative.)
+- Pull the highest POC for the daily maximum and the annual second high comparison to acute IHB. Take the mean of the POCS for the UCL-95, assuming both are valid values.
+
+
 
 <br> __Sample `R` script__ 
 
@@ -19,10 +60,9 @@ Data must have columns with "AQS_ID", "POC", "Param_Code", "Date","Concentration
 "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS" in order from left to right.
 ```{r}
 POC_check = function(data) {
-  library(dplyr)
-  library(tidyr)
+  library(tidyverse)
   library(lubridate)
-  library(ggplot2)
+
   
   POC_ratio = function(Concentration.x, Concentration.y, MDL) {
     
@@ -35,45 +75,78 @@ POC_check = function(data) {
     
   }
   
+  POC_diff = function(Concentration.x, Concentration.y, MDL) {
+    
+    return( ifelse(!is.na(Concentration.x) & Concentration.x > MDL & !is.na(Concentration.y) & Concentration.y > MDL, Concentration.y - Concentration.x, NA) )
+    
+  }
+  
+  POC_avg = function(Concentration.x, Concentration.y, MDL) {
+    
+    return( ifelse(!is.na(Concentration.x) & Concentration.x > MDL & !is.na(Concentration.y) & Concentration.y > MDL, (Concentration.y + Concentration.x) / 2 , NA) )
+    
+  }
+  
+  POC_sd = function(Concentration.x, Concentration.y, MDL) {
+    
+    return( ifelse(!is.na(Concentration.x) & Concentration.x > MDL & !is.na(Concentration.y) & Concentration.y > MDL, apply(rbind(Concentration.x, Concentration.y), 2, function(x) sd(x, na.rm = T) ), NA) )
+    
+  }
+  
   names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration",
                    "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
-  data = select(data, AQS_ID, POC, Date, Concentration, MDL, Pollutant)
+  data = select(data, AQS_ID, POC, Date, Concentration, MDL, Pollutant, Year)
   data = distinct(data)
-  #data = distinct(data, AQS_ID, POC, Date, MDL, Pollutant, .keep_all = T)
   POCs = filter(data, POC > 1)
   data = filter(data, POC == 1)
-  POCs = full_join(data, POCs, by = c("AQS_ID", "Pollutant", "Date", "MDL"))
+  POCs = full_join(data, POCs, by = c("AQS_ID", "Pollutant", "Date", "MDL", "Year"))
+  POC_differences = POCs %>% mutate(difference = POC_diff(Concentration.x, Concentration.y, MDL), average = POC_avg(Concentration.x, Concentration.y, MDL), sd = POC_sd(Concentration.x, Concentration.y, MDL) )
+  POC_summary = POC_differences %>% mutate(CV = sd/average * 100)
+  POC_flag = POC_summary %>% group_by(AQS_ID, Pollutant, Year) %>% summarise(median_CV = median(CV, na.rm = T), n = sum(!is.na(CV) ) ) %>% mutate(flag = median_CV > 15 & n >= 10)
+  
+  
   POCs = POCs %>% mutate(Conc = Concentration.y / Concentration.x * (Concentration.x > MDL) * (Concentration.y > MDL))
   POCs = filter(POCs, !is.na(Conc) & Conc != 0)
   POCs$Unique <- paste(POCs$AQS_ID, POCs$Pollutant)
   POCs$Date = as.Date(POCs$Date)
   
-  ggplot(POCs, aes(Date, Conc)) +
+  POC_plot = ggplot(POCs, aes(Date, Conc)) +
     geom_point() + scale_x_date() + scale_y_log10() +
     facet_wrap ( ~ Unique) +
     ylab("POC 2 / POC 1 (log scale") +
     theme(axis.title.x=element_blank(),
       axis.text.x=element_blank(),
       axis.ticks.x=element_blank())
+  
+  return(list(POC_flag, POC_plot) )
 }
 ```
 
 
-
 <br> __Contributors__    
 
-> Derek 
-  
-<br> __References__    
+> Derek   
+   
+   
+<br> __References__     
 
 
 
 ## Prioritize multiple air monitors (POCs) {#pripocs}  
 
-__Description__  
+__Description__
+
+If collocated monitors at a site are both considered valid, then a single value must be chosen from multiple collocated values to avoid double-counting values at a single site.
 
 <br> __Recommended steps__   
 
+For air toxics, measurements from collocated monitors are considered equally valid unless there is a specific reason to treat them differently. Therefore, these methods are used for dealing with collocated samples.
+
+1. If one monitor has a valid measurement, and the other does not, then the valid measurement is used.
+
+2. If one monitor has a valid measurement greater than or equal to the MDL and the other has a valid measurement less than the MDL, then the measurement above the MDL is used as a conservative approach as there is greater confidence in the value above the MDL.
+
+3. If both monitors have valid measurements above the MDL, then those values are averaged since both values are equally valid and the "true" value is assumed to likely be between the two values.
 
 <br> __Sample `R` script__ 
 
@@ -107,13 +180,14 @@ POC_average = function(data) {
 ```  
 
 
-
-
-
 <br> __Contributors__    
 
-> Derek 
+> Derek   
   
-<br> __References__    
+    
+    
+<br> __References__   
+
+
 
   

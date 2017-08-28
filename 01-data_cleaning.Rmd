@@ -1,4 +1,4 @@
-# Data cleaning
+# Data cleaning (Dorian)
 
 ```{r out.width='55%', echo=F}
 knitr::include_graphics("images/data-cleaning.jpg")
@@ -8,13 +8,10 @@ Before jumping into your analysis you'll want to clean it up with some helpful q
 
 These procedures include steps to:  
 
-- \@ref(missing)  __Remove blank, NULL, and missing values__  
-- \@ref(sticky)   __Check for machine errors (sticking values)__  
+- \@ref(missing)  __Remove blank, invalid, NULL, and missing values__  
 - \@ref(quals)    __Evaluate qualified data__     
 - \@ref(dups)     __Remove duplicate observations__ 
-- \@ref(evalpocs) __Evaluate sites with multiple monitors (POCs)__   
-- \@ref(pocs)     __Prioritize observations from multiple monitors (POCs)__   
-- \@ref(outs)     __Check for outliers, leaks, and contamination__
+ 
 
 
 ## Remove blank, `NULL`, and missing values {#missing}
@@ -45,8 +42,7 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, length
 
 <br> Load example monitoring data
 ```{r demo, eval=T, message=F, warning=F, class = "collapse"}
-library(dplyr)
-library(readr)
+library(tidyverse)
 
 data <- read_csv('aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
                   271231003,1,12101,"2004-01-04",-999.99,NA,0.06,"Aluminum","7429-90-5"
@@ -204,7 +200,7 @@ __Description__
 
 
 
-## Duplicate obersvations {#dups}
+## Duplicate observations {#dups}
 
 __Description__  
 Large monitoring data sets often contain a few instances when multiple observations occur over the same time period at the same site. When multiples observations do occur they tend to be identified by a unique monitor POC (parameter occurrence code) or by a qualifier describing why the second observation was recorded (e.g. a duplicate for quality control). 
@@ -317,14 +313,13 @@ datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, orderi
     
 <br> __Contributors__   
 
-> Dorian Kvale 
+> Dorian, Mr. Kitty
 
 
 <br> __References__    
 
 
-
-[Jump to top](#start)
+[Jump to top](#missing)
 
 
 Reference: https://stackoverflow.com/questions/37755037/how-to-add-code-folding-to-output-chunks-in-rmarkdown-html-documents/37839683#37839683

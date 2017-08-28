@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="data-cleaning-dorian.html">
+<link rel="prev" href="time-series.html">
+<link rel="next" href="additional-resources-kristie.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -181,24 +181,70 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<!--bookdown:title:end-->
-<!--bookdown:title:start-->
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<div style="margin-top: -25px;">
-<p><em>Updated Aug 28, 2017</em></p>
+<div id="maps-kristie" class="section level1">
+<h1><span class="header-section-number"></span> Maps (Kristie)</h1>
+<div id="kriging" class="section level2">
+<h2><span class="header-section-number">11.1</span> Kriging</h2>
+<p>Coming soon…</p>
 </div>
-<p><a href="https://www.crcpress.com/product/isbn/9781138700109" target="_blank"><img src="images/cover.jpeg" style="display: block; margin: auto;" /></a></p>
-<p>This guide describes the methods used at the MPCA to analyze air monitoring and modeling data. The charts and code found in this guide were produced using the freely available R statistical software. To follow along with the examples download a copy of R to your computer from the <a href="https://cran.r-project.org/">r-project</a> or use <a href="http://www.r-fiddle.org/#/">R-Fiddle</a> in your browser.</p>
+<div id="spatial-averaging-and-aggregation" class="section level2">
+<h2><span class="header-section-number">11.2</span> Spatial averaging and aggregation</h2>
+<p>To average across…</p>
+</div>
+<div id="creating-shapefiles-in-r-adn-joining-to-ej-areas" class="section level2">
+<h2><span class="header-section-number">11.3</span> Creating shapefiles in R adn joining to EJ areas</h2>
+<p>I don’t really remember the points of this. This bit of script creates a shapefile from air monitoring data with coordinates and then joins to the EJ status for census tracts. Let’s discuss how to make this useful.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(stringr)
+<span class="kw">library</span>(RcppRoll)
+<span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(car)
+<span class="kw">library</span>(DT)
 
+data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)
+
+<span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)
+
+dt_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">scrollX =</span> T, <span class="dt">autoWidth =</span> T, <span class="dt">searching =</span> F, <span class="dt">ordering=</span>F, <span class="dt">lengthChange =</span> F, <span class="dt">paginate=</span>F, <span class="dt">info=</span>F)
+
+
+########################################################################
+## Spatial join to census tracts and then left_join to EJ areas status #
+########################################################################
+coords &lt;-<span class="st"> </span>monitoring_locations[, <span class="kw">c</span>(<span class="st">&quot;Longitude&quot;</span>, <span class="st">&quot;Latitude&quot;</span>)]
+
+point_source_wypoints &lt;-<span class="st"> </span><span class="kw">SpatialPointsDataFrame</span>(coords, <span class="dt">data=</span>data, <span class="dt">proj4string =</span> <span class="kw">CRS</span>(<span class="st">&#39;+proj=longlat +ellps=WGS84&#39;</span>))
+
+point_source_wypoints &lt;-<span class="st"> </span><span class="kw">spTransform</span>(point_source_wypoints, <span class="kw">CRS</span>(<span class="st">&#39;+proj=utm +zone=15 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0&#39;</span>))
+
+census_tracts &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="dt">dsn=</span><span class="st">&quot;R:/demographics&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;census_2010_tracts_usboc&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+
+point_sources_files_geo &lt;-<span class="st"> </span><span class="kw">point.in.poly</span>(point_source_wypoints, census_tracts)
+
+<span class="kw">writeOGR</span>(<span class="dt">obj=</span>point_sources_files_geo, <span class="dt">dsn=</span><span class="st">&quot;X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;airmonitors_tracts&quot;</span>, <span class="dt">driver=</span><span class="st">&quot;ESRI Shapefile&quot;</span>)
+
+point_sources_tracts_dbf &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods/airmonitors_tracts.dbf&quot;</span>, <span class="dt">as.is=</span><span class="ot">TRUE</span>)
+
+ej_layers &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;X:/Agency_Files/EJ/GIS/Shapefiles/ACS_2014_5Yr_Tract_MNPovPPC.dbf&quot;</span>, <span class="dt">as.is=</span><span class="ot">TRUE</span>)
+
+ej_layers &lt;-<span class="st"> </span>ej_layers[, <span class="kw">c</span>(<span class="st">&quot;GEOID&quot;</span>, <span class="st">&quot;ov50per_nw&quot;</span>, <span class="st">&quot;prp_under1&quot;</span>)]
+
+point_sources_tracts_ej &lt;-<span class="st"> </span><span class="kw">left_join</span>(point_sources_tracts_dbf, ej_layers, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;GEOID10&quot;</span>=<span class="st">&quot;GEOID&quot;</span>))
+
+<span class="kw">names</span>(point_sources_tracts_ej) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Facility_ID&quot;</span>,  <span class="st">&quot;Facility_Name&quot;</span>, <span class="st">&quot;Resident_Cancer_Risk&quot;</span>, <span class="st">&quot;Resident_Hazard_Quotient&quot;</span>, <span class="st">&quot;CAS&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>,  <span class="st">&quot;Latitude&quot;</span>, <span class="st">&quot;Longitude&quot;</span>, <span class="st">&quot;Annual_PM25_Concentration&quot;</span>, <span class="st">&quot;STATEFP&quot;</span>, <span class="st">&quot;COUNTYF&quot;</span>, <span class="st">&quot;TRACTCE&quot;</span>, <span class="st">&quot;GEOID10&quot;</span>, <span class="st">&quot;NAME10&quot;</span>, <span class="st">&quot;NAMELSA&quot;</span>, <span class="st">&quot;MTFCC10&quot;</span>, <span class="st">&quot;FUNCSTA&quot;</span>, <span class="st">&quot;ALAND10&quot;</span>, <span class="st">&quot;AWATER1&quot;</span>, <span class="st">&quot;INTPTLA&quot;</span>, <span class="st">&quot;INTPTLO&quot;</span>, <span class="st">&quot;ov50per_nw&quot;</span>, <span class="st">&quot;prp_under1&quot;</span>)
+
+<span class="co">#Output file name (including path)</span>
+point_sources_tracts_ej &lt;-<span class="st"> </span><span class="kw">unique</span>(point_sources_tracts_ej)</code></pre></div>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="data-cleaning-dorian.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="time-series.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="additional-resources-kristie.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -218,7 +264,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/MPCA-air/air-methods/edit/master/index.Rmd",
+"link": "https://github.com/MPCA-air/air-methods/edit/master/80-maps.Rmd",
 "text": "Edit"
 },
 "download": ["air-methods.pdf"],

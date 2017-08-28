@@ -1,11 +1,11 @@
-# Charts
+# Charts 
 
-## Boxplots
+## Boxplots (Dorian)
 
-Dividing by zero is an amazing super power. Unfortunately for you your computer does not have this power. Making a log boxplot with data containing zeros or negative values will result in your computer melting itself. Obviously, it will never forgive you.
+Dividing by zero is an amazing super power. Unfortunately for you your computer does not have this power. Making a log boxplot with data containing zeros or negative values will result in your computer melting itself. It will never forgive you.
 
 
-### Log boxplot
+### Log boxplot 
 
 Coming soon... 
 
@@ -15,3 +15,19 @@ Coming soon...
 Coming soon...   
 
 
+## Calendar plots (Cassie)
+
+We have created a nice plot.
+
+
+## Colors (Dorian)
+
+Please use Ghibli colors. See [Ghibli](https://github.com/ewenme/ghibli).
+
+![Ghibli colors](https://github.com/ewenme/ghibli/raw/master/ghibli.jpg)
+
+## _openair_ package (Derek & Cassie)
+
+`r library(openair)`  
+
+Coming soon... 

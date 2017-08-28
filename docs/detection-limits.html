@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="collocated-monitors.html">
+<link rel="prev" href="placeholder.html">
 <link rel="next" href="summary-statistics.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -107,51 +107,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="1" data-path="data-cleaning.html"><a href="data-cleaning.html"><i class="fa fa-check"></i><b>1</b> Data cleaning</a><ul>
-<li class="chapter" data-level="1.1" data-path="data-cleaning.html"><a href="data-cleaning.html#missing"><i class="fa fa-check"></i><b>1.1</b> Remove blank, <code>NULL</code>, and missing values</a></li>
-<li class="chapter" data-level="1.2" data-path="data-cleaning.html"><a href="data-cleaning.html#quals"><i class="fa fa-check"></i><b>1.2</b> Remove <code>Qualified</code> data</a></li>
-<li class="chapter" data-level="1.3" data-path="data-cleaning.html"><a href="data-cleaning.html#dups"><i class="fa fa-check"></i><b>1.3</b> Duplicate obersvations</a></li>
+<li class="chapter" data-level="1" data-path="data-cleaning.html"><a href="data-cleaning.html"><i class="fa fa-check"></i><b>1</b> Data cleaning</a></li>
+<li class="chapter" data-level="2" data-path="data-validation.html"><a href="data-validation.html"><i class="fa fa-check"></i><b>2</b> Data validation</a></li>
+<li class="chapter" data-level="3" data-path="collocated-monitors.html"><a href="collocated-monitors.html"><i class="fa fa-check"></i><b>3</b> Collocated monitors</a></li>
+<li class="chapter" data-level="4" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>4</b> Placeholder</a></li>
+<li class="chapter" data-level="5" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>5</b> Detection limits</a><ul>
+<li class="chapter" data-level="5.1" data-path="detection-limits.html"><a href="detection-limits.html#below-detection"><i class="fa fa-check"></i><b>5.1</b> Below detection</a><ul>
+<li class="chapter" data-level="" data-path="detection-limits.html"><a href="detection-limits.html#example-charts-for-visualizing-data-below-and-above-detection-limits"><i class="fa fa-check"></i>Example charts for visualizing data below and above detection limits</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="data-validation.html"><a href="data-validation.html"><i class="fa fa-check"></i><b>2</b> Data validation</a><ul>
-<li class="chapter" data-level="2.0.1" data-path="data-validation.html"><a href="data-validation.html#leaks"><i class="fa fa-check"></i><b>2.0.1</b> Identifying Instrument drift or leaks in a system. The test looks for a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance.</a></li>
-<li class="chapter" data-level="2.1" data-path="data-validation.html"><a href="data-validation.html#outs"><i class="fa fa-check"></i><b>2.1</b> Exceptional and extreme values aka outliers are detected by comparing each measured concentration to 3 X the 75th percentile of the data set by year, site, and pollutant. For now, pocs collocated measurements are not tested separately.</a></li>
-<li class="chapter" data-level="2.2" data-path="data-validation.html"><a href="data-validation.html#sticky"><i class="fa fa-check"></i><b>2.2</b> Sequential repeats aka “sticky” numbers aka machine errors</a></li>
+<li class="chapter" data-level="5.2" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>5.2</b> Multiple detection limits</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="collocated-monitors.html"><a href="collocated-monitors.html"><i class="fa fa-check"></i><b>3</b> Collocated monitors</a><ul>
-<li class="chapter" data-level="3.1" data-path="collocated-monitors.html"><a href="collocated-monitors.html#evalpocs"><i class="fa fa-check"></i><b>3.1</b> Evaluate multiple air monitors (POCs)</a></li>
-<li class="chapter" data-level="3.2" data-path="collocated-monitors.html"><a href="collocated-monitors.html#pripocs"><i class="fa fa-check"></i><b>3.2</b> Prioritize multiple air monitors (POCs)</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>4</b> Detection limits</a><ul>
-<li class="chapter" data-level="4.1" data-path="detection-limits.html"><a href="detection-limits.html#below-detection"><i class="fa fa-check"></i><b>4.1</b> Below detection</a></li>
-<li class="chapter" data-level="4.2" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>4.2</b> Multiple detection limits</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>5</b> Summary statistics</a><ul>
-<li class="chapter" data-level="5.1" data-path="summary-statistics.html"><a href="summary-statistics.html#bootstrapping"><i class="fa fa-check"></i><b>5.1</b> Bootstrapping</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>6</b> Site comparisons</a><ul>
-<li class="chapter" data-level="6.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>6.1</b> Confidence intervals</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>7</b> Charts</a><ul>
-<li class="chapter" data-level="7.1" data-path="charts.html"><a href="charts.html#boxplots"><i class="fa fa-check"></i><b>7.1</b> Boxplots</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="charts.html"><a href="charts.html#log-boxplot"><i class="fa fa-check"></i><b>7.1.1</b> Log boxplot</a></li>
-<li class="chapter" data-level="7.1.2" data-path="charts.html"><a href="charts.html#outliers"><i class="fa fa-check"></i><b>7.1.2</b> Outliers</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="charts.html"><a href="charts.html#calendar-plots"><i class="fa fa-check"></i><b>7.2</b> Calendar plots</a></li>
-<li class="chapter" data-level="7.3" data-path="charts.html"><a href="charts.html#tableau"><i class="fa fa-check"></i><b>7.3</b> Tableau</a></li>
-<li class="chapter" data-level="7.4" data-path="charts.html"><a href="charts.html#r"><i class="fa fa-check"></i><b>7.4</b> R</a></li>
-<li class="chapter" data-level="7.5" data-path="charts.html"><a href="charts.html#wind-pollution-roses"><i class="fa fa-check"></i><b>7.5</b> Wind &amp; pollution roses</a></li>
-<li class="chapter" data-level="7.6" data-path="charts.html"><a href="charts.html#openair-package"><i class="fa fa-check"></i><b>7.6</b> <em>openair</em> package</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>8</b> Time series</a><ul>
-<li class="chapter" data-level="8.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>8.1</b> Seasonality</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="time-series.html"><a href="time-series.html#sub-sub-section"><i class="fa fa-check"></i><b>8.1.1</b> Sub-sub section</a></li>
-</ul></li>
-<li class="chapter" data-level="8.2" data-path="time-series.html"><a href="time-series.html#change-points-before-after"><i class="fa fa-check"></i><b>8.2</b> Change points (before &amp; after)</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>9</b> Maps</a><ul>
-<li class="chapter" data-level="9.1" data-path="maps.html"><a href="maps.html#kriging"><i class="fa fa-check"></i><b>9.1</b> Kriging</a></li>
-<li class="chapter" data-level="9.2" data-path="maps.html"><a href="maps.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>9.2</b> Spatial averaging and aggregation</a></li>
-</ul></li>
+<li class="chapter" data-level="6" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>6</b> Summary statistics</a></li>
+<li class="chapter" data-level="7" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>7</b> Site comparisons</a></li>
+<li class="chapter" data-level="8" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>8</b> Charts</a></li>
+<li class="chapter" data-level="9" data-path="placeholder-1.html"><a href="placeholder-1.html"><i class="fa fa-check"></i><b>9</b> Placeholder</a></li>
+<li class="chapter" data-level="10" data-path="generates-pollution-roses-for-all-air-toxics-for-a-site-and-saves-them-in-a-folder-defined-by-output-path.html"><a href="generates-pollution-roses-for-all-air-toxics-for-a-site-and-saves-them-in-a-folder-defined-by-output-path.html"><i class="fa fa-check"></i><b>10</b> Generates pollution roses for all air toxics for a site and saves them in a folder defined by output_path</a></li>
+<li class="chapter" data-level="11" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>11</b> Time series</a></li>
+<li class="chapter" data-level="12" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>12</b> Maps</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -177,11 +149,37 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number"></span> Detection limits</h1>
 <p>Here is a review of existing methods.</p>
 <div id="below-detection" class="section level2">
-<h2><span class="header-section-number">4.1</span> Below detection</h2>
-<p>Coming soon…</p>
+<h2><span class="header-section-number">5.1</span> Below detection</h2>
+<p><strong>Description</strong></p>
+<p><br> <strong>Recommended steps</strong></p>
+<p><br> <strong>Sample <code>R</code> script</strong></p>
+<div id="example-charts-for-visualizing-data-below-and-above-detection-limits" class="section level3 unnumbered">
+<h3>Example charts for visualizing data below and above detection limits</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(stringr)
+<span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(tidyr)
+<span class="kw">library</span>(car)
+<span class="kw">library</span>(readr)
+<span class="kw">library</span>(DT)
+<span class="kw">library</span>(shiny)
+<span class="kw">library</span>(ggplot2)
+
+
+data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)
+
+<span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)
+
+dt_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">scrollX =</span> T, <span class="dt">autoWidth =</span> T, <span class="dt">searching =</span> F, <span class="dt">ordering=</span>F, <span class="dt">lengthChange =</span> F, <span class="dt">paginate=</span>F, <span class="dt">info=</span>F)</code></pre></div>
+<p><br> <em>Table: Sample monitoring data</em><br />
+<div id="htmlwidget-f573406792f54f8065c4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f573406792f54f8065c4">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1,1,1],[12102,12102,12102,12102,12102,12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29","2009-09-04","2009-09-10"],[0.00127,0.00223,0.0037,0.0018,0.0027,0.00173,0.00257,0.00101,0.00604,0.0029],[null,null,null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>year<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,5,7,9]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script></p>
+<p><br> <strong>Contributors</strong></p>
+<p><br> <strong>References</strong></p>
+</div>
 </div>
 <div id="multiple-detection-limits" class="section level2">
-<h2><span class="header-section-number">4.2</span> Multiple detection limits</h2>
+<h2><span class="header-section-number">5.2</span> Multiple detection limits</h2>
 <p>In progress.</p>
 
 </div>
@@ -191,7 +189,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="collocated-monitors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="placeholder.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="summary-statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
