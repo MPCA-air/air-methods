@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="data-cleaning-dorian.html">
+<link rel="prev" href="detection-limits-kristie-cassie.html">
+<link rel="next" href="summary-statistics.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -181,24 +181,102 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<!--bookdown:title:end-->
-<!--bookdown:title:start-->
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<div style="margin-top: -25px;">
-<p><em>Updated Aug 28, 2017</em></p>
-</div>
-<p><a href="https://www.crcpress.com/product/isbn/9781138700109" target="_blank"><img src="images/cover.jpeg" style="display: block; margin: auto;" /></a></p>
-<p>This guide describes the methods used at the MPCA to analyze air monitoring and modeling data. The charts and code found in this guide were produced using the freely available R statistical software. To follow along with the examples download a copy of R to your computer from the <a href="https://cran.r-project.org/">r-project</a> or use <a href="http://www.r-fiddle.org/#/">R-Fiddle</a> in your browser.</p>
+<div id="completeness-checks-dorian-cassie" class="section level1">
+<h1><span class="header-section-number"></span> Completeness checks (Dorian &amp; Cassie)</h1>
+<p>We should check for data completeness before generating summaries for sampling data.</p>
+<p>Completeness checks inlcude tests for:</p>
+<ul>
+<li>Seasonal completeness (75%)
+<ul>
+<li>This is an EPA guideline for criteria pollutants and has been applied to air toxics (citation).</li>
+</ul></li>
+<li>20% values above detection
+<ul>
+<li>This is based on <em>Cox 2006</em> and MPCA simulations (cite work and results)</li>
+</ul></li>
+<li>Label for criteria not met
+<ul>
+<li>“Criteria to calculate annual mean not met.”</li>
+</ul></li>
+<li>More than 3 unique values (cite this)
+<ul>
+<li>3 per year? 3 per quarter?</li>
+</ul></li>
+<li>What can we do for incomplete seasons or years: Compare to acute? Summarize based on number of values above detection? (Cassie did this)</li>
+</ul>
+<p><br> <strong>Annual reporting rules</strong></p>
+<div id="complete" class="section level2">
+<h2><span class="header-section-number">6.1</span> Completeness checks</h2>
+<p>Methods for performing completeness checks…</p>
+<p>Packages</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<p>Our example data is organized by monitoring site and date. Here’s a sample.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">AQS_ID</th>
+<th align="left">Date</th>
+<th align="right">Conc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">270535501</td>
+<td align="left">2009-07-30</td>
+<td align="right">0.00148</td>
+</tr>
+<tr class="even">
+<td align="right">270535501</td>
+<td align="left">2009-09-30</td>
+<td align="right">0.00064</td>
+</tr>
+<tr class="odd">
+<td align="right">270535501</td>
+<td align="left">2009-11-30</td>
+<td align="right">0.34256</td>
+</tr>
+<tr class="even">
+<td align="right">270535501</td>
+<td align="left">2009-12-30</td>
+<td align="right">0.00064</td>
+</tr>
+<tr class="odd">
+<td align="right">270535502</td>
+<td align="left">2009-03-30</td>
+<td align="right">0.26219</td>
+</tr>
+<tr class="even">
+<td align="right">270535502</td>
+<td align="left">2009-07-30</td>
+<td align="right">0.01113</td>
+</tr>
+<tr class="odd">
+<td align="right">270535502</td>
+<td align="left">2009-09-30</td>
+<td align="right">0.00044</td>
+</tr>
+<tr class="even">
+<td align="right">270535502</td>
+<td align="left">2009-11-30</td>
+<td align="right">0.00127</td>
+</tr>
+<tr class="odd">
+<td align="right">270535502</td>
+<td align="left">2009-12-30</td>
+<td align="right">0.00113</td>
+</tr>
+</tbody>
+</table>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="data-cleaning-dorian.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="detection-limits-kristie-cassie.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summary-statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -218,7 +296,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/MPCA-air/air-methods/edit/master/index.Rmd",
+"link": "https://github.com/MPCA-air/air-methods/edit/master/06-completeness_checks.Rmd",
 "text": "Edit"
 },
 "download": ["air-methods.pdf"],

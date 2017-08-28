@@ -1,56 +1,98 @@
-# Data validation 
+# Data validation (Kristie)
+
 
 ```{r out.width='65%', echo=F}
 knitr::include_graphics("https://imgs.xkcd.com/comics/error_code.png")
 ```
 
-__Description__  
-Environmental monitoring data, typical of all chemical analysis, can be subject to error. Three important errors to track are loss of sample (leaks), intrument issues (concing in duplicated concs), or extreme values (high values). 
+
+Environmental monitoring data can be subject to error. Three important errors to look out for are:
+
+  1. Loss of sample (leaks).
+  2. Instrument issues such as sequential repeated results.
+  3. Extreme values.
+
+
+Validation includes steps to:
+
+- \@ref(leaks)    __Identify leaks and sample contamination__
+- \@ref(sticky)   __Check for instrument errors (sticking values)__ 
+- \@ref(outs)     __Check for outliers__
+
 
 <br> __Recommended steps__
 
 1. Identify exceptionally high values.
-1. Identify 3 sequential identical values.
+1. Identify 3 sequential identical values (sticking).
 1. Identify potential instrument drift.
 1. Report findings to laboratory for further investigation.
 
 <br> __Why not average these exceptional data into the year and assume the problem will go away?__
 
-Further investigation by laboratory staff is required if the laboratory equipment or system is in error. If the laboratory is not in error, these concs require additional investigation by data analysts and potentially by air pollution source specialists. For these reasons, these data validation steps are critical. A decreasing signal or repeated sequential measurement means that the data are not interpretable. An exceptionally high value could mean laboratory contamination or potentially could contribute to human health impacts if the high value is accurate.    
+Further investigation by laboratory staff is required if the laboratory equipment or system is in error. If the laboratory is not in error, these concentrations require additional investigation by data analysts and potentially by air pollution source specialists. For these reasons, these data validation steps are critical. A decreasing signal or repeated sequential measurement means that the data are not interpretable. An exceptionally high value could mean laboratory contamination or potentially could contribute to human health impacts if the high value is accurate.    
+
+
+<br> __Notes__  
+
+Issues:  
+
+- Possible Contamination Issues-by site and pollutant
+  -  3*IQR: I used as a simple outlier identifier in EU guidelines. This includes a lot of data for UFPs.
+- Cassie has experimented with: 
+  -  3*75th percentile(UFP) - quantiles from previous year of data
+  -  2.5 *75th percentile of the data (put in Derek's explanation) this is for integrated air toxics data
+  -  3*SD (Poor performance)
+  -  Site mean more than twice the second highest site mean(NO)
+  -  Sites with maxima over 2X the next highest value(NO)
+  -  Only one detection at a site (special case)
+    -  And Detection was greater than 3X the MDL
+    -  And Detection was within 10% of state maximum that year
+- Recommendation 
+- __[75th percentile * 3] for all pollutants__
+
+Possible Sample loss issues (leak)-by site and pollutant
+	Check for several (2,3) below MDL values when values have been above MDLs previously (need discussion). MDL would be from the previous year. 
+o	I tried taking the mean of 5 sequential values, and then the 5 sequential values after the first 5. Then, if the second set of means was 1.5 times less than the first mean I flagged the values for a check.
+
+o   Instrument issues
+  Check for 3 sequential duplicated values.
+ 
+o   Goals are: 1. Simple to run, 2. To find extreme values that may be in error or from contamination, 3. Find 2 repeating values that are exactly the same, 4. Find low values where this is not common., 5. Do this in a routine way [identify frequency of validation checks].
+
 
 
 <br> __Sample `R` script__ 
 
+The following sections on data validation will use the example monitoring data loaded below.
 
-```{r validate, eval=T, message=F, warning=F, id = "demo", class = "collapse"}
-library(dplyr)
-library(data.table)
-library(knitr)
-library(DT)
-library(RODBC)
+```{r validation, eval=T, message=F, warning=F}
+library(tidyverse)
 library(stringr)
 library(RcppRoll)
 library(lubridate)
-library(tidyr)
 library(car)
 
-
 ##need to confirm that this data set has sequential repeats, some high values and at least 10 dates with numbers
-data <- read.csv("X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods/airtoxics_data_2009_2013.csv", stringsAsFactor = F)
-colnames(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
-dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
 
+colnames(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
+
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
 
 ```
 
 <br> _Table: Sample monitoring data_   
 ```{r, eval=T, echo=F, message=F, warning=F}
+library(knitr)
+library(DT)
 #kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(head(data, 10), options = dt_options)
 ```
 
 
-### Identifying Instrument drift or leaks in a system. The test looks for a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. {#leaks} 
+## Identifying Instrument drift or leaks in a system. {#leaks} 
+
+The test looks for a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. 
 
 ```{r echo=F, message=F, warning=F}  
 
@@ -97,11 +139,13 @@ leak_table_unfiltered  <- rbind(leak_table_unfiltered,data_carbontet)
 leak_table <- filter(leak_table_unfiltered, pval_levene<0.01, abs(Year_1-Year_2)==1)
 leak_table$Warning_Type <- "Decrease_in_Measurements"
 
-datatable(head(leak_table, 10), options = dt_options)
+datatable(head(leak_table, 10), options = dt_options) %>% formatSignif(c("fvalue_levene", "pval_levene", "Mean_Year_1", "Mean_Year_2"), digits = 2)
+
 ```
 
 
-## Exceptional and extreme values aka outliers are detected by comparing each measured concentration to 3 X the 75th percentile of the data set by year, site, and pollutant. For now, pocs collocated measurements are not tested separately. {#outs} 
+## Identify exceptional and extreme values aka outliers. {#outs} 
+These are detected by comparing each measured concentration to 3 X the 75th percentile of the data set by year, site, and pollutant. For now, pocs collocated measurements are not tested separately. 
 
 
 ```{r eval=T, message=F, warning=F}
@@ -111,8 +155,8 @@ high_data <- group_by(data, year, aqs_id, pollutant) %>% mutate(AR_Mean = mean(c
 high_data <- filter(high_data, conc>Percentile_75_X3, !is.na(conc), AR_Mean>md_limit, Percentile_75>0)
 high_data$Warning_Type <- "Exceptionally_High_Value_Test"
 high_data <- unique(high_data)
+datatable(head(high_data, 10), options = dt_options) 
 
-datatable(head(high_data, 10), options = dt_options)
 
 high_data <- high_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
 ##Toxics - Multiplying by 3 returns ~4000/1176818 values as extreme, multiplying by 1.5 returns >20,000. Multiplying by 3 returns between 2 and 45% of analyte/site/year groups.
@@ -121,7 +165,8 @@ high_data <- high_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
 ```
 
 
-## Sequential repeats aka "sticky" numbers aka machine errors {#sticky}
+## Identify sequential repeats aka "sticky" numbers {#sticky}
+ Three sequential replicate values may be a result of a machine error.
 
 ```{r eval=T, message=F, warning=F}
 
@@ -154,4 +199,21 @@ datatable(head(warnings_table, 10), options = dt_options, rownames = FALSE)
 
 
 <br> __References__    
+[USEPA Technical Support Document for the Nation Air Toxics Trends Sites](https://www3.epa.gov/ttnamti1/files/ambient/airtox/NATTS%20TAD%20Revision%203_FINAL%20October%202016.pdf)
+
+[European Union Guide toe Data Validation](https://webgate.ec.europa.eu/fpfis/mwikis/essvalidserv/images/a/ad/PRACTICAL_GUIDE_TO_DATA_VALIDATION.pdf)
+
+[US EPA Guidance on Data Verification and Data Validation] (https://www.epa.gov/sites/production/files/2015-06/documents/g8-final.pdf)
+
+[US EPA Data Validation Workbook Presentation and Training Materials] (https://www3.epa.gov/ttnamti1/files/ambient/airtox/workbook/T-Workbook_Secs1-8.pdf)
+
+[US EPA Data Validation Workbook] (https://nepis.epa.gov/Exe/ZyNET.exe/P1006PAB.TXT?ZyActionD=ZyDocument&Client=EPA&Index=2006+Thru+2010&Docs=&Query=&Time=&EndTime=&SearchMethod=1&TocRestrict=n&Toc=&TocEntry=&QField=&QFieldYear=&QFieldMonth=&QFieldDay=&IntQFieldOp=0&ExtQFieldOp=0&XmlQuery=&File=D%3A%5Czyfiles%5CIndex%20Data%5C06thru10%5CTxt%5C00000016%5CP1006PAB.txt&User=ANONYMOUS&Password=anonymous&SortMethod=h%7C-&MaximumDocuments=1&FuzzyDegree=0&ImageQuality=r75g8/r75g8/x150y150g16/i425&Display=hpfr&DefSeekPage=x&SearchBack=ZyActionL&Back=ZyActionS&BackDesc=Results%20page&MaximumPages=1&ZyEntry=1&SeekPage=x&ZyPURL)
+
+[Review article by Helsel, D about non-detects and substitution methods.] (https://academic.oup.com/annweh/article/54/3/257/223531/Much-Ado-About-Next-to-Nothing-Incorporating)
+
+[A Chemosphere review article describing why BDL substitution should not be done.] (https://pdfs.semanticscholar.org/182e/9278fc36dd73d48a414b8fbc30a44ea314d3.pdf)
+
+[Temporal variability of selected air toxics in the United States] (http://www.sciencedirect.com/science/article/pii/S1352231007004840)
+
+[Spatial and temporal analysis of national air toxics data] (http://www.tandfonline.com/doi/pdf/10.1080/10473289.2006.10464576)
 

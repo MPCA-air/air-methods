@@ -1,0 +1,103 @@
+# Detection limits (Kristie & Cassie) 
+
+Detection limit methods.
+
+
+<br> __Notes__  
+
+Topics:  
+
+- Types of detection limits (what detection limit the lab calculates, where it is, where it is not and when not to use what lims has) [Cassie]
+- Does a value equal to the detection limit count as detected? __“YES!”__ 
+- Things to consider when there are more than one detection limit per year. [Cassie]
+    - Discuss averaging two detection limit years and using that instead of the previous detection limit. [Dorian]
+
+
+Estimating below detection values (what not to do) [Kristie]:
+
+- Don’t delete
+    - Deleting data that are below a detection limit biases central tendency estimates and whole data summaries (quantiles of the data set) high.
+- Don’t fill with zeros
+    - Substituting below detection limit data with 0’s biases central tendency estimates and whole data summaries (quantiles of the data set) low, and can change the distribution by the creation of multiple same value numbers, and can even create an inaccurate bimodal distribution of the data.
+- Don’t fill with DLs or ½ DLs
+    - Substituting below detection limit data with 1/2 MDL creates the least bias in central tendency estimates and whole data summaries (quantiles of the data set), however, it can change the distribution by the creation of multiple same value numbers, and can even create an inaccurate bimodal distribution of the data.
+    - Substituting below detection limit data with MDLs biases central tendency estimates and whole data summaries (quantiles of the data set) high, and can change the distribution by the creation of multiple same value numbers, and can even create an inaccurate bimodal distribution of the data.
+
+
+
+## Finding detection limits (Cassie)
+
+> I swear I put it right here.
+
+
+
+## Below detection values (Kristie)
+
+__Description__  
+
+<br> __Recommended steps__  
+
+<br> __Sample `R` script__  
+
+
+### Example charts for visualizing data below and above detection limits {-}
+```{r, eval=T, echo=T, message=F, warning=F}
+library(tidyverse)
+library(stringr)
+library(lubridate)
+library(car)
+library(DT)
+library(shiny)
+
+
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+
+colnames(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
+
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
+
+```
+
+<br> _Table: Sample monitoring data_   
+```{r, eval=T, echo=F, message=F, warning=F}
+library(knitr)
+#kable(head(data), booktabs = T, caption = "Sample monitoring data.")
+datatable(head(data, 10), options = dt_options)
+```
+
+```{r, eval=F, echo=T, message=F, warning=F}
+
+pollutants <- data$pollutant
+years <- data$year
+
+inputPanel(
+  selectInput("pollutant", label="Choose a pollutant", choices = pollutants, selected="Benzene"),
+  selectInput("year", label="Choose a year", choices = years, selected=2009)
+)
+
+renderPlot({
+    data_sub = filter(data, year==input$year, pollutant==input$pollutant)
+    mdl <- mean(data_sub$md_limit)
+    data_sub$Censored <- ifelse(data_sub$conc > data_sub$md_limit, FALSE, TRUE)
+    ggplot(data=data_sub, aes(x= factor(aqs_id), y=conc)) +
+      scale_colour_manual(values= c("#00FF00"[FALSE %in% unique(data_sub$Censored)], "#0000FF"[TRUE %in% unique(data_sub$Censored)]), breaks=c(FALSE, TRUE)) +
+    geom_boxplot(outlier.colour=NA) +
+    geom_jitter(aes(color=Censored)) +
+    geom_hline(yintercept=md_limit) +
+    xlab(paste(i, "MPCA Site Identification Numbers")) +
+    ylab("Result ug/m3, Horizontal Line = Detection Limit") +
+    theme(text = element_text(size=9)) +
+    ggtitle(paste0("Site Comparison Boxplot with Censored and Non-Censored Values for", pollutant, "from", year, "data"))
+
+})
+```
+
+<br> __Contributors__   
+
+
+<br> __References__   
+
+
+## Multiple detection limits   
+
+In progress. 

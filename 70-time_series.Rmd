@@ -1,14 +1,11 @@
-# Time series
+# Time series (?)
 
 ## Seasonality
 
 The trend is up.  
 
-### Sub-sub section  
 
-Nothing to see here.  
-
-## Change points (before & after)  
+## Changepoints (before & after tests)  
 
 Roll a dice.    
 

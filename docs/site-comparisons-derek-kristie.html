@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="data-cleaning-dorian.html">
+<link rel="prev" href="summary-statistics.html">
+<link rel="next" href="charts.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -181,24 +181,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<!--bookdown:title:end-->
-<!--bookdown:title:start-->
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<div style="margin-top: -25px;">
-<p><em>Updated Aug 28, 2017</em></p>
-</div>
-<p><a href="https://www.crcpress.com/product/isbn/9781138700109" target="_blank"><img src="images/cover.jpeg" style="display: block; margin: auto;" /></a></p>
-<p>This guide describes the methods used at the MPCA to analyze air monitoring and modeling data. The charts and code found in this guide were produced using the freely available R statistical software. To follow along with the examples download a copy of R to your computer from the <a href="https://cran.r-project.org/">r-project</a> or use <a href="http://www.r-fiddle.org/#/">R-Fiddle</a> in your browser.</p>
+<div id="site-comparisons-derek-kristie" class="section level1">
+<h1><span class="header-section-number"></span> Site comparisons (Derek &amp; Kristie)</h1>
+<p><strong>Notes</strong></p>
+<p>Steps:</p>
+<ul>
+<li>Chart data with box and whisker plots. Some site differences might be very apparent and not require statistical comparisons. [Need to think about what is apparent enough for a visual test, maybe no overlap of box, or only half or less overlap] look at cenboxplot with NADA packages, or use Kristies boxplot with censored values.</li>
+<li>Check for normality Chi-squared test (Is normality a valid assumption?). If the data are normal, and there is equal variance [Levenes test–generic script here] complete an ANOVA to compare sites. If there are more than 2 sites, follow with a post hoc test [I say Tukey, but Derek weigh in here].</li>
+<li>If the data are not normal, and there is not equal variance [see generic script from above] complete a Kruskal wallis test (but there are other ones if you have &lt; or &gt; 50 samples…look into this). If there are more than 2 sites to compare, use Dunns test for post hoc site by site comparisons [Kristie has a script for this, will make it generic].</li>
+<li>Bayesian ANOVA? [Derek likes this!]</li>
+</ul>
+<div id="confidence-intervals" class="section level2">
+<h2><span class="header-section-number">8.1</span> Confidence intervals</h2>
+<p>Some <em>significant</em> applications are demonstrated in this chapter.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="data-cleaning-dorian.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="summary-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="charts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -218,7 +223,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/MPCA-air/air-methods/edit/master/index.Rmd",
+"link": "https://github.com/MPCA-air/air-methods/edit/master/08-site_comparisons.Rmd",
 "text": "Edit"
 },
 "download": ["air-methods.pdf"],

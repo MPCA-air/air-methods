@@ -1,0 +1,50 @@
+# Completeness checks (Dorian & Cassie)
+
+
+We should check for data completeness before generating summaries for sampling data. 
+
+Completeness checks inlcude tests for:  
+  
+- Seasonal completeness (75%)
+    - This is an EPA guideline for criteria pollutants and has been applied to air toxics (citation).
+- 20% values above detection
+    - This is based on _Cox 2006_ and MPCA simulations (cite work and results)
+- Label for criteria not met
+    - “Criteria to calculate annual mean not met.”
+- More than 3 unique values (cite this)
+    - 3 per year? 3 per quarter?
+- What can we do for incomplete seasons or years: Compare to acute? Summarize based on number of values above detection?   (Cassie did this)
+
+
+<br> __Annual reporting rules__
+
+
+## Completeness checks  {#complete}
+
+Methods for performing completeness checks...
+
+Packages
+```{r message=F}
+library(tidyverse)
+
+```
+
+Our example data is organized by monitoring site and date. Here's a sample.
+
+```{r kable, message=F, echo=F, fig.cap = "Sample data table."}
+library(knitr)
+
+df <- read_csv(
+'"AQS_ID","Date","Conc"
+270535501,"2009-07-30",0.00148
+270535501,"2009-09-30",0.00064
+270535501,"2009-11-30",0.34256
+270535501,"2009-12-30",0.00064
+270535502,"2009-03-30",0.26219
+270535502,"2009-07-30",0.01113
+270535502,"2009-09-30",0.00044
+270535502,"2009-11-30",0.00127
+270535502,"2009-12-30",0.00113')
+
+kable(df)
+```

@@ -1,0 +1,22 @@
+# Additional resources (Kristie) 
+
+Suggested readings:
+
+- https://webgate.ec.europa.eu/fpfis/mwikis/essvalidserv/images/a/ad/PRACTICAL_GUIDE_TO_DATA_VALIDATION.pdf
+
+- https://www.epa.gov/sites/production/files/2015-06/documents/g8-final.pdf
+
+- Data validation workbook – Kristie will do thing
+
+- https://academic.oup.com/annweh/article/54/3/257/223531/Much-Ado-About-Next-to-Nothing-Incorporating - 
+  
+- Review article by Helsel about non-detects and substitution methods.
+
+- https://pdfs.semanticscholar.org/182e/9278fc36dd73d48a414b8fbc30a44ea314d3.pdf
+
+- A Chemosphere review article describing why BDL substitution should not be done.
+
+- EPA, TADD
+
+- Nothing over 80% detection paper: http://www.tandfonline.com/doi/pdf/10.1080/10473289.2006.10464576
+
