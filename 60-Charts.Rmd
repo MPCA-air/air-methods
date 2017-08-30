@@ -22,9 +22,9 @@ We have created a nice plot.
 
 ## Colors (Dorian)
 
-Please use Ghibli colors. See [Ghibli](https://github.com/ewenme/ghibli).
+The MPCA only uses Ghibli colors. See [Ghibli](https://github.com/ewenme/ghibli).
 
-![Ghibli colors](https://github.com/ewenme/ghibli/raw/master/ghibli.jpg)
+![Ghibli colors](https://github.com/ewenme/ghibli/raw/master/ghibli.jpg){width="80%"}
 
 ## _openair_ package (Derek & Cassie)
 
