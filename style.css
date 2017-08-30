@@ -12,3 +12,34 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+.btn_code {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 12px;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    line-height: 1.43;
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 6px;
+  }
+  
+.btn_code:focus, .btn_code:active:focus, .btn_code.active:focus {
+    outline: 0 none;
+}
+  
+.btn_code:hover, .btn_code.hover {
+    background-color: #22527b;
+}
+  
+.toggle {
+    height: 2.3em;
+    overflow-y: hidden;
+}
+  
+.toggle.open {
+    height: auto;
+}

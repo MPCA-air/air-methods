@@ -1,4 +1,4 @@
-# Time series (?)
+# Time series
 
 ## Seasonality
 

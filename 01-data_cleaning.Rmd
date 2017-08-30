@@ -12,10 +12,8 @@ These procedures include steps to:
 - \@ref(quals)    __Evaluate qualified data__     
 - \@ref(dups)     __Remove duplicate observations__ 
  
-
+ 
 __Text summary__
-
-
 
 
 ## Remove blank, `NULL`, and missing values {#missing}
@@ -36,16 +34,23 @@ Unless the lab can confirm the meaning of the missing values for you, there is n
 
 <br> __Sample `R` script__ 
 
+Click the button below to view a step by step example of the methods above.
+
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+
 
 ```{r echo=F, message=F, warning=F}  
 library(knitr)
 library(DT)
+library(kableExtra)
+
+options(knitr.table.format = "html") 
 
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
 ```
 
 <br> Load example monitoring data
-```{r demo, eval=T, message=F, warning=F, class = "collapse"}
+```{r demo, eval=T, message=F, warning=F}
 library(tidyverse)
 
 data <- read_csv('aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
@@ -64,10 +69,12 @@ data <- read_csv('aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,c
 ```
 
 
-<br> _Table: Sample monitoring data_   
-```{r, eval=T, echo=F, message=F, warning=F}
-#kable(head(data), booktabs = T, caption = "Sample monitoring data.")
-datatable(data, options = dt_options)
+
+```{r, eval=T, echo=F, message=F, warning=F, fig.width=4}
+knitr::kable(head(data), caption = "Sample monitoring data.") %>%
+         kable_styling() %>%
+         scroll_box(width = "100%", box_css = "border: 0; ")
+#datatable(data, options = dt_options)
 ```
 
 
@@ -177,6 +184,7 @@ data <- data %>%
 datatable(data, options = dt_options)
 ```
 
+</div>
 
 <br> __Contributors__  
 
@@ -222,6 +230,11 @@ Leaving both observations in the data set is likely to bias calculated summary s
 
 <br> __Sample `R` script__  
   
+Click the button below to view a step by step example of the methods above.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+
 ```{r echo=F, message=F, warning=F}  
 library(knitr)
 library(DT)
@@ -311,22 +324,18 @@ data <- rbind(data, dupes)
 <br> _Table: The new cleaner data_  
 ```{r, eval=T, echo=F, message=F, warning=F, fig.cap ="Final data set with 1 duplicate removed."}
 datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)
+
+# Code folding reference: Reference: https://stackoverflow.com/questions/37755037/how-to-add-code-folding-to-output-chunks-in-rmarkdown-html-documents/37839683#37839683
+
 ```
 
-    
+</div>
+
 <br> __Contributors__   
 
 > Dorian, Mr. Kitty
 
 
-<br> __References__    
 
+<br> [^ Back to top](#missing)
 
-[Jump to top](#missing)
-
-
-Reference: https://stackoverflow.com/questions/37755037/how-to-add-code-folding-to-output-chunks-in-rmarkdown-html-documents/37839683#37839683
-
-
-
-  

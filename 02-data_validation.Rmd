@@ -52,6 +52,12 @@ Possible Sample loss issues (leaks) by site and pollutant
 - __Recommendation:__ Use the `[75th percentile * 3]` for all pollutants.  
 
 
+<br> __Sample `R` script__ 
+
+Click the button below to view a step by step example of the methods above.
+
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+
 __Goals:__ 
 
 1. Find extreme values that may be in error or from contamination.
@@ -59,9 +65,6 @@ __Goals:__
 1. Find low values where this is not common.
 1. Do this in a routine way (identify frequency of validation checks).
 
-
-
-<br> __Sample `R` script__ 
 
 The following sections on data validation will use the example monitoring data loaded below.
 
@@ -89,12 +92,23 @@ library(DT)
 datatable(head(data, 10), options = dt_options)
 ```
 
+</div>
+
 
 ## Identifying Instrument drift or leaks in a system. {#leaks} 
 
 The test looks for a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. 
 
-```{r echo=F, message=F, warning=F}  
+
+<br> __Sample `R` script__ 
+
+Click the button below to view a step by step example of the method above.
+
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+
+<br>
+
+```{r echo=T, message=F, warning=F}  
 
 data$conc <- as.numeric(data$conc)
 data$aqs_id <- as.character(data$aqs_id)
@@ -142,11 +156,23 @@ leak_table$Warning_Type <- "Decrease_in_Measurements"
 datatable(head(leak_table, 10), options = dt_options) %>% formatSignif(c("fvalue_levene", "pval_levene", "Mean_Year_1", "Mean_Year_2"), digits = 2)
 
 ```
+</div>
+
 
 
 ## Identify exceptional and extreme values aka outliers. {#outs} 
+
 These are detected by comparing each measured concentration to 3 X the 75th percentile of the data set by year, site, and pollutant. For now, pocs collocated measurements are not tested separately. 
 
+
+<br> __Sample `R` script__ 
+
+
+Click the button below to view a step by step example of the method above.
+
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+
+<br>
 
 ```{r eval=T, message=F, warning=F}
 
@@ -166,7 +192,8 @@ high_data <- high_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
 
 
 ## Identify sequential repeats aka "sticky" numbers {#sticky}
- Three sequential replicate values may be a result of a machine error.
+ 
+Three sequential replicate values may be a result of a machine error.
 
 ```{r eval=T, message=F, warning=F}
 
@@ -193,9 +220,11 @@ warnings_table <- rbind(repeat_data, high_data)
 datatable(head(warnings_table, 10), options = dt_options, rownames = FALSE)
 ```
 
+</div>
+
 <br> __Contributors__  
 
-> Dorian Kvale; Derek Nagel, Kristie Ellickson, Cassie McMahon 
+> Kristie Ellickson, Cassie McMahon, Dorian Kvale, Derek Nagel
 
 
 <br> __References__    
