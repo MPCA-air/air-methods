@@ -26,14 +26,43 @@ Estimating below detection values (what not to do) [Kristie]:
     - Substituting below detection limit data with 1/2 MDL creates the least bias in central tendency estimates and whole data summaries (quantiles of the data set), however, it can change the distribution by the creation of multiple same value numbers, and can even create an inaccurate bimodal distribution of the data.
     - Substituting below detection limit data with MDLs biases central tendency estimates and whole data summaries (quantiles of the data set) high, and can change the distribution by the creation of multiple same value numbers, and can even create an inaccurate bimodal distribution of the data.
 
+## Method Detection Limit - Definition
+  - The method detection limit (MDL) is the minimum concentration of a substance that can be measured and reported with 99% confidence that the analyte concentration is greater than zero and is determined from analysis of a sample in a given matrix containing the analyte.
 
+## Procedure for calculating method detection limits
+    - Prior to 2017, the lab calculated detection limits according to the procedures defined in 40 CFR Appendix B to Part 136 - Definition and Procedure for the determination of Method Detection Limit, https://www.gpo.gov/fdsys/granule/CFR-2011-title40-vol23/CFR-2011-title40-vol23-part136-appB/content-detail.html 
+    - Begining in 2017, the lab adopted a modified method for calcuating the method detection limit. Known as the "Method Update Rule(MUR)", this method accounts for media background contamination when establishing the MDL. This method is defined in the NATTS TAD (October 2016),https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjJ3Y6AyfzVAhVL2IMKHXe_DI0QFggoMAA&url=https%3A%2F%2Fwww3.epa.gov%2Fttnamti1%2Ffiles%2Fambient%2Fairtox%2FNATTS%2520TAD%2520Revision%25203_FINAL%2520October%25202016.pdf&usg=AFQjCNGVu-9E0zS1-Gjkt_5sULzOPNeymg. EPA has proposed to revise 40 CFR Appendix B to Part 136 to reflect this methodology. 
+    - Both methods require preparing and analyzing 7 matrix spikes and 7 method blanks. Samples should be prepped and analyzed over the course of at least 3 seperate batches/days. 
+    -Calculate the MDL of spiked samples (MDL_sp)
+      - Calculate standard deviation of the calcuated concentrations for the spiked samples.
+      - Calculate the MDL for the spiked samples by multiplying the standard deviation of spiked sample by the one-sided student's T value at 99% confidence corresponding to the number of spikes analyzed (3.143 if 7 samples). 
+  -New method requires calculation of the MDL of the method blanks(MDL_b)   
+    - If no method blank provides a numerical result, no further action needed.
+    - If method blank pool includes a combination of ND and numeric values, set the method blank MDL to equal the highest of the method blank results. 
+    - IF all concentration values for the method blank pool are numeric values, calculate the MDL_b as follows:
+      - Calculate the average concentration of method blanks
+      - Calculate the standard deviation of the method blank concentrations
+      - Multiply the standard deviation by the one-sided student's T value at 99% confidence corresponding to the number of blanks analyzed
+      -Calculate the MDL_b as the sum of the average concentration method blanks, and the product of the standard deviation of blanks and the associated student's T Value
+        - MDL_b= mean_blanks + stdv_blanks * Student T
+  - Compare MDL_sp and MDL_b. The higher of the two values is reported as the laboratory MDL.  
 
 ## Finding detection limits (Cassie)
 
-> I swear I put it right here.
+- Annual method detection limits used for data analysis are stored on the x:drive, "X:\\Databases\\AQ\\AQ Lab\\Data Analysis\\Air Toxics\\Detection Limits\\Annual Detection Limits (micrograms).xlsx"
+ - Use ParamYear field to join data
+ - Detection limits are updated when received from the lab. Current year samples may not have a detection limit in the file if the lab has not performed the test. 
+ - When Promium is adopted, method detection limits will be applied on a sample basis and will account for the varying air volumes of samples. As a result, there will be multiple detection limits for an analyte. 
 
-
-
+## Qualifier Codes for Detection Limits
+- Begining in 2017, the MPCA will be linking laboratory detection limits to sample data and applying appropriate data qualifiers depending on detection status. These qualifiers include:
+  - ND = HAP not qualitatively identified (reported as zero)
+  - MD = < MDL
+  - SQ = >= MDL but < SQL
+  - No qualifier = measured concentration >= to SQL
+  
+  **The SQL is 3.18x the MDL**
+  
 ## Below detection values (Kristie)
 
 __Description__  
@@ -51,6 +80,7 @@ library(lubridate)
 library(car)
 library(DT)
 library(shiny)
+library(ggplot2)
 
 
 data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
@@ -69,30 +99,41 @@ datatable(head(data, 10), options = dt_options)
 ```
 
 ```{r, eval=F, echo=T, message=F, warning=F}
+pollutants <- unique(data$pollutant)
+years <- unique(data$year)
 
-pollutants <- data$pollutant
-years <- data$year
-
-inputPanel(
+shinyApp(
+ ui = fluidPage(responsive = FALSE,
+                   fluidRow(
+                     column(3,
+                            style = "padding-bottom: 20px;",
+                            inputPanel(
   selectInput("pollutant", label="Choose a pollutant", choices = pollutants, selected="Benzene"),
-  selectInput("year", label="Choose a year", choices = years, selected=2009)
-)
+  selectInput("year", label="Choose a year", choices = years, selected=2009))),
+                    column(9,
+                   plotOutput('detlim', height = "400px")))),
+   
+  server = function(input, output) {
 
-renderPlot({
-    data_sub = filter(data, year==input$year, pollutant==input$pollutant)
+
+output$detlim <- renderPlot({
+  data_sub = filter(data, year==2009, pollutant=="Benzene")
+    data_sub = filter(data, year==input$years, pollutant==input$pollutants)
     mdl <- mean(data_sub$md_limit)
     data_sub$Censored <- ifelse(data_sub$conc > data_sub$md_limit, FALSE, TRUE)
     ggplot(data=data_sub, aes(x= factor(aqs_id), y=conc)) +
       scale_colour_manual(values= c("#00FF00"[FALSE %in% unique(data_sub$Censored)], "#0000FF"[TRUE %in% unique(data_sub$Censored)]), breaks=c(FALSE, TRUE)) +
     geom_boxplot(outlier.colour=NA) +
     geom_jitter(aes(color=Censored)) +
-    geom_hline(yintercept=md_limit) +
-    xlab(paste(i, "MPCA Site Identification Numbers")) +
+    geom_hline(yintercept=mdl) +
+    xlab(NULL) +
     ylab("Result ug/m3, Horizontal Line = Detection Limit") +
     theme(text = element_text(size=9)) +
-    ggtitle(paste0("Site Comparison Boxplot with Censored and Non-Censored Values for", pollutant, "from", year, "data"))
-
+    ggtitle(paste0("Site Comparison Boxplot with Censored and Non-Censored Values for", input$pollutants, "from", input$years, "data"))
 })
+})
+
+
 ```
 
 <br> __Contributors__   

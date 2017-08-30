@@ -4,7 +4,7 @@ author: ""
 knit: "bookdown::tufte_html_book"
 fontsize: 14pt
 monofont: "Source Code Pro"
-monofontoptions: "Scale=0.7"
+monofontoptions: "Scale=0.75"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -20,7 +20,8 @@ cover-image: images/cover.jpeg
 <div style= "margin-top: -25px;">
 _Updated `r format(Sys.Date(),"%b %d, %Y")`_
 </div>  
-```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html'), fig.link='https://www.crcpress.com/product/isbn/9781138700109'}
+
+```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html')}
 knitr::include_graphics('images/cover.jpeg', dpi = NA)
 ```
 
