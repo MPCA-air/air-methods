@@ -15,7 +15,7 @@ Steps:
 
 If data is not normal, use bootstraping to generate means for each site and take the differences of those means. If the lower bound of the 95% confidence interval for those differences is greater than zero, or the upper bound is less than zero, then the site means are significantly different. You cannot just genrate confidence intervals for the means individually and see if they overlap since the joint probability of both means being in the same region is lower than the marginal probabilities of each mean being in the region. (Will add code later.)
 
-```{r}
+```{r, eval=F}
 # Data must have names"AQS_ID", "POC", "Param_Code", "Date", "Concentration", "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS"
 # Data must also have column named "Censored" indicating whether Concentration < MDL
 # Data must also have column "ID" with grouping criteria. ID = Pollutant if only grouping by pollutant, ID = Pollutant + Year if grouping by pollutant & year, ID = Pollutant + Site ID if comparing the same site across multiple years. See example below. Other options for ID are also acceptable depending on type of analysis.

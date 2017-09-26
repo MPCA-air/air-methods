@@ -6,11 +6,11 @@ knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/fr
 
 The summary methods described in this chapter inlcude:  
 
-- \@ref(boots)       __Bootstrapping__  
-- \@ref(below)       __Below the detection limit__  
-- \@ref(confidence)  __Confidence intervals__ 
-- \@ref(incomplete)  __Annual summaries for incomplete data__  
-- \@ref(health)  __Comparison of data to inhalation health benchmarks__  
+\@ref(boots)       __Bootstrapping__  
+\@ref(below)       __Below the detection limit__  
+\@ref(confidence)  __Confidence intervals__ 
+\@ref(incomplete)  __Annual summaries for incomplete data__  
+\@ref(health)      __Comparison of data to inhalation health benchmarks__  
 
 
 __Notes__
@@ -160,7 +160,7 @@ The annual mean or upper confidence limit is considered below the method detecti
 
 ## Confidence intervals (Derek) {#confidence}
 
-```{r}
+```{r confidence, eval=F}
 # Data must have names"AQS_ID", "POC", "Param_Code", "Date", "Concentration", "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS"
 # Data must also have column named "Censored" indicating whether Concentration < MDL
 # Data must also have column "ID" with grouping criteria. ID = Site + Pollutant + Year if data has multiple sites, pollutants, and years. If data has only one site, pollutant, or year, then those elements do not need to be included in ID.
@@ -169,14 +169,14 @@ The annual mean or upper confidence limit is considered below the method detecti
 library(dplyr)
 library(EnvStats)
 data = read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
+
 names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration",
                        "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
+
 data = data %>% filter(AQS_ID == 270370020) %>% mutate(ID = paste(Pollutant, Year), Censored = Concentration < MDL)
 
 UCL_95 = function(data, Boot_Repeats = 1000, seed = 2017) {
 
-  library(dplyr)
-  library(EnvStats)
   
 MLE_est <- function(data){
     
@@ -211,9 +211,6 @@ MLE_est <- function(data){
       
     }
     
-    
-    
-    
     return(MLE_means)
 }
 
@@ -237,7 +234,10 @@ return(UCL)
 
 UCLs = UCL_95(data)
 ```
+
+
 ## Annual summaries for incomplete data {#incomplete}
+
 
 ## Comparison of data to inhalation health benchmarks  (Kristie) {#health}
 
@@ -251,6 +251,7 @@ The annual 95% upper confidence limit is compared to chronic inhalation health b
     - Based somewhat on criteria pollutant guidance for design values, the cumualtive risk estimates determined from monitoring data for cumulative AERAs are the means of the most recent three years of monitored data.
     - The following scripts estimate 3 year means for measurements of all pollutant data, and compare to inhalation health benchmarks. A mid-script product is a table of the IHBs used by the agency in tabular form, which can be knit individually into a pdf document.
 (pipe dreams, but I know I can make it real!)
+
 ```{r}
 #pull all the data
 ```

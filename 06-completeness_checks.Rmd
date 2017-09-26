@@ -26,8 +26,8 @@ __<i>Air toxic</i> reporting guidelines based on MPCA and EPA guidelines__
 
 Annual results are considered _incomplete_ if any of the following conditions are not met:
 
-- `Annual completeness` 75% or more of expected samples collected (rounded down)
-- `Calendar quarter completeness` 75% or more of expected samples collected (rounded down)
+- `Annual completeness` 75% or more of expected samples collected (rounded up)
+- `Calendar quarter completeness` 75% or more of expected samples collected (rounded up)
 - `Unique values` 2 or more unique values
 
 <br>
@@ -45,6 +45,7 @@ In general, these rules apply:
 <br> __Recommended steps__
 
 1. Based on the monitoring schedule, record the total _expected samples_ for each year and quarter.
+    - Air toxics monitors follow a national schedule provided by the EPA - (Air Toxics Monitoring Schedule)[google.com].
 1. Count the number of _valid samples_ for each year and quarter.
 1. Divide the number of _valid samples_ by the number of _expected samples_.
 1. Count the number of unique values for each year.
@@ -87,12 +88,26 @@ datatable(head(data, 10), options = dt_options)
 
 <br>
 
-__Step 1:__ Record the expected number of samples.
+__Step 1:__ Find the expected number of samples.
 
-The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. It is recommended to consult the lab for the exact number, however, if that option is unavailable the following assumptions can be used. 
+The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. It is recommended to consult the lab for the exact number, however, if the monitor submits data to EPA's Sir Quality System, the monitor is required to follow the (Air Toxics Monitoring Schedule)[google.com].
 
-`Annual expected samples`  60  
-`Calender quarter expected samples` 15
+```{r message=F, eval=F}
+
+# Load the air toxics monitoring schedule
+schedule <- read_csv()
+
+schedule <- schedule %>% mutate(cal_quarter = quarter(Date))
+
+# Count the number of sampling dates for each quarter and year.
+schedule <- schedule %>% 
+            group_by(Year, cal_quarter) %>%
+            summarize(expected_quarter_samples = length(unique(Date))) %>%
+            group_by(Year) %>%
+            mutate(expected_annual_samples = sum(expected_quarter_samples))) 
+        
+```
+
 
 <br>
 
@@ -119,6 +134,12 @@ data <- data %>%
 __Step 3:__ Divide the number of valid samples by the number of expected samples.
 ```{r message=F}
 
+
+# Join expected sample table to data
+#data <- left_join(data, schedule)
+
+
+# Divide valid samples by expected samples
 data <- data %>% 
         group_by(AQSID, POC, Pollutant, CAS, Year, cal_quarter) %>%
         mutate(pct_quarter_samples = valid_quarter_samples / 15) %>%
