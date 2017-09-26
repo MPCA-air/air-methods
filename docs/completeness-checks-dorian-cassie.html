@@ -108,8 +108,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
 <li class="chapter" data-level="1" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html"><i class="fa fa-check"></i><b>1</b> Data cleaning (Dorian &amp; Cassie)</a><ul>
-<li class="chapter" data-level="1.1" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#missing"><i class="fa fa-check"></i><b>1.1</b> Remove blank, <code>NULL</code>, and missing values</a></li>
-<li class="chapter" data-level="1.2" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#quals"><i class="fa fa-check"></i><b>1.2</b> Remove <code>Qualified</code> data (Cassie)</a></li>
+<li class="chapter" data-level="1.1" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#missing"><i class="fa fa-check"></i><b>1.1</b> Remove blank, NULL, and missing values</a></li>
+<li class="chapter" data-level="1.2" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#quals"><i class="fa fa-check"></i><b>1.2</b> Remove <em>Qualified</em> data</a></li>
 <li class="chapter" data-level="1.3" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#dups"><i class="fa fa-check"></i><b>1.3</b> Duplicate observations</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-validation-kristie.html"><a href="data-validation-kristie.html"><i class="fa fa-check"></i><b>2</b> Data validation (Kristie)</a><ul>
@@ -133,13 +133,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="completeness-checks-dorian-cassie.html"><a href="completeness-checks-dorian-cassie.html"><i class="fa fa-check"></i><b>5</b> Completeness checks (Dorian &amp; Cassie)</a><ul>
 <li class="chapter" data-level="5.1" data-path="completeness-checks-dorian-cassie.html"><a href="completeness-checks-dorian-cassie.html#complete"><i class="fa fa-check"></i><b>5.1</b> Completeness checks</a></li>
-<li class="chapter" data-level="5.2" data-path="completeness-checks-dorian-cassie.html"><a href="completeness-checks-dorian-cassie.html#incomplete-data"><i class="fa fa-check"></i><b>5.2</b> Incomplete data</a></li>
-<li class="chapter" data-level="5.3" data-path="completeness-checks-dorian-cassie.html"><a href="completeness-checks-dorian-cassie.html#annual-summary-values"><i class="fa fa-check"></i><b>5.3</b> Annual summary values</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>6</b> Summary statistics</a><ul>
 <li class="chapter" data-level="6.1" data-path="summary-statistics.html"><a href="summary-statistics.html#boots"><i class="fa fa-check"></i><b>6.1</b> Bootstrapping (Dorian)</a></li>
-<li class="chapter" data-level="6.2" data-path="summary-statistics.html"><a href="summary-statistics.html#confidence"><i class="fa fa-check"></i><b>6.2</b> Confidence intervals (Derek)</a></li>
-<li class="chapter" data-level="6.3" data-path="summary-statistics.html"><a href="summary-statistics.html#incomplete"><i class="fa fa-check"></i><b>6.3</b> Annual summaries for incomplete data</a></li>
+<li class="chapter" data-level="6.2" data-path="summary-statistics.html"><a href="summary-statistics.html#below"><i class="fa fa-check"></i><b>6.2</b> Below the detection limit</a></li>
+<li class="chapter" data-level="6.3" data-path="summary-statistics.html"><a href="summary-statistics.html#confidence"><i class="fa fa-check"></i><b>6.3</b> Confidence intervals (Derek)</a></li>
+<li class="chapter" data-level="6.4" data-path="summary-statistics.html"><a href="summary-statistics.html#incomplete"><i class="fa fa-check"></i><b>6.4</b> Annual summaries for incomplete data</a></li>
+<li class="chapter" data-level="6.5" data-path="summary-statistics.html"><a href="summary-statistics.html#health"><i class="fa fa-check"></i><b>6.5</b> Comparison of data to inhalation health benchmarks (Kristie)</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="site-comparisons-derek-cassie.html"><a href="site-comparisons-derek-cassie.html"><i class="fa fa-check"></i><b>7</b> Site comparisons (Derek &amp; Cassie)</a><ul>
 <li class="chapter" data-level="7.1" data-path="site-comparisons-derek-cassie.html"><a href="site-comparisons-derek-cassie.html#confidence-intervals"><i class="fa fa-check"></i><b>7.1</b> Confidence intervals</a></li>
@@ -204,8 +204,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><strong><i>Air toxic</i> reporting guidelines based on MPCA and EPA guidelines</strong></p>
 <p>Annual results are considered <em>incomplete</em> if any of the following conditions are not met:</p>
 <ul>
-<li><code>Annual completeness</code> 75% or more of expected samples collected (rounded down)</li>
-<li><code>Calendar quarter completeness</code> 75% or more of expected samples collected (rounded down)</li>
+<li><code>Annual completeness</code> 75% or more of expected samples collected (rounded up)</li>
+<li><code>Calendar quarter completeness</code> 75% or more of expected samples collected (rounded up)</li>
 <li><code>Unique values</code> 2 or more unique values</li>
 </ul>
 <p><br></p>
@@ -218,7 +218,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p><br> <strong>Recommended steps</strong></p>
 <ol style="list-style-type: decimal">
-<li>Based on the monitoring schedule, record the total <em>expected samples</em> for each year and quarter.</li>
+<li>Based on the monitoring schedule, record the total <em>expected samples</em> for each year and quarter.
+<ul>
+<li>Air toxics monitors follow a national schedule provided by the EPA - (Air Toxics Monitoring Schedule)[google.com].</li>
+</ul></li>
 <li>Count the number of <em>valid samples</em> for each year and quarter.</li>
 <li>Divide the number of <em>valid samples</em> by the number of <em>expected samples</em>.</li>
 <li>Count the number of unique values for each year.</li>
@@ -234,17 +237,26 @@ Show <strong>R</strong> code
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
 Our example data is organized by monitoring site and date.
 <div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<div id="htmlwidget-be465a344e0e5a6f1598" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-be465a344e0e5a6f1598">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1,1,1],[12102,12102,12102,12102,12102,12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29","2009-09-04","2009-09-10"],[0.00127,0.00223,0.0037,0.0018,0.0027,0.00173,0.00257,0.00101,0.00604,0.0029],[null,null,null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Param_Code<\/th>\n      <th>Date<\/th>\n      <th>Concentration<\/th>\n      <th>Null_Code<\/th>\n      <th>Dlimit<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>CAS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,5,7,9]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-28ddc271056c0bfb4a1c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-28ddc271056c0bfb4a1c">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1,1,1],[12102,12102,12102,12102,12102,12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29","2009-09-04","2009-09-10"],[0.00127,0.00223,0.0037,0.0018,0.0027,0.00173,0.00257,0.00101,0.00604,0.0029],[null,null,null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Param_Code<\/th>\n      <th>Date<\/th>\n      <th>Concentration<\/th>\n      <th>Null_Code<\/th>\n      <th>Dlimit<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>CAS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,5,7,9]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 5.1: Sample data table.
 </p>
 </div>
 <p><br></p>
-<p><strong>Step 1:</strong> Record the expected number of samples.</p>
-<p>The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. It is recommended to consult the lab for the exact number, however, if that option is unavailable the following assumptions can be used.</p>
-<p><code>Annual expected samples</code> 60<br />
-<code>Calender quarter expected samples</code> 15</p>
+<p><strong>Step 1:</strong> Find the expected number of samples.</p>
+<p>The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. It is recommended to consult the lab for the exact number, however, if the monitor submits data to EPA’s Sir Quality System, the monitor is required to follow the (Air Toxics Monitoring Schedule)[google.com].</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the air toxics monitoring schedule</span>
+schedule &lt;-<span class="st"> </span><span class="kw">read_csv</span>()
+
+schedule &lt;-<span class="st"> </span>schedule <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">cal_quarter =</span> <span class="kw">quarter</span>(Date))
+
+<span class="co"># Count the number of sampling dates for each quarter and year.</span>
+schedule &lt;-<span class="st"> </span>schedule <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">            </span><span class="kw">group_by</span>(Year, cal_quarter) <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">summarize</span>(<span class="dt">expected_quarter_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date))) <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span>
+<span class="st">            </span><span class="kw">mutate</span>(<span class="dt">expected_annual_samples =</span> <span class="kw">sum</span>(expected_quarter_samples))<span class="er">)</span> </code></pre></div>
 <p><br></p>
 <p><strong>Step 2:</strong> Count number of valid samples.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
@@ -260,7 +272,12 @@ data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span clas
 <span class="st">        </span><span class="kw">mutate</span>(<span class="dt">valid_annual_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date))) </code></pre></div>
 <p><br></p>
 <p><strong>Step 3:</strong> Divide the number of valid samples by the number of expected samples.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Join expected sample table to data</span>
+<span class="co">#data &lt;- left_join(data, schedule)</span>
+
+
+<span class="co"># Divide valid samples by expected samples</span>
+data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, CAS, Year, cal_quarter) <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">mutate</span>(<span class="dt">pct_quarter_samples =</span> valid_quarter_samples <span class="op">/</span><span class="st"> </span><span class="dv">15</span>) <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, CAS, Year) <span class="op">%&gt;%</span>
@@ -284,21 +301,6 @@ data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span clas
 </blockquote>
 <p><br> <strong>References</strong></p>
 <p><a href="https://www.ecfr.gov/cgi-bin/text-idx?tpl=/ecfrbrowse/Title40/40cfr50_main_02.tpl">Appendices of 40 CFR 50</a></p>
-</div>
-<div id="incomplete-data" class="section level2">
-<h2><span class="header-section-number">5.2</span> Incomplete data</h2>
-<p>See section <a href="summary-statistics.html#incomplete"><a href="summary-statistics.html#incomplete">6.3</a> - Annual summaries for incomplete data</a> for various summary options for incomplete monitoring data.</p>
-</div>
-<div id="annual-summary-values" class="section level2">
-<h2><span class="header-section-number">5.3</span> Annual summary values</h2>
-<p>The annual means and upper confidence limits are considered below the method detection limit under the following conditions:</p>
-<ul>
-<li>The number of censored values is <code>&gt; 80%</code>
-<ul>
-<li>This is based on <em>Cox 2006</em> and MPCA simulations (cite work and results)[www.google.com].</li>
-</ul></li>
-<li>The annual 95% upper confidence limit is below the method detection limit.</li>
-</ul>
 
 </div>
 </div>

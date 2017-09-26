@@ -103,8 +103,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
 <li class="chapter" data-level="1" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html"><i class="fa fa-check"></i><b>1</b> Data cleaning (Dorian &amp; Cassie)</a><ul>
-<li class="chapter" data-level="1.1" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#missing"><i class="fa fa-check"></i><b>1.1</b> Remove blank, <code>NULL</code>, and missing values</a></li>
-<li class="chapter" data-level="1.2" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#quals"><i class="fa fa-check"></i><b>1.2</b> Remove <code>Qualified</code> data (Cassie)</a></li>
+<li class="chapter" data-level="1.1" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#missing"><i class="fa fa-check"></i><b>1.1</b> Remove blank, NULL, and missing values</a></li>
+<li class="chapter" data-level="1.2" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#quals"><i class="fa fa-check"></i><b>1.2</b> Remove <em>Qualified</em> data</a></li>
 <li class="chapter" data-level="1.3" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#dups"><i class="fa fa-check"></i><b>1.3</b> Duplicate observations</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="data-validation-kristie.html"><a href="data-validation-kristie.html"><i class="fa fa-check"></i><b>2</b> Data validation (Kristie)</a><ul>
@@ -134,6 +134,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.2" data-path="summary-statistics.html"><a href="summary-statistics.html#below"><i class="fa fa-check"></i><b>6.2</b> Below the detection limit</a></li>
 <li class="chapter" data-level="6.3" data-path="summary-statistics.html"><a href="summary-statistics.html#confidence"><i class="fa fa-check"></i><b>6.3</b> Confidence intervals (Derek)</a></li>
 <li class="chapter" data-level="6.4" data-path="summary-statistics.html"><a href="summary-statistics.html#incomplete"><i class="fa fa-check"></i><b>6.4</b> Annual summaries for incomplete data</a></li>
+<li class="chapter" data-level="6.5" data-path="summary-statistics.html"><a href="summary-statistics.html#health"><i class="fa fa-check"></i><b>6.5</b> Comparison of data to inhalation health benchmarks (Kristie)</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="site-comparisons-derek-cassie.html"><a href="site-comparisons-derek-cassie.html"><i class="fa fa-check"></i><b>7</b> Site comparisons (Derek &amp; Cassie)</a><ul>
 <li class="chapter" data-level="7.1" data-path="site-comparisons-derek-cassie.html"><a href="site-comparisons-derek-cassie.html#confidence-intervals"><i class="fa fa-check"></i><b>7.1</b> Confidence intervals</a></li>
@@ -188,19 +189,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number"></span> Summary statistics</h1>
 <p><img src="https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/12936/large/1464301097/number-rcatladies.png" width="40%" style="display: block; margin: auto;" /></p>
 <p>The summary methods described in this chapter inlcude:</p>
-<ul>
-<li><a href="summary-statistics.html#boots">6.1</a> <strong>Bootstrapping</strong><br />
-</li>
-<li><a href="summary-statistics.html#below">6.2</a> <strong>Below the detection limit</strong><br />
-</li>
-<li><a href="summary-statistics.html#confidence">6.3</a> <strong>Confidence intervals</strong></li>
-<li><a href="summary-statistics.html#incomplete">6.4</a> <strong>Annual summaries for incomplete data</strong></li>
-</ul>
+<p><a href="summary-statistics.html#boots">6.1</a> <strong>Bootstrapping</strong><br />
+<a href="summary-statistics.html#below">6.2</a> <strong>Below the detection limit</strong><br />
+<a href="summary-statistics.html#confidence">6.3</a> <strong>Confidence intervals</strong> <a href="summary-statistics.html#incomplete">6.4</a> <strong>Annual summaries for incomplete data</strong><br />
+<a href="summary-statistics.html#health">6.5</a> <strong>Comparison of data to inhalation health benchmarks</strong></p>
 <p><strong>Notes</strong></p>
 <p>Means</p>
+<p>When to use a arithmetic or geometric mean:</p>
 <ul>
-<li>When to use arithmetic / geometric</li>
-<li>Use an arithmetic mean when your data are normal and there are less than 5% below detection limit values per year/analyte/site [I made up the 5%, but there is an EPA document looking at the impacts of BDL data we can cite and incorporate. I’ll look for it] generic test for normality AND 5% BDL.</li>
+<li>Use an arithmetic mean when your data are normal and there are less than 5% below detection limit values per year/analyte/site [Kristie made up the 5%, but there is an EPA document looking at the impacts of BDL data. Will cite and incorporate.].</li>
 <li>For non-automated scripts: Use a geometric mean if your data are log-normally distributed and there are less than 5% below detection limit values per year/analyte/site.</li>
 </ul>
 <div id="boots" class="section level2">
@@ -375,9 +372,99 @@ conc_summary &lt;-<span class="st"> </span><span class="kw">group_by</span>(df, 
 </div>
 <div id="confidence" class="section level2">
 <h2><span class="header-section-number">6.3</span> Confidence intervals (Derek)</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data must have names&quot;AQS_ID&quot;, &quot;POC&quot;, &quot;Param_Code&quot;, &quot;Date&quot;, &quot;Concentration&quot;, &quot;Null_Data_Code&quot;, &quot;MDL&quot;, &quot;Pollutant&quot;, &quot;Year&quot;, &quot;CAS&quot;</span>
+<span class="co"># Data must also have column named &quot;Censored&quot; indicating whether Concentration &lt; MDL</span>
+<span class="co"># Data must also have column &quot;ID&quot; with grouping criteria. ID = Site + Pollutant + Year if data has multiple sites, pollutants, and years. If data has only one site, pollutant, or year, then those elements do not need to be included in ID.</span>
+
+
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(EnvStats)
+data =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> F)
+
+<span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQS_ID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Param_Code&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Concentration&quot;</span>,
+                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)
+
+data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(AQS_ID <span class="op">==</span><span class="st"> </span><span class="dv">270370020</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">paste</span>(Pollutant, Year), <span class="dt">Censored =</span> Concentration <span class="op">&lt;</span><span class="st"> </span>MDL)
+
+UCL_<span class="dv">95</span> =<span class="st"> </span><span class="cf">function</span>(data, <span class="dt">Boot_Repeats =</span> <span class="dv">1000</span>, <span class="dt">seed =</span> <span class="dv">2017</span>) {
+
+  
+MLE_est &lt;-<span class="st"> </span><span class="cf">function</span>(data){
+    
+    results =<span class="st"> </span>data<span class="op">$</span>Concentration
+    censored =<span class="st"> </span>data<span class="op">$</span>Censored
+    n =<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(data<span class="op">$</span>Concentration))
+    
+    MLE_means =<span class="st"> </span><span class="ot">NULL</span>
+    
+    
+    <span class="cf">if</span> ( (n <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.75</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(results)) <span class="op">|</span><span class="st"> </span>((<span class="kw">sum</span>(<span class="op">!</span>censored, <span class="dt">na.rm =</span> T) ) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span> <span class="op">*</span><span class="st"> </span>n) <span class="op">|</span><span class="st"> </span>( <span class="kw">length</span>(<span class="kw">unique</span>(results[<span class="op">!</span><span class="kw">is.na</span>(results) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span> ) ) {
+      MLE_means =<span class="st"> </span><span class="ot">NA</span>
+    } <span class="cf">else</span>
+    {
+      
+      random.rows =<span class="st"> </span><span class="ot">NULL</span>  
+      random.rows &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored) <span class="op">&amp;</span><span class="st"> </span>(<span class="op">!</span>censored) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">duplicated</span>(results) ), <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)
+      random.rows =<span class="st"> </span><span class="kw">c</span>(random.rows, <span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored)), n<span class="op">-</span><span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
+      
+      
+      <span class="cf">if</span> (<span class="kw">sum</span>(censored[random.rows], <span class="dt">na.rm =</span> T) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>){
+        MLE_means =<span class="st"> </span><span class="kw">mean</span>(results[random.rows])  
+      }
+      
+      <span class="cf">else</span> {
+        MLE_means =<span class="st"> </span><span class="kw">exp</span> (<span class="kw">elnormCensored</span>(results[random.rows] <span class="op">+</span><span class="st"> </span><span class="fl">1e-16</span>,
+                                        censored[random.rows],
+                                        <span class="dt">method =</span> <span class="st">&quot;mle&quot;</span>, 
+                                        <span class="dt">ci =</span> F 
+        )<span class="op">$</span>parameters[[<span class="dv">1</span>]])
+      }
+      
+    }
+    
+    <span class="kw">return</span>(MLE_means)
+}
+
+<span class="kw">set.seed</span>(seed)
+
+data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(ID) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(Concentration) ), <span class="st">`</span><span class="dt">% Censored</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sum</span>(Censored, <span class="dt">na.rm =</span> T) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span>n)
+
+site_means =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(ID) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>( <span class="kw">mean</span>(n) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.75</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(Concentration) <span class="op">|</span><span class="st"> </span><span class="kw">mean</span> (<span class="st">`</span><span class="dt">% Censored</span><span class="st">`</span>) <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span> <span class="op">|</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(Concentration[<span class="op">!</span><span class="kw">is.na</span>(Concentration) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>Censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">3</span>, <span class="ot">NA</span>, <span class="kw">ifelse</span> (<span class="kw">any</span>(Censored, <span class="dt">na.rm =</span> T), <span class="kw">exp</span> (<span class="kw">elnormCensored</span>(Concentration <span class="op">+</span><span class="st"> </span><span class="fl">1e-16</span>, Censored, <span class="dt">method =</span> <span class="st">&quot;mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]]), <span class="kw">mean</span>(Concentration, <span class="dt">na.rm =</span> T) ) ) )
+
+Bootstrap_means =<span class="st"> </span><span class="kw">replicate</span>(Boot_Repeats, (<span class="kw">by</span>(data, data<span class="op">$</span>ID, MLE_est) ) )
+
+UCL =<span class="st"> </span><span class="kw">apply</span>(Bootstrap_means, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(x)[<span class="kw">ceiling</span>(<span class="fl">0.975</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)])
+
+UCL =<span class="st"> </span><span class="kw">cbind</span>(site_means, UCL)
+
+<span class="kw">rownames</span>(UCL) =<span class="st"> </span><span class="ot">NULL</span>
+
+<span class="kw">return</span>(UCL)
+
+}
+
+UCLs =<span class="st"> </span><span class="kw">UCL_95</span>(data)</code></pre></div>
 </div>
 <div id="incomplete" class="section level2">
 <h2><span class="header-section-number">6.4</span> Annual summaries for incomplete data</h2>
+</div>
+<div id="health" class="section level2">
+<h2><span class="header-section-number">6.5</span> Comparison of data to inhalation health benchmarks (Kristie)</h2>
+<p>The annual 95% upper confidence limit is compared to chronic inhalation health benchmarks according to the MPCA/MDH hierarchy for inhalation health benchmarks information sources.The ways this is done is different for annual measured data reports (The Air Toxics Data Explorer) or if the comparison is used in a cumulative analysis (cumulative AERA) to inform air permitting or environmental review.</p>
+<ul>
+<li>Treatment of data for Annual Comparisons of Measured Data to IHBs
+<ul>
+<li>Chronic values are compared to UCL-95 values that reflect data that meet completeness and non-censored rules discussed in this document. Refer to where the UCL-95s come from in this chapter</li>
+<li>Acute health benchmarks are intended for comparison with an hourly max value.Since air toxics measurements are 24 hour integrated samples, the hourly maxima is estimated by multiplying the second highest value by 10. The justification for this estimation stemmed from an analysis comparing hourly gas (NO2) and particle (PM2.5) measurements to 24hour means. (reference this work?) Refer to where the hourly max estimates come from in this chapter.</li>
+</ul></li>
+<li>Treatment of measured data for use in a cumulative AERA to inform permitting or environmental review
+<ul>
+<li>A cumulative AERA requires risks summed across pollutants. Since not all pollutants are measured at each monitoring site, means of sites are estimated based on population density. An estimation based on population density is based in the assumption that pollution sources are greater near greater numbers of people. Means are calculated for mid-density sites, and rural sites. Facilities within urban areas are provided risk estimates at hte closest monitor with all pollutants measured.(reference guidance here and do not repeat the guidance that is already written down)</li>
+<li>Based somewhat on criteria pollutant guidance for design values, the cumualtive risk estimates determined from monitoring data for cumulative AERAs are the means of the most recent three years of monitored data.</li>
+<li>The following scripts estimate 3 year means for measurements of all pollutant data, and compare to inhalation health benchmarks. A mid-script product is a table of the IHBs used by the agency in tabular form, which can be knit individually into a pdf document. (pipe dreams, but I know I can make it real!)</li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#pull all the data</span></code></pre></div>
 
 </div>
 </div>

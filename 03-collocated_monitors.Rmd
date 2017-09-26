@@ -1,14 +1,16 @@
 # Collocated monitors (Derek)
 
 ```{r out.width='95%', echo=F}
+
 knitr::include_graphics("https://imgs.xkcd.com/comics/box_plot.png")
+
 ```
 
 
 Analysis steps for collocated monitors include:
 
-- \@ref(evalpocs) __Evaluate sites with collocated monitors (POCs)__   
-- \@ref(pripocs)  __Prioritize observations from collocated monitors (POCs)__ 
+\@ref(evalpocs) __Evaluate sites with collocated monitors (POCs)__   
+\@ref(pripocs)  __Prioritize observations from collocated monitors (POCs)__ 
 
 
 ## Evaluate collocated air monitors (POCs) {#evalpocs}  
@@ -16,6 +18,11 @@ Analysis steps for collocated monitors include:
 __Description__ 
 
 Collocated samples are multiple samples taken for a pollutant from the same monitoring site at the same time. Collocated samples provide an extra layer of quality assurance by taking multiple measurements under very similar conditions which helps detect machine, lab, and human error. Depending on the results from collocated monitors, only one of the monitors, or potentially neither may be considered as valid measurements.
+
+
+<br> __Why not keep all the data?__
+
+Leaving observations for multiple POCs in the data set is likely to bias calculated summary statistics. For example, consider a site that starts with two monitors operating during the winter months, but after one malfunctions, the site is left with one monitor operating for the remainder of the year. If we were to calculate the annual average for this site, the mean would be biased by having twice as many observations during the winter months. By limiting the number of observations to 1 per day, we can remove the bias due to the extra winter observations. 
 
 
 <br> __Recommended steps__   
@@ -42,7 +49,6 @@ Identify bias
 - Variance: Minimum correlation for both POCs to be valid? Possibly use a R2 of 0.99 (2 significant digits). 
   -  May require unique COV for each pollutant or pollutant group.  
   
-
 One value above detection, one value below? 
 
 - Derek suggests going with the value above detection. We don’t want to do substitutions unless we have to, so if there are not any problems with the POC above detection, then use the actual measured value. (EPA Data Analysis Workbook?)

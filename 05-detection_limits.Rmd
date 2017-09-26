@@ -32,43 +32,44 @@ Estimating below detection values (what not to do) [Kristie]:
 
 ## Procedure for calculating method detection limits
 
-- Prior to 2017, the lab calculated detection limits according to the procedures defined in 40 CFR Appendix B to Part 136 - Definition and Procedure for the determination of Method Detection Limit, ("https://www.gpo.gov/fdsys/granule/CFR-2011-title40-vol23/CFR-2011-title40-vol23-part136-appB/content-detail.html") 
-- Begining in 2017, the lab adopted a modified method for calcuating the method detection limit. Known as the "Method Update Rule(MUR)", this method accounts for media background contamination when establishing the MDL. This method is defined in the NATTS TAD (October 2016),("https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjJ3Y6AyfzVAhVL2IMKHXe_DI0QFggoMAA&url=https%3A%2F%2Fwww3.epa.gov%2Fttnamti1%2Ffiles%2Fambient%2Fairtox%2FNATTS%2520TAD%2520Revision%25203_FINAL%2520October%25202016.pdf&usg=AFQjCNGVu-9E0zS1-Gjkt_5sULzOPNeymg"). EPA has proposed to revise 40 CFR Appendix B to Part 136 to reflect this methodology. 
-    - Both methods require preparing and analyzing 7 matrix spikes and 7 method blanks. Samples should be prepped and analyzed over the course of at least 3 seperate batches/days. 
-    -Calculate the MDL of spiked samples (MDL_sp)
-      - Calculate standard deviation of the calcuated concentrations for the spiked samples.
-      - Calculate the MDL for the spiked samples by multiplying the standard deviation of spiked sample by the one-sided student's T value at 99% confidence corresponding to the number of spikes analyzed (3.143 if 7 samples).  
+- Prior to 2017, the lab calculated detection limits according to the procedures defined in 40 CFR Appendix B to Part 136 - Definition and Procedure for the determination of Method Detection Limit, (https://www.gpo.gov/fdsys/granule/CFR-2011-title40-vol23/CFR-2011-title40-vol23-part136-appB/content-detail.html) 
+- Begining in 2017, the lab adopted a modified method for calcuating the method detection limit. Known as the "Method Update Rule(MUR)", this method accounts for media background contamination when establishing the MDL. This method is defined in the [NATTS TAD (October 2016)](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjJ3Y6AyfzVAhVL2IMKHXe_DI0QFggoMAA&url=https%3A%2F%2Fwww3.epa.gov%2Fttnamti1%2Ffiles%2Fambient%2Fairtox%2FNATTS%2520TAD%2520Revision%25203_FINAL%2520October%25202016.pdf&usg=AFQjCNGVu-9E0zS1-Gjkt_5sULzOPNeymg). EPA has proposed to revise 40 CFR Appendix B to Part 136 to reflect this methodology. 
+- Both methods require preparing and analyzing 7 matrix spikes and 7 method blanks. Samples should be prepped and analyzed over the course of at least 3 seperate batches/days. 
+    - Calculate the MDL of spiked samples (MDL_sp)
+    - Calculate standard deviation of the calcuated concentrations for the spiked samples.
+    - Calculate the MDL for the spiked samples by multiplying the standard deviation of spiked sample by the one-sided student's T value at 99% confidence corresponding to the number of spikes analyzed (3.143 if 7 samples).  
       
-  -New method requires calculation of the MDL of the method blanks(MDL_b)   
-    - If no method blank provides a numerical result, no further action needed.
-    - If method blank pool includes a combination of ND and numeric values, set the method blank MDL to equal the highest of the method blank results. 
-    - IF all concentration values for the method blank pool are numeric values, calculate the MDL_b as follows:
+New method requires calculation of the MDL of the method blanks(MDL_b)   
+
+- If no method blank provides a numerical result, no further action needed.
+- If method blank pool includes a combination of ND and numeric values, set the method blank MDL to equal the highest of the method blank results. 
+- IF all concentration values for the method blank pool are numeric values, calculate the MDL_b as follows:
       - Calculate the average concentration of method blanks
       - Calculate the standard deviation of the method blank concentrations
       - Multiply the standard deviation by the one-sided student's T value at 99% confidence corresponding to the number of blanks analyzed
-      -Calculate the MDL_b as the sum of the average concentration method blanks, and the product of the standard deviation of blanks and the associated student's T Value
-        - MDL_b= mean_blanks + stdv_blanks * Student T
-  - Compare MDL_sp and MDL_b. The higher of the two values is reported as the laboratory MDL.  
+      - Calculate the MDL_b as the sum of the average concentration method blanks, and the product of the standard deviation of blanks and the associated student's T Value
+      - MDL_b = mean_blanks + stdv_blanks * Student T
+- Compare MDL_sp and MDL_b. The higher of the two values is reported as the laboratory MDL.  
 
 ## Finding detection limits (Cassie)
-- 
+
 - Annual method detection limits used for data analysis are stored on the x:drive, "X:\\Databases\\AQ\\AQ Lab\\Data Analysis\\Air Toxics\\Detection Limits\\Annual Detection Limits (micrograms).xlsx"
- - Use ParamYear field to join data
- - Detection limits are updated when received from the lab. Current year samples may not have a detection limit in the file if the lab has not performed the test. 
- - If you receive a detection limit from the lab it is likely in instrument units!
+- Use ParamYear field to join data
+- Detection limits are updated when received from the lab. Current year samples may not have a detection limit in the file if the lab has not performed the test. 
+- If you receive a detection limit from the lab it is likely in instrument units!
     - Metals (ug/mL): conversion to ug/m3 requires accounting of flow rate, runtime, and 1/9 filter strip, and 40 mL liquid extraction
     - Carbonyls (ug/mL): conversion requires account of flow rate, runtime, and extraction volume. 
-    -VOCs (ppb):conversion can be done using MW and Standard Temp/Pressure. 
- - When Promium is adopted, method detection limits will be applied on a sample basis and will account for the varying air volumes of samples. As a result, there will be multiple detection limits for an analyte. 
+    - VOCs (ppb):conversion can be done using MW and Standard Temp/Pressure. 
+- When Promium is adopted, method detection limits will be applied on a sample basis and will account for the varying air volumes of samples. As a result, there will be multiple detection limits for an analyte. 
 
 
 ## Qualifier Codes for Detection Limits
 
 - Begining in 2017, the MPCA will be linking laboratory detection limits to sample data and applying appropriate data qualifiers depending on detection status. These qualifiers include:
-  - ND = HAP not qualitatively identified (reported as zero)
-  - MD = < MDL
-  - SQ = >= MDL but < SQL
-  - No qualifier = measured concentration >= to SQL
+    - ND = HAP not qualitatively identified (reported as zero)
+    - MD = < MDL
+    - SQ = >= MDL but < SQL
+    - No qualifier = measured concentration >= to SQL
   
   **The SQL is 3.18x the MDL**
   

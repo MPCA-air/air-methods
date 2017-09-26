@@ -14,7 +14,6 @@ These procedures include steps to:
  
  
 
-
 ## Remove blank, NULL, and missing values {#missing}
 
 __Description__  
@@ -31,7 +30,6 @@ Large monitoring data sets often contain observations with missing concentration
 <br> __Why not keep them?__
 
 In most cases, our analyses do not require or allow filling in missing values. For this reason, it makes sense to remove them. However, for some analyses you may want to fill the missing values. The method for filling values will be project specific and decisions should be documented. Data sets should identify any records that include a replaced missing value. 
-
 
 
 <br> __Sample `R` script__ 
@@ -223,11 +221,13 @@ Valid sample results may have data qualifiers. These qualifiers provide contextu
 ## Duplicate observations {#dups}
 
 __Description__  
+
 Large monitoring data sets often contain instances where multiple observations from a monitor exist for the same time period. When multiples observations do occur they tend to be identified by _[a unique monitor POC (parameter occurrence code ]_ or by a qualifier describing why the second observation was recorded (e.g. a duplicate for quality control). 
 
 <br> __Recommended steps__  
 
 1. Identify duplicate observations.
+1. A duplicate in the data is likely the result of an error. Consult the lab about duplicate values.
 1. Treatment of a duplicate observation will depend on the project.
     - For criteria pollutant design values, treatment of duplicate samples is defined for each pollutant in the [Appendices of 40 CFR 50](https://www.ecfr.gov/cgi-bin/text-idx?tpl=/ecfrbrowse/Title40/40cfr50_main_02.tpl).
     - For air toxics, treatment of duplicate values will depend on the analysis. In some cases you may want to average the results. In others, you may want to take the maximum value.
@@ -237,11 +237,9 @@ Large monitoring data sets often contain instances where multiple observations f
     - If all observations are censored, select the observation with the lowest detection limit.
     - If all observations are censored and the detection limits are equal, select a single observation.  
 
-  
 <br> __Why not keep all the data?__
 
-Leaving both observations in the data set is likely to bias calculated summary statistics. For example, consider a site that starts with two monitors operating during the winter months, but after one malfunctions, the site is left with one monitor operating for the remainder of the year. If we were to calculate the annual average for this site, the mean would be biased by having twice as many observations during the winter months. By limiting the number of observations to 1 per day, we can remove the bias due to the extra winter observations. 
-
+Leaving multiple observations for some dates in the data set is likely to bias calculated summary statistics. For example, duplicate ozone observations from January would be likely to skew the annual average lower. By limiting the number of observations to 1 per day, we can remove the bias due to duplicate observations. 
 
 <br> __Sample `R` script__  
   
