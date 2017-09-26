@@ -59,76 +59,62 @@ library(tidyr)
 library(openair)
 library(reshape)
 
-
-site_save = gsub("[.]", "", site_name)
-
-site_save = gsub("\n", "", site_save)
-
-site_save = gsub("/", "-", site_save)
-
-
 data = read.csv(monitoring_data_file, stringsAsFactors = F)
 
-names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration", "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
-
-data$date = ymd(data$Date)
-
-data$Pollutant = gsub("/", "-", data$Pollutant) #R confuses forward slashes for file paths when naming pngs
-
-met_data = read.csv(met_data_file)
-
-data_site = filter(data, AQS_ID %in% site_num & !is.na(Concentration) )
-
-data_site = data_site %>% group_by(Pollutant) %>% filter(max(Concentration) > 0.001 & max(Concentration) > max(MDL))
-
-pollutants_site = data_site %>% group_by(Pollutant) %>% summarise(MDL = max(MDL), minimum = min(Concentration), maximum = max(Concentration))
-
-data_site = select(data_site, date, Pollutant, Concentration)
-
-breaks_site = NULL
-
-for (i in 1:nrow(pollutants_site)) {
-
-breaks_site = rbind(breaks_site, c(round_any(pollutants_site$minimum[i], 0.001, floor), round_any(
-c(pollutants_site$MDL[i], pollutants_site$MDL[i] + (pollutants_site$maximum[i]
-- pollutants_site$MDL[i]) * (1:(num_breaks-1) / (num_breaks-1) ) ), 0.001,
-ceiling ) ) )
-
-}
-
-data_site = spread(data_site, key = Pollutant, value = Concentration)
-
-names(met_data)[c(1,7,8)] = c("Day","wd","ws")
-
-met_data = mutate(met_data, date = paste0(Year,"/",Month,"/",Day,"",Hour,":00"))
-
-met_data$date = ymd_hm(met_data$date)
-
-met_data = met_data[,-c(1:3, 9:11)]
-
-met_data = timeAverage(met_data, avg.time = "day")
-
-met_data$date = ymd(met_data$date)
-
-data_site = left_join(data_site, met_data, by = "date")
-
-png(paste0(output_path,"/Wind Rose for ", site_save,".png"), height = png_height, width=png_width)
-
-windRose(data_site, paddle = F, breaks = 5 * 0:5, key.footer = "mph", main=paste("Daily Average Wind Rose \n", site_name) )
-
-dev.off()
-
-for(i in 1:nrow(pollutants_site)) {
-
-  png(paste0(output_path,"/Pollution Rose for ", pollutants_site$Pollutant[i]," ", eight), width=png_width)
+roses = function(data, met_data_file, output_path, site_num, site_name, png_height = 600, png_width = 600, num_breaks = 5) {
   
-  pollutionRose(data_site, statistic = "abs.count", pollutant = pollutants_site$Pollutant[i], breaks = breaks_site[i,], key.footer="ug/m3", main=paste("Daily Average Pollution Rose for", pollutants_site$Pollutant[i],"\n", site_name) )
+  library(dplyr)
+  library(lubridate)
+  library(tidyr)
+  library(openair)
+  library(reshape)
   
+  site_save = gsub("[.]", "", site_name)
+  site_save = gsub("\n", "", site_save)
+  site_save = gsub("/", "-", site_save)
+  
+  names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration",
+                 "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
+  data$date = mdy(data$Date)
+  data$Pollutant = gsub("/", "-", data$Pollutant) #R confuses forward slashes for file paths when naming pngs
+  met_data = read.csv(met_data_file)
+
+  data_site = filter(data, AQS_ID %in% site_num & !is.na(Concentration) )
+  data_site = data_site %>% group_by(Pollutant) %>% filter(max(Concentration) > 0.001 & max(Concentration) > max(MDL))
+  pollutants_site = data_site %>% group_by(Pollutant) %>% summarise(MDL = max(MDL), minimum = min(Concentration), maximum = max(Concentration))
+  data_site = select(data_site, date, Pollutant, Concentration)
+  breaks_site = NULL
+  for (i in 1:nrow(pollutants_site)) {
+    breaks_site = rbind(breaks_site, c(round_any(pollutants_site$minimum[i], 0.001, floor),
+                      round_any( c(pollutants_site$MDL[i], pollutants_site$MDL[i] + (pollutants_site$maximum[i] - pollutants_site$MDL[i]) * (1:(num_breaks-1) / (num_breaks-1) ) ), 0.001, ceiling ) ) )
+  }
+  
+
+
+  data_site = spread(data_site, key = Pollutant, value = Concentration)
+
+
+  names(met_data)[c(1,8,9)] = c("Day","wd","ws")
+  met_data = mutate(met_data, date = paste0(Year,"/",Month,"/",Day," ",Hour,":00"))
+  met_data$date = ymd_hm(met_data$date)
+  met_data = met_data[,-c(1:3,10)]
+  met_data = timeAverage(met_data, avg.time = "day")
+  met_data$date = ymd(met_data$date)
+
+  data_site = left_join(data_site, met_data, by = "date")
+
+  png(paste0(output_path,"/Wind Rose for ", site_save,".png"), height=png_height, width=png_width)
+  windRose(data_site, paddle = F, breaks = 5 * 0:5, key.footer = "mph", main=paste("Daily Average Wind Rose \n", site_name) )
   dev.off()
 
+  for(i in 1:nrow(pollutants_site)) {
+    png(paste0(output_path,"/Pollution Rose for ", pollutants_site$Pollutant[i]," ", site_save,".png"), height=png_height, width=png_width)
+    pollutionRose(data_site, statistic = "abs.count", pollutant = pollutants_site$Pollutant[i], breaks = breaks_site[i,], key.footer="ug/m3", main=paste("Daily Average Pollution Rose for", pollutants_site$Pollutant[i],"\n", site_name) )
+    dev.off()
+  }
+
 }
 
-## ?? site_save,".png"), height=png_h
-
+roses(data, met_data_file, output_path, site_num, site_name, png_height, png_width, num_breaks)
 
 ```

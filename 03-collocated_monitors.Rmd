@@ -24,7 +24,9 @@ Viewing a scatterplot of collocated measurements is suggested as it helps to vie
 
 EPA recommends that collocated monitors have no higher than a 15% coefficient of variation between their measurements. Calculating the CV for every measurement pair does not make sense as small differences (i.e. 0.001 and 0.002) have the same CV as large differences (i.e. 10 and 20). Therefore, we chose to look at the median CV for each site, pollutant, and year then flag collocated monitors if the median CV is greater than 15 which suggests differences between the collocated monitors are systematic. We only calculate the CV for collocated monitors on days which both have valid measurements greater than or equal to the MDL since there is lower confidence in values below the MDL. We only compare the median CV to the threshold of 15 if there are at least 10 calculated CV values since it does not make sense to flag monitors where only a few values are above detection.
 
-If collocated monitors do not agree, then consult with the lab or quality assurance team to determine if there is a problem with one of the POCs. If they determine that one of POCs is reliable and the other is not, then only use data from the reliable POC. If they cannot determine which POC is the problem, then confidence in the measurements from both collocated monitors is reduced and no measurements taken from either collocated monitor should be used.
+If collocated monitors do not agree, then consult with the lab, field or quality assurance team to determine if there is a problem with one of the POCs. If they determine that one of POCs is reliable and the other is not, then only use data from the reliable POC. If they cannot determine which POC is the problem, then confidence in the measurements from both collocated monitors is reduced and * no measurements taken from either collocated monitor should be used.* More than likely, we will be asked to report results. We will have lower confidence in the accuracy of those results
+ 
+
 
 
 <br> __Notes__  

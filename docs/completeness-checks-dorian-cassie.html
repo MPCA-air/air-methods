@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title></title>
   <meta name="description" content="">
-  <meta name="generator" content="bookdown 0.4.3 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.2 and GitBook 2.6.7">
 
   <meta property="og:title" content="" />
   <meta property="og:type" content="book" />
@@ -115,6 +115,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="data-validation-kristie.html"><a href="data-validation-kristie.html"><i class="fa fa-check"></i><b>2</b> Data validation (Kristie)</a><ul>
 <li class="chapter" data-level="2.1" data-path="data-validation-kristie.html"><a href="data-validation-kristie.html#leaks"><i class="fa fa-check"></i><b>2.1</b> Identifying Instrument drift or leaks in a system.</a></li>
 <li class="chapter" data-level="2.2" data-path="data-validation-kristie.html"><a href="data-validation-kristie.html#outs"><i class="fa fa-check"></i><b>2.2</b> Identify exceptional and extreme values aka outliers.</a></li>
+<li class="chapter" data-level="2.3" data-path="data-validation-kristie.html"><a href="data-validation-kristie.html#sticky"><i class="fa fa-check"></i><b>2.3</b> Identify sequential repeats aka “sticky” numbers</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="collocated-monitors-derek.html"><a href="collocated-monitors-derek.html"><i class="fa fa-check"></i><b>3</b> Collocated monitors (Derek)</a><ul>
 <li class="chapter" data-level="3.1" data-path="collocated-monitors-derek.html"><a href="collocated-monitors-derek.html#evalpocs"><i class="fa fa-check"></i><b>3.1</b> Evaluate collocated air monitors (POCs)</a></li>
@@ -132,14 +133,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="completeness-checks-dorian-cassie.html"><a href="completeness-checks-dorian-cassie.html"><i class="fa fa-check"></i><b>5</b> Completeness checks (Dorian &amp; Cassie)</a><ul>
 <li class="chapter" data-level="5.1" data-path="completeness-checks-dorian-cassie.html"><a href="completeness-checks-dorian-cassie.html#complete"><i class="fa fa-check"></i><b>5.1</b> Completeness checks</a></li>
+<li class="chapter" data-level="5.2" data-path="completeness-checks-dorian-cassie.html"><a href="completeness-checks-dorian-cassie.html#incomplete-data"><i class="fa fa-check"></i><b>5.2</b> Incomplete data</a></li>
+<li class="chapter" data-level="5.3" data-path="completeness-checks-dorian-cassie.html"><a href="completeness-checks-dorian-cassie.html#annual-summary-values"><i class="fa fa-check"></i><b>5.3</b> Annual summary values</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>6</b> Summary statistics</a><ul>
 <li class="chapter" data-level="6.1" data-path="summary-statistics.html"><a href="summary-statistics.html#boots"><i class="fa fa-check"></i><b>6.1</b> Bootstrapping (Dorian)</a></li>
 <li class="chapter" data-level="6.2" data-path="summary-statistics.html"><a href="summary-statistics.html#confidence"><i class="fa fa-check"></i><b>6.2</b> Confidence intervals (Derek)</a></li>
+<li class="chapter" data-level="6.3" data-path="summary-statistics.html"><a href="summary-statistics.html#incomplete"><i class="fa fa-check"></i><b>6.3</b> Annual summaries for incomplete data</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="site-comparisons-derek-cassie.html"><a href="site-comparisons-derek-cassie.html"><i class="fa fa-check"></i><b>7</b> Site comparisons (Derek &amp; Cassie)</a><ul>
 <li class="chapter" data-level="7.1" data-path="site-comparisons-derek-cassie.html"><a href="site-comparisons-derek-cassie.html#confidence-intervals"><i class="fa fa-check"></i><b>7.1</b> Confidence intervals</a></li>
-<li class="chapter" data-level="7.2" data-path="site-comparisons-derek-cassie.html"><a href="site-comparisons-derek-cassie.html#correlation-matrices-cassie"><i class="fa fa-check"></i><b>7.2</b> Correlation matrices (Cassie)</a></li>
+<li class="chapter" data-level="7.2" data-path="site-comparisons-derek-cassie.html"><a href="site-comparisons-derek-cassie.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>7.2</b> Tools to visualize data</a></li>
+<li class="chapter" data-level="7.3" data-path="site-comparisons-derek-cassie.html"><a href="site-comparisons-derek-cassie.html#correlation-matrices-cassie"><i class="fa fa-check"></i><b>7.3</b> Correlation matrices (Cassie)</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>8</b> Charts</a><ul>
 <li class="chapter" data-level="8.1" data-path="charts.html"><a href="charts.html#boxplots-dorian"><i class="fa fa-check"></i><b>8.1</b> Boxplots (Dorian)</a><ul>
@@ -148,20 +153,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="charts.html"><a href="charts.html#calendar-plots-cassie"><i class="fa fa-check"></i><b>8.2</b> Calendar plots (Cassie)</a></li>
 <li class="chapter" data-level="8.3" data-path="charts.html"><a href="charts.html#colors-dorian"><i class="fa fa-check"></i><b>8.3</b> Colors (Dorian)</a></li>
-<li class="chapter" data-level="8.4" data-path="charts.html"><a href="charts.html#openair-package-derek-cassie"><i class="fa fa-check"></i><b>8.4</b> <em>openair</em> package (Derek &amp; Cassie)</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="charts.html"><a href="charts.html#pollution-roses-and-love-poems-derek"><i class="fa fa-check"></i><b>8.4.1</b> Pollution roses and love poems (Derek)</a></li>
+<li class="chapter" data-level="8.4" data-path="charts.html"><a href="charts.html#openair-package-derek-cassie"><i class="fa fa-check"></i><b>8.4</b> <em>openair</em> package (Derek &amp; Cassie)</a></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="generates-pollution-roses-for-all-air-toxics-for-a-site-and-saves-them-in-a-folder-defined-by-output-path.html"><a href="generates-pollution-roses-for-all-air-toxics-for-a-site-and-saves-them-in-a-folder-defined-by-output-path.html"><i class="fa fa-check"></i><b>9</b> Generates pollution roses for all air toxics for a site and saves them in a folder defined by output_path</a><ul>
+<li class="chapter" data-level="9.0.1" data-path="generates-pollution-roses-for-all-air-toxics-for-a-site-and-saves-them-in-a-folder-defined-by-output-path.html"><a href="generates-pollution-roses-for-all-air-toxics-for-a-site-and-saves-them-in-a-folder-defined-by-output-path.html#pollution-roses-and-love-poems-derek"><i class="fa fa-check"></i><b>9.0.1</b> Pollution roses and love poems (Derek)</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>9</b> Time series</a><ul>
-<li class="chapter" data-level="9.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>9.1</b> Seasonality</a></li>
-<li class="chapter" data-level="9.2" data-path="time-series.html"><a href="time-series.html#changepoints-before-after-tests"><i class="fa fa-check"></i><b>9.2</b> Changepoints (before &amp; after tests)</a></li>
+<li class="chapter" data-level="10" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>10</b> Time series</a><ul>
+<li class="chapter" data-level="10.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>10.1</b> Seasonality</a></li>
+<li class="chapter" data-level="10.2" data-path="time-series.html"><a href="time-series.html#changepoints-before-after-tests"><i class="fa fa-check"></i><b>10.2</b> Changepoints (before &amp; after tests)</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="maps-kristie.html"><a href="maps-kristie.html"><i class="fa fa-check"></i><b>10</b> Maps (Kristie)</a><ul>
-<li class="chapter" data-level="10.1" data-path="maps-kristie.html"><a href="maps-kristie.html#kriging"><i class="fa fa-check"></i><b>10.1</b> Kriging</a></li>
-<li class="chapter" data-level="10.2" data-path="maps-kristie.html"><a href="maps-kristie.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>10.2</b> Spatial averaging and aggregation</a></li>
-<li class="chapter" data-level="10.3" data-path="maps-kristie.html"><a href="maps-kristie.html#creating-shapefiles-in-r-adn-joining-to-ej-areas"><i class="fa fa-check"></i><b>10.3</b> Creating shapefiles in R adn joining to EJ areas</a></li>
+<li class="chapter" data-level="11" data-path="maps-kristie.html"><a href="maps-kristie.html"><i class="fa fa-check"></i><b>11</b> Maps (Kristie)</a><ul>
+<li class="chapter" data-level="11.1" data-path="maps-kristie.html"><a href="maps-kristie.html#kriging"><i class="fa fa-check"></i><b>11.1</b> Kriging</a></li>
+<li class="chapter" data-level="11.2" data-path="maps-kristie.html"><a href="maps-kristie.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>11.2</b> Spatial averaging and aggregation</a></li>
+<li class="chapter" data-level="11.3" data-path="maps-kristie.html"><a href="maps-kristie.html#creating-shapefiles-in-r-adn-joining-to-ej-areas"><i class="fa fa-check"></i><b>11.3</b> Creating shapefiles in R adn joining to EJ areas</a></li>
+<li class="chapter" data-level="11.4" data-path="maps-kristie.html"><a href="maps-kristie.html#spatial-join-to-census-tracts-and-then-left_join-to-ej-areas-status"><i class="fa fa-check"></i><b>11.4</b> Spatial join to census tracts and then left_join to EJ areas status</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="additional-resources-kristie.html"><a href="additional-resources-kristie.html"><i class="fa fa-check"></i><b>11</b> Additional resources (Kristie)</a></li>
+<li class="chapter" data-level="12" data-path="additional-resources-kristie.html"><a href="additional-resources-kristie.html"><i class="fa fa-check"></i><b>12</b> Additional resources (Kristie)</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -185,151 +192,113 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="completeness-checks-dorian-cassie" class="section level1">
 <h1><span class="header-section-number"></span> Completeness checks (Dorian &amp; Cassie)</h1>
-<p>We should check for data completeness before generating summaries for sampling data.</p>
+<p>Checking for data completeness before generating summaries ensures that results will be comparable from one year to the next. Without completeness checks, changes in the seasonal coverage from year to year may create the illusion of increasing or decreasing trends.</p>
 <p>Completeness checks inlcude tests for:</p>
-<ul>
-<li>Seasonal completeness (75%)
-<ul>
-<li>This is an EPA guideline for criteria pollutants and has been applied to air toxics (citation).</li>
-</ul></li>
-<li>20% values above detection
-<ul>
-<li>This is based on <em>Cox 2006</em> and MPCA simulations (cite work and results)</li>
-</ul></li>
-<li>Label for criteria not met
-<ul>
-<li>“Criteria to calculate annual mean not met.”</li>
-</ul></li>
-<li>More than 3 unique values (cite this)
-<ul>
-<li>3 per year? 3 per quarter?</li>
-</ul></li>
-<li>Minimum samples.</li>
-</ul>
-<p>What can we do for incomplete seasons or years: Compare to acute? Summarize based on number of values above detection? (Cassie did this)</p>
-<p><br> <strong>Annual reporting rules</strong></p>
+<p><code>Calendar quarter completeness</code> Number of samples required for a season or quarter.</p>
+<p><code>Annual completeness</code> Number of samples required for a year.</p>
+<p><code>Unique values</code> Number of unique values required.</p>
 <div id="complete" class="section level2">
 <h2><span class="header-section-number">5.1</span> Completeness checks</h2>
-<p>Methods for performing completeness checks…</p>
-<p>Packages</p>
+<p><strong>Description</strong></p>
+<p>This section describes completeness guidelines and methods for performing completeness checks.</p>
+<p><strong><i>Air toxic</i> reporting guidelines based on MPCA and EPA guidelines</strong></p>
+<p>Annual results are considered <em>incomplete</em> if any of the following conditions are not met:</p>
+<ul>
+<li><code>Annual completeness</code> 75% or more of expected samples collected (rounded down)</li>
+<li><code>Calendar quarter completeness</code> 75% or more of expected samples collected (rounded down)</li>
+<li><code>Unique values</code> 2 or more unique values</li>
+</ul>
+<p><br></p>
+<p><strong><i>Criteria pollutant</i> reporting guidelines</strong></p>
+<p>Completeness rules for criteria pollutant design values are defined in the <a href="https://www.ecfr.gov/cgi-bin/text-idx?tpl=/ecfrbrowse/Title40/40cfr50_main_02.tpl">Appendices of 40 CFR 50</a>.</p>
+<p>In general, these rules apply:</p>
+<ul>
+<li><code>Annual completeness</code> 75% or more of samples collected</li>
+<li><code>Calendar quarter completeness</code> 75% or more of samples collected</li>
+</ul>
+<p><br> <strong>Recommended steps</strong></p>
+<ol style="list-style-type: decimal">
+<li>Based on the monitoring schedule, record the total <em>expected samples</em> for each year and quarter.</li>
+<li>Count the number of <em>valid samples</em> for each year and quarter.</li>
+<li>Divide the number of <em>valid samples</em> by the number of <em>expected samples</em>.</li>
+<li>Count the number of unique values for each year.</li>
+<li>Mark annual results as <em>incomplete</em> if they do not fulfill one of the completeness checks.</li>
+</ol>
+<p><br> <strong>Example <code>R</code> script</strong></p>
+<p>Click the button below to view a step by step example of the methods above.</p>
+<div class="toggle">
+<button class="btn_code">
+Show <strong>R</strong> code
+</button>
+<p><br> Packages</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
-<p>Our example data is organized by monitoring site and date. Here’s a sample.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:right;">
-AQS_ID
-</th>
-<th style="text-align:left;">
-Date
-</th>
-<th style="text-align:right;">
-Conc
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-270535501
-</td>
-<td style="text-align:left;">
-2009-07-30
-</td>
-<td style="text-align:right;">
-0.00148
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-270535501
-</td>
-<td style="text-align:left;">
-2009-09-30
-</td>
-<td style="text-align:right;">
-0.00064
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-270535501
-</td>
-<td style="text-align:left;">
-2009-11-30
-</td>
-<td style="text-align:right;">
-0.34256
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-270535501
-</td>
-<td style="text-align:left;">
-2009-12-30
-</td>
-<td style="text-align:right;">
-0.00064
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-270535502
-</td>
-<td style="text-align:left;">
-2009-03-30
-</td>
-<td style="text-align:right;">
-0.26219
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-270535502
-</td>
-<td style="text-align:left;">
-2009-07-30
-</td>
-<td style="text-align:right;">
-0.01113
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-270535502
-</td>
-<td style="text-align:left;">
-2009-09-30
-</td>
-<td style="text-align:right;">
-0.00044
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-270535502
-</td>
-<td style="text-align:left;">
-2009-11-30
-</td>
-<td style="text-align:right;">
-0.00127
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-270535502
-</td>
-<td style="text-align:left;">
-2009-12-30
-</td>
-<td style="text-align:right;">
-0.00113
-</td>
-</tr>
-</tbody>
-</table>
+Our example data is organized by monitoring site and date.
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<div id="htmlwidget-be465a344e0e5a6f1598" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-be465a344e0e5a6f1598">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1,1,1],[12102,12102,12102,12102,12102,12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29","2009-09-04","2009-09-10"],[0.00127,0.00223,0.0037,0.0018,0.0027,0.00173,0.00257,0.00101,0.00604,0.0029],[null,null,null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Param_Code<\/th>\n      <th>Date<\/th>\n      <th>Concentration<\/th>\n      <th>Null_Code<\/th>\n      <th>Dlimit<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>CAS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,5,7,9]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 5.1: Sample data table.
+</p>
+</div>
+<p><br></p>
+<p><strong>Step 1:</strong> Record the expected number of samples.</p>
+<p>The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. It is recommended to consult the lab for the exact number, however, if that option is unavailable the following assumptions can be used.</p>
+<p><code>Annual expected samples</code> 60<br />
+<code>Calender quarter expected samples</code> 15</p>
+<p><br></p>
+<p><strong>Step 2:</strong> Count number of valid samples.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
+
+<span class="co"># Assign each date to a calendar quarter</span>
+data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">cal_quarter =</span> <span class="kw">quarter</span>(Date))
+
+<span class="co"># Count the number of sampling dates for each quarter and year.</span>
+data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, CAS, Year, cal_quarter) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">valid_quarter_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date))) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, CAS, Year) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">valid_annual_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date))) </code></pre></div>
+<p><br></p>
+<p><strong>Step 3:</strong> Divide the number of valid samples by the number of expected samples.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, CAS, Year, cal_quarter) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">pct_quarter_samples =</span> valid_quarter_samples <span class="op">/</span><span class="st"> </span><span class="dv">15</span>) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, CAS, Year) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">pct_annual_samples =</span> valid_annual_samples <span class="op">/</span><span class="st"> </span><span class="dv">60</span>) </code></pre></div>
+<p><br></p>
+<p><strong>Step 4:</strong> Count the number of unique values for each year.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, CAS, Year) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">unique_values =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Concentration)))</code></pre></div>
+<p><br></p>
+<p><strong>Step 5:</strong> Mark results as incomplete if they do not fulfill one of the completeness checks.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set incomplete to zero if any of completeness checks are not met</span>
+data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">incomplete =</span> <span class="kw">sum</span>(<span class="kw">c</span>(pct_quarter_samples <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.75</span>, 
+                                  pct_annual_samples <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.75</span>,
+                                  unique_values <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</code></pre></div>
+</div>
+<p><br> <strong>Contributors</strong></p>
+<blockquote>
+<p>Dorian Kvale, Cassie McMahon</p>
+</blockquote>
+<p><br> <strong>References</strong></p>
+<p><a href="https://www.ecfr.gov/cgi-bin/text-idx?tpl=/ecfrbrowse/Title40/40cfr50_main_02.tpl">Appendices of 40 CFR 50</a></p>
+</div>
+<div id="incomplete-data" class="section level2">
+<h2><span class="header-section-number">5.2</span> Incomplete data</h2>
+<p>See section <a href="summary-statistics.html#incomplete"><a href="summary-statistics.html#incomplete">6.3</a> - Annual summaries for incomplete data</a> for various summary options for incomplete monitoring data.</p>
+</div>
+<div id="annual-summary-values" class="section level2">
+<h2><span class="header-section-number">5.3</span> Annual summary values</h2>
+<p>The annual means and upper confidence limits are considered below the method detection limit under the following conditions:</p>
+<ul>
+<li>The number of censored values is <code>&gt; 80%</code>
+<ul>
+<li>This is based on <em>Cox 2006</em> and MPCA simulations (cite work and results)[www.google.com].</li>
+</ul></li>
+<li>The annual 95% upper confidence limit is below the method detection limit.</li>
+</ul>
 
 </div>
 </div>

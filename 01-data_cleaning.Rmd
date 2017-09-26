@@ -8,15 +8,14 @@ Before jumping into your analysis you'll want to clean it up with some helpful q
 
 These procedures include steps to:  
 
-- \@ref(missing)  __Remove blank, invalid, NULL, and missing values__  
-- \@ref(quals)    __Evaluate qualified data__     
-- \@ref(dups)     __Remove duplicate observations__ 
+\@ref(missing)  __Remove blank, invalid, NULL, and missing values__  
+\@ref(quals)    __Evaluate qualified data__     
+\@ref(dups)     __Remove duplicate observations__ 
  
  
-__Text summary__
 
 
-## Remove blank, `NULL`, and missing values {#missing}
+## Remove blank, NULL, and missing values {#missing}
 
 __Description__  
 Large monitoring data sets often contain observations with missing concentrations, detection limits or other labeling errors that can lead to incorrect summary statistics.  
@@ -24,12 +23,15 @@ Large monitoring data sets often contain observations with missing concentration
 <br> __Recommended steps__
 
 1. Identify any blank, NULL, `-999`, and missing values.
-1. Remove those observations.
+1. If available, review Null Data Codes. These codes will tell you why the data is missing. Most data sets will include null data codes. For AQS null code descriptions, see https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.html.
+1. Determine if your analysis needs to account for missing data before deleting observations. You may want to perform a count on all sample dates to quantify the expected number of observations.
+1. If you no longer need these records, remove them from the dataset.
 1. Document your process.
 
 <br> __Why not keep them?__
 
-Unless the lab can confirm the meaning of the missing values for you, there is not a reliable means to interpret the values.  
+In most cases, our analyses do not require or allow filling in missing values. For this reason, it makes sense to remove them. However, for some analyses you may want to fill the missing values. The method for filling values will be project specific and decisions should be documented. Data sets should identify any records that include a replaced missing value. 
+
 
 
 <br> __Sample `R` script__ 
@@ -153,7 +155,7 @@ missing_param <- function(x) {
 ```
   
   
-<br> You can apply these functions all at once by using `dplyr`'s great function called `mutate()`.
+<br> To apply these functions all at once use `dplyr`'s great function called `mutate()`.
 ```{r eval=T, message=F, warning=F}
 
 # Create new TRUE/FALSE columns labeling each result as missing or not
@@ -188,24 +190,31 @@ datatable(data, options = dt_options)
 
 <br> __Contributors__  
 
-> Dorian Kvale; Derek Nagel, Kristie Ellickson 
+> Dorian Kvale
 
 
 <br> __References__    
 
 
-## Remove `Qualified` data (Cassie) {#quals}
+## Remove _Qualified_ data {#quals}
 
 
 __Description__  
+Valid sample results may have data qualifiers. These qualifiers provide contextual information about factors that may have influenced the result. In the AQS data format, qualifiers are listed in 10 qualifier fields. A sample may have more than one qualifier. Descriptions of the AQS qualifier codes are available from the EPA at https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.html.  
 
-<br> __Recommended steps__  
+
+<br> __Recommended steps__ 
+
+1. Filter data to view samples with Qualifier codes
+1. Evaluate whether any of the qualified data will unduly influence your analysis. For example, you may want to remove samples influenced by unique events. 
+1. When removing qualified data, maintain a copy of the original data set and document what values have been removed. In some cases, you may want to run your analysis with and without the qualified values to characterize the influence of the qualified data on the results. 
+
 
 <br> __Sample `R` script__ 
 
 <br> __Contributors__    
 
-> Not me
+> Cassie McMahon
 
 <br> __References__    
 
@@ -214,18 +223,24 @@ __Description__
 ## Duplicate observations {#dups}
 
 __Description__  
-Large monitoring data sets often contain a few instances when multiple observations occur over the same time period at the same site. When multiples observations do occur they tend to be identified by a unique monitor POC (parameter occurrence code) or by a qualifier describing why the second observation was recorded (e.g. a duplicate for quality control). 
+Large monitoring data sets often contain instances where multiple observations from a monitor exist for the same time period. When multiples observations do occur they tend to be identified by _[a unique monitor POC (parameter occurrence code ]_ or by a qualifier describing why the second observation was recorded (e.g. a duplicate for quality control). 
 
 <br> __Recommended steps__  
 
 1. Identify duplicate observations.
-1. If both values are detected, calculate the mean of the duplicates.  
-1. If values are identical, use the observation with a lower detection limit.  
+1. Treatment of a duplicate observation will depend on the project.
+    - For criteria pollutant design values, treatment of duplicate samples is defined for each pollutant in the [Appendices of 40 CFR 50](https://www.ecfr.gov/cgi-bin/text-idx?tpl=/ecfrbrowse/Title40/40cfr50_main_02.tpl).
+    - For air toxics, treatment of duplicate values will depend on the analysis. In some cases you may want to average the results. In others, you may want to take the maximum value.
+1. If you identify records that are completely duplicated (same date, same site, same POC, same result, same MDL), delete these records prior to completing analyses.  
+1. For automated annual summaries, use the following hierarchy to remove duplicates:
+    - Calculate the mean concentration of all non-censored observations.
+    - If all observations are censored, select the observation with the lowest detection limit.
+    - If all observations are censored and the detection limits are equal, select a single observation.  
 
-<br> __Why not keep them all?__
-If more data is more better, why not keep both values? 
+  
+<br> __Why not keep all the data?__
 
-Leaving both observations in the data set is likely to bias calculated summary statistics. For example, consider a scenario where two monitors were operating on a site during the winter months, but only one monitor was operating the rest of the year. If we were to calculate the annual average for this site using all the observations, the mean would be biased by having twice as many observations from the winter months. By limiting the number of observations to 1 per day, the weighting of the seasons will be balanced. 
+Leaving both observations in the data set is likely to bias calculated summary statistics. For example, consider a site that starts with two monitors operating during the winter months, but after one malfunctions, the site is left with one monitor operating for the remainder of the year. If we were to calculate the annual average for this site, the mean would be biased by having twice as many observations during the winter months. By limiting the number of observations to 1 per day, we can remove the bias due to the extra winter observations. 
 
 
 <br> __Sample `R` script__  
@@ -238,7 +253,8 @@ Click the button below to view a step by step example of the methods above.
 ```{r echo=F, message=F, warning=F}  
 library(knitr)
 library(DT)
-#write.csv(select(ungroup(data_bk), -Unique, -Key, -Duplicate)[1:10, ], row.names = F)
+
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
 ```
 
 <br> Load the sample monitoring data.
@@ -256,7 +272,10 @@ aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
 271231003,1,12101,"2004-02-09",0.02,NA,0.06,"Aluminum","7429-90-5"
 271231003,1,12101,"2004-02-15",0.07,NA,0.06,"Aluminum","7429-90-5"
 271231003,1,12101,"2004-02-21",0.03,NA,0.06,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-21",0.02,NA,0.05,"Aluminum","7429-90-5"
+271231003,1,12101,"2004-02-27",0.04,NA,0.06,"Aluminum","7429-90-5"
 271231003,1,12101,"2004-02-27",0.21,NA,0.06,"Aluminum","7429-90-5"
+271377001,1,12101,"2007-09-21",0.18,NA,0.04,"Aluminum","7429-90-5"
 271377001,1,12101,"2007-09-21",0.14,NA,0.04,"Aluminum","7429-90-5"
 271377001,1,12101,"2007-09-21",0.14,NA,0.04,"Aluminum","7429-90-5"
 ', stringsAsFactor = F)
@@ -267,15 +286,27 @@ aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
 #kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(data, options = dt_options, rownames = FALSE)
 ```
+ 
+ 
+<br> Delete rows of data that are exact duplicates.
+```{r, eval=T, message=F, warning=F}
+
+# Check for exact duplicate rows
+dup_rows <- data[duplicated(data), ]
+
+# Drop the exact duplicates
+data    <- data[!duplicated(data), ]
+
+```
   
   
-<br> Add a unique column identifier to each observation.
+<br> Add a unique column ID to each site/poc/param-code/date combination.
 ```{r, eval=T, message=F, warning=F}
 
 # Add unique key to each row
 data$key <- 1:nrow(data)
 
-# Create s unique ID for each site/poc/param code/day combination
+# Create a unique ID for each site/poc/param-code/date combination
 data$unique_sample_id <- paste(data$aqs_id, data$poc, data$param_code, data$date, sep = "_")
 ```
   
@@ -303,12 +334,22 @@ datatable(head(dupes), options = dt_options, rownames = FALSE)
 
 <br> If duplicates are found, use the following hierarchy to remove duplicates:
   
-1. Calculate the mean concentration of all detected observations.
-1. If no observations are detected, select the observation with the lower detection limit.
-1. If no obsercations are detected and the detection limits are all equal, select a single observation.  
-
+1. Calculate the mean concentration of all non-censored observations.
+1. If all observations are censored, select the observation with the lowest detection limit.
+1. If all observations are censored and the detection limits are equal, select a single observation.
     
 ```{r, eval=T, message=F, warning=F}
+
+
+# Replace censored observations with NA
+dupes <- dupes %>% mutate(conc = ifelse(conc >= md_limit, conc, NA))
+
+# Calculate the mean of non-censored observations
+dupes <- group_by(dupes, unique_sample_id) %>% 
+         mutate(conc = mean(conc, na.rm = T))
+
+
+# Arrange by concentration and detection limit, then select the first observation
 dupes <- group_by(dupes, unique_sample_id) %>% 
          arrange(desc(conc), md_limit) %>% 
          filter(key == key[1])
@@ -323,7 +364,8 @@ data <- rbind(data, dupes)
 
 <br> _Table: The new cleaner data_  
 ```{r, eval=T, echo=F, message=F, warning=F, fig.cap ="Final data set with 1 duplicate removed."}
-datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)
+
+datatable(select(data, -key, -duplicate), options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)
 
 # Code folding reference: Reference: https://stackoverflow.com/questions/37755037/how-to-add-code-folding-to-output-chunks-in-rmarkdown-html-documents/37839683#37839683
 
@@ -333,9 +375,9 @@ datatable(data, options = list(scrollX = T, autoWidth = T, searching = F, orderi
 
 <br> __Contributors__   
 
-> Dorian, Mr. Kitty
+> Dorian Kvale, Cassie McMahon 
 
 
 
-<br> [^ Back to top](#missing)
+<br> [Back to top](#missing)
 
