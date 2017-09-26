@@ -222,7 +222,8 @@ Valid sample results may have data qualifiers. These qualifiers provide contextu
 
 __Description__  
 
-Large monitoring data sets often contain instances where multiple observations from a monitor exist for the same time period. When multiples observations do occur they tend to be identified by _[a unique monitor POC (parameter occurrence code ]_ or by a qualifier describing why the second observation was recorded (e.g. a duplicate for quality control). 
+Large monitoring data sets often contain multiple observations from the same monitor for the same time period. When multiple observations do occur they tend to be identified by or by a qualifier describing why the second observation was recorded (e.g. a duplicate for quality control). The treatment of these duplicate values will depend on the analysis. 
+
 
 <br> __Recommended steps__  
 
