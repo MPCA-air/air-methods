@@ -32,7 +32,7 @@ Estimating below detection values (what not to do) [Kristie]:
 
 ## Procedure for calculating method detection limits
 
-- Prior to 2017, the lab calculated detection limits according to the procedures defined in 40 CFR Appendix B to Part 136 - Definition and Procedure for the determination of Method Detection Limit, (https://www.gpo.gov/fdsys/granule/CFR-2011-title40-vol23/CFR-2011-title40-vol23-part136-appB/content-detail.html) 
+- Prior to 2017, the lab calculated detection limits according to the procedures defined in 40 CFR Appendix B to Part 136 - [Definition and Procedure for the determination of Method Detection Limit](https://www.gpo.gov/fdsys/granule/CFR-2011-title40-vol23/CFR-2011-title40-vol23-part136-appB/content-detail.html) 
 - Begining in 2017, the lab adopted a modified method for calcuating the method detection limit. Known as the "Method Update Rule(MUR)", this method accounts for media background contamination when establishing the MDL. This method is defined in the [NATTS TAD (October 2016)](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjJ3Y6AyfzVAhVL2IMKHXe_DI0QFggoMAA&url=https%3A%2F%2Fwww3.epa.gov%2Fttnamti1%2Ffiles%2Fambient%2Fairtox%2FNATTS%2520TAD%2520Revision%25203_FINAL%2520October%25202016.pdf&usg=AFQjCNGVu-9E0zS1-Gjkt_5sULzOPNeymg). EPA has proposed to revise 40 CFR Appendix B to Part 136 to reflect this methodology. 
 - Both methods require preparing and analyzing 7 matrix spikes and 7 method blanks. Samples should be prepped and analyzed over the course of at least 3 seperate batches/days. 
     - Calculate the MDL of spiked samples (MDL_sp)

@@ -8,14 +8,14 @@ The summary methods described in this chapter inlcude:
 
 \@ref(boots)       __Bootstrapping__  
 \@ref(below)       __Below the detection limit__  
-\@ref(confidence)  __Confidence intervals__ 
+\@ref(confidence)  __Confidence intervals__  
 \@ref(incomplete)  __Annual summaries for incomplete data__  
 \@ref(health)      __Comparison of data to inhalation health benchmarks__  
 
 
-__Notes__
+<br>
 
-Means 
+__Notes__
 
 When to use a arithmetic or geometric mean:
 
