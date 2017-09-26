@@ -45,7 +45,7 @@ In general, these rules apply:
 <br> __Recommended steps__
 
 1. Based on the monitoring schedule, record the total _expected samples_ for each year and quarter.
-    - Air toxics monitors follow a national schedule provided by the EPA - (Air Toxics Monitoring Schedule)[google.com].
+    - Air toxics monitors follow a fixed sampling schedule provided by the EPA. (See the [Air Toxics Monitoring Calendar](https://www3.epa.gov/ttn/amtic/calendar.html))
 1. Count the number of _valid samples_ for each year and quarter.
 1. Divide the number of _valid samples_ by the number of _expected samples_.
 1. Count the number of unique values for each year.
@@ -90,11 +90,11 @@ datatable(head(data, 10), options = dt_options)
 
 __Step 1:__ Find the expected number of samples.
 
-The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. It is recommended to consult the lab for the exact number, however, if the monitor submits data to EPA's Sir Quality System, the monitor is required to follow the (Air Toxics Monitoring Schedule)[google.com].
+Monitors in EPA's Air Quality System are required to follow the [Air Toxics Monitoring Calendar](https://www3.epa.gov/ttn/amtic/calendar.html). The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. If you are uncertain about the sampling schedule for your data, consult the lab to confirm the expected number of samples. 
 
 ```{r message=F, eval=F}
 
-# Load the air toxics monitoring schedule
+# Load EPA's air toxics monitoring schedule
 schedule <- read_csv()
 
 schedule <- schedule %>% mutate(cal_quarter = quarter(Date))
