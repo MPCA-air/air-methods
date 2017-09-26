@@ -7,14 +7,19 @@ knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/fr
 The summary methods described in this chapter inlcude:  
 
 - \@ref(boots)       __Bootstrapping__  
-- \@ref(confidence)  __Confidence intervals__  
+- \@ref(below)       __Below the detection limit__  
+- \@ref(confidence)  __Confidence intervals__ 
+- \@ref(incomplete)  __Annual summaries for incomplete data__  
+- \@ref(health)  __Comparison of data to inhalation health benchmarks__  
+
 
 __Notes__
 
 Means 
 
-- When to use arithmetic / geometric
-  -  Use an arithmetic mean when your data are normal and there are less than 5% below detection limit values per year/analyte/site [I made up the 5%, but there is an EPA document looking at the impacts of BDL data we can cite and incorporate. I’ll look for it] generic test for normality AND 5% BDL.
+When to use a arithmetic or geometric mean:
+
+  -  Use an arithmetic mean when your data are normal and there are less than 5% below detection limit values per year/analyte/site [Kristie made up the 5%, but there is an EPA document looking at the impacts of BDL data. Will cite and incorporate.].
   -  For non-automated scripts: Use a geometric mean if your data are log-normally distributed and there are less than 5% below detection limit values per year/analyte/site.
 
 
@@ -52,7 +57,7 @@ kable(df)
 
 Bootstrap function
 
-We currently use the `EnvStats` package to generate our summary values. It has built in functions to accunt for non-detect data and allows for different distributions. However, if you're not dealing with non-detects you can use a simple loop to boot things yourself.
+We currently use the `EnvStats` package to generate our summary values. It has built in functions to account for non-detect data and allows for different distributions. However, if you're not dealing with non-detects you can use a simple loop to boot things yourself.
 
 
 Before you start you'll want to set the random number generator to ensure you'll be able to reproduce your results. I'll use `#27` below.
@@ -113,7 +118,7 @@ quantile(booted_10pct, c(0.025, 0.5, 0.975), na.rm=T)
 
 Automate
 
-To finish up, throw these steps into your personal `boot` function, and then run it on each site using `group_by`.
+To finish, put these steps into a `boot` function and run it on each site by using `group_by`.
 ```{r message=F}
 
 # Create boot function
@@ -130,11 +135,11 @@ list(quantile(booted_10pct, c(alpha, 0.5, 1-alpha), na.rm=T))
 
 # Use `group_by` to send data for each site to your boot function
 conc_summary <- group_by(df, AQS_ID) %>% 
-mutate(boot_results = boot_low_Conc(Conc, Conc_pct=0.10, conf_int=0.95)) %>%
-summarize(Conc_10pct  =  quantile(Conc, 0.10, na.rm=T)[[1]],
-Low_CL95_conc   = unlist(boot_results[1])[[1]], 
-Boot_conc       = unlist(boot_results[1])[[2]], 
-Upper_CL95_conc = unlist(boot_results[1])[[3]])  
+                mutate(boot_results   = boot_low_Conc(Conc, Conc_pct=0.10, conf_int=0.95)) %>%
+                summarize(Conc_10pct  =  quantile(Conc, 0.10, na.rm=T)[[1]],
+                Low_CL95_conc         = unlist(boot_results[1])[[1]], 
+                Boot_conc             = unlist(boot_results[1])[[2]], 
+                Upper_CL95_conc       = unlist(boot_results[1])[[3]])  
 ```
 
 
@@ -143,6 +148,109 @@ Results
 The booted confidence limits `r kable(conc_summary)`
 
 
+## Below the detection limit {#below}
+
+The annual mean or upper confidence limit is considered below the method detection limit when one of the following conditions is true:
+
+- The number of censored values is greater than 80%.
+    - This is based on _Cox 2006_ and MPCA simulations (cite work and results)[www.google.com].
+- The annual 95% upper confidence limit is below the method detection limit. 
+
+
 
 ## Confidence intervals (Derek) {#confidence}
 
+```{r}
+# Data must have names"AQS_ID", "POC", "Param_Code", "Date", "Concentration", "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS"
+# Data must also have column named "Censored" indicating whether Concentration < MDL
+# Data must also have column "ID" with grouping criteria. ID = Site + Pollutant + Year if data has multiple sites, pollutants, and years. If data has only one site, pollutant, or year, then those elements do not need to be included in ID.
+
+
+library(dplyr)
+library(EnvStats)
+data = read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
+names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration",
+                       "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
+data = data %>% filter(AQS_ID == 270370020) %>% mutate(ID = paste(Pollutant, Year), Censored = Concentration < MDL)
+
+UCL_95 = function(data, Boot_Repeats = 1000, seed = 2017) {
+
+  library(dplyr)
+  library(EnvStats)
+  
+MLE_est <- function(data){
+    
+    results = data$Concentration
+    censored = data$Censored
+    n = sum(!is.na(data$Concentration))
+    
+    MLE_means = NULL
+    
+    
+    if ( (n < 0.75 * length(results)) | ((sum(!censored, na.rm = T) ) < 0.2 * n) | ( length(unique(results[!is.na(results) & !censored] ) ) < 2 ) ) {
+      MLE_means = NA
+    } else
+    {
+      
+      random.rows = NULL  
+      random.rows <- sample(which(!is.na(censored) & (!censored) & !duplicated(results) ), 2, replace = FALSE)
+      random.rows = c(random.rows, sample(which(!is.na(censored)), n-2, replace = TRUE))
+      
+      
+      if (sum(censored[random.rows], na.rm = T) < 1){
+        MLE_means = mean(results[random.rows])  
+      }
+      
+      else {
+        MLE_means = exp (elnormCensored(results[random.rows] + 1e-16,
+                                        censored[random.rows],
+                                        method = "mle", 
+                                        ci = F 
+        )$parameters[[1]])
+      }
+      
+    }
+    
+    
+    
+    
+    return(MLE_means)
+}
+
+set.seed(seed)
+
+data = data %>% group_by(ID) %>% mutate(n = sum(!is.na(Concentration) ), `% Censored` = sum(Censored, na.rm = T) * 100 / n)
+
+site_means = data %>% group_by(ID) %>% summarise(Mean = ifelse( mean(n) < 0.75 * length(Concentration) | mean (`% Censored`) > 80 | length(unique(Concentration[!is.na(Concentration) & !Censored] ) ) < 3, NA, ifelse (any(Censored, na.rm = T), exp (elnormCensored(Concentration + 1e-16, Censored, method = "mle", ci = F)$parameters[[1]]), mean(Concentration, na.rm = T) ) ) )
+
+Bootstrap_means = replicate(Boot_Repeats, (by(data, data$ID, MLE_est) ) )
+
+UCL = apply(Bootstrap_means, 1, function(x) sort(x)[ceiling(0.975 * Boot_Repeats)])
+
+UCL = cbind(site_means, UCL)
+
+rownames(UCL) = NULL
+
+return(UCL)
+
+}
+
+UCLs = UCL_95(data)
+```
+## Annual summaries for incomplete data {#incomplete}
+
+## Comparison of data to inhalation health benchmarks  (Kristie) {#health}
+
+The annual 95% upper confidence limit is compared to chronic inhalation health benchmarks according to the MPCA/MDH hierarchy for inhalation health benchmarks information sources.The ways this is done is different for annual measured data reports (The Air Toxics Data Explorer) or if the comparison is used in a cumulative analysis (cumulative AERA) to inform air permitting or environmental review.
+
+- Treatment of data for Annual Comparisons of Measured Data to IHBs
+    - Chronic values are compared to UCL-95 values that reflect data that meet completeness and non-censored rules discussed in this document. Refer to where the UCL-95s come from in this chapter
+    - Acute health benchmarks are intended for comparison with an hourly max value.Since air toxics measurements are 24 hour integrated samples, the hourly maxima is estimated by multiplying the second highest value by 10. The justification for this estimation stemmed from an analysis comparing hourly gas (NO2) and particle (PM2.5) measurements to 24hour means. (reference this work?) Refer to where the hourly max estimates come from in this chapter.
+-  Treatment of measured data for use in a cumulative AERA to inform permitting or environmental review
+    - A cumulative AERA requires risks summed across pollutants. Since not all pollutants are measured at each monitoring site, means of sites are estimated based on population density. An estimation based on population density is based in the assumption that pollution sources are greater near greater numbers of people. Means are calculated for mid-density sites, and rural sites. Facilities within urban areas are provided risk estimates at hte closest monitor with all pollutants measured.(reference guidance here and do not repeat the guidance that is already written down)
+    - Based somewhat on criteria pollutant guidance for design values, the cumualtive risk estimates determined from monitoring data for cumulative AERAs are the means of the most recent three years of monitored data.
+    - The following scripts estimate 3 year means for measurements of all pollutant data, and compare to inhalation health benchmarks. A mid-script product is a table of the IHBs used by the agency in tabular form, which can be knit individually into a pdf document.
+(pipe dreams, but I know I can make it real!)
+```{r}
+#pull all the data
+```

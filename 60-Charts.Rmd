@@ -1,5 +1,9 @@
 # Charts 
 
+![What our code looks like](http://imgs.xkcd.com/comics/code_quality.png){width="80%"}
+
+
+
 ## Boxplots (Dorian)
 
 Dividing by zero is an amazing super power. Unfortunately for you your computer does not have this power. Making a log boxplot with data containing zeros or negative values will result in your computer melting itself. It will never forgive you.

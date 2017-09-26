@@ -1,52 +1,166 @@
 # Completeness checks (Dorian & Cassie)
 
 
-We should check for data completeness before generating summaries for sampling data. 
+Checking for data completeness before generating summaries ensures that results will be comparable from one year to the next. Without completeness checks, changes in the seasonal coverage from year to year may create the illusion of increasing or decreasing trends. 
+
 
 Completeness checks inlcude tests for:  
-  
-- Seasonal completeness (75%)
-    - This is an EPA guideline for criteria pollutants and has been applied to air toxics (citation).
-- 20% values above detection
-    - This is based on _Cox 2006_ and MPCA simulations (cite work and results)
-- Label for criteria not met
-    - “Criteria to calculate annual mean not met.”
-- More than 3 unique values (cite this)
-    - 3 per year? 3 per quarter?
-- Minimum samples.
 
-What can we do for incomplete seasons or years: Compare to acute? Summarize based on number of values above detection?   (Cassie did this)
+`Calendar quarter completeness` Number of samples required for a season or quarter.  
 
+`Annual completeness` Number of samples required for a year.  
 
-<br> __Annual reporting rules__
+`Unique values` Number of unique values required.
 
 
 ## Completeness checks  {#complete}
 
-Methods for performing completeness checks...
 
+__Description__  
+
+This section describes completeness guidelines and methods for performing completeness checks.
+
+
+__<i>Air toxic</i> reporting guidelines based on MPCA and EPA guidelines__
+
+
+Annual results are considered _incomplete_ if any of the following conditions are not met:
+
+- `Annual completeness` 75% or more of expected samples collected (rounded down)
+- `Calendar quarter completeness` 75% or more of expected samples collected (rounded down)
+- `Unique values` 2 or more unique values
+
+<br>
+
+__<i>Criteria pollutant</i> reporting guidelines__
+
+Completeness rules for criteria pollutant design values are defined in the [Appendices of 40 CFR 50](https://www.ecfr.gov/cgi-bin/text-idx?tpl=/ecfrbrowse/Title40/40cfr50_main_02.tpl).
+
+In general, these rules apply:
+
+- `Annual completeness` 75% or more of samples collected
+- `Calendar quarter completeness` 75% or more of samples collected
+
+
+<br> __Recommended steps__
+
+1. Based on the monitoring schedule, record the total _expected samples_ for each year and quarter.
+1. Count the number of _valid samples_ for each year and quarter.
+1. Divide the number of _valid samples_ by the number of _expected samples_.
+1. Count the number of unique values for each year.
+1. Mark annual results as _incomplete_ if they do not fulfill one of the completeness checks.
+
+<br> __Example `R` script__ 
+
+
+Click the button below to view a step by step example of the methods above.
+
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+
+
+
+```{r eval=T, message=F, warning=F, echo=F}
+library(knitr)
+library(DT)
+library(readr)
+
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+
+#names(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
+
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
+
+```
+
+<br>
 Packages
 ```{r message=F}
 library(tidyverse)
-
 ```
 
-Our example data is organized by monitoring site and date. Here's a sample.
 
-```{r kable, message=F, echo=F, fig.cap = "Sample data table."}
-library(knitr)
+Our example data is organized by monitoring site and date.
+```{r message=F, echo=F, fig.cap = "Sample data table."}
 
-df <- read_csv(
-'"AQS_ID","Date","Conc"
-270535501,"2009-07-30",0.00148
-270535501,"2009-09-30",0.00064
-270535501,"2009-11-30",0.34256
-270535501,"2009-12-30",0.00064
-270535502,"2009-03-30",0.26219
-270535502,"2009-07-30",0.01113
-270535502,"2009-09-30",0.00044
-270535502,"2009-11-30",0.00127
-270535502,"2009-12-30",0.00113')
-
-kable(df)
+datatable(head(data, 10), options = dt_options)
 ```
+
+<br>
+
+__Step 1:__ Record the expected number of samples.
+
+The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. It is recommended to consult the lab for the exact number, however, if that option is unavailable the following assumptions can be used. 
+
+`Annual expected samples`  60  
+`Calender quarter expected samples` 15
+
+<br>
+
+__Step 2:__ Count number of valid samples.
+```{r message=F}
+
+library(lubridate)
+
+# Assign each date to a calendar quarter
+data <- data %>% mutate(cal_quarter = quarter(Date))
+
+# Count the number of sampling dates for each quarter and year.
+data <- data %>% 
+        group_by(AQSID, POC, Pollutant, CAS, Year, cal_quarter) %>%
+        mutate(valid_quarter_samples = length(unique(Date))) %>%
+        group_by(AQSID, POC, Pollutant, CAS, Year) %>%
+        mutate(valid_annual_samples = length(unique(Date))) 
+        
+```
+
+
+<br>
+
+__Step 3:__ Divide the number of valid samples by the number of expected samples.
+```{r message=F}
+
+data <- data %>% 
+        group_by(AQSID, POC, Pollutant, CAS, Year, cal_quarter) %>%
+        mutate(pct_quarter_samples = valid_quarter_samples / 15) %>%
+        group_by(AQSID, POC, Pollutant, CAS, Year) %>%
+        mutate(pct_annual_samples = valid_annual_samples / 60) 
+        
+```
+
+<br>
+
+__Step 4:__ Count the number of unique values for each year.
+```{r message=F}
+
+data <- data %>% 
+        group_by(AQSID, POC, Pollutant, CAS, Year) %>%
+        mutate(unique_values = length(unique(Concentration)))
+        
+```
+
+<br>
+
+__Step 5:__ Mark results as incomplete if they do not fulfill one of the completeness checks.
+```{r message=F}
+
+# Set incomplete to zero if any of completeness checks are not met
+data <- data %>% 
+        mutate(incomplete = sum(c(pct_quarter_samples < 0.75, 
+                                  pct_annual_samples < 0.75,
+                                  unique_values < 2)) > 0)
+        
+```
+
+</div>
+
+
+<br> __Contributors__  
+
+> Dorian Kvale, Cassie McMahon
+
+
+<br> __References__    
+
+[Appendices of 40 CFR 50](https://www.ecfr.gov/cgi-bin/text-idx?tpl=/ecfrbrowse/Title40/40cfr50_main_02.tpl)  
+
+
