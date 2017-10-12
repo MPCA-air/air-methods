@@ -73,7 +73,7 @@ library(tidyverse)
 library(stringr)
 library(RcppRoll)
 library(lubridate)
-library(car)
+
 
 ##need to confirm that this data set has sequential repeats, some high values and at least 10 dates with numbers
 data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
@@ -95,7 +95,7 @@ datatable(head(data, 10), options = dt_options)
 </div>
 _First its' always a good idea to look at the data
 
-```{r, eval=T, echo=F, message=F, warning=F}
+```{r, eval=F, echo=F, message=F, warning=F}
 library(shiny)
 pollutants <- unique(data$pollutant)
 sites <- unique(data$aqs_id)
@@ -154,6 +154,8 @@ Click the button below to view a step by step example of the method above.
 <br>
 
 ```{r echo=T, message=F, warning=F}  
+
+library(car)
 
 data$conc <- as.numeric(data$conc)
 data$aqs_id <- as.character(data$aqs_id)
@@ -275,7 +277,7 @@ datatable(head(warnings_table, 10), options = dt_options, rownames = FALSE)
 <br> __References__    
 [USEPA Technical Support Document for the Nation Air Toxics Trends Sites](https://www3.epa.gov/ttnamti1/files/ambient/airtox/NATTS%20TAD%20Revision%203_FINAL%20October%202016.pdf)
 
-[European Union Guide toe Data Validation](https://webgate.ec.europa.eu/fpfis/mwikis/essvalidserv/images/a/ad/PRACTICAL_GUIDE_TO_DATA_VALIDATION.pdf)
+[European Union Guide to Data Validation](https://webgate.ec.europa.eu/fpfis/mwikis/essvalidserv/images/a/ad/PRACTICAL_GUIDE_TO_DATA_VALIDATION.pdf)
 
 [US EPA Guidance on Data Verification and Data Validation] (https://www.epa.gov/sites/production/files/2015-06/documents/g8-final.pdf)
 

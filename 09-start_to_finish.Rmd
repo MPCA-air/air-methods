@@ -1,0 +1,45 @@
+# Start to finish (all hands on deck) {#start-finish}
+
+
+To pull it all together we created some R packages to streamline the cleaning and analysis steps. 
+
+
+> `airclean`   Cleaning and analysis functions for air monitoring data. 
+>
+> `airplot`    Plotting functions for air monitoring data.
+>
+> `airrisk`    Inhalation health benchmarks for air toxics.
+
+
+The script below shows an example workflow that starts with a raw data set from the lab, walks through each of the analysis steps outlined in the previous sections, and finishes by producing a summary PDF report. 
+
+<br> __Sample `R` script__  
+```{r, eval=F}
+
+
+#1. Data cleaning
+
+#2. Data Validation
+
+#3. Collocated monitors
+
+#4. Detection limits
+
+#5. Completeness checks
+
+#6. Summary statistics
+
+#7. Site Comparisons
+
+
+
+```
+
+
+<br> __Contributors__   
+
+> Dorian Kvale, Cassie McMahon 
+
+
+<br> [Back to top](#start-finish)
+
