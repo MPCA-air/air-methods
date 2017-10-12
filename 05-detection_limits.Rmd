@@ -114,7 +114,7 @@ knitr::include_graphics("images/detection_boxplot.png")
 ```
 
 <br> Shiny code  
-```{r, eval=F, echo=T, message=F, warning=F}
+```{r, eval=FALSE, echo=T, message=F, warning=F}
 pollutants <- unique(data$pollutant)
 years <- unique(data$year)
 

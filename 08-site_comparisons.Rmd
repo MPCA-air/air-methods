@@ -13,7 +13,9 @@ Steps:
 
 ## Confidence intervals 
 
-If data is not normal, use bootstraping to generate means for each site and take the differences of those means. If the lower bound of the 95% confidence interval for those differences is greater than zero, or the upper bound is less than zero, then the site means are significantly different. You cannot just genrate confidence intervals for the means individually and see if they overlap since the joint probability of both means being in the same region is lower than the marginal probabilities of each mean being in the region. (Will add code later.)
+If data is not normal, use bootstraping to generate means for each site and take the differences of those means. If the lower bound of the 95% confidence interval for those differences is greater than zero, or the upper bound is less than zero, then the site means are significantly different. You cannot just genrate confidence intervals for the means individually and see if they overlap since the joint probability of both means being in the same region is lower than the marginal probabilities of each mean being in the region. It is not effective to do pairwise comparisons due to null data and non-detects. You cannot use an ANOVA test since the data more closely resembles a log-normal distribution than a normal distribution and for a log-normal distribution, the variance is not independent of the mean which means that transforming the data and doing an ANOVA test would bias the confidence interval for the difference.
+
+The script below uses bootstrap sampling to generate 1000 differences in site means which are ordered to create a 95% confidence interval for the difference in means. If the lower bound of the interval is greater than zero, then the second site has a higher mean concentration than the first site. If the upper bound of the confidence interval is less than zero, then the second site has a lower mean concentration than the first site.
 
 ```{r, eval=F}
 # Data must have names"AQS_ID", "POC", "Param_Code", "Date", "Concentration", "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS"
@@ -85,6 +87,10 @@ site_comparisons = function(site1_data, site2_data, Boot_Repeats = 1000, seed = 
   Bootstrap_means1 = replicate(Boot_Repeats, (by(site1_data, site1_data$ID, MLE_est) ) )
   Bootstrap_means2 = replicate(Boot_Repeats, (by(site2_data, site2_data$ID, MLE_est) ) )
   Bootstrap_diffs = Bootstrap_means2 - Bootstrap_means1
+  if(is.vector(Bootstrap_diffs)) {
+    Bootstrap_diffs = t(data.frame(Bootstrap_diffs))
+    rownames(Bootstrap_diffs) = names(Bootstrap_means1)[1]
+    }
   
   CI_lower = apply(Bootstrap_diffs, 1, function(x) sort(x)[floor(0.025 * Boot_Repeats)])
   CI_upper = apply(Bootstrap_diffs, 1, function(x) sort(x)[ceiling(0.975 * Boot_Repeats)])

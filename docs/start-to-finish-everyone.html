@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="additional-resources-kristie.html">
-
+<link rel="prev" href="site-comparisons-derek-cassie.html">
+<link rel="next" href="charts.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -45,11 +45,6 @@
 
 
 
-<script src="libs/htmlwidgets-0.9/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -115,6 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="data-validation-kristie.html"><a href="data-validation-kristie.html"><i class="fa fa-check"></i><b>2</b> Data validation (Kristie)</a><ul>
 <li class="chapter" data-level="2.1" data-path="data-validation-kristie.html"><a href="data-validation-kristie.html#leaks"><i class="fa fa-check"></i><b>2.1</b> Identifying Instrument drift or leaks in a system.</a></li>
 <li class="chapter" data-level="2.2" data-path="data-validation-kristie.html"><a href="data-validation-kristie.html#outs"><i class="fa fa-check"></i><b>2.2</b> Identify exceptional and extreme values aka outliers.</a></li>
+<li class="chapter" data-level="2.3" data-path="data-validation-kristie.html"><a href="data-validation-kristie.html#sticky"><i class="fa fa-check"></i><b>2.3</b> Identify sequential repeats aka “sticky” numbers</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="collocated-monitors-derek.html"><a href="collocated-monitors-derek.html"><i class="fa fa-check"></i><b>3</b> Collocated monitors (Derek)</a><ul>
 <li class="chapter" data-level="3.1" data-path="collocated-monitors-derek.html"><a href="collocated-monitors-derek.html#evalpocs"><i class="fa fa-check"></i><b>3.1</b> Evaluate collocated air monitors (POCs)</a></li>
@@ -145,7 +141,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2" data-path="site-comparisons-derek-cassie.html"><a href="site-comparisons-derek-cassie.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>7.2</b> Tools to visualize data</a></li>
 <li class="chapter" data-level="7.3" data-path="site-comparisons-derek-cassie.html"><a href="site-comparisons-derek-cassie.html#correlation-matrices-cassie"><i class="fa fa-check"></i><b>7.3</b> Correlation matrices (Cassie)</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>8</b> Start to finish (all hands on deck)</a></li>
+<li class="chapter" data-level="8" data-path="start-to-finish-everyone.html"><a href="start-to-finish-everyone.html"><i class="fa fa-check"></i><b>8</b> Start to finish (everyone)</a></li>
 <li class="chapter" data-level="9" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>9</b> Charts</a><ul>
 <li class="chapter" data-level="9.1" data-path="charts.html"><a href="charts.html#boxplots-dorian"><i class="fa fa-check"></i><b>9.1</b> Boxplots (Dorian)</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="charts.html"><a href="charts.html#log-boxplot"><i class="fa fa-check"></i><b>9.1.1</b> Log boxplot</a></li>
@@ -154,18 +150,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.2" data-path="charts.html"><a href="charts.html#calendar-plots-cassie"><i class="fa fa-check"></i><b>9.2</b> Calendar plots (Cassie)</a></li>
 <li class="chapter" data-level="9.3" data-path="charts.html"><a href="charts.html#colors-dorian"><i class="fa fa-check"></i><b>9.3</b> Colors (Dorian)</a></li>
 <li class="chapter" data-level="9.4" data-path="charts.html"><a href="charts.html#openair-package-derek-cassie"><i class="fa fa-check"></i><b>9.4</b> <em>openair</em> package (Derek &amp; Cassie)</a></li>
-<li class="chapter" data-level="9.5" data-path="charts.html"><a href="charts.html#pollution-roses-and-love-poems-derek"><i class="fa fa-check"></i><b>9.5</b> Pollution roses and love poems (Derek)</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>10</b> Time series</a><ul>
-<li class="chapter" data-level="10.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>10.1</b> Seasonality</a></li>
-<li class="chapter" data-level="10.2" data-path="time-series.html"><a href="time-series.html#changepoints-before-after-tests"><i class="fa fa-check"></i><b>10.2</b> Changepoints (before &amp; after tests)</a></li>
+<li class="chapter" data-level="10" data-path="generates-pollution-roses-for-all-air-toxics-for-a-site-and-saves-them-in-a-folder-defined-by-output-path.html"><a href="generates-pollution-roses-for-all-air-toxics-for-a-site-and-saves-them-in-a-folder-defined-by-output-path.html"><i class="fa fa-check"></i><b>10</b> Generates pollution roses for all air toxics for a site and saves them in a folder defined by output_path</a><ul>
+<li class="chapter" data-level="10.0.1" data-path="generates-pollution-roses-for-all-air-toxics-for-a-site-and-saves-them-in-a-folder-defined-by-output-path.html"><a href="generates-pollution-roses-for-all-air-toxics-for-a-site-and-saves-them-in-a-folder-defined-by-output-path.html#pollution-roses-and-love-poems-derek"><i class="fa fa-check"></i><b>10.0.1</b> Pollution roses and love poems (Derek)</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="maps-kristie.html"><a href="maps-kristie.html"><i class="fa fa-check"></i><b>11</b> Maps (Kristie)</a><ul>
-<li class="chapter" data-level="11.1" data-path="maps-kristie.html"><a href="maps-kristie.html#kriging"><i class="fa fa-check"></i><b>11.1</b> Kriging</a></li>
-<li class="chapter" data-level="11.2" data-path="maps-kristie.html"><a href="maps-kristie.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>11.2</b> Spatial averaging and aggregation</a></li>
-<li class="chapter" data-level="11.3" data-path="maps-kristie.html"><a href="maps-kristie.html#creating-shapefiles-in-r-adn-joining-to-ej-areas"><i class="fa fa-check"></i><b>11.3</b> Creating shapefiles in R adn joining to EJ areas</a></li>
+<li class="chapter" data-level="11" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>11</b> Time series</a><ul>
+<li class="chapter" data-level="11.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>11.1</b> Seasonality</a></li>
+<li class="chapter" data-level="11.2" data-path="time-series.html"><a href="time-series.html#changepoints-before-after-tests"><i class="fa fa-check"></i><b>11.2</b> Changepoints (before &amp; after tests)</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="additional-resources-kristie.html"><a href="additional-resources-kristie.html"><i class="fa fa-check"></i><b>12</b> Additional resources (Kristie)</a></li>
+<li class="chapter" data-level="12" data-path="maps-kristie.html"><a href="maps-kristie.html"><i class="fa fa-check"></i><b>12</b> Maps (Kristie)</a><ul>
+<li class="chapter" data-level="12.1" data-path="maps-kristie.html"><a href="maps-kristie.html#kriging"><i class="fa fa-check"></i><b>12.1</b> Kriging</a></li>
+<li class="chapter" data-level="12.2" data-path="maps-kristie.html"><a href="maps-kristie.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>12.2</b> Spatial averaging and aggregation</a></li>
+<li class="chapter" data-level="12.3" data-path="maps-kristie.html"><a href="maps-kristie.html#creating-shapefiles-in-r-adn-joining-to-ej-areas"><i class="fa fa-check"></i><b>12.3</b> Creating shapefiles in R adn joining to EJ areas</a></li>
+<li class="chapter" data-level="12.4" data-path="maps-kristie.html"><a href="maps-kristie.html#spatial-join-to-census-tracts-and-then-left_join-to-ej-areas-status"><i class="fa fa-check"></i><b>12.4</b> Spatial join to census tracts and then left_join to EJ areas status</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="additional-resources-kristie.html"><a href="additional-resources-kristie.html"><i class="fa fa-check"></i><b>13</b> Additional resources (Kristie)</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -187,37 +186,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="edit-this-book" class="section level1 unnumbered">
-<h1>Edit this book</h1>
-<p>This guide lives online at GitHub.</p>
-<ul>
-<li><p>To make <em>changes</em> go to <a href="https://github.com/MPCA-air/air-methods">github.com/MPCA-air/air-methods</a> and click <code>[ Fork ]</code>.</p></li>
-<li><p>To make <em>suggestions</em> go to <a href="https://github.com/MPCA-air/air-methods/issues">github.com/MPCA-air/air-methods/issues</a> and click <code>[ New issue ]</code>.</p></li>
-</ul>
-<p>We are using the R <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown">2017</a>)</span> in this book, which was built on top of <em>R-Markdown</em> and <em>knitr</em> <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span>.</p>
-<p>Code folding reference: <a href="https://stackoverflow.com/questions/34784121/interactively-show-hide-code-r-markdown-knitr-report" class="uri">https://stackoverflow.com/questions/34784121/interactively-show-hide-code-r-markdown-knitr-report</a></p>
+<div id="start-to-finish-everyone" class="section level1">
+<h1><span class="header-section-number"></span> Start to finish (everyone)</h1>
+<p>To pull it all together we created four R packages to streamline the cleaning and analysis steps.</p>
+<blockquote>
+<p><code>airclean</code> - Cleaning and analysis functions for air monitoring data.</p>
+<p><code>aircas</code> - CAS # lookup and common pollutant names for hazardous air pollutants.</p>
+<p><code>airplot</code> - Plotting functions for air monitoring data.</p>
+<p><code>airrisk</code> - Inhalation health benchmarks for air toxics.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#1. Data cleaning</span>
 
-<div id="refs" class="references">
-<div>
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
-</div>
-<div>
-<p>———. 2017. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</p>
-</div>
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-R-bookdown">
-<p>Xie, Yihui. 2017. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</p>
-</div>
-<div id="ref-xie2015">
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
-</div>
+<span class="co">#2. Data Validation</span>
+
+<span class="co">#3. Collocated monitors</span>
+
+<span class="co">#4. Detection limits</span>
+
+<span class="co">#5. Completeness checks</span>
+
+<span class="co">#6. Summary statistics</span>
+
+<span class="co">#7. Site Comparisons</span></code></pre></div>
+
 </div>
 <script>
-  $(".btn_code").click(function() {
-    $(this.parentNode).toggleClass("open");
+  $(".toggle").click(function() {
+    $(this).toggleClass("open");
   });
 </script>
             </section>
@@ -225,8 +220,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="additional-resources-kristie.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="site-comparisons-derek-cassie.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="charts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -246,7 +241,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/MPCA-air/air-methods/edit/master/90-edit_document.Rmd",
+"link": "https://github.com/MPCA-air/air-methods/edit/master/09-from_start_to_finish.Rmd",
 "text": "Edit"
 },
 "download": ["air-methods.pdf"],

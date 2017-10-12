@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="additional-resources-kristie.html">
-
+<link rel="prev" href="site-comparisons-derek-cassie.html">
+<link rel="next" href="charts.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -187,33 +187,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="edit-this-book" class="section level1 unnumbered">
-<h1>Edit this book</h1>
-<p>This guide lives online at GitHub.</p>
-<ul>
-<li><p>To make <em>changes</em> go to <a href="https://github.com/MPCA-air/air-methods">github.com/MPCA-air/air-methods</a> and click <code>[ Fork ]</code>.</p></li>
-<li><p>To make <em>suggestions</em> go to <a href="https://github.com/MPCA-air/air-methods/issues">github.com/MPCA-air/air-methods/issues</a> and click <code>[ New issue ]</code>.</p></li>
-</ul>
-<p>We are using the R <strong>bookdown</strong> package <span class="citation">(Xie <a href="#ref-R-bookdown">2017</a>)</span> in this book, which was built on top of <em>R-Markdown</em> and <em>knitr</em> <span class="citation">(Xie <a href="#ref-xie2015">2015</a>)</span>.</p>
-<p>Code folding reference: <a href="https://stackoverflow.com/questions/34784121/interactively-show-hide-code-r-markdown-knitr-report" class="uri">https://stackoverflow.com/questions/34784121/interactively-show-hide-code-r-markdown-knitr-report</a></p>
+<div id="start-finish" class="section level1">
+<h1><span class="header-section-number"></span> Start to finish (all hands on deck)</h1>
+<p>To pull it all together we created some R packages to streamline the cleaning and analysis steps.</p>
+<blockquote>
+<p><code>airclean</code> Cleaning and analysis functions for air monitoring data.</p>
+<p><code>airplot</code> Plotting functions for air monitoring data.</p>
+<p><code>airrisk</code> Inhalation health benchmarks for air toxics.</p>
+</blockquote>
+<p>The script below shows an example workflow that starts with a raw data set from the lab, walks through each of the analysis steps outlined in the previous sections, and finishes by producing a summary PDF report.</p>
+<p><br> <strong>Sample <code>R</code> script</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#1. Data cleaning</span>
 
-<div id="refs" class="references">
-<div>
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
-</div>
-<div>
-<p>———. 2017. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</p>
-</div>
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-R-bookdown">
-<p>Xie, Yihui. 2017. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</p>
-</div>
-<div id="ref-xie2015">
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/" class="uri">http://yihui.name/knitr/</a>.</p>
-</div>
+<span class="co">#2. Data Validation</span>
+
+<span class="co">#3. Collocated monitors</span>
+
+<span class="co">#4. Detection limits</span>
+
+<span class="co">#5. Completeness checks</span>
+
+<span class="co">#6. Summary statistics</span>
+
+<span class="co">#7. Site Comparisons</span></code></pre></div>
+<p><br> <strong>Contributors</strong></p>
+<blockquote>
+<p>Dorian Kvale, Cassie McMahon</p>
+</blockquote>
+<p><br> <a href="start-finish.html#start-finish">Back to top</a></p>
+
 </div>
 <script>
   $(".btn_code").click(function() {
@@ -225,8 +227,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="additional-resources-kristie.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="site-comparisons-derek-cassie.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="charts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -246,7 +248,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/MPCA-air/air-methods/edit/master/90-edit_document.Rmd",
+"link": "https://github.com/MPCA-air/air-methods/edit/master/09-start_to_finish.Rmd",
 "text": "Edit"
 },
 "download": ["air-methods.pdf"],
