@@ -130,16 +130,26 @@ data = read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/a
 names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration",
                        "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
 
-data$censored=ifelse(data$Concentration<data$MDL,T,F)
+data$censored = ifelse(data$Concentration<data$MDL, T, F)
 
-lead=subset(data,data$Param_Code==14129 & data$Year==2013)
-ggplot2::ggplot(lead,aes(y=as.factor(lead$AQS_ID),x=lead$Concentration,color=lead$censored))+geom_quasirandom(aes(),groupOnX=F)+ggtitle("Lead, 2013 (ug/m3)")
+lead = subset(data,data$Param_Code == 14129 & data$Year==2013)
 
-arsenic=subset(data,data$Param_Code==12103 & data$Year==2013)
-ggplot2::ggplot(arsenic,aes(y=as.factor(arsenic$AQS_ID),x=arsenic$Concentration,color=arsenic$censored))+geom_quasirandom(aes(),groupOnX=F)+ggtitle("arsenic, 2013 (ug/m3)")
+ggplot2::ggplot(lead, aes(y = as.factor(lead$AQS_ID), x = lead$Concentration, color = lead$censored)) + geom_quasirandom(aes(), groupOnX=F) + ggtitle("Lead, 2013 (ug/m3)")
 
-benzene=subset(data,data$Param_Code==45201 & data$Year==2013)
-ggplot2::ggplot(benzene,aes(y=as.factor(benzene$AQS_ID),x=benzene$Concentration,color=benzene$censored))+geom_quasirandom(aes(),groupOnX=F,varwidth=TRUE)+ggtitle("Benzene, 2013 (ug/m3)")
+arsenic = subset(data,data$Param_Code == 12103 & data$Year == 2013)
+ggplot2::ggplot(arsenic, aes(y = as.factor(arsenic$AQS_ID), x = arsenic$Concentration, color = arsenic$censored)) + geom_quasirandom(aes(), groupOnX=F) +ggtitle("arsenic, 2013 (ug/m3)")
+
+benzene = subset(data,data$Param_Code == 45201 & data$Year == 2013)
+ggplot2::ggplot(benzene,aes(y = as.factor(benzene$AQS_ID),x=benzene$Concentration,color = benzene$censored)) + geom_quasirandom(aes(),groupOnX = F,varwidth = TRUE) + ggtitle("Benzene, 2013 (ug/m3)")
 ```
+
+
+<br> _References_  
+
+[Visualizing uncertainty in housing data](http://lenkiefer.com/2017/04/26/housing-data-uncertainty/)
+
+R packages: [Beeswarm](https://github.com/eclarke/ggbeeswarm)
+
+<br>
 
 ## Correlation matrices (Cassie)

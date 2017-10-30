@@ -217,7 +217,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ol style="list-style-type: decimal">
 <li>Based on the monitoring schedule, record the total <em>expected samples</em> for each year and quarter.
 <ul>
-<li>Air toxics monitors follow a fixed sampling schedule provided by the EPA. (See the <a href="https://www3.epa.gov/ttn/amtic/calendar.html">Air Toxics Monitoring Calendar</a>)</li>
+<li>Air toxics monitors follow a fixed sampling schedule provided by EPA’s <a href="https://www3.epa.gov/ttn/amtic/calendar.html">Air Toxics Calendar</a>.</li>
 </ul></li>
 <li>Count the number of <em>valid samples</em> for each year and quarter.</li>
 <li>Divide the number of <em>valid samples</em> by the number of <em>expected samples</em>.</li>
@@ -231,34 +231,86 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 Show <strong>R</strong> code
 </button>
 <p><br> Packages</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
-Our example data is organized by monitoring site and date.
-<div class="figure"><span id="fig:unnamed-chunk-40"></span>
-<div id="htmlwidget-9861b6f3860c94a56d1e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-9861b6f3860c94a56d1e">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1,1,1],[12102,12102,12102,12102,12102,12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29","2009-09-04","2009-09-10"],[0.00127,0.00223,0.0037,0.0018,0.0027,0.00173,0.00257,0.00101,0.00604,0.0029],[null,null,null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Param_Code<\/th>\n      <th>Date<\/th>\n      <th>Concentration<\/th>\n      <th>Null_Code<\/th>\n      <th>Dlimit<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>CAS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,5,7,9]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(readr)</code></pre></div>
+<p>Our example data is organized by monitoring site and date.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-42"></span>
+<div id="htmlwidget-7a1abc70577f669c5747" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7a1abc70577f669c5747">{"x":{"filter":"none","data":[[270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1],[12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22"],[0.00127,0.00223,0.0037,0.0018,0.0027],[null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Param_Code<\/th>\n      <th>Date<\/th>\n      <th>Concentration<\/th>\n      <th>Null_Code<\/th>\n      <th>Dlimit<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>CAS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,8]}],"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 5.1: Sample data table.
 </p>
 </div>
 <p><br></p>
 <p><strong>Step 1:</strong> Find the expected number of samples.</p>
-<p>Monitors in EPA’s Air Quality System are required to follow the <a href="https://www3.epa.gov/ttn/amtic/calendar.html">Air Toxics Monitoring Calendar</a>. The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. If you are uncertain about the sampling schedule for your data, consult the lab to confirm the expected number of samples.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load EPA&#39;s air toxics monitoring schedule</span>
-schedule &lt;-<span class="st"> </span><span class="kw">read_csv</span>()
+<p>Monitors in EPA’s Air Quality System are required to follow the <a href="https://www3.epa.gov/ttn/amtic/calendar.html">Air Toxics Monitoring Calendar</a>. The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. If you are uncertain about the sampling schedule for your data consult the lab to confirm the expected number of samples.</p>
+<p>Entering the start and end date into the <code>sample_calendar()</code> function below will create a list of the expected sampling dates based on EPA’s air toxics monitoring schedule.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a sampling calendar based on EPA&#39;s air toxics monitoring schedule</span>
+sample_calendar &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">start         =</span> <span class="st">&quot;2012-01-01&quot;</span>, 
+                            <span class="dt">end           =</span> <span class="st">&quot;2017-01-01&quot;</span>, 
+                            <span class="dt">day_interval  =</span> <span class="dv">6</span>,
+                            <span class="dt">type          =</span> <span class="st">&quot;air_toxics&quot;</span>) {
+  
+  <span class="kw">library</span>(lubridate)
+  
+  <span class="co"># Convert &#39;start&#39; and &#39;end&#39; to class date</span>
+  start &lt;-<span class="st"> </span><span class="kw">ymd</span>(start)
+  end   &lt;-<span class="st"> </span><span class="kw">ymd</span>(end)
+  
+  <span class="co"># Set official start date to selected EPA calendar</span>
+  <span class="cf">if</span>(type <span class="op">==</span><span class="st"> &quot;air_toxics&quot;</span>) {
+      epa_start &lt;-<span class="st"> </span><span class="kw">ymd</span>(<span class="st">&quot;1990-01-09&quot;</span>)
+  } <span class="cf">else</span> {
+      epa_start &lt;-<span class="st"> </span>start
+  }
+  
+  <span class="co"># Create full table of sampling dates</span>
+  calendar &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> epa_start, 
+                  <span class="dt">to   =</span> end, 
+                  <span class="dt">by   =</span> <span class="kw">paste</span>(day_interval, <span class="st">&quot;days&quot;</span>))
+  
+  
+  <span class="co"># Subset to user&#39;s date range</span>
+  calendar &lt;-<span class="st"> </span>calendar[calendar <span class="op">&gt;=</span><span class="st"> </span>start <span class="op">&amp;</span><span class="st"> </span>calendar <span class="op">&lt;=</span><span class="st"> </span>end]
+  
+  <span class="co"># Print total sampling days and date range</span>
+  <span class="kw">cat</span>(<span class="kw">length</span>(calendar), <span class="st">&quot;sampling days from&quot;</span>, <span class="kw">as.character</span>(<span class="kw">min</span>(calendar)), <span class="st">&quot;to&quot;</span>, <span class="kw">as.character</span>(<span class="kw">max</span>(calendar)))
+  
+  <span class="kw">return</span>(calendar)
+  
+}</code></pre></div>
+<p>Find the date range of the data and create the expected sampling schedule with the function above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Find the year range of your data</span>
+date_range &lt;-<span class="st"> </span><span class="kw">range</span>(data<span class="op">$</span>Date)
 
-schedule &lt;-<span class="st"> </span>schedule <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">cal_quarter =</span> <span class="kw">quarter</span>(Date))
+<span class="co"># Create expected sample calendar</span>
+epa_schedule &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">Date =</span> <span class="kw">sample_calendar</span>(<span class="dt">start =</span> <span class="kw">format</span>(date_range[<span class="dv">1</span>], <span class="st">&quot;%Y-01-01&quot;</span>), <span class="co">#Extend range to first day of the year</span>
+                                                  <span class="dt">end   =</span> <span class="kw">format</span>(date_range[<span class="dv">2</span>], <span class="st">&quot;%Y-12-31&quot;</span>), <span class="co">#Extend range to last day of the year</span>
+                                                  <span class="dt">day_interval =</span> <span class="dv">6</span>))</code></pre></div>
+<pre><code>## 304 sampling days from 2009-01-05 to 2013-12-28</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add year and calendar quarter columns</span>
+epa_schedule &lt;-<span class="st"> </span>epa_schedule <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Year        =</span> <span class="kw">year</span>(Date),
+                                        <span class="dt">cal_quarter =</span> <span class="kw">quarter</span>(Date))
 
-<span class="co"># Count the number of sampling dates for each quarter and year.</span>
-schedule &lt;-<span class="st"> </span>schedule <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">            </span><span class="kw">group_by</span>(Year, cal_quarter) <span class="op">%&gt;%</span>
-<span class="st">            </span><span class="kw">summarize</span>(<span class="dt">expected_quarter_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date))) <span class="op">%&gt;%</span>
-<span class="st">            </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span>
-<span class="st">            </span><span class="kw">mutate</span>(<span class="dt">expected_annual_samples =</span> <span class="kw">sum</span>(expected_quarter_samples))<span class="er">)</span> </code></pre></div>
+
+<span class="co"># Count the expected number of samples per quarter and year.</span>
+epa_schedule &lt;-<span class="st"> </span>epa_schedule <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">group_by</span>(Year, cal_quarter) <span class="op">%&gt;%</span>
+<span class="st">                </span><span class="kw">summarize</span>(<span class="dt">expected_quarter_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date))) <span class="op">%&gt;%</span>
+<span class="st">                </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span>
+<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">expected_annual_samples =</span> <span class="kw">sum</span>(expected_quarter_samples))</code></pre></div>
+<br> <strong>Expected number of samples.</strong>
+<div class="figure"><span id="fig:unnamed-chunk-45"></span>
+<div id="htmlwidget-c647a3b2fc4b71ab19dc" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c647a3b2fc4b71ab19dc">{"x":{"filter":"none","data":[[2009,2009,2009,2009,2010,2010,2010,2010,2011,2011,2011,2011,2012,2012,2012,2012,2013,2013,2013,2013],[1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4],[15,15,15,16,15,15,15,15,15,16,15,15,15,16,15,15,15,15,16,15],[61,61,61,61,60,60,60,60,61,61,61,61,61,61,61,61,61,61,61,61]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>cal_quarter<\/th>\n      <th>expected_quarter_samples<\/th>\n      <th>expected_annual_samples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 5.2: Expected number of samples.
+</p>
+</div>
 <p><br></p>
 <p><strong>Step 2:</strong> Count number of valid samples.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
-
-<span class="co"># Assign each date to a calendar quarter</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assign each date to a calendar quarter</span>
 data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">cal_quarter =</span> <span class="kw">quarter</span>(Date))
 
 <span class="co"># Count the number of sampling dates for each quarter and year.</span>
@@ -269,28 +321,61 @@ data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span clas
 <span class="st">        </span><span class="kw">mutate</span>(<span class="dt">valid_annual_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date))) </code></pre></div>
 <p><br></p>
 <p><strong>Step 3:</strong> Divide the number of valid samples by the number of expected samples.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Join expected sample table to data</span>
-<span class="co">#data &lt;- left_join(data, schedule)</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Join expected sample table to data by quarter and year columns</span>
+data &lt;-<span class="st"> </span><span class="kw">left_join</span>(data, epa_schedule, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;cal_quarter&quot;</span>))
 
 
 <span class="co"># Divide valid samples by expected samples</span>
 data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, CAS, Year, cal_quarter) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">pct_quarter_samples =</span> valid_quarter_samples <span class="op">/</span><span class="st"> </span><span class="dv">15</span>) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, CAS, Year) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">pct_annual_samples =</span> valid_annual_samples <span class="op">/</span><span class="st"> </span><span class="dv">60</span>) </code></pre></div>
+<span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, CAS, Year, cal_quarter) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">pct_quarter_samples =</span> <span class="kw">round</span>(valid_quarter_samples <span class="op">/</span><span class="st"> </span>expected_quarter_samples, <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, CAS, Year) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">pct_annual_samples =</span> <span class="kw">round</span>(valid_annual_samples <span class="op">/</span><span class="st"> </span>expected_annual_samples, <span class="dv">2</span>)) </code></pre></div>
 <p><br></p>
 <p><strong>Step 4:</strong> Count the number of unique values for each year.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, CAS, Year) <span class="op">%&gt;%</span>
 <span class="st">        </span><span class="kw">mutate</span>(<span class="dt">unique_values =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Concentration)))</code></pre></div>
 <p><br></p>
-<p><strong>Step 5:</strong> Mark results as incomplete if they do not fulfill one of the completeness checks.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set incomplete to zero if any of completeness checks are not met</span>
+<p><strong>Step 5:</strong> Mark results as incomplete if they fail one of the completeness checks.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set incomplete to zero if any completeness checks fail</span>
 data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">incomplete =</span> <span class="kw">sum</span>(<span class="kw">c</span>(pct_quarter_samples <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.75</span>, 
-                                  pct_annual_samples <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.75</span>,
-                                  unique_values <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</code></pre></div>
+<span class="st">        </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">complete =</span> <span class="kw">sum</span>(<span class="kw">c</span>(pct_quarter_samples <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span>, 
+                                pct_annual_samples  <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span>,
+                                unique_values       <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>)) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">3</span>)
+
+<span class="co">#names(data)      </span></code></pre></div>
+<br> <strong>Final table with added <code>complete</code> column.</strong>
+<div class="figure"><span id="fig:unnamed-chunk-50"></span>
+<div id="htmlwidget-09695dcdaaf5cf0f84b1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-09695dcdaaf5cf0f84b1">{"x":{"filter":"none","data":[[270530963,270031002,270530963,270532006,271630438,270370470,271230868,270532006,270370020,271630438],[1,1,1,1,1,1,1,1,1,1],["2010-09-23","2012-10-12","2009-08-29","2011-07-02","2010-08-18","2011-06-26","2010-03-27","2011-03-28","2011-06-14","2010-04-14"],["Arsenic","Bromoform","Carbon Disulfide","N-Heptane","Toluene","N-Hexane","Ethylene Dibromide","O-Xylene","Formaldehyde","Selenium"],[2010,2012,2009,2011,2010,2011,2010,2011,2011,2010],[3,4,3,3,3,2,1,1,2,2],[16,7,15,16,16,15,15,15,15,15],[61,53,59,61,61,61,61,61,56,61],[15,15,15,15,15,16,15,15,16,15],[60,61,61,61,60,61,60,61,61,60],[1.07,0.47,1,1.07,1.07,0.94,1,1,0.94,1],[1.02,0.87,0.97,1,1.02,1,1.02,1,0.92,1.02],[45,4,24,42,59,42,2,41,55,45],[true,false,true,true,true,true,true,true,true,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Date<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>cal_quarter<\/th>\n      <th>valid_quarter_samples<\/th>\n      <th>valid_annual_samples<\/th>\n      <th>expected_quarter_samples<\/th>\n      <th>expected_annual_samples<\/th>\n      <th>pct_quarter_samples<\/th>\n      <th>pct_annual_samples<\/th>\n      <th>unique_values<\/th>\n      <th>complete<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,4,5,6,7,8,9,10,11,12]}],"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 5.3: Final table with added <code>complete</code> column.
+</p>
+</div>
+<p><br></p>
+<p><strong>Step 6 (Optional):</strong> By collapsing the <code>complete</code> status to 1 row per site-pollutant-quarter combination, you can save the table and attach a site’s <em>completeness</em> status to future data analysis as needed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Collapse table to 1 row per unique site-pollutant-quarter</span>
+ data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">         </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, Year, cal_quarter) <span class="op">%&gt;%</span><span class="st">  </span><span class="co">#Check completeness for every quarter</span>
+<span class="st">         </span><span class="kw">summarize</span>(<span class="dt">complete              =</span> complete[<span class="dv">1</span>], 
+                   <span class="dt">valid_annual_samples  =</span> valid_annual_samples[<span class="dv">1</span>],
+                   <span class="dt">valid_quarter_samples =</span> valid_quarter_samples[<span class="dv">1</span>])
+
+<span class="co"># Collapse table to 1 row per unique site-pollutant-year</span>
+ data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st">          </span>
+<span class="st">         </span><span class="kw">group_by</span>(AQSID, POC, Pollutant, Year) <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">         </span><span class="kw">summarize</span>(<span class="dt">complete            =</span> <span class="kw">sum</span>(complete, <span class="dt">na.rm =</span> T) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4</span>,
+                   <span class="dt">annual_samples      =</span> valid_annual_samples[<span class="dv">1</span>],
+                   <span class="dt">min_quarter_samples =</span> <span class="kw">min</span>(valid_quarter_samples, <span class="dt">na.rm =</span> T))</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-52"></span>
+<div id="htmlwidget-3de9e5935a8b77f018ee" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3de9e5935a8b77f018ee">{"x":{"filter":"none","data":[[270031002,270031002,270031002,270031002,270031002,270031002,270031002,270031002,270031002,270031002],[1,1,1,1,1,1,1,1,1,1],["1,3-Butadiene","1,3-Butadiene","Acetaldehyde","Acetaldehyde","Antimony","Antimony","Antimony","Arsenic","Arsenic","Arsenic"],[2012,2013,2012,2013,2011,2012,2013,2011,2012,2013],[false,false,false,false,false,true,true,false,true,true],[53,53,53,55,1,61,61,1,61,61],[7,8,8,9,1,15,15,1,15,15]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>complete<\/th>\n      <th>annual_samples<\/th>\n      <th>min_quarter_samples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,3,5,6]}],"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 5.4: Collapsed table showing <code>completeness</code> status.
+</p>
+</div>
 </div>
 <p><br> <strong>Contributors</strong></p>
 <blockquote>

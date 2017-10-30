@@ -8,6 +8,10 @@ library(lubridate)
 library(DT)
 library(rsconnect)
 
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+colnames(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
+pollutant <- unique(data$pollutant)
+site <- unique(data$aqs_id)
 
 
 shinyApp(
@@ -24,10 +28,6 @@ shinyApp(
   
   server = function(input, output) {
     
-    data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
-    colnames(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
-    pollutant <- unique(data$pollutant)
-    site <- unique(data$aqs_id)
     
     
     

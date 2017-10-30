@@ -298,13 +298,22 @@ data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class=
 
 dt_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">scrollX =</span> T, <span class="dt">autoWidth =</span> T, <span class="dt">searching =</span> F, <span class="dt">ordering=</span>F, <span class="dt">lengthChange =</span> F, <span class="dt">paginate=</span>F, <span class="dt">info=</span>F)</code></pre></div>
 <p><br> <em>Table: Sample monitoring data</em><br />
-<div id="htmlwidget-a60c84f5b14bb5842771" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a60c84f5b14bb5842771">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1,1,1],[12102,12102,12102,12102,12102,12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29","2009-09-04","2009-09-10"],[0.00127,0.00223,0.0037,0.0018,0.0027,0.00173,0.00257,0.00101,0.00604,0.0029],[null,null,null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>year<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,5,7,9]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-2e569c2e0e4a9b38e634" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2e569c2e0e4a9b38e634">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1,1,1],[12102,12102,12102,12102,12102,12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29","2009-09-04","2009-09-10"],[0.00127,0.00223,0.0037,0.0018,0.0027,0.00173,0.00257,0.00101,0.00604,0.0029],[null,null,null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>year<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,5,7,9]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script></p>
 <p><br> Shiny tool for displaying non-detects<br />
-<img src="images/detection_boxplot.png" width="100%" style="display: block; margin: auto;" /></p>
+_Open this tool to chart pollutant values and detection limits by year (<a href="https://mpca-pahs.shinyapps.io/ChartDetectionLimits/" class="uri">https://mpca-pahs.shinyapps.io/ChartDetectionLimits/</a>)</p>
+<p><img src="images/detection_boxplot.png" width="100%" style="display: block; margin: auto;" /></p>
 <p><br> Shiny code</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pollutants &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>pollutant)
-years &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>year)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
+<span class="kw">library</span>(rsconnect)
+<span class="kw">library</span>(readr)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(dplyr)
+
+data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)
+<span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)
+pollutant &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>pollutant)
+year &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>year)
 
 <span class="kw">shinyApp</span>(
  <span class="dt">ui =</span> <span class="kw">fluidPage</span>(<span class="dt">responsive =</span> <span class="ot">FALSE</span>,
@@ -319,10 +328,6 @@ years &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span cla
    
 
   <span class="dt">server =</span> <span class="cf">function</span>(input, output) {
-
-    data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)
-
-   <span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)
 
 output<span class="op">$</span>detlim &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({
   <span class="kw">print</span>(input<span class="op">$</span>year)
