@@ -50,7 +50,7 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, length
 ```
 
 <br> Load example monitoring data
-```{r demo, eval=T, message=F, warning=F}
+```{r demo_missing, eval=T, message=F, warning=F}
 library(tidyverse)
 
 data <- read_csv('aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
@@ -69,12 +69,10 @@ data <- read_csv('aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,c
 ```
 
 
-
+<br> _Sample monitoring data_
 ```{r, eval=T, echo=F, message=F, warning=F, fig.width=4}
-knitr::kable(head(data), caption = "Sample monitoring data.") %>%
-         kable_styling() %>%
-         scroll_box(width = "100%", box_css = "border: 0; ")
-#datatable(data, options = dt_options)
+datatable(head(data), options = dt_options, rownames = FALSE)
+
 ```
 
 
@@ -104,7 +102,7 @@ missing_values <- filter(data, conc_missing == TRUE)
 ```
   
   
-<br> _Table: Missing values_
+<br> _Missing values_
 ```{r, eval=T, echo=F, message=F, warning=F}
 #kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(select(missing_values, -null_code), options = dt_options, rownames = FALSE)
@@ -118,7 +116,7 @@ data <- filter(data, conc_missing == FALSE)
 ```
   
   
-<br> _Table: The new and improved cleaner data_   
+<br> _The new and improved cleaner data_   
 ```{r, eval=T, echo=F, message=F, warning=F}
 #kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(select(data, -null_code), options = dt_options, rownames = FALSE)
@@ -178,7 +176,7 @@ data <- data %>%
 ```  
 
   
-<br> _Table: The super cleaner data_  
+<br> _The super cleaner data_  
 ```{r, eval=T, echo=F, message=F, warning=F}
 #kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(data, options = dt_options)
@@ -280,7 +278,7 @@ aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
 ', stringsAsFactor = F)
 ```
 
-<br> _Table: Sample monitoring data_ 
+<br> _Sample monitoring data_ 
 ```{r, eval=T, echo=F, message=F, warning=F}
 #kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(data, options = dt_options, rownames = FALSE)
@@ -325,7 +323,7 @@ dupes <- filter(data, duplicate == T)
 ```
   
   
-<br> _Table: Duplicate observations_ 
+<br> _Duplicate observations_ 
 ```{r, eval=T, echo=F, message=F, warning=F}
 datatable(head(dupes), options = dt_options, rownames = FALSE)
 ```
@@ -361,7 +359,7 @@ data <- rbind(data, dupes)
 ```
 
 
-<br> _Table: The new cleaner data_  
+<br> _The new cleaner data_  
 ```{r, eval=T, echo=F, message=F, warning=F, fig.cap ="Final data set with 1 duplicate removed."}
 
 datatable(select(data, -key, -duplicate), options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)

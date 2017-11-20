@@ -18,102 +18,86 @@ If data is not normal, use bootstraping to generate means for each site and take
 The script below uses bootstrap sampling to generate 1000 differences in site means which are ordered to create a 95% confidence interval for the difference in means. If the lower bound of the interval is greater than zero, then the second site has a higher mean concentration than the first site. If the upper bound of the confidence interval is less than zero, then the second site has a lower mean concentration than the first site.
 
 ```{r, eval=F}
-# Data must have names"AQS_ID", "POC", "Param_Code", "Date", "Concentration", "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS"
-# Data must also have column named "Censored" indicating whether Concentration < MDL
-# Data must also have column "ID" with grouping criteria. ID = Pollutant if only grouping by pollutant, ID = Pollutant + Year if grouping by pollutant & year, ID = Pollutant + Site ID if comparing the same site across multiple years. See example below. Other options for ID are also acceptable depending on type of analysis.
+# Data must have names "AQSID", "POC", "Parameter", "Date", "Result", "MDL", "Pollutant"
 
 library(dplyr)
 library(EnvStats)
-
+library(lubridate)
 data = read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
-names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration",
+seed = 2017
+
+names(data)[1:10] <- c("AQSID", "POC", "Parameter", "Date","Result",
                        "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
 
+data = data %>% filter(AQSID %in% c(270370020, 270370470, 271230871) ) %>% mutate(`Monitoring Site` = AQSID, PollutantGroup = Pollutant, Censored = Result < MDL, Result = ifelse(Censored, MDL, Result) )
 
-site1_data = data %>% filter(AQS_ID == 270370020) %>% mutate(ID = paste(Pollutant, Year), Censored = Concentration < MDL)
-site2_data = data %>% filter(AQS_ID == 270370470) %>% mutate(ID = paste(Pollutant, Year), Censored = Concentration < MDL)
+site_number = 271230871
 
+site_compare = function(data, site_number, Boot_Repeats = 1000) {
+  
+  annual_AT_means = function(air_toxics) {
+  
+  air_toxics = mutate(air_toxics, Year = year(ymd(Date)), Quarter = quarter(ymd(Date)) )
+  sample_complete = air_toxics %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, Quarter, MDL) %>% summarise(Complete = ( (sum(!is.na(Result) ) / length(Result) ) >= 0.75 ) ) %>%
+    mutate(Complete = ifelse(is.na(Complete), F, Complete) ) %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, MDL) %>% summarise(Complete = all(Complete) )
+  
+  enough_detects = air_toxics %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, MDL) %>% summarise(Detected = mean(Censored, na.rm = T) <= 0.8 )
+  
+  site_means = air_toxics %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, MDL) %>% summarise(Mean = ifelse(length(unique(Result[!is.na(Result) & !Censored] ) ) < 2, NA,
+     ifelse (any(Censored, na.rm = T), elnormAltCensored(Result, Censored, method = "impute.w.mle", ci = F)$parameters[[1]], mean(Result, na.rm = T) ) ) )
+  
+  site_means = left_join(site_means, sample_complete, by = c("Monitoring Site", "AQSID", "Pollutant", "PollutantGroup", "Year", "MDL") ) %>%
+    left_join(enough_detects, by = c("Monitoring Site", "AQSID", "Pollutant", "PollutantGroup", "Year", "MDL") ) %>% mutate(Mean = ifelse(Complete & Detected, Mean, NA), ID = paste(AQSID, Pollutant, Year) )
 
-
-site_comparisons = function(site1_data, site2_data, Boot_Repeats = 1000, seed = 2017) {
-
-  library(dplyr)
-  library(EnvStats)
+  return(site_means)
+}
   
   MLE_est <- function(data){
     
-    results = data$Concentration
+    results = data$Result
     censored = data$Censored
-    n = sum(!is.na(data$Concentration))
+    n = sum(!is.na(results))
     
-    MLE_means = NULL
-    
-    
-    if ( (n < 0.75 * length(results)) | ((sum(!censored, na.rm = T) ) < 0.2 * n) | ( length(unique(results[!is.na(results) & !censored] ) ) < 2 ) ) {
+    if (length(unique(results[!is.na(results) & !censored] ) ) < 2 ) {
       MLE_means = NA
-    } else
-    {
-      
-      random.rows = NULL  
-      random.rows <- sample(which(!is.na(censored) & (!censored) & !duplicated(results) ), 2, replace = FALSE)
-      random.rows = c(random.rows, sample(which(!is.na(censored)), n-2, replace = TRUE))
-      
-      
-      if (sum(censored[random.rows], na.rm = T) < 1){
-        MLE_means = mean(results[random.rows])  
-      }
-      
-      else {
-        MLE_means = exp (elnormCensored(results[random.rows] + 1e-16,
-                                        censored[random.rows],
-                                        method = "mle", 
-                                        ci = F 
-        )$parameters[[1]])
-      }
-      
     }
     
-    
-    
+    else {
+      random.rows = NULL  
+      random.rows = sample(which(!is.na(censored) & (!censored) & !duplicated(results) ), 2, replace = FALSE)
+      random.rows = c(random.rows, sample(which(!is.na(censored)), n-2, replace = TRUE))
+      
+      MLE_means = ifelse(sum(censored[random.rows], na.rm = T) == 0, mean(results[random.rows]), elnormAltCensored(results[random.rows], censored[random.rows], method = "impute.w.mle", ci = F)$parameters[[1]] )
+    }
     
     return(MLE_means)
   }
   
-  site1_data = filter(site1_data, ID %in% unique(site2_data$ID) )
-  site2_data = filter(site2_data, ID %in% unique(site1_data$ID) )
+  data = mutate(data, ID = paste(AQSID, Pollutant, Year))
   
-  set.seed(seed)
+  Bootstrap_means = replicate(Boot_Repeats, (by(data, data$ID, MLE_est) ) )
   
-  Bootstrap_means1 = replicate(Boot_Repeats, (by(site1_data, site1_data$ID, MLE_est) ) )
-  Bootstrap_means2 = replicate(Boot_Repeats, (by(site2_data, site2_data$ID, MLE_est) ) )
-  Bootstrap_diffs = Bootstrap_means2 - Bootstrap_means1
-  if(is.vector(Bootstrap_diffs)) {
-    Bootstrap_diffs = t(data.frame(Bootstrap_diffs))
-    rownames(Bootstrap_diffs) = names(Bootstrap_means1)[1]
-    }
+  Bootstrap_means = rownames_to_column(as.data.frame(Bootstrap_means), "ID" )
   
-  CI_lower = apply(Bootstrap_diffs, 1, function(x) sort(x)[floor(0.025 * Boot_Repeats)])
-  CI_upper = apply(Bootstrap_diffs, 1, function(x) sort(x)[ceiling(0.975 * Boot_Repeats)])
-  Higher = CI_lower > 0
-  Lower = CI_upper < 0
-  Same = !Higher & !Lower
+  Bootstrap_means = right_join(annual_AT_means(data), Bootstrap_means, by = "ID")
   
-  comparison_table = NULL
-  comparison_table[Lower == TRUE] = "Lower"
-  comparison_table[Higher == TRUE] = "Higher"
-  comparison_table[Same == TRUE] = "Same"
+  Bootstrap_means = Bootstrap_means %>% group_by(Pollutant, Year) %>% arrange(desc(AQSID == site_number), .by_group = T ) %>%
+    group_by(Pollutant, Year) %>% mutate_at(vars(num_range("V", 1:Boot_Repeats)), funs(c(first(.), (. - first(.))[-1])) ) %>% ungroup()
   
-  CI_lower = data.frame(CI_lower)
-  CI_upper = data.frame(CI_upper)
-  comparison_table = data.frame(comparison_table)
-  rownames(comparison_table) = rownames(Bootstrap_diffs)
-  comparison_table = cbind(comparison_table, CI_lower, CI_upper)
-  names(comparison_table)[1]="Site_comparison"
-  return(comparison_table)
+  LB = select(Bootstrap_means, num_range("V", 1:Boot_Repeats) ) %>% apply(1, function(x) sort(-x)[floor(0.025 * Boot_Repeats)] )
+  UB = select(Bootstrap_means, num_range("V", 1:Boot_Repeats) ) %>% apply(1, function(x) sort(-x)[ceiling(0.975 * Boot_Repeats)] )
+  
+  CI = data.frame(Lower = LB, Upper = UB)
+  CI = bind_cols(CI, Bootstrap_means) %>% select(Lower:ID) %>% mutate(Lower = ifelse(any(AQSID == site_number & Complete & Detected) & AQSID != site_number & Complete & Detected, Lower, NA),
+                                                                      Upper = ifelse(any(AQSID == site_number & Complete & Detected) & AQSID != site_number & Complete & Detected, Upper, NA),
+                                                                      Comparison = ifelse(Lower > 0, "Higher", ifelse(Upper < 0, "Lower", "Same") ) )
+  
+  return(CI)
   
 }
 
-comparison_table = site_comparisons(site1_data, site2_data)
+set.seed(seed)
+compare = site_compare(data, site_number, 50) #minimum 50 repeats
 ```
 
 ## Tools to visualize data
@@ -153,3 +137,14 @@ R packages: [Beeswarm](https://github.com/eclarke/ggbeeswarm)
 <br>
 
 ## Correlation matrices (Cassie)
+
+```{r}
+site <- 270530962
+data_site <- data[data$AQS_ID %in% site, c("Date", "Pollutant", "Concentration")]
+analytes <- spread(data_site, Pollutant, Concentration, drop=T)
+analytes$Date <- NULL
+coranalytes <- cor(analytes, method="kendall", use="pairwise.complete.obs")
+coranalytes <- coranalytes[,colSums(is.na(coranalytes))<nrow(coranalytes)]
+coranalytes <- coranalytes[rowSums(is.na(coranalytes))<ncol(coranalytes),]
+corrplot(coranalytes, method = "circle", type="lower", tl.cex=0.6) #plot matrix
+```

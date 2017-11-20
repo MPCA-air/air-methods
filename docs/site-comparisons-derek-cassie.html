@@ -106,7 +106,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="https://mpca-air.github.io/air-methods">Methods for air data analysis</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#RQAMD"><i class="fa fa-check"></i><b>0.1</b> Retrieving data from AQS DataMart using RQAMD</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#WAIR"><i class="fa fa-check"></i><b>0.2</b> Retrieving data from MPCA WAIR database</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#aqi-now"><i class="fa fa-check"></i><b>0.3</b> Current AQI obs</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#monitors"><i class="fa fa-check"></i><b>0.4</b> Current AQI observations</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#tableau"><i class="fa fa-check"></i><b>0.5</b> Retrieving data from Tableau</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html"><i class="fa fa-check"></i><b>1</b> Data cleaning (Dorian &amp; Cassie)</a><ul>
 <li class="chapter" data-level="1.1" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#missing"><i class="fa fa-check"></i><b>1.1</b> Remove blank, NULL, and missing values</a></li>
 <li class="chapter" data-level="1.2" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#quals"><i class="fa fa-check"></i><b>1.2</b> Remove <em>Qualified</em> data</a></li>
@@ -166,6 +172,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.3" data-path="maps-kristie.html"><a href="maps-kristie.html#creating-shapefiles-in-r-adn-joining-to-ej-areas"><i class="fa fa-check"></i><b>11.3</b> Creating shapefiles in R adn joining to EJ areas</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="additional-resources-kristie.html"><a href="additional-resources-kristie.html"><i class="fa fa-check"></i><b>12</b> Additional resources (Kristie)</a></li>
+<li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
+<li class="chapter" data-level="13" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>13</b> AQI explorer</a></li>
+<li class="chapter" data-level="14" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>14</b> Criteria pollutant explorer</a></li>
+<li class="chapter" data-level="15" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>15</b> Air toxics explorer</a><ul>
+<li class="chapter" data-level="15.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>15.1</b> MPCA Air Toxics Methods</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning"><i class="fa fa-check"></i><b>15.1.1</b> Data Cleaning</a></li>
+<li class="chapter" data-level="15.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation"><i class="fa fa-check"></i><b>15.1.2</b> Data Validation</a></li>
+<li class="chapter" data-level="15.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>15.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="15.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>15.1.4</b> Producing Annual Summaries</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -200,102 +217,86 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">7.1</span> Confidence intervals</h2>
 <p>If data is not normal, use bootstraping to generate means for each site and take the differences of those means. If the lower bound of the 95% confidence interval for those differences is greater than zero, or the upper bound is less than zero, then the site means are significantly different. You cannot just genrate confidence intervals for the means individually and see if they overlap since the joint probability of both means being in the same region is lower than the marginal probabilities of each mean being in the region. It is not effective to do pairwise comparisons due to null data and non-detects. You cannot use an ANOVA test since the data more closely resembles a log-normal distribution than a normal distribution and for a log-normal distribution, the variance is not independent of the mean which means that transforming the data and doing an ANOVA test would bias the confidence interval for the difference.</p>
 <p>The script below uses bootstrap sampling to generate 1000 differences in site means which are ordered to create a 95% confidence interval for the difference in means. If the lower bound of the interval is greater than zero, then the second site has a higher mean concentration than the first site. If the upper bound of the confidence interval is less than zero, then the second site has a lower mean concentration than the first site.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data must have names&quot;AQS_ID&quot;, &quot;POC&quot;, &quot;Param_Code&quot;, &quot;Date&quot;, &quot;Concentration&quot;, &quot;Null_Data_Code&quot;, &quot;MDL&quot;, &quot;Pollutant&quot;, &quot;Year&quot;, &quot;CAS&quot;</span>
-<span class="co"># Data must also have column named &quot;Censored&quot; indicating whether Concentration &lt; MDL</span>
-<span class="co"># Data must also have column &quot;ID&quot; with grouping criteria. ID = Pollutant if only grouping by pollutant, ID = Pollutant + Year if grouping by pollutant &amp; year, ID = Pollutant + Site ID if comparing the same site across multiple years. See example below. Other options for ID are also acceptable depending on type of analysis.</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data must have names &quot;AQSID&quot;, &quot;POC&quot;, &quot;Parameter&quot;, &quot;Date&quot;, &quot;Result&quot;, &quot;MDL&quot;, &quot;Pollutant&quot;</span>
 
 <span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(EnvStats)
-
+<span class="kw">library</span>(lubridate)
 data =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> F)
-<span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQS_ID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Param_Code&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Concentration&quot;</span>,
+seed =<span class="st"> </span><span class="dv">2017</span>
+
+<span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Parameter&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,
                        <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)
 
+data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(AQSID <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">270370020</span>, <span class="dv">270370470</span>, <span class="dv">271230871</span>) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">Monitoring Site</span><span class="st">`</span> =<span class="st"> </span>AQSID, <span class="dt">PollutantGroup =</span> Pollutant, <span class="dt">Censored =</span> Result <span class="op">&lt;</span><span class="st"> </span>MDL, <span class="dt">Result =</span> <span class="kw">ifelse</span>(Censored, MDL, Result) )
 
-site1_data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(AQS_ID <span class="op">==</span><span class="st"> </span><span class="dv">270370020</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">paste</span>(Pollutant, Year), <span class="dt">Censored =</span> Concentration <span class="op">&lt;</span><span class="st"> </span>MDL)
-site2_data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(AQS_ID <span class="op">==</span><span class="st"> </span><span class="dv">270370470</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="kw">paste</span>(Pollutant, Year), <span class="dt">Censored =</span> Concentration <span class="op">&lt;</span><span class="st"> </span>MDL)
+site_number =<span class="st"> </span><span class="dv">271230871</span>
 
+site_compare =<span class="st"> </span><span class="cf">function</span>(data, site_number, <span class="dt">Boot_Repeats =</span> <span class="dv">1000</span>) {
+  
+  annual_AT_means =<span class="st"> </span><span class="cf">function</span>(air_toxics) {
+  
+  air_toxics =<span class="st"> </span><span class="kw">mutate</span>(air_toxics, <span class="dt">Year =</span> <span class="kw">year</span>(<span class="kw">ymd</span>(Date)), <span class="dt">Quarter =</span> <span class="kw">quarter</span>(<span class="kw">ymd</span>(Date)) )
+  sample_complete =<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Monitoring Site</span><span class="st">`</span>, AQSID, Pollutant, PollutantGroup, Year, Quarter, MDL) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> ( (<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(Result) ) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(Result) ) <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span> ) ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Complete =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(Complete), F, Complete) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Monitoring Site</span><span class="st">`</span>, AQSID, Pollutant, PollutantGroup, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> <span class="kw">all</span>(Complete) )
+  
+  enough_detects =<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Monitoring Site</span><span class="st">`</span>, AQSID, Pollutant, PollutantGroup, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Detected =</span> <span class="kw">mean</span>(Censored, <span class="dt">na.rm =</span> T) <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.8</span> )
+  
+  site_means =<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Monitoring Site</span><span class="st">`</span>, AQSID, Pollutant, PollutantGroup, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(<span class="kw">length</span>(<span class="kw">unique</span>(Result[<span class="op">!</span><span class="kw">is.na</span>(Result) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>Censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="ot">NA</span>,
+     <span class="kw">ifelse</span> (<span class="kw">any</span>(Censored, <span class="dt">na.rm =</span> T), <span class="kw">elnormAltCensored</span>(Result, Censored, <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]], <span class="kw">mean</span>(Result, <span class="dt">na.rm =</span> T) ) ) )
+  
+  site_means =<span class="st"> </span><span class="kw">left_join</span>(site_means, sample_complete, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;Monitoring Site&quot;</span>, <span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;PollutantGroup&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">left_join</span>(enough_detects, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;Monitoring Site&quot;</span>, <span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;PollutantGroup&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Mean, <span class="ot">NA</span>), <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year) )
 
-
-site_comparisons =<span class="st"> </span><span class="cf">function</span>(site1_data, site2_data, <span class="dt">Boot_Repeats =</span> <span class="dv">1000</span>, <span class="dt">seed =</span> <span class="dv">2017</span>) {
-
-  <span class="kw">library</span>(dplyr)
-  <span class="kw">library</span>(EnvStats)
+  <span class="kw">return</span>(site_means)
+}
   
   MLE_est &lt;-<span class="st"> </span><span class="cf">function</span>(data){
     
-    results =<span class="st"> </span>data<span class="op">$</span>Concentration
+    results =<span class="st"> </span>data<span class="op">$</span>Result
     censored =<span class="st"> </span>data<span class="op">$</span>Censored
-    n =<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(data<span class="op">$</span>Concentration))
+    n =<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(results))
     
-    MLE_means =<span class="st"> </span><span class="ot">NULL</span>
-    
-    
-    <span class="cf">if</span> ( (n <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.75</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(results)) <span class="op">|</span><span class="st"> </span>((<span class="kw">sum</span>(<span class="op">!</span>censored, <span class="dt">na.rm =</span> T) ) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span> <span class="op">*</span><span class="st"> </span>n) <span class="op">|</span><span class="st"> </span>( <span class="kw">length</span>(<span class="kw">unique</span>(results[<span class="op">!</span><span class="kw">is.na</span>(results) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span> ) ) {
+    <span class="cf">if</span> (<span class="kw">length</span>(<span class="kw">unique</span>(results[<span class="op">!</span><span class="kw">is.na</span>(results) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span> ) {
       MLE_means =<span class="st"> </span><span class="ot">NA</span>
-    } <span class="cf">else</span>
-    {
-      
-      random.rows =<span class="st"> </span><span class="ot">NULL</span>  
-      random.rows &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored) <span class="op">&amp;</span><span class="st"> </span>(<span class="op">!</span>censored) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">duplicated</span>(results) ), <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)
-      random.rows =<span class="st"> </span><span class="kw">c</span>(random.rows, <span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored)), n<span class="op">-</span><span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
-      
-      
-      <span class="cf">if</span> (<span class="kw">sum</span>(censored[random.rows], <span class="dt">na.rm =</span> T) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>){
-        MLE_means =<span class="st"> </span><span class="kw">mean</span>(results[random.rows])  
-      }
-      
-      <span class="cf">else</span> {
-        MLE_means =<span class="st"> </span><span class="kw">exp</span> (<span class="kw">elnormCensored</span>(results[random.rows] <span class="op">+</span><span class="st"> </span><span class="fl">1e-16</span>,
-                                        censored[random.rows],
-                                        <span class="dt">method =</span> <span class="st">&quot;mle&quot;</span>, 
-                                        <span class="dt">ci =</span> F 
-        )<span class="op">$</span>parameters[[<span class="dv">1</span>]])
-      }
-      
     }
     
-    
-    
+    <span class="cf">else</span> {
+      random.rows =<span class="st"> </span><span class="ot">NULL</span>  
+      random.rows =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored) <span class="op">&amp;</span><span class="st"> </span>(<span class="op">!</span>censored) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">duplicated</span>(results) ), <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)
+      random.rows =<span class="st"> </span><span class="kw">c</span>(random.rows, <span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored)), n<span class="op">-</span><span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
+      
+      MLE_means =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">sum</span>(censored[random.rows], <span class="dt">na.rm =</span> T) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">mean</span>(results[random.rows]), <span class="kw">elnormAltCensored</span>(results[random.rows], censored[random.rows], <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]] )
+    }
     
     <span class="kw">return</span>(MLE_means)
   }
   
-  site1_data =<span class="st"> </span><span class="kw">filter</span>(site1_data, ID <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(site2_data<span class="op">$</span>ID) )
-  site2_data =<span class="st"> </span><span class="kw">filter</span>(site2_data, ID <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(site1_data<span class="op">$</span>ID) )
+  data =<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year))
   
-  <span class="kw">set.seed</span>(seed)
+  Bootstrap_means =<span class="st"> </span><span class="kw">replicate</span>(Boot_Repeats, (<span class="kw">by</span>(data, data<span class="op">$</span>ID, MLE_est) ) )
   
-  Bootstrap_means1 =<span class="st"> </span><span class="kw">replicate</span>(Boot_Repeats, (<span class="kw">by</span>(site1_data, site1_data<span class="op">$</span>ID, MLE_est) ) )
-  Bootstrap_means2 =<span class="st"> </span><span class="kw">replicate</span>(Boot_Repeats, (<span class="kw">by</span>(site2_data, site2_data<span class="op">$</span>ID, MLE_est) ) )
-  Bootstrap_diffs =<span class="st"> </span>Bootstrap_means2 <span class="op">-</span><span class="st"> </span>Bootstrap_means1
-  <span class="cf">if</span>(<span class="kw">is.vector</span>(Bootstrap_diffs)) {
-    Bootstrap_diffs =<span class="st"> </span><span class="kw">t</span>(<span class="kw">data.frame</span>(Bootstrap_diffs))
-    <span class="kw">rownames</span>(Bootstrap_diffs) =<span class="st"> </span><span class="kw">names</span>(Bootstrap_means1)[<span class="dv">1</span>]
-    }
+  Bootstrap_means =<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">as.data.frame</span>(Bootstrap_means), <span class="st">&quot;ID&quot;</span> )
   
-  CI_lower =<span class="st"> </span><span class="kw">apply</span>(Bootstrap_diffs, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(x)[<span class="kw">floor</span>(<span class="fl">0.025</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)])
-  CI_upper =<span class="st"> </span><span class="kw">apply</span>(Bootstrap_diffs, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(x)[<span class="kw">ceiling</span>(<span class="fl">0.975</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)])
-  Higher =<span class="st"> </span>CI_lower <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>
-  Lower =<span class="st"> </span>CI_upper <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>
-  Same =<span class="st"> </span><span class="op">!</span>Higher <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>Lower
+  Bootstrap_means =<span class="st"> </span><span class="kw">right_join</span>(<span class="kw">annual_AT_means</span>(data), Bootstrap_means, <span class="dt">by =</span> <span class="st">&quot;ID&quot;</span>)
   
-  comparison_table =<span class="st"> </span><span class="ot">NULL</span>
-  comparison_table[Lower <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>] =<span class="st"> &quot;Lower&quot;</span>
-  comparison_table[Higher <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>] =<span class="st"> &quot;Higher&quot;</span>
-  comparison_table[Same <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>] =<span class="st"> &quot;Same&quot;</span>
+  Bootstrap_means =<span class="st"> </span>Bootstrap_means <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Pollutant, Year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number), <span class="dt">.by_group =</span> T ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(Pollutant, Year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats)), <span class="kw">funs</span>(<span class="kw">c</span>(<span class="kw">first</span>(.), (. <span class="op">-</span><span class="st"> </span><span class="kw">first</span>(.))[<span class="op">-</span><span class="dv">1</span>])) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()
   
-  CI_lower =<span class="st"> </span><span class="kw">data.frame</span>(CI_lower)
-  CI_upper =<span class="st"> </span><span class="kw">data.frame</span>(CI_upper)
-  comparison_table =<span class="st"> </span><span class="kw">data.frame</span>(comparison_table)
-  <span class="kw">rownames</span>(comparison_table) =<span class="st"> </span><span class="kw">rownames</span>(Bootstrap_diffs)
-  comparison_table =<span class="st"> </span><span class="kw">cbind</span>(comparison_table, CI_lower, CI_upper)
-  <span class="kw">names</span>(comparison_table)[<span class="dv">1</span>]=<span class="st">&quot;Site_comparison&quot;</span>
-  <span class="kw">return</span>(comparison_table)
+  LB =<span class="st"> </span><span class="kw">select</span>(Bootstrap_means, <span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(<span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(<span class="op">-</span>x)[<span class="kw">floor</span>(<span class="fl">0.025</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)] )
+  UB =<span class="st"> </span><span class="kw">select</span>(Bootstrap_means, <span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(<span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(<span class="op">-</span>x)[<span class="kw">ceiling</span>(<span class="fl">0.975</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)] )
+  
+  CI =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Lower =</span> LB, <span class="dt">Upper =</span> UB)
+  CI =<span class="st"> </span><span class="kw">bind_cols</span>(CI, Bootstrap_means) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Lower<span class="op">:</span>ID) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Lower =</span> <span class="kw">ifelse</span>(<span class="kw">any</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected) <span class="op">&amp;</span><span class="st"> </span>AQSID <span class="op">!=</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Lower, <span class="ot">NA</span>),
+                                                                      <span class="dt">Upper =</span> <span class="kw">ifelse</span>(<span class="kw">any</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected) <span class="op">&amp;</span><span class="st"> </span>AQSID <span class="op">!=</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Upper, <span class="ot">NA</span>),
+                                                                      <span class="dt">Comparison =</span> <span class="kw">ifelse</span>(Lower <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Higher&quot;</span>, <span class="kw">ifelse</span>(Upper <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Lower&quot;</span>, <span class="st">&quot;Same&quot;</span>) ) )
+  
+  <span class="kw">return</span>(CI)
   
 }
 
-comparison_table =<span class="st"> </span><span class="kw">site_comparisons</span>(site1_data, site2_data)</code></pre></div>
+<span class="kw">set.seed</span>(seed)
+compare =<span class="st"> </span><span class="kw">site_compare</span>(data, site_number, <span class="dv">50</span>) <span class="co">#minimum 50 repeats</span></code></pre></div>
 </div>
 <div id="tools-to-visualize-data" class="section level2">
 <h2><span class="header-section-number">7.2</span> Tools to visualize data</h2>
@@ -316,15 +317,15 @@ lead =<span class="st"> </span><span class="kw">subset</span>(data,data<span cla
 
 ggplot2<span class="op">::</span><span class="kw">ggplot</span>(lead, <span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">as.factor</span>(lead<span class="op">$</span>AQS_ID), <span class="dt">x =</span> lead<span class="op">$</span>Concentration, <span class="dt">color =</span> lead<span class="op">$</span>censored)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_quasirandom</span>(<span class="kw">aes</span>(), <span class="dt">groupOnX=</span>F) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Lead, 2013 (ug/m3)&quot;</span>)</code></pre></div>
 <pre><code>## Warning: Removed 31 rows containing missing values (position_quasirandom).</code></pre>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arsenic =<span class="st"> </span><span class="kw">subset</span>(data,data<span class="op">$</span>Param_Code <span class="op">==</span><span class="st"> </span><span class="dv">12103</span> <span class="op">&amp;</span><span class="st"> </span>data<span class="op">$</span>Year <span class="op">==</span><span class="st"> </span><span class="dv">2013</span>)
 ggplot2<span class="op">::</span><span class="kw">ggplot</span>(arsenic, <span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">as.factor</span>(arsenic<span class="op">$</span>AQS_ID), <span class="dt">x =</span> arsenic<span class="op">$</span>Concentration, <span class="dt">color =</span> arsenic<span class="op">$</span>censored)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_quasirandom</span>(<span class="kw">aes</span>(), <span class="dt">groupOnX=</span>F) <span class="op">+</span><span class="kw">ggtitle</span>(<span class="st">&quot;arsenic, 2013 (ug/m3)&quot;</span>)</code></pre></div>
 <pre><code>## Warning: Removed 31 rows containing missing values (position_quasirandom).</code></pre>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-62-2.png" width="672" /></p>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-76-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">benzene =<span class="st"> </span><span class="kw">subset</span>(data,data<span class="op">$</span>Param_Code <span class="op">==</span><span class="st"> </span><span class="dv">45201</span> <span class="op">&amp;</span><span class="st"> </span>data<span class="op">$</span>Year <span class="op">==</span><span class="st"> </span><span class="dv">2013</span>)
 ggplot2<span class="op">::</span><span class="kw">ggplot</span>(benzene,<span class="kw">aes</span>(<span class="dt">y =</span> <span class="kw">as.factor</span>(benzene<span class="op">$</span>AQS_ID),<span class="dt">x=</span>benzene<span class="op">$</span>Concentration,<span class="dt">color =</span> benzene<span class="op">$</span>censored)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_quasirandom</span>(<span class="kw">aes</span>(),<span class="dt">groupOnX =</span> F,<span class="dt">varwidth =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Benzene, 2013 (ug/m3)&quot;</span>)</code></pre></div>
 <pre><code>## Warning: Removed 33 rows containing missing values (position_quasirandom).</code></pre>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-62-3.png" width="672" /></p>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-76-3.png" width="672" /></p>
 <p><br> <em>References</em></p>
 <p><a href="http://lenkiefer.com/2017/04/26/housing-data-uncertainty/">Visualizing uncertainty in housing data</a></p>
 <p>R packages: <a href="https://github.com/eclarke/ggbeeswarm">Beeswarm</a></p>
