@@ -45,7 +45,7 @@ In general, these rules apply:
 <br> __Recommended steps__
 
 1. Based on the monitoring schedule, record the total _expected samples_ for each year and quarter.
-    - Air toxics monitors follow a fixed sampling schedule provided by the EPA. (See the [Air Toxics Monitoring Calendar](https://www3.epa.gov/ttn/amtic/calendar.html))
+    - Air toxics monitors follow a fixed sampling schedule provided by EPA's [Air Toxics Calendar](https://www3.epa.gov/ttn/amtic/calendar.html).
 1. Count the number of _valid samples_ for each year and quarter.
 1. Divide the number of _valid samples_ by the number of _expected samples_.
 1. Count the number of unique values for each year.
@@ -63,9 +63,6 @@ Click the button below to view a step by step example of the methods above.
 ```{r eval=T, message=F, warning=F, echo=F}
 library(knitr)
 library(DT)
-library(readr)
-
-data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
 
 #names(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
 
@@ -77,44 +74,104 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, length
 Packages
 ```{r message=F}
 library(tidyverse)
+library(readr)
+
 ```
 
 
 Our example data is organized by monitoring site and date.
+```{r message=F}
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+```
+
 ```{r message=F, echo=F, fig.cap = "Sample data table."}
 
-datatable(head(data, 10), options = dt_options)
+datatable(head(data, 5), options = dt_options, rownames = F)
 ```
 
 <br>
 
 __Step 1:__ Find the expected number of samples.
 
-Monitors in EPA's Air Quality System are required to follow the [Air Toxics Monitoring Calendar](https://www3.epa.gov/ttn/amtic/calendar.html). The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. If you are uncertain about the sampling schedule for your data, consult the lab to confirm the expected number of samples. 
+Monitors in EPA's Air Quality System are required to follow the [Air Toxics Monitoring Calendar](https://www3.epa.gov/ttn/amtic/calendar.html). The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. If you are uncertain about the sampling schedule for your data consult the lab to confirm the expected number of samples. 
 
-```{r message=F, eval=F}
+Entering the start and end date into the `sample_calendar()` function below will create a list of the expected sampling dates based on EPA's air toxics monitoring schedule.
+```{r message=F, eval=T}
 
-# Load EPA's air toxics monitoring schedule
-schedule <- read_csv()
-
-schedule <- schedule %>% mutate(cal_quarter = quarter(Date))
-
-# Count the number of sampling dates for each quarter and year.
-schedule <- schedule %>% 
-            group_by(Year, cal_quarter) %>%
-            summarize(expected_quarter_samples = length(unique(Date))) %>%
-            group_by(Year) %>%
-            mutate(expected_annual_samples = sum(expected_quarter_samples))) 
-        
+# Create a sampling calendar based on EPA's air toxics monitoring schedule
+sample_calendar <- function(start         = "2012-01-01", 
+                            end           = "2017-01-01", 
+                            day_interval  = 6,
+                            type          = "air_toxics") {
+  
+  library(lubridate)
+  
+  # Convert 'start' and 'end' to class date
+  start <- ymd(start)
+  end   <- ymd(end)
+  
+  # Set official start date to selected EPA calendar
+  if(type == "air_toxics") {
+      epa_start <- ymd("1990-01-09")
+  } else {
+      epa_start <- start
+  }
+  
+  # Create full table of sampling dates
+  calendar <- seq(from = epa_start, 
+                  to   = end, 
+                  by   = paste(day_interval, "days"))
+  
+  
+  # Subset to user's date range
+  calendar <- calendar[calendar >= start & calendar <= end]
+  
+  # Print total sampling days and date range
+  cat(length(calendar), "sampling days from", as.character(min(calendar)), "to", as.character(max(calendar)))
+  
+  return(calendar)
+  
+}
 ```
 
+
+Find the date range of the data and create the expected sampling schedule with the function above.
+```{r message=F, eval=T}
+
+# Find the year range of your data
+date_range <- range(data$Date)
+
+# Create expected sample calendar
+epa_schedule <- data_frame(Date = sample_calendar(start = format(date_range[1], "%Y-01-01"), #Extend range to first day of the year
+                                                  end   = format(date_range[2], "%Y-12-31"), #Extend range to last day of the year
+                                                  day_interval = 6))
+
+# Add year and calendar quarter columns
+epa_schedule <- epa_schedule %>% mutate(Year        = year(Date),
+                                        cal_quarter = quarter(Date))
+
+
+# Count the expected number of samples per quarter and year.
+epa_schedule <- epa_schedule %>% 
+                group_by(Year, cal_quarter) %>%
+                summarize(expected_quarter_samples = length(unique(Date))) %>%
+                group_by(Year) %>%
+                mutate(expected_annual_samples = sum(expected_quarter_samples))
+
+```
+
+
+
+<br>
+__Expected number of samples.__
+```{r message=F, echo=F, fig.cap = "Expected number of samples."}
+DT::datatable(epa_schedule, options = dt_options, rownames = F)
+```
 
 <br>
 
 __Step 2:__ Count number of valid samples.
 ```{r message=F}
-
-library(lubridate)
 
 # Assign each date to a calendar quarter
 data <- data %>% mutate(cal_quarter = quarter(Date))
@@ -135,16 +192,16 @@ __Step 3:__ Divide the number of valid samples by the number of expected samples
 ```{r message=F}
 
 
-# Join expected sample table to data
-#data <- left_join(data, schedule)
+# Join expected sample table to data by quarter and year columns
+data <- left_join(data, epa_schedule, by = c("Year", "cal_quarter"))
 
 
 # Divide valid samples by expected samples
 data <- data %>% 
-        group_by(AQSID, POC, Pollutant, CAS, Year, cal_quarter) %>%
-        mutate(pct_quarter_samples = valid_quarter_samples / 15) %>%
-        group_by(AQSID, POC, Pollutant, CAS, Year) %>%
-        mutate(pct_annual_samples = valid_annual_samples / 60) 
+        group_by(AQSID, POC, CAS, Year, cal_quarter) %>%
+        mutate(pct_quarter_samples = round(valid_quarter_samples / expected_quarter_samples, 2)) %>%
+        group_by(AQSID, POC, CAS, Year) %>%
+        mutate(pct_annual_samples = round(valid_annual_samples / expected_annual_samples, 2)) 
         
 ```
 
@@ -161,15 +218,53 @@ data <- data %>%
 
 <br>
 
-__Step 5:__ Mark results as incomplete if they do not fulfill one of the completeness checks.
+__Step 5:__ Mark results as incomplete if they fail one of the completeness checks.
 ```{r message=F}
 
-# Set incomplete to zero if any of completeness checks are not met
+# Set incomplete to zero if any completeness checks fail
 data <- data %>% 
-        mutate(incomplete = sum(c(pct_quarter_samples < 0.75, 
-                                  pct_annual_samples < 0.75,
-                                  unique_values < 2)) > 0)
-        
+        rowwise() %>%
+        mutate(complete = sum(c(pct_quarter_samples >= 0.75, 
+                                pct_annual_samples  >= 0.75,
+                                unique_values       >= 2)) >= 3)
+
+#names(data)      
+```
+
+<br>
+__Final table with added `complete` column.__
+```{r message=F, echo=F, fig.cap = "Final table with added `complete` column."}
+
+DT::datatable(sample_n(select(data, -c(Param_Code, Concentration, Null_Code, Dlimit, CAS)), 10, replace = F), options = dt_options, rownames = F)
+```
+
+<br>
+
+__Step 6 (Optional):__ By collapsing the `complete` status to 1 row per site-pollutant-quarter combination, you can save the table and attach a site's _completeness_ status to future data analysis as needed.
+```{r message=F, warning=F}
+
+# Collapse table to 1 row per unique site-pollutant-quarter
+ data <- data %>% 
+         group_by(AQSID, POC, Pollutant, Year, cal_quarter) %>%  #Check completeness for every quarter
+         summarize(complete              = complete[1], 
+                   valid_annual_samples  = valid_annual_samples[1],
+                   valid_quarter_samples = valid_quarter_samples[1])
+
+# Collapse table to 1 row per unique site-pollutant-year
+ data <- data %>%          
+         group_by(AQSID, POC, Pollutant, Year) %>%  
+         summarize(complete            = sum(complete, na.rm = T) >= 4,
+                   annual_samples      = valid_annual_samples[1],
+                   min_quarter_samples = min(valid_quarter_samples, na.rm = T))
+      
+```
+
+
+```{r message=F, echo=F, fig.cap = "Collapsed table showing `completeness` status."}
+
+DT::datatable(head(data, 10), options = dt_options, rownames = F)
+
+#DT::datatable(sample_n(select(data, -c(Param_Code, CAS)), 10, replace = F), options = dt_options, rownames = F)
 ```
 
 </div>

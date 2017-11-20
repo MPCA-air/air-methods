@@ -160,30 +160,28 @@ For air toxics, measurements from collocated monitors are considered equally val
 
 Averages POCs. All POCs with valid measurements >= MDL are averaged. If no POC has a valid measurement >= MDL, then all valid measurements are averaged (result will be < MDL and estimated using MLE approximation). If there are no valid measurements, then result will be NA and filtered out later.
 
-Data must have columns with "AQS_ID", "POC", "Param_Code", "Date","Concentration",
-"Null_Data_Code", "MDL", "Pollutant", "Year", "CAS" in order from left to right.
+Data must have columns with "Monitoring Site", "AQSID", "Parameter", "Pollutant","PollutantGroup",
+"Date", "MDL", "Result", "Censored".
 ```{r}
 POC_average = function(data) {
-  library(dplyr)
-  library(tidyr)
   
-  POC_averaging = function(Concentration, MDL) {
+  POC_averaging = function(Result, Censored) {
     
-    if(all(Concentration < MDL)) {
-      return (mean(Concentration, na.rm = T))
+    Result = Result[!is.na(Result)]
+    Censored = Censored[!is.na(Censored)]
+    
+    if(all(Censored, na.rm = T)) {
+      return (mean(Result, na.rm = T))
     }
     else {
-      return (mean(Concentration[Concentration > MDL], na.rm = T ) )
+      return (mean(Result[!Censored], na.rm = T ) )
     }
     
   }
   
-  names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration",
-                   "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
-  data = data %>% group_by(AQS_ID, Param_Code, Date, MDL, Pollutant, Year, CAS) %>% summarise(Concentration = POC_averaging(Concentration, MDL) )
-  return (select(data, AQS_ID, Param_Code, Date, Concentration, MDL, Pollutant, Year, CAS) )
-  
-  return(data)
+  data = data %>% group_by(`Monitoring Site`, AQSID, Parameter, Pollutant, PollutantGroup, Date, MDL) %>% summarise(Result = POC_averaging(Result, MDL), Censored = all(Censored, na.rm = T) ) %>%
+    mutate(Result = ifelse(is.na(Result), NA, Result), Censored = ifelse(is.na(Result), NA, Censored))
+  return (select(data, `Monitoring Site`, AQSID, Parameter, Pollutant, PollutantGroup, Date, Result, MDL, Censored) )
 }
 ```  
 

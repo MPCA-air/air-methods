@@ -1,0 +1,3 @@
+# AQI explorer
+
+This section describes the methods used to summarize the data shown in MPCA's AQI explorer.

@@ -17,6 +17,97 @@ The summary methods described in this chapter inlcude:
 
 __Notes__
 
+Data must be tested for normality prior to determining what type of summarization to report. In general environmental data are non-normal and skewed towards the low end of detrection (left skewed). Many normality tests exist and they cary in sensitivity. A good article for the lay person can be found at this link: (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3693611/)
+
+The normality test in the example script below is a recommended test for data of sample size between 5-5000 and will allow missing values. A Shapiro-Wilk test may also be performed for the typical sample size of a year of air toxics results. The script below includes a a line to switch to a Shapiro Wilk test.
+
+```{r message=F, echo=F, eval=TRUE}
+library(readr)
+library(dplyr)
+library(stats)
+library(nortest)
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+
+colnames(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
+
+data_normresults <- data.frame(site_name=character(),
+                               analyte=character(),
+                               year=character(),
+                                 w_value=numeric(), 
+                                 p_value=numeric(), 
+                                 stringsAsFactors=FALSE) 
+sites <- unique(data$aqs_id)
+analytes <- unique(data$pollutant)
+years <- unique(data$year)
+
+for(i in sites){
+  for(j in analytes){
+    for(k in years){
+  data_sub = filter(data , aqs_id==i, pollutant== j, year==k)
+  if(length(unique(data_sub$conc))>5){
+  norm_test <- sf.test(data_sub$conc)
+  #norm_test <- shapiro.test(data_sub$conc)
+  print(i)
+  print(norm_test)
+  values = data.frame(site_name = i, analyte=j, year=k, w_value = round(norm_test$statistic, digits=2), p_value = round(norm_test$p.value, digits=2))
+  data_normresults <- rbind(values, data_normresults)
+    }
+  }
+  }
+}
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
+datatable(head(data_normresults, 10), options = dt_options)
+```
+
+It is also suggested that one visualize the data to determine if normality may be a valid assumption. The script below are an example for visual normality tests and include explanation for their interpretation.In the Q-Q Plot, normal data will form a straight line with the theoretical distribution quantiles with little deviation from the line. This is a visual test and somewhat subjective. Normal data form histograms that produce a bell shaped curve.
+This web tool will allow visual inspection of air toxics data by year, site and pollutants.
+(https://mpca-pahs.shinyapps.io/NormViz/)
+
+```{r message=F, echo=F, eval=FALSE, warning = FALSE}
+library(shiny)
+library(readr)
+library(rsconnect)
+
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+colnames(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
+pollutant <- unique(data$pollutant)
+site <- unique(data$aqs_id)
+year <- unique(data$year)
+
+
+shinyApp(
+  ui = fluidPage(responsive = FALSE,
+                 fluidRow(
+                   column(3,
+                          style = "padding-bottom: 20px;",
+                          inputPanel(
+                            selectInput("pollutant", label="Choose a pollutant", choices = pollutant, selected="Benzene"),
+                            selectInput("year", label="Choose a year", choices = year, selected=2009),
+                            selectInput("site", label="Choose a site", choices = site, selected=270535501))),
+                   column(9,
+                          plotOutput('normviz', height = "400px")))),
+  
+  
+  server = function(input, output) {
+    
+    
+    
+    
+    output$normviz <- renderPlot({
+      print(input$pollutant)
+      print(input$site)
+      print(input$year)
+      data_sub = filter(data, pollutant==input$pollutant, aqs_id == input$site, year == input$year)
+      par(mfrow=c(2,2))
+      qqnorm(data_sub$conc)
+      hist(data_sub$conc)
+    })
+    
+  })
+
+```
+
+
 When to use a arithmetic or geometric mean:
 
   -  Use an arithmetic mean when your data are normal and there are less than 5% below detection limit values per year/analyte/site [Kristie made up the 5%, but there is an EPA document looking at the impacts of BDL data. Will cite and incorporate.].
@@ -161,78 +252,76 @@ The annual mean or upper confidence limit is considered below the method detecti
 ## Confidence intervals (Derek) {#confidence}
 
 ```{r confidence, eval=F}
-# Data must have names"AQS_ID", "POC", "Param_Code", "Date", "Concentration", "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS"
-# Data must also have column named "Censored" indicating whether Concentration < MDL
-# Data must also have column "ID" with grouping criteria. ID = Site + Pollutant + Year if data has multiple sites, pollutants, and years. If data has only one site, pollutant, or year, then those elements do not need to be included in ID.
+# Data must have names "AQSID", "POC", "Parameter", "Date", "Result", "MDL", "Pollutant"
 
 
 library(dplyr)
 library(EnvStats)
+library(lubridate)
 data = read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
+seed = 2017
 
-names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration",
+names(data)[1:10] <- c("AQSID", "POC", "Parameter", "Date","Result",
                        "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
 
-data = data %>% filter(AQS_ID == 270370020) %>% mutate(ID = paste(Pollutant, Year), Censored = Concentration < MDL)
+data = data %>% filter(AQSID == 270370020) %>% mutate(`Monitoring Site` = AQSID, PollutantGroup = Pollutant, Censored = Result < MDL, Result = ifelse(Censored, MDL, Result) )
 
-UCL_95 = function(data, Boot_Repeats = 1000, seed = 2017) {
 
+UCL_95 = function(data, Boot_Repeats = 1000) {
   
-MLE_est <- function(data){
+  annual_AT_means = function(air_toxics) {
+  
+  air_toxics = mutate(air_toxics, Year = year(ymd(Date)), Quarter = quarter(ymd(Date)) )
+  sample_complete = air_toxics %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, Quarter, MDL) %>% summarise(Complete = ( (sum(!is.na(Result) ) / length(Result) ) >= 0.75 ) ) %>%
+    mutate(Complete = ifelse(is.na(Complete), F, Complete) ) %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, MDL) %>% summarise(Complete = all(Complete) )
+  
+  enough_detects = air_toxics %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, MDL) %>% summarise(Detected = mean(Censored, na.rm = T) <= 0.8 )
+  
+  site_means = air_toxics %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, MDL) %>% summarise(Mean = ifelse(length(unique(Result[!is.na(Result) & !Censored] ) ) < 2, NA,
+     ifelse (any(Censored, na.rm = T), elnormAltCensored(Result, Censored, method = "impute.w.mle", ci = F)$parameters[[1]], mean(Result, na.rm = T) ) ) )
+  
+  site_means = left_join(site_means, sample_complete, by = c("Monitoring Site", "AQSID", "Pollutant", "PollutantGroup", "Year", "MDL") ) %>%
+    left_join(enough_detects, by = c("Monitoring Site", "AQSID", "Pollutant", "PollutantGroup", "Year", "MDL") ) %>% mutate(Mean = ifelse(Complete & Detected, Mean, NA), ID = paste(AQSID, Pollutant, Year) )
+
+  return(site_means)
+}
+  
+  MLE_est <- function(data){
     
-    results = data$Concentration
+    results = data$Result
     censored = data$Censored
-    n = sum(!is.na(data$Concentration))
+    n = sum(!is.na(results))
     
-    MLE_means = NULL
-    
-    
-    if ( (n < 0.75 * length(results)) | ((sum(!censored, na.rm = T) ) < 0.2 * n) | ( length(unique(results[!is.na(results) & !censored] ) ) < 2 ) ) {
+    if (length(unique(results[!is.na(results) & !censored] ) ) < 2 ) {
       MLE_means = NA
-    } else
-    {
-      
+    }
+    
+    else {
       random.rows = NULL  
-      random.rows <- sample(which(!is.na(censored) & (!censored) & !duplicated(results) ), 2, replace = FALSE)
+      random.rows = sample(which(!is.na(censored) & (!censored) & !duplicated(results) ), 2, replace = FALSE)
       random.rows = c(random.rows, sample(which(!is.na(censored)), n-2, replace = TRUE))
       
-      
-      if (sum(censored[random.rows], na.rm = T) < 1){
-        MLE_means = mean(results[random.rows])  
-      }
-      
-      else {
-        MLE_means = exp (elnormCensored(results[random.rows] + 1e-16,
-                                        censored[random.rows],
-                                        method = "mle", 
-                                        ci = F 
-        )$parameters[[1]])
-      }
-      
+      MLE_means = ifelse(sum(censored[random.rows], na.rm = T) == 0, mean(results[random.rows]), elnormAltCensored(results[random.rows], censored[random.rows], method = "impute.w.mle", ci = F)$parameters[[1]] )
     }
     
     return(MLE_means)
+  }
+  
+  data = mutate(data, ID = paste(AQSID, Pollutant, Year))
+  
+  Bootstrap_means = replicate(Boot_Repeats, (by(data, data$ID, MLE_est) ) )
+  
+  CL = apply(Bootstrap_means, 1, function(x) sort(x)[ceiling(0.95 * Boot_Repeats)] )
+  CL = data.frame(ID = names(CL), UCL95 = unname(CL))
+  
+  annual_summary = left_join(annual_AT_means(data), CL, by = "ID") %>% mutate(UCL95 = ifelse(Complete & Detected, UCL95, NA) ) %>% select(-ID)
+  
+  return(annual_summary)
+  
 }
 
 set.seed(seed)
-
-data = data %>% group_by(ID) %>% mutate(n = sum(!is.na(Concentration) ), `% Censored` = sum(Censored, na.rm = T) * 100 / n)
-
-site_means = data %>% group_by(ID) %>% summarise(Mean = ifelse( mean(n) < 0.75 * length(Concentration) | mean (`% Censored`) > 80 | length(unique(Concentration[!is.na(Concentration) & !Censored] ) ) < 3, NA, ifelse (any(Censored, na.rm = T), exp (elnormCensored(Concentration + 1e-16, Censored, method = "mle", ci = F)$parameters[[1]]), mean(Concentration, na.rm = T) ) ) )
-
-Bootstrap_means = replicate(Boot_Repeats, (by(data, data$ID, MLE_est) ) )
-
-UCL = apply(Bootstrap_means, 1, function(x) sort(x)[ceiling(0.975 * Boot_Repeats)])
-
-UCL = cbind(site_means, UCL)
-
-rownames(UCL) = NULL
-
-return(UCL)
-
-}
-
-UCLs = UCL_95(data)
+annual_summary = UCL_95(data, 100)
 ```
 
 
@@ -241,17 +330,7 @@ UCLs = UCL_95(data)
 
 ## Comparison of data to inhalation health benchmarks  (Kristie) {#health}
 
-The annual 95% upper confidence limit is compared to chronic inhalation health benchmarks according to the MPCA/MDH hierarchy for inhalation health benchmarks information sources.The ways this is done is different for annual measured data reports (The Air Toxics Data Explorer) or if the comparison is used in a cumulative analysis (cumulative AERA) to inform air permitting or environmental review.
+Chronic Inhalation Health Benchmarks - The annual 95% upper confidence limit is compared to chronic inhalation health benchmarks which are chosen based on the MPCA/MDH hierarchy for inhalation health benchmarks information sources.These risk results are summarized differently for annual measured data reports (The Air Toxics Data Explorer) or if the comparison is used in a cumulative analysis (cumulative AERA) to inform air permitting or environmental review.
+Acute Inhalation Health Benchmarks - The 2nd highest annual value multiplied by ten is compared to acute inhalation health benchmarks. This adjustment of the 24 hour integrated value approximates an hourly maximum, since acute inhalation health benchmarks are developed to be protective for high short term exposures such as an hour.
 
-- Treatment of data for Annual Comparisons of Measured Data to IHBs
-    - Chronic values are compared to UCL-95 values that reflect data that meet completeness and non-censored rules discussed in this document. Refer to where the UCL-95s come from in this chapter
-    - Acute health benchmarks are intended for comparison with an hourly max value.Since air toxics measurements are 24 hour integrated samples, the hourly maxima is estimated by multiplying the second highest value by 10. The justification for this estimation stemmed from an analysis comparing hourly gas (NO2) and particle (PM2.5) measurements to 24hour means. (reference this work?) Refer to where the hourly max estimates come from in this chapter.
--  Treatment of measured data for use in a cumulative AERA to inform permitting or environmental review
-    - A cumulative AERA requires risks summed across pollutants. Since not all pollutants are measured at each monitoring site, means of sites are estimated based on population density. An estimation based on population density is based in the assumption that pollution sources are greater near greater numbers of people. Means are calculated for mid-density sites, and rural sites. Facilities within urban areas are provided risk estimates at hte closest monitor with all pollutants measured.(reference guidance here and do not repeat the guidance that is already written down)
-    - Based somewhat on criteria pollutant guidance for design values, the cumualtive risk estimates determined from monitoring data for cumulative AERAs are the means of the most recent three years of monitored data.
-    - The following scripts estimate 3 year means for measurements of all pollutant data, and compare to inhalation health benchmarks. A mid-script product is a table of the IHBs used by the agency in tabular form, which can be knit individually into a pdf document.
-(pipe dreams, but I know I can make it real!)
-
-```{r}
-#pull all the data
-```
+Summarization of risk estimates for a cumulative Air Emission Risk Analaysis - Risk estimates are summed across pollutants thereby applying the concept of additivity. Since not all pollutants are measured at each monitoring site, means of sites are estimated based on population density since we asumme that pollution sources are greater near greater numbers of people. Means are calculated for mid-density sites, and rural sites. Facilities within urban areas are provided risk estimates at the closest or most representative monitor with all pollutants measured.This is described in the cumulative AERA section in the AERA guidance. (https://www.pca.state.mn.us/air/aera-guide) Cumulative AERAs utilitze the mean cumulative risk estimates for the most recent three years of monitored data.

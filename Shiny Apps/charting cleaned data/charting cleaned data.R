@@ -16,8 +16,8 @@ shinyApp(
                    column(3,
                           style = "padding-bottom: 20px;",
                           inputPanel(
-                            selectInput("pollutant", label="Choose a pollutant", choices = pollutants, selected="Benzene"),
-                            selectInput("site", label="Choose a site", choices = sites, selected=270535501))),
+                            selectInput("pollutant", label="Choose a pollutant", choices = pollutant, selected="Benzene"),
+                            selectInput("site", label="Choose a site", choices = site, selected=270535501))),
                    column(9,
                           plotOutput('detlim', height = "400px")))),
   
@@ -26,8 +26,8 @@ shinyApp(
     
     data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
     colnames(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
-    pollutants <- unique(data$pollutant)
-    sites <- unique(data$aqs_id)
+    pollutant <- unique(data$pollutant)
+    site <- unique(data$aqs_id)
     
     
     

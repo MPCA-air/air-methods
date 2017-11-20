@@ -1,0 +1,12 @@
+name: ChartDetectionLimits
+title: ChartDetectionLimits
+username:
+account: mpca-pahs
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 230620
+bundleId: 1051833
+url: https://mpca-pahs.shinyapps.io/ChartDetectionLimits/
+when: 1509372907.49962
+asMultiple: FALSE
+asStatic: FALSE

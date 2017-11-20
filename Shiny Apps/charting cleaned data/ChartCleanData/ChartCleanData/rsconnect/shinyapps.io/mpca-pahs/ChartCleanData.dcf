@@ -1,0 +1,12 @@
+name: ChartCleanData
+title: ChartCleanData
+username:
+account: mpca-pahs
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 230617
+bundleId: 1051808
+url: https://mpca-pahs.shinyapps.io/ChartCleanData/
+when: 1509371518.64126
+asMultiple: FALSE
+asStatic: FALSE

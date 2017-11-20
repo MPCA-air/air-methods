@@ -21,7 +21,21 @@ Coming soon...
 
 ## Calendar plots (Cassie)
 
-We have created a nice plot.
+The openair package provides a convenient function, calendarPlot, for presenting data in a calendar format. 
+
+```{r,echo=FALSE}
+library(openair)
+library(readr)
+library(curl)
+
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+
+formaldehyde_963<-subset(data,data$Param_Code==43502 & data$AQSID==270530963 &data$Date>="2013-01-01")
+colnames(formaldehyde_963)[4]="date" #openair requires dates to be stored under field name "date"
+
+calendarPlot(formaldehyde_963,pollutant="Concentration",statistic="mean", year=2013, annotate="value",digits=1,  key.footer="ug/m3", main="Daily Average Formaldehyde Concentrations at Mpls-Phillips (963), 2013")
+
+```
 
 
 ## Colors (Dorian)

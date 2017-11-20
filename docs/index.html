@@ -106,7 +106,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="https://mpca-air.github.io/air-methods">Methods for air data analysis</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#RQAMD"><i class="fa fa-check"></i><b>0.1</b> Retrieving data from AQS DataMart using RQAMD</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#WAIR"><i class="fa fa-check"></i><b>0.2</b> Retrieving data from MPCA WAIR database</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#aqi-now"><i class="fa fa-check"></i><b>0.3</b> Current AQI obs</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#monitors"><i class="fa fa-check"></i><b>0.4</b> Current AQI observations</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#tableau"><i class="fa fa-check"></i><b>0.5</b> Retrieving data from Tableau</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html"><i class="fa fa-check"></i><b>1</b> Data cleaning (Dorian &amp; Cassie)</a><ul>
 <li class="chapter" data-level="1.1" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#missing"><i class="fa fa-check"></i><b>1.1</b> Remove blank, NULL, and missing values</a></li>
 <li class="chapter" data-level="1.2" data-path="data-cleaning-dorian-cassie.html"><a href="data-cleaning-dorian-cassie.html#quals"><i class="fa fa-check"></i><b>1.2</b> Remove <em>Qualified</em> data</a></li>
@@ -166,6 +172,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.3" data-path="maps-kristie.html"><a href="maps-kristie.html#creating-shapefiles-in-r-adn-joining-to-ej-areas"><i class="fa fa-check"></i><b>11.3</b> Creating shapefiles in R adn joining to EJ areas</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="additional-resources-kristie.html"><a href="additional-resources-kristie.html"><i class="fa fa-check"></i><b>12</b> Additional resources (Kristie)</a></li>
+<li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
+<li class="chapter" data-level="13" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>13</b> AQI explorer</a></li>
+<li class="chapter" data-level="14" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>14</b> Criteria pollutant explorer</a></li>
+<li class="chapter" data-level="15" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>15</b> Air toxics explorer</a><ul>
+<li class="chapter" data-level="15.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>15.1</b> MPCA Air Toxics Methods</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning"><i class="fa fa-check"></i><b>15.1.1</b> Data Cleaning</a></li>
+<li class="chapter" data-level="15.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation"><i class="fa fa-check"></i><b>15.1.2</b> Data Validation</a></li>
+<li class="chapter" data-level="15.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>15.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="15.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>15.1.4</b> Producing Annual Summaries</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -192,11 +209,713 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="introduction" class="section level1 unnumbered">
 <h1>Introduction</h1>
 <div style="margin-top: -25px;">
-<p><em>Updated Oct 12, 2017</em></p>
+<p><em>Updated Nov 20, 2017</em></p>
 </div>
 <p><img src="images/cover.jpeg" style="display: block; margin: auto;" /></p>
 <p>This guide describes the methods used at the MPCA to analyze air monitoring and modeling data. The charts and code found in this guide were produced using the freely available R statistical software. To follow along with the examples download a copy of R to your computer from the <a href="https://cran.r-project.org/">r-project</a> or use <a href="http://www.r-fiddle.org/#/">R-Fiddle</a> in your browser.</p>
 
+<p>﻿# Get data (Dorian &amp; Cassie)</p>
+<p><img src="http://imgs.xkcd.com/comics/fuck_grapefruit.png" width="55%" /></p>
+<p>This section describes the location of data sources relevant to air monitoring and how to access them using R.</p>
+<p>These data sources include:</p>
+<p><strong>Air monitoring</strong></p>
+<ul>
+<li>EPA’s AQS DataMart
+<ul>
+<li><a href="#rqamd"><strong>??</strong></a> RQAMD Package</li>
+</ul></li>
+<li>EPA’s AirNow
+<ul>
+<li><a href="index.html#aqi-now">0.3</a> Current AQI observations<br />
+</li>
+<li><a href="index.html#monitors">0.4</a> Active AQI monitors</li>
+</ul></li>
+<li>MPCA sources
+<ul>
+<li><a href="index.html#WAIR">0.2</a> WAIR Database</li>
+<li><a href="#LIMS"><strong>??</strong></a> LIMS data via Tableau</li>
+<li><a href="#AirVision"><strong>??</strong></a> Airvision - Hourly data</li>
+</ul></li>
+</ul>
+<p><strong>Health and standards</strong></p>
+<ul>
+<li>Inhalation health benchmarks</li>
+<li>NAAQs</li>
+</ul>
+<p><strong>Air modeling</strong></p>
+<ul>
+<li>NATA</li>
+<li>Downscaler for Ozone and PM2.5</li>
+<li>MNRisks</li>
+<li>CMAQ</li>
+</ul>
+<p><strong>Air emissions</strong></p>
+<ul>
+<li>EPA’s NEI</li>
+<li>Facility locations</li>
+</ul>
+<p><strong>Meteorology and Climate</strong></p>
+<ul>
+<li>Observations</li>
+<li>HYSPLIT for wind trajectories</li>
+<li>Forecasts</li>
+</ul>
+<p><strong><a href="index.html#tableau">0.5</a> Tableau workbooks</strong></p>
+<p><strong>Geography and American Community Survey (ACS)</strong></p>
+<ul>
+<li>Census</li>
+<li>ACS</li>
+<li>Traffic</li>
+<li>Land use</li>
+</ul>
+<div id="RQAMD" class="section level2">
+<h2><span class="header-section-number">0.1</span> Retrieving data from AQS DataMart using RQAMD</h2>
+<p>The AQS Data Mart provides a convenient API to access air quality data stored in the EPA’s AQS database, [AQS Data Mart] (<a href="https://aqs.epa.gov/aqsweb/documents/data_mart_welcome.html" class="uri">https://aqs.epa.gov/aqsweb/documents/data_mart_welcome.html</a>)</p>
+<p>Note: The AQS Data Mart requires a user name and password.The username and password is not the same as your AQS User Account.To request a Data Mart account, follow the instructions on the Data Mart page.</p>
+<p>The RQAMD package allows users to query the AQS Data Mart in R, [RQAMD] (<a href="https://github.com/ebailey78/raqdm" class="uri">https://github.com/ebailey78/raqdm</a>)</p>
+<p><br> <strong>Sample <code>R</code> script</strong></p>
+<p>Click the button below to view a step by step example.</p>
+<div class="toggle">
+<button class="btn_code">
+Show <strong>R</strong> code
+</button>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##install raqdm package
+
+<span class="kw">library</span>(devtools)
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ebailey78/raqdm&quot;</span>)
+
+<span class="kw">require</span>(raqdm)
+
+##set Data Mart username and password.
+
+<span class="kw">setAQDMuser</span>(<span class="st">&quot;User Name&quot;</span>,<span class="st">&quot;PW&quot;</span>,<span class="dt">save=</span><span class="ot">TRUE</span>) <span class="co">#Note save=TRUE creates a file that stores username and password locally, you will not need to run setuser info each time you load raqdm. </span>
+
+<span class="kw">setAQDMdefaults</span>(<span class="dt">pc=</span><span class="st">&quot;CRITERIA&quot;</span>, <span class="dt">state=</span><span class="st">&quot;27&quot;</span>, <span class="dt">save=</span><span class="ot">TRUE</span>) <span class="co">#Set defaults that are locally stored for queries. This eliminates need to define the data type and state code. </span>
+
+
+##Single Paramteer Query
+
+x=<span class="kw">getAQDMdata</span>(<span class="dt">state=</span><span class="st">&quot;27&quot;</span>,<span class="dt">pc=</span><span class="st">&quot;CRITERIA&quot;</span>,<span class="dt">param=</span><span class="st">&quot;42602&quot;</span>,<span class="dt">format=</span><span class="st">&quot;AQCSV&quot;</span>,<span class="dt">bdate=</span><span class="st">&quot;20140101&quot;</span>,<span class="dt">edate=</span><span class="st">&quot;20141231&quot;</span>,<span class="dt">synchronous =</span> <span class="ot">FALSE</span>) <span class="co"># Queries Data Mart DataBase</span>
+aqcsv=<span class="kw">getAQDMrequest</span>(x) <span class="co">#wait for email confirming file is ready. </span>
+
+
+##Multiple Parameter Loops
+
+
+params &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;45201&quot;</span>, <span class="st">&quot;42602&quot;</span>, <span class="st">&quot;44201&quot;</span>) <span class="co">#Create a vector with the parameters you are interested in</span>
+
+<span class="co"># Use lapply to loop through the params vector, requesting each one from AQDM. A list of requests will be returned to the x variable</span>
+x &lt;-<span class="st"> </span><span class="kw">lapply</span>(params, <span class="cf">function</span>(p) {
+  <span class="kw">return</span>(<span class="kw">getAQDMdata</span>(<span class="dt">param=</span>p))
+})
+
+<span class="co"># now loop through the requests to retrieve the data</span>
+y &lt;-<span class="st"> </span><span class="kw">lapply</span>(x, <span class="cf">function</span>(r) {
+  <span class="kw">return</span>(<span class="kw">getAQDMrequest</span>(r))
+})
+
+<span class="co"># You could then use do.call and rbind to combine them into one data.frame</span>
+d &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, y)</code></pre></div>
+<p><br></p>
+</div>
+<div id="WAIR" class="section level2">
+<h2><span class="header-section-number">0.2</span> Retrieving data from MPCA WAIR database</h2>
+<p>The WAIR database provides a queryable local copy of select air quality data extracted multiple data sources. This database is managed by Margaret McCourtney. Contact Margaret to request login credentials. See [WAIR Data Dictionary] (<a href="http://rainier.pca.state.mn.us/documentation/DataDictionary/wair/index.html" class="uri">http://rainier.pca.state.mn.us/documentation/DataDictionary/wair/index.html</a>) for available data tables.</p>
+<p>Use the following code to query WAIR using DPLYR</p>
+<div class="toggle">
+<button class="btn_code">
+Show <strong>R</strong> code
+</button>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">################################################################################################
+## This script loads the library and driver and connects to WAIR.  A dplyr query extracts 
+## data from the database into a format specified by Cassie McMahon for calculating           
+## OZONE DESIGN VALUES                                                                        
+##                                                                                    
+## Please disconnect from database before proceeding with analysis of the data in your 
+## dataframe.
+##
+## Cassie&#39;s headings
+## &quot;State.Code&quot;, &quot;County.Code&quot;, &quot;Site.ID&quot;, &quot;Parameter&quot;, &quot;POC&quot;, &quot;Sample.Duration&quot;, &quot;Unit&quot;,
+## &quot;Method&quot;, &quot;Date&quot;, &quot;Start.Time&quot;, &quot;Sample.Value&quot;, &quot;NullDataCode&quot;, &quot;SamplingFrequency&quot;,
+## &quot;MonitorProtocolID&quot;, &quot;Qual1&quot;  
+##  Note: WAIR does not contain values for SamplingFrequency and MonitorProtocolID 
+##
+## Note:  dplyr does not have a command to disconnect to the database.  Connection will
+## terminate upon quitting R.  So please do not keep (many) connections open for long periods of
+## time
+################################################################################################
+
+## call the library
+<span class="kw">library</span>(dplyr)
+
+
+## Open a connection to the database WAIR, schema AQS ##
+my_wair &lt;-<span class="st"> </span><span class="kw">src_postgres</span>(<span class="dt">dbname=</span><span class="st">&#39;wair&#39;</span>,<span class="dt">host=</span><span class="st">&quot;eiger&quot;</span>,<span class="dt">user=</span><span class="st">&quot;username&quot;</span>,<span class="dt">password=</span><span class="st">&quot;password&quot;</span>,
+<span class="dt">options=</span><span class="st">&quot;-c search_path=aqs&quot;</span>)
+
+
+## Reference a table, or two if combining, in the database (e.g. aqs.monitor &amp; aqs.obs_value) ##
+## Select columns and filter by row ##
+
+<span class="co">#aqs.monitor table in WAIR ##</span>
+my_monitor &lt;-<span class="st"> </span><span class="kw">filter</span>(<span class="kw">select</span>(<span class="kw">tbl</span>(my_wair, <span class="st">&quot;monitor&quot;</span>), id_mon<span class="op">:</span>poc_code), stateid<span class="op">==</span><span class="dv">27</span> <span class="op">&amp;&amp;</span>
+parm_code<span class="op">==</span><span class="dv">44201</span>)
+
+<span class="co">#aqs.obs_value table in WAIR ##</span>
+my_obs &lt;-<span class="st"> </span><span class="kw">filter</span>(<span class="kw">select</span>(<span class="kw">tbl</span>(my_wair, <span class="st">&quot;obs_value&quot;</span>), id_mon, dur_code, unitid, method_code,
+sampldate, startime, value, nulldata, qual_code), parm_code<span class="op">==</span><span class="dv">44201</span> <span class="op">&amp;&amp;</span><span class="st"> </span><span class="kw">between</span>(sampldate,
+<span class="st">&quot;2014-06-01&quot;</span>, <span class="st">&quot;2014-06-07&quot;</span>))
+
+
+## Combine monitor data with observations ##
+my_mn_o3 &lt;-<span class="st"> </span><span class="kw">inner_join</span>(my_monitor, my_obs, <span class="dt">type =</span> <span class="st">&quot;inner&quot;</span>, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;id_mon&quot;</span>)) 
+
+
+## Arrange combined data in specified order
+## Collect data into a dataframe or table (&#39;collect&#39; only works on dataframe, if don&#39;t &#39;collect&#39;
+## will only get first 100,000 rows with tbl_df or tbl_dt)
+
+my_mn_o3_df &lt;-<span class="st"> </span><span class="kw">collect</span>(my_mn_o3, <span class="kw">arrange</span>(my_mn_o3, stateid, cntyid, siteid,
+parm_code, poc_code, dur_code, unitid, method_code, sampldate, startime, value, nulldata,
+qual_code))
+
+## To store data in a data.table instead of data.frame
+<span class="co"># my_mn_o3_dt &lt;- tbl_dt(my_mn_o3_df)  </span>
+
+
+## To avoid &quot;Variables not shown&quot;
+<span class="kw">options</span>(<span class="dt">dplyr.width =</span> <span class="ot">Inf</span>)
+
+
+## 
+<span class="kw">head</span>(my_mn_o3_df)</code></pre></div>
+<p>Use the following code to query WAIR using RPostgrSQL</p>
+<div class="toggle">
+<button class="btn_code">
+Show <strong>R</strong> code
+</button>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">################################################################################################
+## This script loads the library and driver and connects to WAIR.  A PostgrSQL query extracts 
+## data from the database into a format specified by Cassie McMahon for calculating           
+## OZONE DESIGN VALUES                                                                        
+##                                                                                    
+## Please disconnect from database and unload the driver before proceeding with
+## analysis of the data in your dataframe.
+##
+## Cassie&#39;s headings
+## &quot;State.Code&quot;, &quot;County.Code&quot;, &quot;Site.ID&quot;, &quot;Parameter&quot;, &quot;POC&quot;, &quot;Sample.Duration&quot;, &quot;Unit&quot;,
+## &quot;Method&quot;, &quot;Date&quot;, &quot;Start.Time&quot;, &quot;Sample.Value&quot;, &quot;NullDataCode&quot;, &quot;SamplingFrequency&quot;,
+## &quot;MonitorProtocolID&quot;, &quot;Qual1&quot;  
+##  Note: WAIR does not contain values for SamplingFrequency and MonitorProtocolID 
+##
+################################################################################################
+
+## call the library
+<span class="kw">library</span>(RPostgreSQL)
+
+## load the PostgreSQL driver
+drv &lt;-<span class="st"> </span><span class="kw">dbDriver</span>(<span class="st">&quot;PostgreSQL&quot;</span>)
+
+## Open a connection 
+con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(drv, <span class="dt">dbname=</span><span class="st">&quot;wair&quot;</span>,<span class="dt">host=</span><span class="st">&#39;eiger&#39;</span>,<span class="dt">user=</span><span class="st">&#39;username&#39;</span>,<span class="dt">password=</span><span class="st">&#39;password&#39;</span>)
+
+<span class="co">#***************************** all in 1 step ***************************************************</span>
+
+
+dframe &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(con, 
+           <span class="dt">statement =</span> <span class="kw">paste</span>(
+       ################ insert SQL here ######################
+        <span class="st">&quot;SELECT m.stateid AS state_code,\</span>
+<span class="st">            m.cntyid AS county_code,\</span>
+<span class="st">            m.siteid AS site_id,\</span>
+<span class="st">            m.parm_code AS parameter,\</span>
+<span class="st">            m.poc_code AS poc,\</span>
+<span class="st">            o.dur_code AS sample_duration,\</span>
+<span class="st">        o.unitid AS unit,\</span>
+<span class="st">            o.method_code AS method,\</span>
+<span class="st">            o.sampldate AS date,\</span>
+<span class="st">            o.startime AS start_time,\</span>
+<span class="st">            o.value AS sample_value,\</span>
+<span class="st">            o.nulldata AS nulldatacode,\</span>
+<span class="st">                NULL AS sampling_frequency,\</span>
+<span class="st">        NULL AS monitor_protocol_id,\</span>
+<span class="st">            o.qual_code\</span>
+<span class="st">           FROM aqs.monitor m \</span>
+<span class="st">           JOIN aqs.obs_value o \</span>
+<span class="st">             ON m.id_mon = o.id_mon \ </span>
+<span class="st">          WHERE m.stateid = &#39;27&#39; \</span>
+<span class="st">            AND m.parm_code = &#39;44201&#39; \</span>
+<span class="st">            AND o.sampldate BETWEEN &#39;2014-06-01&#39; AND &#39;2014-06-07&#39;\</span>
+<span class="st">    &quot;</span>
+       ########################################################
+                     )); 
+
+
+<span class="co">#***********************************************************************************************</span>
+
+## Closes the connection
+<span class="kw">dbDisconnect</span>(con)
+
+## Frees all the resources on the driver
+<span class="kw">dbUnloadDriver</span>(drv)</code></pre></div>
+</div>
+<div id="aqi-now" class="section level2">
+<h2><span class="header-section-number">0.3</span> Current AQI obs</h2>
+<p>Air data for the entire United States is at your finger tips. <em>EPA’s AirNow</em> maintains a publicly accessible folder of current air monitoring data at <a href="https://files.airnowtech.org/" class="uri">https://files.airnowtech.org/</a>.</p>
+<p><br> <strong>Sample <code>R</code> script</strong></p>
+<p>Use the following R code to grab the most recent AQI results for the entire country.e.</p>
+<div class="toggle">
+<button class="btn_code">
+Show <strong>R</strong> code
+</button>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+
+<span class="co"># Connect to AirNow data site</span>
+<span class="co">#https://files.airnowtech.org/</span>
+
+airnow_link &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;https://s3-us-west-1.amazonaws.com//files.airnowtech.org/airnow/today/&quot;</span>,
+                      <span class="st">&quot;HourlyData_&quot;</span>,
+                      <span class="kw">format</span>(<span class="kw">Sys.time</span>()<span class="op">-</span><span class="dv">60</span><span class="op">*</span><span class="dv">75</span>, <span class="st">&quot;%Y%m%d%H&quot;</span>, <span class="dt">tz=</span><span class="st">&quot;GMT&quot;</span>),
+                      <span class="st">&quot;.dat&quot;</span>)
+  
+aqi_now   &lt;-<span class="st"> </span><span class="kw">read_delim</span>(airnow_link, <span class="st">&quot;|&quot;</span>, 
+                        <span class="dt">col_names =</span> F)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   X1 = col_character(),
+##   X2 = col_time(format = &quot;&quot;),
+##   X3 = col_character(),
+##   X4 = col_character(),
+##   X5 = col_integer(),
+##   X6 = col_character(),
+##   X7 = col_character(),
+##   X8 = col_double(),
+##   X9 = col_character()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">                        <span class="co">#col_types = c(&#39;cccciccdc&#39;))</span>
+ 
+<span class="co"># Add column names</span>
+<span class="kw">names</span>(aqi_now) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;time&quot;</span>, <span class="st">&quot;aqsid&quot;</span>, <span class="st">&quot;city&quot;</span>, <span class="st">&quot;local_time&quot;</span>, <span class="st">&quot;parameter&quot;</span>, <span class="st">&quot;units&quot;</span>, <span class="st">&quot;concentration&quot;</span>, <span class="st">&quot;agency&quot;</span>)
+
+
+<span class="co"># Filter to Ozone and PM2.5 results</span>
+aqi_now &lt;-<span class="st"> </span><span class="kw">filter</span>(aqi_now, parameter <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;OZONE&quot;</span>, <span class="st">&quot;PM2.5&quot;</span>))</code></pre></div>
+</div>
+<p><br> <strong>Contributors</strong></p>
+<blockquote>
+<p>Dorian Kvale</p>
+</blockquote>
+</div>
+<div id="monitors" class="section level2">
+<h2><span class="header-section-number">0.4</span> Current AQI observations</h2>
+<p>Current air monitoring locations can be accessed from <em>AirNow</em> by opening the <code>monitoring_site_locations.dat</code> file.</p>
+<p><br> <strong>Sample <code>R</code> script</strong></p>
+<p>Click the button below to view a step by step example.</p>
+<div class="toggle">
+<button class="btn_code">
+Show <strong>R</strong> code
+</button>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(readr)
+
+<span class="co"># Connect to AirNow data site</span>
+<span class="co">#https://files.airnowtech.org/</span>
+
+airnow_link &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;https://s3-us-west-1.amazonaws.com//files.airnowtech.org/airnow/today/&quot;</span>,
+                      <span class="st">&quot;monitoring_site_locations.dat&quot;</span>)
+  
+aqi_sites   &lt;-<span class="st"> </span><span class="kw">read_delim</span>(airnow_link, <span class="st">&quot;|&quot;</span>, <span class="dt">col_names =</span> F)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_character(),
+##   X9 = col_double(),
+##   X10 = col_double(),
+##   X11 = col_double(),
+##   X12 = col_double(),
+##   X16 = col_integer()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Drop empty columns</span>
+aqi_sites &lt;-<span class="st"> </span>aqi_sites[ , <span class="op">-</span><span class="kw">c</span>(<span class="dv">14</span><span class="op">:</span><span class="dv">16</span>,<span class="dv">22</span><span class="op">:</span><span class="dv">23</span>)]
+
+<span class="co"># Add column names</span>
+<span class="kw">names</span>(aqi_sites) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqsid&quot;</span>, 
+                      <span class="st">&quot;parameter&quot;</span>, 
+                      <span class="st">&quot;local_id&quot;</span>, 
+                      <span class="st">&quot;name&quot;</span>, 
+                      <span class="st">&quot;status&quot;</span>, 
+                      <span class="st">&quot;state_region&quot;</span>, 
+                      <span class="st">&quot;agency&quot;</span>, 
+                      <span class="st">&quot;epa_region&quot;</span>, 
+                      <span class="st">&quot;lat&quot;</span>, 
+                      <span class="st">&quot;long&quot;</span>, 
+                      <span class="st">&quot;elevation&quot;</span>,
+                      <span class="st">&quot;local_time&quot;</span>,
+                      <span class="st">&quot;country&quot;</span>,
+                      <span class="st">&quot;city&quot;</span>,
+                      <span class="st">&quot;state_fips&quot;</span>,
+                      <span class="st">&quot;state&quot;</span>,
+                      <span class="st">&quot;county_fips&quot;</span>,
+                      <span class="st">&quot;county&quot;</span>)
+                    
+
+<span class="co"># Filter to Minnesota sites</span>
+aqi_sites  &lt;-<span class="st"> </span><span class="kw">filter</span>(aqi_sites, state_fips <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">27</span>))</code></pre></div>
+</div>
+<p><br> <strong>Contributors</strong></p>
+<blockquote>
+<p>Dorian Kvale</p>
+</blockquote>
+<p><br> <strong>References</strong></p>
+</div>
+<div id="tableau" class="section level2">
+<h2><span class="header-section-number">0.5</span> Retrieving data from Tableau</h2>
+<p>I’ll let you in on a secret. You can grab data directly from published Tableau workbooks without ever having to open them. This is handy when you don’t have access to an underlying database or if you’re dealing with a database that requires complicated table joins to extract the data you need.</p>
+<p>Here’s the trick.</p>
+<blockquote>
+<p>To download data from a Tableau workbook add “.csv” to the end of a worksheet’s <em>URL</em>.</p>
+</blockquote>
+<p>That’s it!</p>
+<p>Let’s the grab the data behind the internal <a href="http://tableau.pca.state.mn.us/#/views/VWVolkswagendieselregistrationsinMN/VWownership">Volkswagen vehicle</a> workbook.</p>
+<p><br> <strong>Sample <code>R</code> script</strong></p>
+<p>Click the button below to view a step by step example.</p>
+<div class="toggle">
+<button class="btn_code">
+Show <strong>R</strong> code
+</button>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+
+
+<span class="co"># MPCA Tableau site</span>
+pca_tableau &lt;-<span class="st"> &quot;http://tableau.pca.state.mn.us/views/&quot;</span>
+
+<span class="co"># Tableau worksheet</span>
+## Delete the link garbage
+## Remove the &quot;/#/&quot; in the middle and the question mark at the end w/ anything that comes after
+workbook    &lt;-<span class="st"> &quot;Volkswagenownership/VWownership&quot;</span>
+
+<span class="co"># Complete URL</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(pca_tableau, workbook)
+
+
+<span class="co"># Final URL will look like this</span>
+tableau_url &lt;-<span class="st"> &quot;http://tableau.pca.state.mn.us/views/VWVolkswagendieselregistrationsinMN/VWownership&quot;</span>
+
+
+<span class="co"># Paste &quot;.csv&quot; to end of Tableau URL</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(tableau_url, <span class="st">&quot;.csv&quot;</span>)
+
+<span class="co"># Read data into a data frame</span>
+vw_cars &lt;-<span class="st"> </span><span class="kw">read_csv</span>(tableau_url)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   `County number` = col_character(),
+##   County = col_character(),
+##   `Latitude (generated)` = col_double(),
+##   `Longitude (generated)` = col_double(),
+##   `% of VW registrations` = col_character()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a look</span>
+<span class="kw">head</span>(vw_cars)</code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##   `County number`   County `Latitude (generated)` `Longitude (generated)`
+##             &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;                   &lt;dbl&gt;
+## 1          Aitkin   AITKIN                 46.637                 -93.432
+## 2           Anoka    ANOKA                 45.224                 -93.265
+## 3          Becker   BECKER                 46.933                 -95.678
+## 4        Beltrami BELTRAMI                 47.888                 -95.008
+## 5          Benton   BENTON                 45.691                 -94.056
+## 6       Big Stone BIGSTONE                 45.455                 -96.469
+## # ... with 1 more variables: `% of VW registrations` &lt;chr&gt;</code></pre>
+<p><br></p>
+<p>Do you feel like a Master Jedi? Good. But there is 1 small caveat.</p>
+<ul>
+<li>This trick doesn’t work on the URL of a Tableau <em>Story</em>. You’ll need to get to the worksheet or dashboard behind the story.</li>
+</ul>
+<p>For an example, take a look at the <a href="http://tableau.pca.state.mn.us/#/views/wplmn_data_browser/WPLMNBrowser">Watershed Pollutant Load Monitoring</a> workbook. Since the workbook loads to a <em>Story</em> the nifty <code>.csv</code> trick won’t work on this page. We need to jump over to a worksheet or dashboard behind the story.</p>
+<p>In this case the tabs are shown at the top, but this won’t always be true. Let’s try the tab <em>“Download Annual data”</em>.</p>
+<p>Now that you know the name of the worksheet, the data is free for the taking. Let’s read it into R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+
+
+<span class="co"># MPCA Tableau site</span>
+pca_tableau &lt;-<span class="st"> &quot;http://tableau.pca.state.mn.us/views/&quot;</span>
+
+<span class="co"># Tableau workbook </span>
+workbook    &lt;-<span class="st"> &quot;wplmn_data_browser/DownloadAnnualData&quot;</span>
+
+<span class="co"># Complete URL</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(pca_tableau, workbook)
+
+
+
+<span class="co"># Paste &quot;.csv&quot; to end of Tableau URL</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(tableau_url, <span class="st">&quot;.csv&quot;</span>)
+
+<span class="co"># Read data into a data frame</span>
+water &lt;-<span class="st"> </span><span class="kw">read_csv</span>(tableau_url)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_character(),
+##   `CatchArea (acres)` = col_integer(),
+##   `FWMC (mg/L)` = col_double(),
+##   Latitude = col_double(),
+##   Longitude = col_double(),
+##   `Mass (kg)` = col_integer(),
+##   `Number of samples` = col_integer(),
+##   `Vol (acre ft)` = col_integer(),
+##   Year = col_integer(),
+##   `Yield (lbs/ac)` = col_double()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># How many rows are there?</span>
+<span class="kw">nrow</span>(water)</code></pre></div>
+<pre><code>## [1] 4116</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a look</span>
+<span class="kw">head</span>(water)</code></pre></div>
+<pre><code>## # A tibble: 6 x 21
+##   Blank  `Bsn Name` `CatchArea (acres)` `End date` `Equis ID`
+##   &lt;chr&gt;       &lt;chr&gt;               &lt;int&gt;      &lt;chr&gt;      &lt;chr&gt;
+## 1  &lt;NA&gt; Cedar River               92160 10/31/2013   S004-432
+## 2  &lt;NA&gt; Cedar River               92160 10/31/2013   S004-432
+## 3  &lt;NA&gt; Cedar River               92160 10/31/2013   S004-432
+## 4  &lt;NA&gt; Cedar River               92160 10/31/2013   S004-432
+## 5  &lt;NA&gt; Cedar River               92160 10/31/2013   S004-432
+## 6  &lt;NA&gt; Cedar River               92160 10/31/2014   S004-432
+## # ... with 16 more variables: `FWMC (mg/L)` &lt;dbl&gt;, Huc12 &lt;chr&gt;, `Hydstra
+## #   ID` &lt;chr&gt;, `Intentionally blank` &lt;chr&gt;, Latitude &lt;dbl&gt;,
+## #   Longitude &lt;dbl&gt;, `Mass (kg)` &lt;int&gt;, Name &lt;chr&gt;, `Number of
+## #   samples` &lt;int&gt;, `Org Name` &lt;chr&gt;, Parameter &lt;chr&gt;, `Site Type` &lt;chr&gt;,
+## #   `Start date` &lt;chr&gt;, `Vol (acre ft)` &lt;int&gt;, Year &lt;int&gt;, `Yield
+## #   (lbs/ac)` &lt;dbl&gt;</code></pre>
+<p><br></p>
+<p>Wow! Over 4,000 rows of data. It looks like we got <strong>ALL</strong> the data. That’s because everything is selected in the filters on the right. If you’d like to download data for only a single site or a single year, you can change the filter by adding a little magic to the end of the URL.</p>
+<p><br></p>
+<p><strong>Requesting a subset</strong></p>
+<p>The filters on the worksheet are accessible by using the format<code>Year=2014</code>. To add a filter to your data request you first add a <code>?</code> to the end of the workseet URL and then the filter. The final URL with the 2014 year filter would look like this <code>http://tableau.pca.state.mn.us/views/wplmn_data_browser/DownloadAnnualData.csv?Year=2014</code>.</p>
+<p>Let’s get all the data for year 2014.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+
+<span class="co"># MPCA Tableau site</span>
+pca_tableau &lt;-<span class="st"> &quot;http://tableau.pca.state.mn.us/views/&quot;</span>
+
+<span class="co"># Tableau worksheet</span>
+workbook    &lt;-<span class="st"> &quot;wplmn_data_browser/DownloadAnnualData&quot;</span>
+
+<span class="co"># Complete URL</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(pca_tableau, workbook)
+
+  
+<span class="co"># Paste &quot;.csv&quot; to end of Tableau URL</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(tableau_url, <span class="st">&quot;.csv&quot;</span>)
+
+<span class="co"># Add the Year=2014 filter</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(tableau_url, <span class="st">&quot;?Year=2014&quot;</span>)
+
+<span class="co"># Read data into a data frame</span>
+water_<span class="dv">2014</span> &lt;-<span class="st"> </span><span class="kw">read_csv</span>(tableau_url)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_character(),
+##   `CatchArea (acres)` = col_integer(),
+##   `FWMC (mg/L)` = col_double(),
+##   Latitude = col_double(),
+##   Longitude = col_double(),
+##   `Mass (kg)` = col_integer(),
+##   `Number of samples` = col_integer(),
+##   `Vol (acre ft)` = col_integer(),
+##   Year = col_integer(),
+##   `Yield (lbs/ac)` = col_double()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a look</span>
+<span class="kw">head</span>(water_<span class="dv">2014</span>)</code></pre></div>
+<pre><code>## # A tibble: 6 x 21
+##   Blank  `Bsn Name` `CatchArea (acres)` `End date` `Equis ID`
+##   &lt;chr&gt;       &lt;chr&gt;               &lt;int&gt;      &lt;chr&gt;      &lt;chr&gt;
+## 1  &lt;NA&gt; Cedar River               92160 10/31/2014   S004-432
+## 2  &lt;NA&gt; Cedar River               92160 10/31/2014   S004-432
+## 3  &lt;NA&gt; Cedar River               92160 10/31/2014   S004-432
+## 4  &lt;NA&gt; Cedar River               92160 10/31/2014   S004-432
+## 5  &lt;NA&gt; Cedar River               92160 10/31/2014   S004-432
+## 6  &lt;NA&gt; Cedar River               92160 10/31/2014   S004-432
+## # ... with 16 more variables: `FWMC (mg/L)` &lt;dbl&gt;, Huc12 &lt;chr&gt;, `Hydstra
+## #   ID` &lt;chr&gt;, `Intentionally blank` &lt;chr&gt;, Latitude &lt;dbl&gt;,
+## #   Longitude &lt;dbl&gt;, `Mass (kg)` &lt;int&gt;, Name &lt;chr&gt;, `Number of
+## #   samples` &lt;int&gt;, `Org Name` &lt;chr&gt;, Parameter &lt;chr&gt;, `Site Type` &lt;chr&gt;,
+## #   `Start date` &lt;chr&gt;, `Vol (acre ft)` &lt;int&gt;, Year &lt;int&gt;, `Yield
+## #   (lbs/ac)` &lt;dbl&gt;</code></pre>
+<p><br></p>
+<p>Perfect! Were down to only 926 rows of data.</p>
+<p><strong>Filtering with special characters</strong></p>
+<p>Want to try one of the other filters? Things can get a little trickier when you filter on values that contain special characters, such as text with spaces — <em>“Total phosphorous”</em> — or slashes — <em>“FWMC (mg/L)”</em> —. To filter with special characters in a URL you’ll need to let the browser know that you really mean a text slash “/”, and that you don’t mean “move up a folder” as in <code>Desktop/Documents/Reports</code>. To do this, URL’s have codes for the characters that usually mean something else to computers. For example, the forward slash <em>“/”</em> has the special code <code>%2</code>. A space has the code <code>%20</code>.</p>
+<p>Here is a table of codes for the most common symbols. A more complete reference and a tool to convert your text to a URL friendly format is online <a href="https://www.w3schools.com/tags/ref_urlencode.asp">here</a>.</p>
+<div id="htmlwidget-979ee0b18f990cf7eb98" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-979ee0b18f990cf7eb98">{"x":{"filter":"none","data":[["%20"],["%23"],["%25"],["%2D"],["%2E"],["%3C"],["%3E"],["%5C"],["%2F"],["%5E"],["%5F"],["%60"],["%7B"],["%7C"],["%7D"],["%7E"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>space<\/th>\n      <th>\"<\/th>\n      <th>%<\/th>\n      <th>-<\/th>\n      <th>.<\/th>\n      <th>&lt;<\/th>\n      <th>&gt;<\/th>\n      <th>\\<\/th>\n      <th>/<\/th>\n      <th>^<\/th>\n      <th>_<\/th>\n      <th>`<\/th>\n      <th>{<\/th>\n      <th>|<\/th>\n      <th>}<\/th>\n      <th>~<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+<p>Let’s try filtering the data to one the values listed for <code>Parameter</code>. If the filter doesn’t work, Tableau will be nice and send you all of the data. However, it isn’t helpful enough to give you clues about what’s wrong with your filter. Like if I happen to misspell <em>phosphourus</em> 3 times.</p>
+<p>The code below filters the data to the <code>Parameter</code> <em>Total phosphorus</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+
+<span class="co"># MPCA Tableau site</span>
+pca_tableau &lt;-<span class="st"> &quot;http://tableau.pca.state.mn.us/views/&quot;</span>
+
+<span class="co"># Tableau worksheet</span>
+workbook    &lt;-<span class="st"> &quot;wplmn_data_browser/DownloadAnnualData&quot;</span>
+
+<span class="co"># Complete URL</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(pca_tableau, workbook)
+
+
+<span class="co"># Paste &quot;.csv&quot; to end of Tableau URL</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(tableau_url, <span class="st">&quot;.csv&quot;</span>)
+
+<span class="co"># Add the Measures=&quot;Mass+(kg)&quot; filter</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(tableau_url, <span class="st">&quot;?Parameter=Total%20phosphorus&quot;</span>)
+
+<span class="co"># Read data into a data frame</span>
+water_phos &lt;-<span class="st"> </span><span class="kw">read_csv</span>(tableau_url)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_character(),
+##   `CatchArea (acres)` = col_integer(),
+##   `FWMC (mg/L)` = col_double(),
+##   Latitude = col_double(),
+##   Longitude = col_double(),
+##   `Mass (kg)` = col_integer(),
+##   `Number of samples` = col_integer(),
+##   Year = col_integer(),
+##   `Yield (lbs/ac)` = col_double()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a look</span>
+<span class="kw">head</span>(water_phos, <span class="dv">5</span>)</code></pre></div>
+<pre><code>## # A tibble: 5 x 21
+##   Blank  `Bsn Name` `CatchArea (acres)` `End date` `Equis ID`
+##   &lt;chr&gt;       &lt;chr&gt;               &lt;int&gt;      &lt;chr&gt;      &lt;chr&gt;
+## 1  &lt;NA&gt; Cedar River               92160 10/31/2014   S004-432
+## 2  &lt;NA&gt; Cedar River              122240 12/31/2009   S000-084
+## 3  &lt;NA&gt; Cedar River              122240 12/31/2010   S000-084
+## 4  &lt;NA&gt; Cedar River              122240 12/31/2011   S000-084
+## 5  &lt;NA&gt; Cedar River              122240 12/31/2014   S000-084
+## # ... with 16 more variables: `FWMC (mg/L)` &lt;dbl&gt;, Huc12 &lt;chr&gt;, `Hydstra
+## #   ID` &lt;chr&gt;, `Intentionally blank` &lt;chr&gt;, Latitude &lt;dbl&gt;,
+## #   Longitude &lt;dbl&gt;, `Mass (kg)` &lt;int&gt;, Name &lt;chr&gt;, `Number of
+## #   samples` &lt;int&gt;, `Org Name` &lt;chr&gt;, Parameter &lt;chr&gt;, `Site Type` &lt;chr&gt;,
+## #   `Start date` &lt;chr&gt;, `Vol (acre ft)` &lt;chr&gt;, Year &lt;int&gt;, `Yield
+## #   (lbs/ac)` &lt;dbl&gt;</code></pre>
+<p><br></p>
+<p>Try filtering the sites to only the <code>Hydstra ID</code> <em>W38014001</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+
+<span class="co">#Tableau worksheet URL</span>
+tableau_url &lt;-<span class="st"> &quot;http://tableau.pca.state.mn.us/views/wplmn_data_browser/DownloadAnnualData&quot;</span>
+
+<span class="co"># Paste &quot;.csv&quot; to end of Tableau URL</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(tableau_url, <span class="st">&quot;.csv&quot;</span>)
+
+<span class="co"># Add the Measures=&quot;Mass+(kg)&quot; filter</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(tableau_url, <span class="st">&quot;?Hydstra%20ID=W38014001&quot;</span>)
+
+<span class="co"># Read data into a data frame</span>
+water_missip &lt;-<span class="st"> </span><span class="kw">read_csv</span>(tableau_url)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_character(),
+##   `CatchArea (acres)` = col_integer(),
+##   `FWMC (mg/L)` = col_double(),
+##   Latitude = col_double(),
+##   Longitude = col_double(),
+##   `Mass (kg)` = col_integer(),
+##   `Number of samples` = col_integer(),
+##   `Vol (acre ft)` = col_integer(),
+##   Year = col_integer(),
+##   `Yield (lbs/ac)` = col_double()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a look</span>
+<span class="kw">head</span>(water_missip, <span class="dv">5</span>)</code></pre></div>
+<pre><code>## # A tibble: 5 x 21
+##   Blank              `Bsn Name` `CatchArea (acres)` `End date` `Equis ID`
+##   &lt;chr&gt;                   &lt;chr&gt;               &lt;int&gt;      &lt;chr&gt;      &lt;chr&gt;
+## 1  &lt;NA&gt; Lower Mississippi River            29824000 12/31/2007   S000-132
+## 2  &lt;NA&gt; Lower Mississippi River            29824000 12/31/2007   S000-132
+## 3  &lt;NA&gt; Lower Mississippi River            29824000 12/31/2007   S000-132
+## 4  &lt;NA&gt; Lower Mississippi River            29824000 12/31/2007   S000-132
+## 5  &lt;NA&gt; Lower Mississippi River            29824000 12/31/2007   S000-132
+## # ... with 16 more variables: `FWMC (mg/L)` &lt;dbl&gt;, Huc12 &lt;chr&gt;, `Hydstra
+## #   ID` &lt;chr&gt;, `Intentionally blank` &lt;chr&gt;, Latitude &lt;dbl&gt;,
+## #   Longitude &lt;dbl&gt;, `Mass (kg)` &lt;int&gt;, Name &lt;chr&gt;, `Number of
+## #   samples` &lt;int&gt;, `Org Name` &lt;chr&gt;, Parameter &lt;chr&gt;, `Site Type` &lt;chr&gt;,
+## #   `Start date` &lt;chr&gt;, `Vol (acre ft)` &lt;int&gt;, Year &lt;int&gt;, `Yield
+## #   (lbs/ac)` &lt;dbl&gt;</code></pre>
+<p><br></p>
+<p>Simple site IDs are your friend. Dashes, slashes, and surprising capital letters are your not.</p>
+<h3 id="a-happy-note"><span class="header-section-number">0.5</span> A Happy note!</h3>
+<p>To add multiple filters separate them with the <code>&amp;</code> character with no spaces. As in <code>?Year=2014&amp;Parameter=Flow</code>.</p>
+<h3 id="sad-note-1"><span class="header-section-number">0.5</span> Sad note /#1</h3>
+<blockquote>
+<p>If the author of the worksheet hasn’t added the filter to the page, you won’t be able to use it in a magic URL.</p>
+</blockquote>
+<h3 id="sad-note-2"><span class="header-section-number">0.5</span> Sad note /#2</h3>
+<blockquote>
+<p>If the workbook author has all of its worksheets and dashboards hidden, you won’t be able to access its data using the “.csv” trick. Contact the workbook author and politley request that they unhide one of their data tabs so you can more easily steal the data.</p>
+</blockquote>
+<h4 id="facility-emissions"><span class="header-section-number">0.5</span> Facility emissions</h4>
+<p>Sometimes tabs are hidden.</p>
+<ol style="list-style-type: decimal">
+<li>Download and open the workbook to find the name of the worksheet with the data you want.</li>
+<li>In this case the tabs are shown (this won’t always be the case), click <code>Share</code> on the bottom of the page and copy the lower link. Paste this URL into your browser and then scroll all the way to the bottom of the page. You should see a section called <strong>Metadata:</strong> on the right. These are all the names of the hidden tabs! You can even open them. Let’s try downloading data from the tab <em>“Download Annual data”</em>.</li>
+</ol>
+<p>Now that you know the name of the worksheet, the data is yours. Let’s read it into R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
+<span class="co">#Tableau worksheet URL</span>
+tableau_url &lt;-<span class="st"> &quot;https://public.tableau.com/profile/mpca.data.services#!/vizhome/Pointsourceairemissionsdata/EmissionsbyFacility&quot;</span>
+
+<span class="co"># Add &quot;.csv?:embed=y&quot; to Tableau URL</span>
+tableau_url &lt;-<span class="st"> </span><span class="kw">paste0</span>(tableau_url, <span class="st">&quot;.csv&quot;</span>)
+
+fac_emits &lt;-<span class="st"> </span><span class="kw">read_csv</span>(tableau_url)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   `&lt;!DOCTYPE html&gt;` = col_character()
+## )</code></pre>
+<pre><code>## Warning in rbind(names(probs), probs_f): number of columns of result is not
+## a multiple of vector length (arg 1)</code></pre>
+<pre><code>## Warning: 491 parsing failures.
+## row # A tibble: 5 x 5 col     row   col           expected    actual expected   &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt; actual 1    10  &lt;NA&gt;          1 columns 2 columns file 2    11  &lt;NA&gt; delimiter or quote         f row 3    11  &lt;NA&gt; delimiter or quote         = col 4    11  &lt;NA&gt; delimiter or quote         d expected 5    11  &lt;NA&gt; delimiter or quote         ) actual # ... with 1 more variables: file &lt;chr&gt;
+## ... ................. ... .......................................... ........ .......................................... ...... .......................................... .... .......................................... ... .......................................... ... .......................................... ........ .......................................... ...... .......................................
+## See problems(...) for more details.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(fac_emits)</code></pre></div>
+<pre><code>## # A tibble: 6 x 1
+##                                                             `&lt;!DOCTYPE html&gt;`
+##                                                                         &lt;chr&gt;
+## 1 &quot;&lt;!--[if IEMobile 7]&gt;&lt;html class=\&quot;no-js ie iem7\&quot; lang=\&quot;en\&quot; dir=\&quot;ltr\&quot;&gt;
+## 2 &quot;&lt;!--[if lte IE 6]&gt;&lt;html class=\&quot;no-js ie lt-ie9 lt-ie8 lt-ie7\&quot; lang=\&quot;en\
+## 3 &quot;&lt;!--[if (IE 7)&amp;(!IEMobile)]&gt;&lt;html class=\&quot;no-js ie lt-ie9 lt-ie8\&quot; lang=\&quot;
+## 4 &quot;&lt;!--[if IE 8]&gt;&lt;html class=\&quot;no-js ie lt-ie9\&quot; id=\&quot;ng-app\&quot; ng-app=\&quot;vizhu
+## 5 &quot;&lt;!--[if IE 9]&gt;&lt;html class=\&quot;no-js ie ie9 lte-ie9\&quot; id=\&quot;ng-app\&quot; ng-app=\&quot;
+## 6 &quot;&lt;!--[if (gte IE 9)|(gt IEMobile 7)]&gt;&lt;html class=\&quot;no-js ie\&quot; id=\&quot;ng-app\&quot;</code></pre>
+<p>The filters on the worksheet are accessible by using the format<code>Year=2014</code>. To add a filter to your data request you need to add a <code>?</code> to the end of the workseet URL. Your final URL will look like this <code>https://public.tableau.com/profile/mpca.data.services#!/vizhome/Pointsourceairemissionsdata/EmissionsbyFacility.csv?:embed=y&amp;Year=2014</code>.</p>
+</div>
+<p><br> <strong>Contributors</strong></p>
+<blockquote>
+<p>Dorian Kvale</p>
+</blockquote>
+<p><br> <strong>References</strong></p>
+<p><br> <a href="data-cleaning-dorian-cassie.html#missing">Back to top</a></p>
+
+</div>
 </div>
 <script>
   $(".btn_code").click(function() {
