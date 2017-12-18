@@ -1,0 +1,3 @@
+# __Summary methods__ {-}
+
+The following sections describe the methods used to calculate numeric summaries of the air monitoring data meets.

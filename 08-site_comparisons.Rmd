@@ -1,4 +1,4 @@
-# Site comparisons (Derek & Cassie)
+# Site comparisons
 
 
 __Notes__
@@ -23,31 +23,24 @@ The script below uses bootstrap sampling to generate 1000 differences in site me
 library(dplyr)
 library(EnvStats)
 library(lubridate)
-data = read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
-seed = 2017
-
-names(data)[1:10] <- c("AQSID", "POC", "Parameter", "Date","Result",
-                       "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
-
-data = data %>% filter(AQSID %in% c(270370020, 270370470, 271230871) ) %>% mutate(`Monitoring Site` = AQSID, PollutantGroup = Pollutant, Censored = Result < MDL, Result = ifelse(Censored, MDL, Result) )
-
-site_number = 271230871
 
 site_compare = function(data, site_number, Boot_Repeats = 1000) {
+  library(EnvStats)
+  set.seed(2017)
   
   annual_AT_means = function(air_toxics) {
   
   air_toxics = mutate(air_toxics, Year = year(ymd(Date)), Quarter = quarter(ymd(Date)) )
-  sample_complete = air_toxics %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, Quarter, MDL) %>% summarise(Complete = ( (sum(!is.na(Result) ) / length(Result) ) >= 0.75 ) ) %>%
-    mutate(Complete = ifelse(is.na(Complete), F, Complete) ) %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, MDL) %>% summarise(Complete = all(Complete) )
+  sample_complete = air_toxics %>% group_by(AQSID, Pollutant, Year, Quarter, MDL) %>% summarise(Complete = ( (sum(!is.na(Result) ) / length(Result) ) >= 0.75 ) ) %>%
+    mutate(Complete = ifelse(is.na(Complete), F, Complete) ) %>% group_by(AQSID, Pollutant, Year, MDL) %>% summarise(Complete = all(Complete) )
   
-  enough_detects = air_toxics %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, MDL) %>% summarise(Detected = mean(Censored, na.rm = T) <= 0.8 )
+  enough_detects = air_toxics %>% group_by(AQSID, Pollutant, Year, MDL) %>% summarise(Detected = mean(Censored, na.rm = T) <= 0.8 )
   
-  site_means = air_toxics %>% group_by(`Monitoring Site`, AQSID, Pollutant, PollutantGroup, Year, MDL) %>% summarise(Mean = ifelse(length(unique(Result[!is.na(Result) & !Censored] ) ) < 2, NA,
+  site_means = air_toxics %>% group_by(AQSID, Pollutant, Year, MDL) %>% summarise(Mean = ifelse(length(unique(Result[!is.na(Result) & !Censored] ) ) < 2, NA,
      ifelse (any(Censored, na.rm = T), elnormAltCensored(Result, Censored, method = "impute.w.mle", ci = F)$parameters[[1]], mean(Result, na.rm = T) ) ) )
   
-  site_means = left_join(site_means, sample_complete, by = c("Monitoring Site", "AQSID", "Pollutant", "PollutantGroup", "Year", "MDL") ) %>%
-    left_join(enough_detects, by = c("Monitoring Site", "AQSID", "Pollutant", "PollutantGroup", "Year", "MDL") ) %>% mutate(Mean = ifelse(Complete & Detected, Mean, NA), ID = paste(AQSID, Pollutant, Year) )
+  site_means = left_join(site_means, sample_complete, by = c("AQSID", "Pollutant", "Year", "MDL") ) %>%
+    left_join(enough_detects, by = c("AQSID", "Pollutant", "Year", "MDL") ) %>% mutate(Mean = ifelse(Complete & Detected, Mean, NA), ID = paste(AQSID, Pollutant, Year) )
 
   return(site_means)
 }
@@ -73,7 +66,7 @@ site_compare = function(data, site_number, Boot_Repeats = 1000) {
     return(MLE_means)
   }
   
-  data = mutate(data, ID = paste(AQSID, Pollutant, Year))
+  data = mutate(data, Result = ifelse(Censored, MDL, Result), ID = paste(AQSID, Pollutant, Year))
   
   Bootstrap_means = replicate(Boot_Repeats, (by(data, data$ID, MLE_est) ) )
   
@@ -96,35 +89,52 @@ site_compare = function(data, site_number, Boot_Repeats = 1000) {
   
 }
 
+data = read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
+
+names(data)[1:10] <- c("AQSID", "POC", "Parameter", "Date","Result",
+                       "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
+
+data = data %>% filter(AQSID %in% c(270370020, 270370470, 271230871) ) %>% mutate(Censored = Result < MDL)
+
+site_number = 271230871
+seed = 2017
 set.seed(seed)
+
 compare = site_compare(data, site_number, 50) #minimum 50 repeats
 ```
 
 ## Tools to visualize data
 
-Beeswarm
-```{r}
-# Data must have names"AQS_ID", "POC", "Param_Code", "Date", "Concentration", "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS"
-# Data must also have column named "Censored" indicating whether Concentration < MDL
-# Data must also have column "ID" with grouping criteria. ID = Pollutant if only grouping by pollutant, ID = Pollutant + Year if grouping by pollutant & year, ID = Pollutant + Site ID if comparing the same site across multiple years. See example below. Other options for ID are also acceptable depending on type of analysis.
+## Beeswarm Plots
 
-library(ggbeeswarm)
+Beeswarm plots are useful for visualizing concentrations measured at different sites with more detail than boxplots.
+```{r}
+# Data must have columns "AQSID", "POC", "Param_Code", "Date", "Result", "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS"
+
+beeswarm_plot = function(data, pollutant, year) {
+  library(dplyr)
+  library(ggbeeswarm)
+  library(ggplot2)
+  
+  data = mutate(data, AQSID = as.factor(AQSID) )
+  ggplot(filter(data, Pollutant == pollutant, Year == year), aes(y = AQSID, x = Result, color = Censored) ) + 
+    geom_quasirandom(groupOnX=F) +   
+    labs(title = paste(pollutant, year), x = "Result (ug/m^3)" )
+}
+
+library(tidyverse)
 
 data = read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
-names(data)[1:10] <- c("AQS_ID", "POC", "Param_Code", "Date","Concentration",
+names(data)[1:10] <- c("AQSID", "POC", "Param_Code", "Date","Result",
                        "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
 
-data$censored = ifelse(data$Concentration<data$MDL, T, F)
+data = mutate(data, Censored = Result < MDL)
 
-lead = subset(data,data$Param_Code == 14129 & data$Year==2013)
+beeswarm_plot(data, "Lead", 2013)
 
-ggplot2::ggplot(lead, aes(y = as.factor(lead$AQS_ID), x = lead$Concentration, color = lead$censored)) + geom_quasirandom(aes(), groupOnX=F) + ggtitle("Lead, 2013 (ug/m3)")
+beeswarm_plot(data, "Arsenic", 2013)
 
-arsenic = subset(data,data$Param_Code == 12103 & data$Year == 2013)
-ggplot2::ggplot(arsenic, aes(y = as.factor(arsenic$AQS_ID), x = arsenic$Concentration, color = arsenic$censored)) + geom_quasirandom(aes(), groupOnX=F) +ggtitle("arsenic, 2013 (ug/m3)")
-
-benzene = subset(data,data$Param_Code == 45201 & data$Year == 2013)
-ggplot2::ggplot(benzene,aes(y = as.factor(benzene$AQS_ID),x=benzene$Concentration,color = benzene$censored)) + geom_quasirandom(aes(),groupOnX = F,varwidth = TRUE) + ggtitle("Benzene, 2013 (ug/m3)")
+beeswarm_plot(data, "Benzene", 2013)
 ```
 
 
@@ -136,15 +146,32 @@ R packages: [Beeswarm](https://github.com/eclarke/ggbeeswarm)
 
 <br>
 
-## Correlation matrices (Cassie)
+## Correlation matrices
 
+Correlation matrices help visualize the relationship between different pollutants at a site.
 ```{r}
-site <- 270530962
-data_site <- data[data$AQS_ID %in% site, c("Date", "Pollutant", "Concentration")]
-analytes <- spread(data_site, Pollutant, Concentration, drop=T)
-analytes$Date <- NULL
-coranalytes <- cor(analytes, method="kendall", use="pairwise.complete.obs")
-coranalytes <- coranalytes[,colSums(is.na(coranalytes))<nrow(coranalytes)]
-coranalytes <- coranalytes[rowSums(is.na(coranalytes))<ncol(coranalytes),]
-corrplot(coranalytes, method = "circle", type="lower", tl.cex=0.6) #plot matrix
+library(tidyverse)
+
+correlation_plots = function(data, site) {
+  library(tidyverse)
+  library(corrplot)
+  
+  data_site <- filter(data, AQSID %in% site) %>% select(Date, Pollutant, Result)
+  analytes <- spread(data_site, Pollutant, Result, drop=T)
+  analytes$Date <- NULL
+
+  coranalytes <- cor(analytes, method="kendall", use="pairwise.complete.obs") %>% as.data.frame()
+  coranalytes <- select_if(coranalytes, function(x) !all(is.na(x))) %>% filter_all(any_vars(!is.na(.))) %>% 
+    as.matrix()
+  rownames(coranalytes) <- colnames(coranalytes)
+
+  corrplot(coranalytes, method = "circle", type="lower", tl.cex=0.6) #plot matrix
+}
+
+data <- read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
+
+names(data)[1:10] <- c("AQSID", "POC", "Param_Code", "Date","Result",
+                       "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
+
+data %>% correlation_plots(270530962)
 ```

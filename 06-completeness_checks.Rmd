@@ -1,4 +1,4 @@
-# Completeness checks (Dorian & Cassie)
+# Completeness checks
 
 
 Checking for data completeness before generating summaries ensures that results will be comparable from one year to the next. Without completeness checks, changes in the seasonal coverage from year to year may create the illusion of increasing or decreasing trends. 
@@ -74,7 +74,6 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, length
 Packages
 ```{r message=F}
 library(tidyverse)
-library(readr)
 
 ```
 
@@ -100,7 +99,7 @@ Entering the start and end date into the `sample_calendar()` function below will
 
 # Create a sampling calendar based on EPA's air toxics monitoring schedule
 sample_calendar <- function(start         = "2012-01-01", 
-                            end           = "2017-01-01", 
+                            end           = "2016-12-31", 
                             day_interval  = 6,
                             type          = "air_toxics") {
   
@@ -178,10 +177,10 @@ data <- data %>% mutate(cal_quarter = quarter(Date))
 
 # Count the number of sampling dates for each quarter and year.
 data <- data %>% 
-        group_by(AQSID, POC, Pollutant, CAS, Year, cal_quarter) %>%
-        mutate(valid_quarter_samples = length(unique(Date))) %>%
-        group_by(AQSID, POC, Pollutant, CAS, Year) %>%
-        mutate(valid_annual_samples = length(unique(Date))) 
+        group_by(AQSID, POC, Param_Code, CAS, Year, cal_quarter) %>%
+        mutate(valid_quarter_samples = length(unique(Date[!is.na(Concentration)]))) %>%
+        group_by(AQSID, POC, Param_Code, CAS, Year) %>%
+        mutate(valid_annual_samples = length(unique(Date[!is.na(Concentration)]))) 
         
 ```
 
@@ -211,8 +210,9 @@ __Step 4:__ Count the number of unique values for each year.
 ```{r message=F}
 
 data <- data %>% 
-        group_by(AQSID, POC, Pollutant, CAS, Year) %>%
-        mutate(unique_values = length(unique(Concentration)))
+        group_by(AQSID, POC, Param_Code, CAS, Year) %>%
+        mutate(only_detects = ifelse(Concentration < Dlimit, NA, Concentration), unique_values = 
+                 n_distinct(only_detects, na.rm = TRUE))
         
 ```
 
@@ -253,7 +253,7 @@ __Step 6 (Optional):__ By collapsing the `complete` status to 1 row per site-pol
 # Collapse table to 1 row per unique site-pollutant-year
  data <- data %>%          
          group_by(AQSID, POC, Pollutant, Year) %>%  
-         summarize(complete            = sum(complete, na.rm = T) >= 4,
+         summarize(complete            = sum(complete, na.rm = T) == 4,
                    annual_samples      = valid_annual_samples[1],
                    min_quarter_samples = min(valid_quarter_samples, na.rm = T))
       
