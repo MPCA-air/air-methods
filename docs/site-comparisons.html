@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown 0.5.2 and GitBook 2.6.7">
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/MPCA-air/air-methods" />
+  <meta property="og:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
+  
+  <meta name="github-repo" content="MPCA-air/air-methods" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="" />
+  
+  
+  <meta name="twitter:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="summary-statistics.html">
+<link rel="next" href="start-finish.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-0.9/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://mpca-air.github.io/air-methods">Methods for air data analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="get-data.html"><a href="get-data.html"><i class="fa fa-check"></i><b>1</b> Get data</a><ul>
+<li class="chapter" data-level="1.1" data-path="get-data.html"><a href="get-data.html#rqamd"><i class="fa fa-check"></i><b>1.1</b> Retrieving data from AQS DataMart using RQAMD</a></li>
+<li class="chapter" data-level="1.2" data-path="get-data.html"><a href="get-data.html#wair"><i class="fa fa-check"></i><b>1.2</b> Retrieving data from MPCA WAIR database</a></li>
+<li class="chapter" data-level="1.3" data-path="get-data.html"><a href="get-data.html#aqi-now"><i class="fa fa-check"></i><b>1.3</b> Current AQI obs</a></li>
+<li class="chapter" data-level="1.4" data-path="get-data.html"><a href="get-data.html#monitors"><i class="fa fa-check"></i><b>1.4</b> Current AQI observations</a></li>
+<li class="chapter" data-level="1.5" data-path="get-data.html"><a href="get-data.html#tableau"><i class="fa fa-check"></i><b>1.5</b> Retrieving data from Tableau</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="get-data.html"><a href="get-data.html#a-happy-note"><i class="fa fa-check"></i><b>1.5.1</b> A Happy note!</a></li>
+<li class="chapter" data-level="1.5.2" data-path="get-data.html"><a href="get-data.html#sad-note-1"><i class="fa fa-check"></i><b>1.5.2</b> Sad note /#1</a></li>
+<li class="chapter" data-level="1.5.3" data-path="get-data.html"><a href="get-data.html#sad-note-2"><i class="fa fa-check"></i><b>1.5.3</b> Sad note /#2</a></li>
+</ul></li>
+</ul></li>
+<li><a href="quality-assurance-methods.html#quality-assurance-methods"><strong>Quality assurance methods</strong></a></li>
+<li class="chapter" data-level="2" data-path="data-cleaning.html"><a href="data-cleaning.html"><i class="fa fa-check"></i><b>2</b> Data cleaning</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-cleaning.html"><a href="data-cleaning.html#missing"><i class="fa fa-check"></i><b>2.1</b> Remove blank, NULL, and missing values</a></li>
+<li class="chapter" data-level="2.2" data-path="data-cleaning.html"><a href="data-cleaning.html#quals"><i class="fa fa-check"></i><b>2.2</b> Remove <em>Qualified</em> data</a></li>
+<li class="chapter" data-level="2.3" data-path="data-cleaning.html"><a href="data-cleaning.html#dups"><i class="fa fa-check"></i><b>2.3</b> Duplicate observations</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-validation.html"><a href="data-validation.html"><i class="fa fa-check"></i><b>3</b> Data validation</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-validation.html"><a href="data-validation.html#leaks"><i class="fa fa-check"></i><b>3.1</b> Identifying Instrument drift or leaks in a system.</a></li>
+<li class="chapter" data-level="3.2" data-path="data-validation.html"><a href="data-validation.html#outs"><i class="fa fa-check"></i><b>3.2</b> Identify exceptional and extreme values aka outliers.</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="collocated-monitors.html"><a href="collocated-monitors.html"><i class="fa fa-check"></i><b>4</b> Collocated monitors</a><ul>
+<li class="chapter" data-level="4.1" data-path="collocated-monitors.html"><a href="collocated-monitors.html#evalpocs"><i class="fa fa-check"></i><b>4.1</b> Evaluate collocated air monitors (POCs)</a></li>
+<li class="chapter" data-level="4.2" data-path="collocated-monitors.html"><a href="collocated-monitors.html#pripocs"><i class="fa fa-check"></i><b>4.2</b> Prioritize multiple air monitors (POCs)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>5</b> Detection limits</a><ul>
+<li class="chapter" data-level="5.1" data-path="detection-limits.html"><a href="detection-limits.html#method-detection-limit---definition"><i class="fa fa-check"></i><b>5.1</b> Method Detection Limit - Definition</a></li>
+<li class="chapter" data-level="5.2" data-path="detection-limits.html"><a href="detection-limits.html#procedure-for-calculating-method-detection-limits"><i class="fa fa-check"></i><b>5.2</b> Procedure for calculating method detection limits</a></li>
+<li class="chapter" data-level="5.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-detection-limits-cassie"><i class="fa fa-check"></i><b>5.3</b> Finding detection limits (Cassie)</a></li>
+<li class="chapter" data-level="5.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>5.4</b> Qualifier Codes for Detection Limits</a></li>
+<li class="chapter" data-level="5.5" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>5.5</b> Below detection values</a><ul>
+<li class="chapter" data-level="" data-path="detection-limits.html"><a href="detection-limits.html#example-charts-for-visualizing-data-below-detection-limits"><i class="fa fa-check"></i>Example charts for visualizing data below detection limits</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>5.6</b> Multiple detection limits</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="completeness-checks.html"><a href="completeness-checks.html"><i class="fa fa-check"></i><b>6</b> Completeness checks</a><ul>
+<li class="chapter" data-level="6.1" data-path="completeness-checks.html"><a href="completeness-checks.html#complete"><i class="fa fa-check"></i><b>6.1</b> Completeness checks</a></li>
+</ul></li>
+<li><a href="summary-methods.html#summary-methods"><strong>Summary methods</strong></a></li>
+<li class="chapter" data-level="7" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>7</b> Summary statistics</a><ul>
+<li class="chapter" data-level="7.1" data-path="summary-statistics.html"><a href="summary-statistics.html#boots"><i class="fa fa-check"></i><b>7.1</b> Bootstrapping</a></li>
+<li class="chapter" data-level="7.2" data-path="summary-statistics.html"><a href="summary-statistics.html#below"><i class="fa fa-check"></i><b>7.2</b> Below the detection limit</a></li>
+<li class="chapter" data-level="7.3" data-path="summary-statistics.html"><a href="summary-statistics.html#confidence"><i class="fa fa-check"></i><b>7.3</b> Upper confidence limits (UCLs)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-statistics.html"><a href="summary-statistics.html#incomplete"><i class="fa fa-check"></i><b>7.4</b> Annual summaries for incomplete data</a></li>
+<li class="chapter" data-level="7.5" data-path="summary-statistics.html"><a href="summary-statistics.html#health"><i class="fa fa-check"></i><b>7.5</b> Comparison of data to inhalation health benchmarks</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>8</b> Site comparisons</a><ul>
+<li class="chapter" data-level="8.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>8.1</b> Confidence intervals</a></li>
+<li class="chapter" data-level="8.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>8.2</b> Tools to visualize data</a></li>
+<li class="chapter" data-level="8.3" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>8.3</b> Beeswarm Plots</a></li>
+<li class="chapter" data-level="8.4" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>8.4</b> Correlation matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>9</b> Start to finish</a></li>
+<li class="chapter" data-level="10" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>10</b> Charts</a><ul>
+<li class="chapter" data-level="10.1" data-path="charts.html"><a href="charts.html#boxplots"><i class="fa fa-check"></i><b>10.1</b> Boxplots</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="charts.html"><a href="charts.html#log-boxplots"><i class="fa fa-check"></i><b>10.1.1</b> Log boxplots</a></li>
+<li class="chapter" data-level="10.1.2" data-path="charts.html"><a href="charts.html#outliers"><i class="fa fa-check"></i><b>10.1.2</b> Outliers</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="charts.html"><a href="charts.html#calendar-plots"><i class="fa fa-check"></i><b>10.2</b> Calendar plots</a></li>
+<li class="chapter" data-level="10.3" data-path="charts.html"><a href="charts.html#color-palettes"><i class="fa fa-check"></i><b>10.3</b> Color palettes</a></li>
+<li class="chapter" data-level="10.4" data-path="charts.html"><a href="charts.html#pollution-roses"><i class="fa fa-check"></i><b>10.4</b> Pollution roses</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>11</b> Time series</a><ul>
+<li class="chapter" data-level="11.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>11.1</b> Seasonality</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>12</b> Maps</a><ul>
+<li class="chapter" data-level="12.1" data-path="maps.html"><a href="maps.html#kriging"><i class="fa fa-check"></i><b>12.1</b> Kriging</a></li>
+<li class="chapter" data-level="12.2" data-path="maps.html"><a href="maps.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>12.2</b> Spatial averaging and aggregation</a></li>
+<li class="chapter" data-level="12.3" data-path="maps.html"><a href="maps.html#creating-shapefiles-in-r-adn-joining-to-ej-areas"><i class="fa fa-check"></i><b>12.3</b> Creating shapefiles in R adn joining to EJ areas</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>13</b> Additional resources</a></li>
+<li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
+<li class="chapter" data-level="14" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>14</b> AQI explorer</a></li>
+<li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
+<li class="chapter" data-level="16" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>16</b> Air toxics explorer</a><ul>
+<li class="chapter" data-level="16.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>16.1</b> MPCA Air Toxics Methods</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>16.1.1</b> Data Cleaning</a></li>
+<li class="chapter" data-level="16.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>16.1.2</b> Data Validation</a></li>
+<li class="chapter" data-level="16.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>16.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="16.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>16.1.4</b> Producing Annual Summaries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="site-comparisons" class="section level1">
+<h1><span class="header-section-number"></span> Site comparisons</h1>
+<p><strong>Notes</strong></p>
+<p>Steps:</p>
+<ul>
+<li>Chart data with box and whisker plots. Some site differences might be very apparent and not require statistical comparisons. [Need to think about what is apparent enough for a visual test, maybe no overlap of box, or only half or less overlap] look at cenboxplot with NADA packages, or use Kristies boxplot with censored values.</li>
+<li>Check for normality Chi-squared test (Is normality a valid assumption?). If the data are normal, and there is equal variance [Levenes test–generic script here] complete an ANOVA to compare sites. If there are more than 2 sites, follow with a post hoc test [I say Tukey, but Derek weigh in here].</li>
+<li>If the data are not normal, and there is not equal variance [see generic script from above] complete a Kruskal wallis test (but there are other ones if you have &lt; or &gt; 50 samples…look into this). If there are more than 2 sites to compare, use Dunns test for post hoc site by site comparisons [Kristie has a script for this, will make it generic].</li>
+</ul>
+<div id="confidence-intervals" class="section level2">
+<h2><span class="header-section-number">8.1</span> Confidence intervals</h2>
+<p>If data is not normal, use bootstraping to generate means for each site and take the differences of those means. If the lower bound of the 95% confidence interval for those differences is greater than zero, or the upper bound is less than zero, then the site means are significantly different. You cannot just genrate confidence intervals for the means individually and see if they overlap since the joint probability of both means being in the same region is lower than the marginal probabilities of each mean being in the region. It is not effective to do pairwise comparisons due to null data and non-detects. You cannot use an ANOVA test since the data more closely resembles a log-normal distribution than a normal distribution and for a log-normal distribution, the variance is not independent of the mean which means that transforming the data and doing an ANOVA test would bias the confidence interval for the difference.</p>
+<p>The script below uses bootstrap sampling to generate 1000 differences in site means which are ordered to create a 95% confidence interval for the difference in means. If the lower bound of the interval is greater than zero, then the second site has a higher mean concentration than the first site. If the upper bound of the confidence interval is less than zero, then the second site has a lower mean concentration than the first site.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data must have names &quot;AQSID&quot;, &quot;POC&quot;, &quot;Parameter&quot;, &quot;Date&quot;, &quot;Result&quot;, &quot;MDL&quot;, &quot;Pollutant&quot;</span>
+
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(EnvStats)
+<span class="kw">library</span>(lubridate)
+
+site_compare =<span class="st"> </span><span class="cf">function</span>(data, site_number, <span class="dt">Boot_Repeats =</span> <span class="dv">1000</span>) {
+  <span class="kw">library</span>(EnvStats)
+  <span class="kw">set.seed</span>(<span class="dv">2017</span>)
+  
+  annual_AT_means =<span class="st"> </span><span class="cf">function</span>(air_toxics) {
+  
+  air_toxics =<span class="st"> </span><span class="kw">mutate</span>(air_toxics, <span class="dt">Year =</span> <span class="kw">year</span>(<span class="kw">ymd</span>(Date)), <span class="dt">Quarter =</span> <span class="kw">quarter</span>(<span class="kw">ymd</span>(Date)) )
+  sample_complete =<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, Quarter, MDL) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> ( (<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(Result) ) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(Result) ) <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span> ) ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Complete =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(Complete), F, Complete) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> <span class="kw">all</span>(Complete) )
+  
+  enough_detects =<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Detected =</span> <span class="kw">mean</span>(Censored, <span class="dt">na.rm =</span> T) <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.8</span> )
+  
+  site_means =<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(<span class="kw">length</span>(<span class="kw">unique</span>(Result[<span class="op">!</span><span class="kw">is.na</span>(Result) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>Censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="ot">NA</span>,
+     <span class="kw">ifelse</span> (<span class="kw">any</span>(Censored, <span class="dt">na.rm =</span> T), <span class="kw">elnormAltCensored</span>(Result, Censored, <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]], <span class="kw">mean</span>(Result, <span class="dt">na.rm =</span> T) ) ) )
+  
+  site_means =<span class="st"> </span><span class="kw">left_join</span>(site_means, sample_complete, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">left_join</span>(enough_detects, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Mean, <span class="ot">NA</span>), <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year) )
+
+  <span class="kw">return</span>(site_means)
+}
+  
+  MLE_est &lt;-<span class="st"> </span><span class="cf">function</span>(data){
+    
+    results =<span class="st"> </span>data<span class="op">$</span>Result
+    censored =<span class="st"> </span>data<span class="op">$</span>Censored
+    n =<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(results))
+    
+    <span class="cf">if</span> (<span class="kw">length</span>(<span class="kw">unique</span>(results[<span class="op">!</span><span class="kw">is.na</span>(results) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span> ) {
+      MLE_means =<span class="st"> </span><span class="ot">NA</span>
+    }
+    
+    <span class="cf">else</span> {
+      random.rows =<span class="st"> </span><span class="ot">NULL</span>  
+      random.rows =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored) <span class="op">&amp;</span><span class="st"> </span>(<span class="op">!</span>censored) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">duplicated</span>(results) ), <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)
+      random.rows =<span class="st"> </span><span class="kw">c</span>(random.rows, <span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored)), n<span class="op">-</span><span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))
+      
+      MLE_means =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">sum</span>(censored[random.rows], <span class="dt">na.rm =</span> T) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">mean</span>(results[random.rows]), <span class="kw">elnormAltCensored</span>(results[random.rows], censored[random.rows], <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]] )
+    }
+    
+    <span class="kw">return</span>(MLE_means)
+  }
+  
+  data =<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">Result =</span> <span class="kw">ifelse</span>(Censored, MDL, Result), <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year))
+  
+  Bootstrap_means =<span class="st"> </span><span class="kw">replicate</span>(Boot_Repeats, (<span class="kw">by</span>(data, data<span class="op">$</span>ID, MLE_est) ) )
+  
+  Bootstrap_means =<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">as.data.frame</span>(Bootstrap_means), <span class="st">&quot;ID&quot;</span> )
+  
+  Bootstrap_means =<span class="st"> </span><span class="kw">right_join</span>(<span class="kw">annual_AT_means</span>(data), Bootstrap_means, <span class="dt">by =</span> <span class="st">&quot;ID&quot;</span>)
+  
+  Bootstrap_means =<span class="st"> </span>Bootstrap_means <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Pollutant, Year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number), <span class="dt">.by_group =</span> T ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(Pollutant, Year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats)), <span class="kw">funs</span>(<span class="kw">c</span>(<span class="kw">first</span>(.), (. <span class="op">-</span><span class="st"> </span><span class="kw">first</span>(.))[<span class="op">-</span><span class="dv">1</span>])) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()
+  
+  LB =<span class="st"> </span><span class="kw">select</span>(Bootstrap_means, <span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(<span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(<span class="op">-</span>x)[<span class="kw">floor</span>(<span class="fl">0.025</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)] )
+  UB =<span class="st"> </span><span class="kw">select</span>(Bootstrap_means, <span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(<span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(<span class="op">-</span>x)[<span class="kw">ceiling</span>(<span class="fl">0.975</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)] )
+  
+  CI =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Lower =</span> LB, <span class="dt">Upper =</span> UB)
+  CI =<span class="st"> </span><span class="kw">bind_cols</span>(CI, Bootstrap_means) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Lower<span class="op">:</span>ID) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Lower =</span> <span class="kw">ifelse</span>(<span class="kw">any</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected) <span class="op">&amp;</span><span class="st"> </span>AQSID <span class="op">!=</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Lower, <span class="ot">NA</span>),
+                                                                      <span class="dt">Upper =</span> <span class="kw">ifelse</span>(<span class="kw">any</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected) <span class="op">&amp;</span><span class="st"> </span>AQSID <span class="op">!=</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Upper, <span class="ot">NA</span>),
+                                                                      <span class="dt">Comparison =</span> <span class="kw">ifelse</span>(Lower <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Higher&quot;</span>, <span class="kw">ifelse</span>(Upper <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Lower&quot;</span>, <span class="st">&quot;Same&quot;</span>) ) )
+  
+  <span class="kw">return</span>(CI)
+  
+}
+
+data =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> F)
+
+<span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Parameter&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,
+                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)
+
+data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(AQSID <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">270370020</span>, <span class="dv">270370470</span>, <span class="dv">271230871</span>) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Censored =</span> Result <span class="op">&lt;</span><span class="st"> </span>MDL)
+
+site_number =<span class="st"> </span><span class="dv">271230871</span>
+seed =<span class="st"> </span><span class="dv">2017</span>
+<span class="kw">set.seed</span>(seed)
+
+compare =<span class="st"> </span><span class="kw">site_compare</span>(data, site_number, <span class="dv">50</span>) <span class="co">#minimum 50 repeats</span></code></pre></div>
+</div>
+<div id="tools-to-visualize-data" class="section level2">
+<h2><span class="header-section-number">8.2</span> Tools to visualize data</h2>
+</div>
+<div id="beeswarm-plots" class="section level2">
+<h2><span class="header-section-number">8.3</span> Beeswarm Plots</h2>
+<p>Beeswarm plots are useful for visualizing concentrations measured at different sites with more detail than boxplots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data must have columns &quot;AQSID&quot;, &quot;POC&quot;, &quot;Param_Code&quot;, &quot;Date&quot;, &quot;Result&quot;, &quot;Null_Data_Code&quot;, &quot;MDL&quot;, &quot;Pollutant&quot;, &quot;Year&quot;, &quot;CAS&quot;</span>
+
+beeswarm_plot =<span class="st"> </span><span class="cf">function</span>(data, pollutant, year) {
+  <span class="kw">library</span>(dplyr)
+  <span class="kw">library</span>(ggbeeswarm)
+  <span class="kw">library</span>(ggplot2)
+  
+  data =<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">AQSID =</span> <span class="kw">as.factor</span>(AQSID) )
+  <span class="kw">ggplot</span>(<span class="kw">filter</span>(data, Pollutant <span class="op">==</span><span class="st"> </span>pollutant, Year <span class="op">==</span><span class="st"> </span>year), <span class="kw">aes</span>(<span class="dt">y =</span> AQSID, <span class="dt">x =</span> Result, <span class="dt">color =</span> Censored) ) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_quasirandom</span>(<span class="dt">groupOnX=</span>F) <span class="op">+</span><span class="st">   </span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste</span>(pollutant, year), <span class="dt">x =</span> <span class="st">&quot;Result (ug/m^3)&quot;</span> )
+}
+
+<span class="kw">library</span>(tidyverse)
+
+data =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> F)
+<span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Param_Code&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,
+                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)
+
+data =<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">Censored =</span> Result <span class="op">&lt;</span><span class="st"> </span>MDL)
+
+<span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Lead&quot;</span>, <span class="dv">2013</span>)</code></pre></div>
+<pre><code>## Warning: Removed 31 rows containing missing values (position_quasirandom).</code></pre>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Arsenic&quot;</span>, <span class="dv">2013</span>)</code></pre></div>
+<pre><code>## Warning: Removed 31 rows containing missing values (position_quasirandom).</code></pre>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-76-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Benzene&quot;</span>, <span class="dv">2013</span>)</code></pre></div>
+<pre><code>## Warning: Removed 33 rows containing missing values (position_quasirandom).</code></pre>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-76-3.png" width="672" /></p>
+<p><br> <em>References</em></p>
+<p><a href="http://lenkiefer.com/2017/04/26/housing-data-uncertainty/">Visualizing uncertainty in housing data</a></p>
+<p>R packages: <a href="https://github.com/eclarke/ggbeeswarm">Beeswarm</a></p>
+<p><br></p>
+</div>
+<div id="correlation-matrices" class="section level2">
+<h2><span class="header-section-number">8.4</span> Correlation matrices</h2>
+<p>Correlation matrices help visualize the relationship between different pollutants at a site.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+
+correlation_plots =<span class="st"> </span><span class="cf">function</span>(data, site) {
+  <span class="kw">library</span>(tidyverse)
+  <span class="kw">library</span>(corrplot)
+  
+  data_site &lt;-<span class="st"> </span><span class="kw">filter</span>(data, AQSID <span class="op">%in%</span><span class="st"> </span>site) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Date, Pollutant, Result)
+  analytes &lt;-<span class="st"> </span><span class="kw">spread</span>(data_site, Pollutant, Result, <span class="dt">drop=</span>T)
+  analytes<span class="op">$</span>Date &lt;-<span class="st"> </span><span class="ot">NULL</span>
+
+  coranalytes &lt;-<span class="st"> </span><span class="kw">cor</span>(analytes, <span class="dt">method=</span><span class="st">&quot;kendall&quot;</span>, <span class="dt">use=</span><span class="st">&quot;pairwise.complete.obs&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+  coranalytes &lt;-<span class="st"> </span><span class="kw">select_if</span>(coranalytes, <span class="cf">function</span>(x) <span class="op">!</span><span class="kw">all</span>(<span class="kw">is.na</span>(x))) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_all</span>(<span class="kw">any_vars</span>(<span class="op">!</span><span class="kw">is.na</span>(.))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">as.matrix</span>()
+  <span class="kw">rownames</span>(coranalytes) &lt;-<span class="st"> </span><span class="kw">colnames</span>(coranalytes)
+
+  <span class="kw">corrplot</span>(coranalytes, <span class="dt">method =</span> <span class="st">&quot;circle&quot;</span>, <span class="dt">type=</span><span class="st">&quot;lower&quot;</span>, <span class="dt">tl.cex=</span><span class="fl">0.6</span>) <span class="co">#plot matrix</span>
+}
+
+data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> F)
+
+<span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Param_Code&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,
+                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)
+
+data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">correlation_plots</span>(<span class="dv">270530962</span>)</code></pre></div>
+<pre><code>## corrplot 0.84 loaded</code></pre>
+<pre><code>## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero
+
+## Warning in cor(analytes, method = &quot;kendall&quot;, use =
+## &quot;pairwise.complete.obs&quot;): the standard deviation is zero</code></pre>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+
+</div>
+</div>
+<script>
+  $(".btn_code").click(function() {
+    $(this.parentNode).toggleClass("open");
+  });
+</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="summary-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="start-finish.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/MPCA-air/air-methods/edit/master/08-site_comparisons.Rmd",
+"text": "Edit"
+},
+"download": ["air-methods.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

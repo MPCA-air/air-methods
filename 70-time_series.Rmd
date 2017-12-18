@@ -1,11 +1,12 @@
 # Time series
 
+
 ## Seasonality
 
 The trend is up.  
 
+```{r, echo = F, eval = F}
 
 ## Changepoints (before & after tests)  
-
-Roll a dice.    
-
+    
+```

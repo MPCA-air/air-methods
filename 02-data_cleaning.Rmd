@@ -1,4 +1,4 @@
-# Data cleaning (Dorian & Cassie)
+# Data cleaning
 
 ```{r out.width='55%', echo=F}
 knitr::include_graphics("images/data-cleaning.jpg")
@@ -12,8 +12,8 @@ These procedures include steps to:
 \@ref(quals)    __Evaluate qualified data__     
 \@ref(dups)     __Remove duplicate observations__ 
  
- 
 
+ 
 ## Remove blank, NULL, and missing values {#missing}
 
 __Description__  
@@ -139,12 +139,12 @@ missing_sites <- function(x) {
 
 # Test for missing detection limits
 missing_dls <- function(x) {
-  is.na(as.numeric(x)) || as.numeric(x) < -900
+  is.na(as.numeric(x)) || as.numeric(x) < 0
 }
 
 # Test for missing parameter codes
 missing_param <- function(x) {
-  is.na(as.numeric(x)) || as.numeric(x) < -900 || 
+  is.na(as.numeric(x)) || as.numeric(x) < 0 || 
     nchar(as.character(x)) < 5 || nchar(as.character(x)) > 9
 }
 

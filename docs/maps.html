@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="generator" content="bookdown 0.5.2 and GitBook 2.6.7">
+
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/MPCA-air/air-methods" />
+  <meta property="og:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
+  
+  <meta name="github-repo" content="MPCA-air/air-methods" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="" />
+  
+  
+  <meta name="twitter:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="time-series.html">
+<link rel="next" href="additional-resources.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-0.9/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://mpca-air.github.io/air-methods">Methods for air data analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="get-data.html"><a href="get-data.html"><i class="fa fa-check"></i><b>1</b> Get data</a><ul>
+<li class="chapter" data-level="1.1" data-path="get-data.html"><a href="get-data.html#rqamd"><i class="fa fa-check"></i><b>1.1</b> Retrieving data from AQS DataMart using RQAMD</a></li>
+<li class="chapter" data-level="1.2" data-path="get-data.html"><a href="get-data.html#wair"><i class="fa fa-check"></i><b>1.2</b> Retrieving data from MPCA WAIR database</a></li>
+<li class="chapter" data-level="1.3" data-path="get-data.html"><a href="get-data.html#aqi-now"><i class="fa fa-check"></i><b>1.3</b> Current AQI obs</a></li>
+<li class="chapter" data-level="1.4" data-path="get-data.html"><a href="get-data.html#monitors"><i class="fa fa-check"></i><b>1.4</b> Current AQI observations</a></li>
+<li class="chapter" data-level="1.5" data-path="get-data.html"><a href="get-data.html#tableau"><i class="fa fa-check"></i><b>1.5</b> Retrieving data from Tableau</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="get-data.html"><a href="get-data.html#a-happy-note"><i class="fa fa-check"></i><b>1.5.1</b> A Happy note!</a></li>
+<li class="chapter" data-level="1.5.2" data-path="get-data.html"><a href="get-data.html#sad-note-1"><i class="fa fa-check"></i><b>1.5.2</b> Sad note /#1</a></li>
+<li class="chapter" data-level="1.5.3" data-path="get-data.html"><a href="get-data.html#sad-note-2"><i class="fa fa-check"></i><b>1.5.3</b> Sad note /#2</a></li>
+</ul></li>
+</ul></li>
+<li><a href="quality-assurance-methods.html#quality-assurance-methods"><strong>Quality assurance methods</strong></a></li>
+<li class="chapter" data-level="2" data-path="data-cleaning.html"><a href="data-cleaning.html"><i class="fa fa-check"></i><b>2</b> Data cleaning</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-cleaning.html"><a href="data-cleaning.html#missing"><i class="fa fa-check"></i><b>2.1</b> Remove blank, NULL, and missing values</a></li>
+<li class="chapter" data-level="2.2" data-path="data-cleaning.html"><a href="data-cleaning.html#quals"><i class="fa fa-check"></i><b>2.2</b> Remove <em>Qualified</em> data</a></li>
+<li class="chapter" data-level="2.3" data-path="data-cleaning.html"><a href="data-cleaning.html#dups"><i class="fa fa-check"></i><b>2.3</b> Duplicate observations</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-validation.html"><a href="data-validation.html"><i class="fa fa-check"></i><b>3</b> Data validation</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-validation.html"><a href="data-validation.html#leaks"><i class="fa fa-check"></i><b>3.1</b> Identifying Instrument drift or leaks in a system.</a></li>
+<li class="chapter" data-level="3.2" data-path="data-validation.html"><a href="data-validation.html#outs"><i class="fa fa-check"></i><b>3.2</b> Identify exceptional and extreme values aka outliers.</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="collocated-monitors.html"><a href="collocated-monitors.html"><i class="fa fa-check"></i><b>4</b> Collocated monitors</a><ul>
+<li class="chapter" data-level="4.1" data-path="collocated-monitors.html"><a href="collocated-monitors.html#evalpocs"><i class="fa fa-check"></i><b>4.1</b> Evaluate collocated air monitors (POCs)</a></li>
+<li class="chapter" data-level="4.2" data-path="collocated-monitors.html"><a href="collocated-monitors.html#pripocs"><i class="fa fa-check"></i><b>4.2</b> Prioritize multiple air monitors (POCs)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>5</b> Detection limits</a><ul>
+<li class="chapter" data-level="5.1" data-path="detection-limits.html"><a href="detection-limits.html#method-detection-limit---definition"><i class="fa fa-check"></i><b>5.1</b> Method Detection Limit - Definition</a></li>
+<li class="chapter" data-level="5.2" data-path="detection-limits.html"><a href="detection-limits.html#procedure-for-calculating-method-detection-limits"><i class="fa fa-check"></i><b>5.2</b> Procedure for calculating method detection limits</a></li>
+<li class="chapter" data-level="5.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-detection-limits-cassie"><i class="fa fa-check"></i><b>5.3</b> Finding detection limits (Cassie)</a></li>
+<li class="chapter" data-level="5.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>5.4</b> Qualifier Codes for Detection Limits</a></li>
+<li class="chapter" data-level="5.5" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>5.5</b> Below detection values</a><ul>
+<li class="chapter" data-level="" data-path="detection-limits.html"><a href="detection-limits.html#example-charts-for-visualizing-data-below-detection-limits"><i class="fa fa-check"></i>Example charts for visualizing data below detection limits</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>5.6</b> Multiple detection limits</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="completeness-checks.html"><a href="completeness-checks.html"><i class="fa fa-check"></i><b>6</b> Completeness checks</a><ul>
+<li class="chapter" data-level="6.1" data-path="completeness-checks.html"><a href="completeness-checks.html#complete"><i class="fa fa-check"></i><b>6.1</b> Completeness checks</a></li>
+</ul></li>
+<li><a href="summary-methods.html#summary-methods"><strong>Summary methods</strong></a></li>
+<li class="chapter" data-level="7" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>7</b> Summary statistics</a><ul>
+<li class="chapter" data-level="7.1" data-path="summary-statistics.html"><a href="summary-statistics.html#boots"><i class="fa fa-check"></i><b>7.1</b> Bootstrapping</a></li>
+<li class="chapter" data-level="7.2" data-path="summary-statistics.html"><a href="summary-statistics.html#below"><i class="fa fa-check"></i><b>7.2</b> Below the detection limit</a></li>
+<li class="chapter" data-level="7.3" data-path="summary-statistics.html"><a href="summary-statistics.html#confidence"><i class="fa fa-check"></i><b>7.3</b> Upper confidence limits (UCLs)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-statistics.html"><a href="summary-statistics.html#incomplete"><i class="fa fa-check"></i><b>7.4</b> Annual summaries for incomplete data</a></li>
+<li class="chapter" data-level="7.5" data-path="summary-statistics.html"><a href="summary-statistics.html#health"><i class="fa fa-check"></i><b>7.5</b> Comparison of data to inhalation health benchmarks</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>8</b> Site comparisons</a><ul>
+<li class="chapter" data-level="8.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>8.1</b> Confidence intervals</a></li>
+<li class="chapter" data-level="8.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>8.2</b> Tools to visualize data</a></li>
+<li class="chapter" data-level="8.3" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>8.3</b> Beeswarm Plots</a></li>
+<li class="chapter" data-level="8.4" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>8.4</b> Correlation matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>9</b> Start to finish</a></li>
+<li class="chapter" data-level="10" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>10</b> Charts</a><ul>
+<li class="chapter" data-level="10.1" data-path="charts.html"><a href="charts.html#boxplots"><i class="fa fa-check"></i><b>10.1</b> Boxplots</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="charts.html"><a href="charts.html#log-boxplots"><i class="fa fa-check"></i><b>10.1.1</b> Log boxplots</a></li>
+<li class="chapter" data-level="10.1.2" data-path="charts.html"><a href="charts.html#outliers"><i class="fa fa-check"></i><b>10.1.2</b> Outliers</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="charts.html"><a href="charts.html#calendar-plots"><i class="fa fa-check"></i><b>10.2</b> Calendar plots</a></li>
+<li class="chapter" data-level="10.3" data-path="charts.html"><a href="charts.html#color-palettes"><i class="fa fa-check"></i><b>10.3</b> Color palettes</a></li>
+<li class="chapter" data-level="10.4" data-path="charts.html"><a href="charts.html#pollution-roses"><i class="fa fa-check"></i><b>10.4</b> Pollution roses</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>11</b> Time series</a><ul>
+<li class="chapter" data-level="11.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>11.1</b> Seasonality</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>12</b> Maps</a><ul>
+<li class="chapter" data-level="12.1" data-path="maps.html"><a href="maps.html#kriging"><i class="fa fa-check"></i><b>12.1</b> Kriging</a></li>
+<li class="chapter" data-level="12.2" data-path="maps.html"><a href="maps.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>12.2</b> Spatial averaging and aggregation</a></li>
+<li class="chapter" data-level="12.3" data-path="maps.html"><a href="maps.html#creating-shapefiles-in-r-adn-joining-to-ej-areas"><i class="fa fa-check"></i><b>12.3</b> Creating shapefiles in R adn joining to EJ areas</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>13</b> Additional resources</a></li>
+<li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
+<li class="chapter" data-level="14" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>14</b> AQI explorer</a></li>
+<li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
+<li class="chapter" data-level="16" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>16</b> Air toxics explorer</a><ul>
+<li class="chapter" data-level="16.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>16.1</b> MPCA Air Toxics Methods</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>16.1.1</b> Data Cleaning</a></li>
+<li class="chapter" data-level="16.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>16.1.2</b> Data Validation</a></li>
+<li class="chapter" data-level="16.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>16.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="16.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>16.1.4</b> Producing Annual Summaries</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="maps" class="section level1">
+<h1><span class="header-section-number"></span> Maps</h1>
+<div id="kriging" class="section level2">
+<h2><span class="header-section-number">12.1</span> Kriging</h2>
+<p>Coming soon…</p>
+</div>
+<div id="spatial-averaging-and-aggregation" class="section level2">
+<h2><span class="header-section-number">12.2</span> Spatial averaging and aggregation</h2>
+<p>To average across…</p>
+</div>
+<div id="creating-shapefiles-in-r-adn-joining-to-ej-areas" class="section level2">
+<h2><span class="header-section-number">12.3</span> Creating shapefiles in R adn joining to EJ areas</h2>
+<p>I don’t really remember the points of this. This bit of script creates a shapefile from air monitoring data with coordinates and then joins to the EJ status for census tracts. Let’s discuss how to make this useful.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(stringr)
+<span class="kw">library</span>(RcppRoll)
+<span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(car)
+<span class="kw">library</span>(DT)
+
+data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)
+
+<span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)
+
+dt_options &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">scrollX =</span> T, <span class="dt">autoWidth =</span> T, <span class="dt">searching =</span> F, <span class="dt">ordering=</span>F, <span class="dt">lengthChange =</span> F, <span class="dt">paginate=</span>F, <span class="dt">info=</span>F)
+
+
+########################################################################
+## Spatial join to census tracts and then left_join to EJ areas status #
+########################################################################
+coords &lt;-<span class="st"> </span>monitoring_locations[, <span class="kw">c</span>(<span class="st">&quot;Longitude&quot;</span>, <span class="st">&quot;Latitude&quot;</span>)]
+
+point_source_wypoints &lt;-<span class="st"> </span><span class="kw">SpatialPointsDataFrame</span>(coords, <span class="dt">data=</span>data, <span class="dt">proj4string =</span> <span class="kw">CRS</span>(<span class="st">&#39;+proj=longlat +ellps=WGS84&#39;</span>))
+
+point_source_wypoints &lt;-<span class="st"> </span><span class="kw">spTransform</span>(point_source_wypoints, <span class="kw">CRS</span>(<span class="st">&#39;+proj=utm +zone=15 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0&#39;</span>))
+
+census_tracts &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="dt">dsn=</span><span class="st">&quot;R:/demographics&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;census_2010_tracts_usboc&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+
+point_sources_files_geo &lt;-<span class="st"> </span><span class="kw">point.in.poly</span>(point_source_wypoints, census_tracts)
+
+<span class="kw">writeOGR</span>(<span class="dt">obj=</span>point_sources_files_geo, <span class="dt">dsn=</span><span class="st">&quot;X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods&quot;</span>, <span class="dt">layer=</span><span class="st">&quot;airmonitors_tracts&quot;</span>, <span class="dt">driver=</span><span class="st">&quot;ESRI Shapefile&quot;</span>)
+
+point_sources_tracts_dbf &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods/airmonitors_tracts.dbf&quot;</span>, <span class="dt">as.is=</span><span class="ot">TRUE</span>)
+
+ej_layers &lt;-<span class="st"> </span><span class="kw">read.dbf</span>(<span class="st">&quot;X:/Agency_Files/EJ/GIS/Shapefiles/ACS_2014_5Yr_Tract_MNPovPPC.dbf&quot;</span>, <span class="dt">as.is=</span><span class="ot">TRUE</span>)
+
+ej_layers &lt;-<span class="st"> </span>ej_layers[, <span class="kw">c</span>(<span class="st">&quot;GEOID&quot;</span>, <span class="st">&quot;ov50per_nw&quot;</span>, <span class="st">&quot;prp_under1&quot;</span>)]
+
+point_sources_tracts_ej &lt;-<span class="st"> </span><span class="kw">left_join</span>(point_sources_tracts_dbf, ej_layers, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;GEOID10&quot;</span>=<span class="st">&quot;GEOID&quot;</span>))
+
+<span class="kw">names</span>(point_sources_tracts_ej) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Facility_ID&quot;</span>,  <span class="st">&quot;Facility_Name&quot;</span>, <span class="st">&quot;Resident_Cancer_Risk&quot;</span>, <span class="st">&quot;Resident_Hazard_Quotient&quot;</span>, <span class="st">&quot;CAS&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>,  <span class="st">&quot;Latitude&quot;</span>, <span class="st">&quot;Longitude&quot;</span>, <span class="st">&quot;Annual_PM25_Concentration&quot;</span>, <span class="st">&quot;STATEFP&quot;</span>, <span class="st">&quot;COUNTYF&quot;</span>, <span class="st">&quot;TRACTCE&quot;</span>, <span class="st">&quot;GEOID10&quot;</span>, <span class="st">&quot;NAME10&quot;</span>, <span class="st">&quot;NAMELSA&quot;</span>, <span class="st">&quot;MTFCC10&quot;</span>, <span class="st">&quot;FUNCSTA&quot;</span>, <span class="st">&quot;ALAND10&quot;</span>, <span class="st">&quot;AWATER1&quot;</span>, <span class="st">&quot;INTPTLA&quot;</span>, <span class="st">&quot;INTPTLO&quot;</span>, <span class="st">&quot;ov50per_nw&quot;</span>, <span class="st">&quot;prp_under1&quot;</span>)
+
+<span class="co">#Output file name (including path)</span>
+point_sources_tracts_ej &lt;-<span class="st"> </span><span class="kw">unique</span>(point_sources_tracts_ej)</code></pre></div>
+
+</div>
+</div>
+<script>
+  $(".btn_code").click(function() {
+    $(this.parentNode).toggleClass("open");
+  });
+</script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="time-series.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="additional-resources.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/MPCA-air/air-methods/edit/master/80-maps.Rmd",
+"text": "Edit"
+},
+"download": ["air-methods.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

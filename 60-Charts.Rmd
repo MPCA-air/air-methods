@@ -1,15 +1,14 @@
 # Charts 
 
-![What our code looks like](http://imgs.xkcd.com/comics/code_quality.png){width="80%"}
+![](http://imgs.xkcd.com/comics/cat_proximity.png){width="45%"}
 
 
 
-## Boxplots (Dorian)
-
+## Boxplots
 Dividing by zero is an amazing super power. Unfortunately for you your computer does not have this power. Making a log boxplot with data containing zeros or negative values will result in your computer melting itself. It will never forgive you.
 
 
-### Log boxplot 
+### Log boxplots 
 
 Coming soon... 
 
@@ -19,33 +18,118 @@ Coming soon...
 Coming soon...   
 
 
-## Calendar plots (Cassie)
+## Calendar plots
 
 The openair package provides a convenient function, calendarPlot, for presenting data in a calendar format. 
 
-```{r,echo=FALSE}
+```{r, echo=FALSE}
 library(openair)
-library(readr)
-library(curl)
+library(tidyverse)
 
 data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
 
-formaldehyde_963<-subset(data,data$Param_Code==43502 & data$AQSID==270530963 &data$Date>="2013-01-01")
-colnames(formaldehyde_963)[4]="date" #openair requires dates to be stored under field name "date"
+formaldehyde_963 <- filter(data,Param_Code == 43502, AQSID == 270530963, Date >= "2013-01-01")
 
-calendarPlot(formaldehyde_963,pollutant="Concentration",statistic="mean", year=2013, annotate="value",digits=1,  key.footer="ug/m3", main="Daily Average Formaldehyde Concentrations at Mpls-Phillips (963), 2013")
+names(formaldehyde_963)[4] <- "date" #openair requires dates to be stored under field name "date"
+
+calendarPlot(formaldehyde_963,pollutant<- "Concentration",statistic="mean", year=2013, annotate="value",digits=1, key.footer="ug/m3", main="Daily Average Formaldehyde Concentrations at Mpls-Phillips (963), 2013")
 
 ```
 
 
-## Colors (Dorian)
+## Color palettes
 
+
+```{r, echo = F, eval = F}
 The MPCA only uses Ghibli colors. See [Ghibli](https://github.com/ewenme/ghibli).
 
 ![Ghibli colors](https://github.com/ewenme/ghibli/raw/master/ghibli.jpg){width="80%"}
 
-## _openair_ package (Derek & Cassie)
+```
 
-`r library(openair)`  
 
-Coming soon... 
+## Pollution roses 
+
+Pollution roses are a visual display of pollutant concentrations and wind directions correspnding to those concentrations. The length of each "paddle" is correlated with the percentage of days of valid measurements taken when the wind was blowing from that direction. So if the longest paddle is the one extending upward, then the wind blew from the North on average more times than any other direction for days with valid measurements of a pollutant. The colors on a paddle correspond to the concentration of the pollutant. Blue means lower concentrations up to red which are the highest concentrations.
+
+Note that for 24-hour samples, wind direction is the vector averaged wind direction of each hour in a day.
+
+<br> __Sample `R` script__ 
+
+```{r roses, eval=F, message=F, warning=F}
+
+pollution_roses = function(data, met_data_filepath, num_breaks = 5) { #Met data must be in Tableau format
+  
+  library(tidyverse)
+  library(lubridate)
+  library(openair)
+  library(reshape)
+  library(shiny)
+  library(rsconnect)
+  
+  data$Date = ymd(data$Date)
+  
+  met_data = read.csv(met_data_filepath)
+  names(met_data)[c(1,8,9)] = c("Day","wd","ws")
+  met_data = mutate(met_data, date = paste0(Year,"/",Month,"/",Day," ",Hour,":00"))
+  met_data$date = ymd_hm(met_data$date)
+  met_data = met_data[,-c(1:3,10)]
+  met_data = timeAverage(met_data, avg.time = "day")
+  met_data$date = ymd(met_data$date)
+  
+  data = left_join(data, met_data, by = c("Date" = "date"))
+  
+  Pollutant <- unique(data$Pollutant)
+  Site <- unique(data$AQSID)
+  Year <- unique(data$Year)
+
+  shinyApp(
+  ui = fluidPage(responsive = FALSE,
+                 fluidRow(
+                   column(3,
+                          style = "padding-bottom: 20px;",
+                          inputPanel(
+                            selectInput("Pollutant", label="Choose a pollutant", choices = Pollutant),
+                            selectInput("Year", label="Choose a year", choices = Year),
+                            selectInput("Site", label="Choose a site", choices = Site))),
+                   column(9,
+                          plotOutput('normviz', height = "500px")))),
+  
+  
+  server = function(input, output) {
+    
+    
+    
+    
+    output$normviz <- renderPlot({
+      print(input$Pollutant)
+      print(input$Site)
+      print(input$Year)
+      data_sub = filter(data, Pollutant==input$Pollutant, AQSID == input$Site, Year == input$Year, !is.na(Result))
+      data_sub = data_sub %>% mutate(MDL = max(MDL), minimum = min(Result), maximum = max(Result), Result = ifelse(Censored, 1e-16, Result))
+      breaks_site = NULL
+      if(!all(data_sub$Censored)){
+        
+        breaks_site = c(breaks_site, 0, #c(round_any(data_sub$minimum[1], 0.001, floor),
+                      round_any( c(data_sub$MDL[1], data_sub$MDL[1] + (data_sub$maximum[1] - data_sub$MDL[1]) * 
+                                     (1:(num_breaks-1) / (num_breaks-1) ) ), 0.0001, ceiling ) )
+        pollutionRose(data_sub, statistic = "abs.count", pollutant = "Result", breaks = breaks_site, 
+                  key.footer="ug/m3", main=paste("Daily Average Pollution Rose for",
+                  data_sub$Pollutant[1],"\n", data_sub$AQSID[1]) )
+      }
+      else {
+        breaks_site = c(breaks_site, c(round_any(0, 0.0001, floor),
+                      round_any( c(data_sub$MDL[1], 2*data_sub$MDL[1] ), 0.0001, ceiling ) ) )
+        pollutionRose(data_sub, statistic = "abs.count", pollutant = "Result", breaks = breaks_site, 
+                  key.footer="ug/m3", main=paste("Daily Average Pollution Rose for",
+                  data_sub$Pollutant[1],"\n", data_sub$AQSID[1]) )
+        
+      }
+      
+    })
+    
+  })
+
+}
+
+```

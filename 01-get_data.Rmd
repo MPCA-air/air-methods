@@ -1,10 +1,10 @@
-﻿# Get data (Dorian & Cassie)
+# Get data
 
-```{r out.width='55%', echo=F}
-dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
-
-knitr::include_graphics("http://imgs.xkcd.com/comics/fuck_grapefruit.png")
+```{r echo=F}
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 ```
+
+![](http://1.bp.blogspot.com/_29-T6ljKdFo/R8JvNNLEnOI/AAAAAAAAAEQ/ursB9KU6dwE/w1200-h630-p-k-nu/sydney%27s+fruit+diagram.jpg){width="62%"}
 
 This section describes the location of data sources relevant to air monitoring and how to access them using R.   
 
@@ -13,16 +13,19 @@ These data sources include:
 __Air monitoring__
 
 - EPA's AQS DataMart
-    - \@ref(rqamd) RQAMD Package  
-
+    - \@ref(rqamd) RQAMD Package 
+    
+- MPCA sources
+    - \@ref(wair) WAIR Database
+    - \@ref(lims) LIMS data via Tableau
+    - \@ref(AirVision) Airvision - Hourly data
+    
 - EPA's AirNow
     - \@ref(aqi-now)  Current AQI observations  
     - \@ref(monitors) Active AQI monitors     
 
-- MPCA sources
-    - \@ref(WAIR) WAIR Database
-    - \@ref(LIMS) LIMS data via Tableau
-    - \@ref(AirVision) Airvision - Hourly data
+- Tableau 
+    - \@ref(tableau) Workbooks
 
 __Health and standards__
 
@@ -59,9 +62,7 @@ __Geography and American Community Survey (ACS)__
 - Land use
 
 
-
-
-## Retrieving data from AQS DataMart using RQAMD {#RQAMD}
+## Retrieving data from AQS DataMart using RQAMD {#rqamd}
 
 The AQS Data Mart provides a convenient API to access air quality data stored in the EPA's AQS database, [AQS Data Mart] (https://aqs.epa.gov/aqsweb/documents/data_mart_welcome.html)
 
@@ -76,8 +77,7 @@ Click the button below to view a step by step example.
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
 
-
-```{r,eval=FALSE }
+```{r, eval=FALSE }
 
 ##install raqdm package
 
@@ -95,8 +95,9 @@ setAQDMdefaults(pc="CRITERIA", state="27", save=TRUE) #Set defaults that are loc
 
 ##Single Paramteer Query
 
-x=getAQDMdata(state="27",pc="CRITERIA",param="42602",format="AQCSV",bdate="20140101",edate="20141231",synchronous = FALSE) # Queries Data Mart DataBase
-aqcsv=getAQDMrequest(x) #wait for email confirming file is ready. 
+x <- getAQDMdata(state="27",pc="CRITERIA",param="42602",format="AQCSV",bdate="20140101",edate="20141231",synchronous = FALSE) # Queries Data Mart DataBase
+
+aqcsv <- getAQDMrequest(x) # Wait for email confirming file is ready. 
 
 
 ##Multiple Parameter Loops
@@ -118,9 +119,12 @@ y <- lapply(x, function(r) {
 d <- do.call(rbind, y)
 
 ```
+</div>
+
+
 <br>
 
-## Retrieving data from MPCA WAIR database {#WAIR}
+## Retrieving data from MPCA WAIR database {#wair}
 
 The WAIR database provides a queryable local copy of select air quality data extracted multiple data sources. This database is managed by Margaret McCourtney. Contact Margaret to request login credentials. 
 See [WAIR Data Dictionary] (http://rainier.pca.state.mn.us/documentation/DataDictionary/wair/index.html) for available data tables.
@@ -150,7 +154,7 @@ Use the following code to query WAIR using DPLYR
 ## time
 ################################################################################################
 
-## call the library
+## Load the library
 library(dplyr)
 
 
@@ -197,20 +201,23 @@ head(my_mn_o3_df)
 
 
 ```
+</div>
+
+<br>
+
 
 Use the following code to query WAIR using RPostgrSQL
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
 
-```{r, eval=FALSE }
+```{r, eval = FALSE }
 ################################################################################################
 ## This script loads the library and driver and connects to WAIR.  A PostgrSQL query extracts 
 ## data from the database into a format specified by Cassie McMahon for calculating           
 ## OZONE DESIGN VALUES                                                                        
 ##                                                                                    
-## Please disconnect from database and unload the driver before proceeding with
-## analysis of the data in your dataframe.
+## Please disconnect from database and unload the driver before proceeding with analysis of the data in your dataframe.
 ##
 ## Cassie's headings
 ## "State.Code", "County.Code", "Site.ID", "Parameter", "POC", "Sample.Duration", "Unit",
@@ -270,6 +277,9 @@ dbDisconnect(con)
 dbUnloadDriver(drv)
 
 ```
+</div>
+
+<br>
 
 
 ## Current AQI obs {#aqi-now}
@@ -279,6 +289,7 @@ Air data for the entire United States is at your finger tips. _EPA's AirNow_ mai
 <br> __Sample `R` script__  
   
 Use the following R code to grab the most recent AQI results for the entire country.e.
+
 
 
 <div class="toggle">
@@ -308,7 +319,6 @@ names(aqi_now) <- c("date", "time", "aqsid", "city", "local_time", "parameter", 
 aqi_now <- filter(aqi_now, parameter %in% c("OZONE", "PM2.5"))
  
 ```
-  
 </div>
 
 <br> __Contributors__   
@@ -402,7 +412,6 @@ Click the button below to view a step by step example.
 
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
 
-
 ```{r }
 library(readr)
 
@@ -432,16 +441,19 @@ vw_cars <- read_csv(tableau_url)
 # Take a look
 head(vw_cars)
 ```
+</div>
 
 <br>
 
-Do you feel like a Master Jedi? Good. But there is 1 small caveat.
+Do you feel like a Jedi? Good. But there is 1 small caveat.
 
-- This trick doesn't work on the URL of a Tableau _Story_. You'll need to get to the worksheet or dashboard behind the story.
+> This trick doesn't work on the URL of a Tableau _Story_. You'll need to get to the worksheet or dashboard behind the story.
  
-For an example, take a look at the [Watershed Pollutant Load Monitoring](http://tableau.pca.state.mn.us/#/views/wplmn_data_browser/WPLMNBrowser) workbook. Since the workbook loads to a _Story_ the nifty `.csv` trick won't work on this page. We need to jump over to a worksheet or dashboard behind the story. 
+As an example, take a look at the [Watershed Pollutant Load Monitoring](http://tableau.pca.state.mn.us/#/views/wplmn_data_browser/WPLMNBrowser) workbook. Since the workbook loads to a _Story_ the  _.csv_ trick won't work on this page. We need to jump over to a worksheet or dashboard behind the story. 
 
 In this case the tabs are shown at the top, but this won't always be true. Let's try the tab _"Download Annual data"_.
+
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
 
 Now that you know the name of the worksheet, the data is free for the taking. Let's read it into R.
 ```{r }
@@ -465,24 +477,28 @@ tableau_url <- paste0(tableau_url, ".csv")
 # Read data into a data frame
 water <- read_csv(tableau_url)
 
+# Take a look
+head(water)
+
 # How many rows are there?
 nrow(water)
 
-# Take a look
-head(water)
 ```
+</div>
 
 <br>
 
-Wow! Over 4,000 rows of data. It looks like we got __ALL__ the data. That's because everything is selected in the filters on the right. If you'd like to download data for only a single site or a single year, you can change the filter by adding a little magic to the end of the URL.
+Wow! There's over 4,000 rows of data. It looks like we got __ALL__ the data. That's because everything is selected in the filters on the right of the dashboard. If you'd like to download data only for a single site or a single year, you can change the filter by adding a little text to the end of the URL.
 
 <br>
 
 __Requesting a subset__  
 
-The filters on the worksheet are accessible by using the format`Year=2014`. To add a filter to your data request you first add a `?` to the end of the workseet URL and then the filter. The final URL with the 2014 year filter would look like this `http://tableau.pca.state.mn.us/views/wplmn_data_browser/DownloadAnnualData.csv?Year=2014`.
+The filters on the worksheet are accessible by using the format `Year=2014`. To add a filter to your data request you first add a `?` to the end of the workseet URL and then the filter. The final URL with the 2014 year filter looks like this `http://tableau.pca.state.mn.us/views/wplmn_data_browser/DownloadAnnualData.csv?Year=2014`.
 
 Let's get all the data for year 2014.
+
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
 ```{r }
 library(readr)
 
@@ -508,6 +524,7 @@ water_2014 <- read_csv(tableau_url)
 # Take a look
 head(water_2014)
 ```
+</div>
 
 <br> 
 
@@ -519,7 +536,6 @@ __Filtering with special characters__
 Want to try one of the other filters? Things can get a little trickier when you filter on values that contain special characters, such as text with spaces — _"Total phosphorous"_ — or slashes — _"FWMC (mg/L)"_ —. To filter with special characters in a URL you'll need to let the browser know that you really mean a text slash "/", and that you don't mean "move up a folder" as in `Desktop/Documents/Reports`. To do this, URL's have codes for the characters that usually mean something else to computers. For example, the forward slash _"/"_ has the special code `%2`. A space has the code `%20`. 
 
 Here is a table of codes for the most common symbols. A more complete reference and a tool to convert your text to a URL friendly format is online [here](https://www.w3schools.com/tags/ref_urlencode.asp).
-
 
 
 ```{r, eval=T, echo=F, message=F, warning=F, fig.width=4}
@@ -554,6 +570,8 @@ DT::datatable(codes, options = dt_options, rownames = FALSE)
 Let's try filtering the data to one the values listed for `Parameter`. If the filter doesn't work, Tableau will be nice and send you all of the data. However, it isn't helpful enough to give you clues about what's wrong with your filter. Like if I happen to misspell _phosphourus_ 3 times. 
 
 The code below filters the data to the `Parameter` _Total phosphorus_.
+
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
 ```{r }
 library(readr)
 
@@ -579,10 +597,14 @@ water_phos <- read_csv(tableau_url)
 # Take a look
 head(water_phos, 5)
 ```
+</div>
 
 <br> 
 
-Try filtering the sites to only the `Hydstra ID` _W38014001_.
+
+Try filtering the sites to only the `Hydstra ID` _W38014001_.  
+
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
 ```{r }
 library(readr)
 
@@ -601,15 +623,15 @@ water_missip <- read_csv(tableau_url)
 # Take a look
 head(water_missip, 5)
 ```
-
+</div>
 <br>
 
 Simple site IDs are your friend. Dashes, slashes, and surprising capital letters are your not.
 
 
-
 ### A Happy note!
-To add multiple filters separate them with the `&` character with no spaces. As in `?Year=2014&Parameter=Flow`.
+
+> To add multiple filters separate them with the `&` character with no spaces. As in `?Year=2014&Parameter=Flow`.
 
 ### Sad note /#1
 
@@ -623,13 +645,14 @@ To add multiple filters separate them with the `&` character with no spaces. As 
 
 #### Facility emissions
 
-Sometimes tabs are hidden.
+The tabs or Tableau workbook are often hidden. Below are two methods for finding the names of the worksheets and dashboards in a Tableau project.
 
 1. Download and open the workbook to find the name of the worksheet with the data you want.
-1. In this case the tabs are shown (this won't always be the case), click `Share` on the bottom of the page and copy the lower link. Paste this URL into your browser and then scroll all the way to the bottom of the page. You should see a section called __Metadata:__ on the right. These are all the names of the hidden tabs! You can even open them. Let's try downloading data from the tab _"Download Annual data"_.
+1. When viewing the Tableau story online, click `Share` on the bottom of the page and copy the lower link. Paste this URL into your browser. When it loads scroll to the bottom of the page. You should see a section called __Metadata:__ on the right. These are all the names of the hidden tabs! You can even click to open one of them. Let's try downloading data from the tab _"Download Annual data"_.
 
 
-Now that you know the name of the worksheet, the data is yours. Let's read it into R.
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+
 ```{r }
 library(dplyr)
 
@@ -643,11 +666,9 @@ fac_emits <- read_csv(tableau_url)
 
 head(fac_emits)
 ```
-
-The filters on the worksheet are accessible by using the format`Year=2014`. To add a filter to your data request you need to add a `?` to the end of the workseet URL. Your final URL will look like this `https://public.tableau.com/profile/mpca.data.services#!/vizhome/Pointsourceairemissionsdata/EmissionsbyFacility.csv?:embed=y&Year=2014`.
-
-
 </div>
+<br>
+
 
 <br> __Contributors__  
 
@@ -658,5 +679,5 @@ The filters on the worksheet are accessible by using the format`Year=2014`. To a
 
 
 
-<br> [Back to top](#missing)
+<br> [Back to top](#rqamd)
 

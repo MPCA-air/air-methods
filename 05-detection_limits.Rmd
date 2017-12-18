@@ -1,4 +1,4 @@
-# Detection limits (Kristie & Cassie) 
+# Detection limits
 
 
 ```{r out.width='40%', echo=F, fig.align="center"}
@@ -10,15 +10,15 @@ Detection limit methods.
 
 <br> __Notes__  
 
-- Types of detection limits (what detection limit the lab calculates, where it is, where it is not and when not to use what lims has) [Cassie]
+- Types of detection limits (what detection limit the lab calculates, where it is, where it is not and when not to use what lims has) 
 - Does a value equal to the detection limit count as detected? __“YES!”__ 
-- Things to consider when there are more than one detection limit per year. [Cassie]
-    - Discuss averaging two detection limit years and using that instead of the previous detection limit. [Dorian]
+- Things to consider when there are more than one detection limit per year.
+    - Discuss averaging two detection limit years and using that instead of the previous detection limit. 
 
 
-Estimating below detection values (what not to do) [Kristie]:
+Estimating below detection values _(what not to do)_:
 
-- Don’t delete
+- __Don’t delete data.__
     - Deleting data that are below a detection limit biases central tendency estimates and whole data summaries (quantiles of the data set) high.
 - Don’t fill with zeros
     - Substituting below detection limit data with 0’s biases central tendency estimates and whole data summaries (quantiles of the data set) low, and can change the distribution by the creation of multiple same value numbers, and can even create an inaccurate bimodal distribution of the data.
@@ -73,7 +73,7 @@ New method requires calculation of the MDL of the method blanks(MDL_b)
   
   **The SQL is 3.18x the MDL**
   
-## Below detection values (Kristie)
+## Below detection values
 
 __Description__  
 
@@ -135,7 +135,7 @@ shinyApp(
                      column(3,
                             style = "padding-bottom: 20px;",
                             inputPanel(
-  selectInput("pollutant", label="Choose a pollutant", choices = pollutants, selected="Benzene"),
+  selectInput("pollutant", label="Choose a pollutant", choices = pollutant, selected="Benzene"),
   selectInput("year", label="Choose a year", choices = years, selected=2009))),
                     column(9,
                    plotOutput('detlim', height = "400px")))),
@@ -153,7 +153,7 @@ output$detlim <- renderPlot({
       scale_colour_manual(values= c("#197519"[FALSE %in% unique(data_sub$Censored)], "#0000FF"[TRUE %in% unique(data_sub$Censored)]), breaks=c(FALSE, TRUE)) +
     geom_boxplot(outlier.colour=NA) +
     geom_jitter(aes(color=Censored), size =2.4, alpha=0.55) +
-    geom_hline(yintercept=mdl) +
+    geom_hline(yintercept = mdl) +
     xlab(NULL) +
     ylab("Result (ug/m3)") +
     expand_limits(y=c(0, max(data_sub$conc))) +
@@ -165,7 +165,6 @@ output$detlim <- renderPlot({
 })
 
 ```
-
 
 
 
