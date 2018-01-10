@@ -119,11 +119,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.2" data-path="getting-data.html"><a href="getting-data.html#wair"><i class="fa fa-check"></i><b>2.2</b> Retrieving data from MPCA WAIR database</a></li>
 <li class="chapter" data-level="2.3" data-path="getting-data.html"><a href="getting-data.html#aqi-now"><i class="fa fa-check"></i><b>2.3</b> Current AQI obs</a></li>
 <li class="chapter" data-level="2.4" data-path="getting-data.html"><a href="getting-data.html#monitors"><i class="fa fa-check"></i><b>2.4</b> Current AQI observations</a></li>
-<li class="chapter" data-level="2.5" data-path="getting-data.html"><a href="getting-data.html#tableau"><i class="fa fa-check"></i><b>2.5</b> Retrieving data from Tableau</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="getting-data.html"><a href="getting-data.html#a-happy-note"><i class="fa fa-check"></i><b>2.5.1</b> A Happy note!</a></li>
-<li class="chapter" data-level="2.5.2" data-path="getting-data.html"><a href="getting-data.html#sad-note-1"><i class="fa fa-check"></i><b>2.5.2</b> Sad note /#1</a></li>
-<li class="chapter" data-level="2.5.3" data-path="getting-data.html"><a href="getting-data.html#sad-note-2"><i class="fa fa-check"></i><b>2.5.3</b> Sad note /#2</a></li>
-</ul></li>
 </ul></li>
 <li><a href="quality-assurance-methods.html#quality-assurance-methods"><strong>Quality assurance methods</strong></a></li>
 <li class="chapter" data-level="3" data-path="data-cleaning.html"><a href="data-cleaning.html"><i class="fa fa-check"></i><b>3</b> Data cleaning</a><ul>
@@ -346,13 +341,13 @@ data =<span class="st"> </span><span class="kw">mutate</span>(data, <span class=
 
 <span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Lead&quot;</span>, <span class="dv">2013</span>)</code></pre></div>
 <pre><code>## Warning: Removed 31 rows containing missing values (position_quasirandom).</code></pre>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Arsenic&quot;</span>, <span class="dv">2013</span>)</code></pre></div>
 <pre><code>## Warning: Removed 31 rows containing missing values (position_quasirandom).</code></pre>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-85-2.png" width="672" /></p>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-78-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Benzene&quot;</span>, <span class="dv">2013</span>)</code></pre></div>
 <pre><code>## Warning: Removed 33 rows containing missing values (position_quasirandom).</code></pre>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-85-3.png" width="672" /></p>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-78-3.png" width="672" /></p>
 <p><br> <em>References</em></p>
 <p><a href="http://lenkiefer.com/2017/04/26/housing-data-uncertainty/">Visualizing uncertainty in housing data</a></p>
 <p>R packages: <a href="https://github.com/eclarke/ggbeeswarm">Beeswarm</a></p>
@@ -727,7 +722,7 @@ data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">cor
 
 ## Warning in cor(analytes, method = &quot;kendall&quot;, use =
 ## &quot;pairwise.complete.obs&quot;): the standard deviation is zero</code></pre>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
 
 </div>
 </div>
