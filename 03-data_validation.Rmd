@@ -1,28 +1,28 @@
 # Data validation
 
 
-```{r out.width='65%', echo=F}
-knitr::include_graphics("https://imgs.xkcd.com/comics/error_code.png")
+```{r out.width='62%', echo=F}
+knitr::include_graphics("https://i0.wp.com/catscradleshelter.org/wp-content/uploads/2015/10/8-quality-control.jpg?fit=1200%2C800")
 ```
 
 
-Environmental monitoring data can be subject to error. Three important errors to look for are:
+Environmental monitoring data can be subject to error. Some important errors to check for include:
 
+- \@ref(leaks)    __Leaks, instrument drift, and sample contamination__
+- \@ref(outs)     __Outliers and extreme values__  
+- \@ref(sticky2)  __Sequential repeats and _sticky_ numbers__  
+- \@ref(unique)   __Unique values__ 
 
-- \@ref(leaks)    __Leaks and sample contamination__
-- \@ref(sticky)   __Instrument errors such as drift or repeated results (sticking values)__ 
-- \@ref(outs)     __Outliers or extreme values__
-
-
+  
 <br> __Validation steps__
 
+1. Identify potential instrument drift.
 1. Identify exceptional values.
 1. Identify sequential identical values (sticking).
-1. Identify potential instrument drift.
 1. Report findings to laboratory for further investigation.
 
 
-<br> __Why not average the exceptional data over the year and assume the problem will go away?__
+<br> __Why not average the exceptional data over the year?__
 
 Further investigation by laboratory staff is required if the laboratory equipment or system is in error. If the laboratory is not in error, these concentrations require additional investigation by data analysts and potentially by air pollution source specialists. For these reasons, these data validation steps are critical. A decreasing signal or repeated sequential measurement means that the data are not interpretable. An exceptionally high value could mean laboratory contamination or potentially could contribute to human health impacts if the high value is accurate.    
 
@@ -80,7 +80,7 @@ data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/
 
 colnames(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
 
-dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 
 ```
 
@@ -93,7 +93,7 @@ datatable(head(data, 10), options = dt_options)
 ```
 
 </div>
-_First its' always a good idea to look at the data
+_First it's always a good idea to look at the data
 _Open this web tool to chart all measured pollutants for each site for the cleaned data set. (https://mpca-pahs.shinyapps.io/ChartCleanData/)
 
 ```{r out.width='100%', echo=F, fig.align="center"}
@@ -160,7 +160,7 @@ shinyApp(
 ```
 
 
-## Identifying Instrument drift or leaks in a system. {#leaks} 
+## Instrument drift or leaks in a system. {#leaks} 
 
 The test looks for a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. 
 
@@ -227,7 +227,7 @@ datatable(head(leak_table, 10), options = dt_options) %>% formatSignif(c("fvalue
 
 
 
-## Identify exceptional and extreme values aka outliers. {#outs} 
+## Exceptional values and outliers {#outs} 
 
 These are detected by comparing each measured concentration to 3 X the 75th percentile of the data set by year, site, and pollutant. For now, pocs collocated measurements are not tested separately. 
 
@@ -235,21 +235,25 @@ These are detected by comparing each measured concentration to 3 X the 75th perc
 <br> __Sample `R` script__ 
 
 
-Click the button below to view a step by step example of the method above.
+
+Click the button to view a step by step example.
 
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
 
 <br>
 
-```{r eval=T, message=F, warning=F}
+```{r, eval=T, message=F, warning=F}
 
 # Test for exceptionally high values [above 75th percentile X 3]
-high_data <- group_by(data, year, aqs_id, pollutant) %>% mutate(AR_Mean = mean(conc, na.rm=T), Percentile_75 = quantile(conc, 0.75, na.rm=T), Percentile_75_X3 = Percentile_75*3) %>% ungroup()
+high_data <- group_by(data, year, aqs_id, pollutant) %>% mutate(AR_Mean = mean(conc, na.rm=T), Percentile_75 = quantile(conc, 0.75, na.rm = T), Percentile_75_X3 = Percentile_75*3) %>% ungroup()
+
 high_data <- filter(high_data, conc>Percentile_75_X3, !is.na(conc), AR_Mean>md_limit, Percentile_75>0)
+
+
 high_data$Warning_Type <- "Exceptionally_High_Value_Test"
 high_data <- unique(high_data)
-datatable(head(high_data, 10), options = dt_options) 
 
+datatable(head(high_data, 10), options = dt_options) 
 
 high_data <- high_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
 ##Toxics - Multiplying by 3 returns ~4000/1176818 values as extreme, multiplying by 1.5 returns >20,000. Multiplying by 3 returns between 2 and 45% of analyte/site/year groups.
@@ -257,8 +261,9 @@ high_data <- high_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
 ##PAHs - Multiplying by 3 returns 168 of 39298 total values. Multiplying by 3 returns between 3 and 10% of analyte/site/year groups.
 ```
 
-
-## Identify sequential repeats aka "sticky" numbers {#sticky}
+</div>
+   
+## Sequential repeats and "sticky" numbers {#sticky2}
  
 Three sequential replicate values may be a result of a machine error.
 
@@ -267,16 +272,20 @@ Three sequential replicate values may be a result of a machine error.
 # Test for exceptionally high values [above 75th percentile X 3]
 repeat_data <- group_by(data, poc, year, aqs_id, pollutant) %>% 
   arrange(year, aqs_id, poc, pollutant, date) %>% 
-  mutate(Previous_Day = lag(conc, 1), 
+  mutate(Previous_Day   = lag(conc, 1), 
          Two_Days_Prior = lag(conc, 2)) %>% ungroup()
-repeat_data <- mutate(repeat_data, Repeat_Test = ifelse(round(conc, digits=4)==round(Previous_Day, digits=4) & round(Previous_Day, digits=4)==round(Two_Days_Prior, digits=4), "TRUE", "FALSE"))
+repeat_data <- mutate(repeat_data, Repeat_Test = ifelse(round(conc, digits = 4) == round(Previous_Day, digits = 4) & round(Previous_Day, digits = 4) == round(Two_Days_Prior, digits=4), "TRUE", "FALSE"))
+
 repeat_data$Warning_Type <- "Repeat_Test"
-repeat_data <- filter(repeat_data, conc>0 &  Repeat_Test==TRUE)
+
+repeat_data <- filter(repeat_data, conc > 0 &  Repeat_Test == TRUE)
 
 datatable(head(repeat_data, 10), options = dt_options)
 
 repeat_data <- repeat_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
-###There are many repeating values in the Toxics data. None in PAHs. Approximately 3200 for UFPs, but this is 15 minute data. We may need a more stringent test for UFPs.
+
+# Note
+## There are many repeating values in the Toxics data. None in PAHs. Approximately 3,200 for UFPs, but this is 15 minute data. We may need a more stringent test for UFPs.
 ```
 
 
@@ -287,14 +296,88 @@ warnings_table <- rbind(repeat_data, high_data)
 datatable(head(warnings_table, 10), options = dt_options, rownames = FALSE)
 ```
 
-</div>
-
 <br> __Contributors__  
 
 > Kristie, Cassie, Dorian, Derek
 
 
-<br> __References__    
+
+## Unique detected values {#unique}
+
+In some cases the detected observations at a site may all be an identical value. Identical observations scattered throughout monitoring results at a single monitor can indicate a machine error. In addition, calculating summary statistics often requires a minimum number of unique values, as it is difficult to make assumptions about the distribution of a data set when the values are all `1` or `2`. 
+
+
+
+<br> __Example `R` script__ 
+
+Click the button below to view a step by step example of counting unqiue detected values.
+
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+
+
+
+```{r eval=T, message=F, warning=F, echo=F}
+library(knitr)
+library(DT)
+```
+
+<br>
+Packages
+```{r message=F}
+library(tidyverse)
+
+```
+
+
+Our example data is organized by monitoring site and date.
+```{r message=F}
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+```
+
+```{r message=F, echo=F, fig.cap = "Sample data table."}
+
+DT::datatable(head(data, 5), options = dt_options, rownames = F)
+```
+<br>
+
+
+Count the number of unique detected values for each year.
+```{r message=F}
+
+data <- data %>% 
+        group_by(AQSID, POC, Param_Code, CAS, Year) %>%
+        mutate(detected_obs  = ifelse(Concentration < Dlimit, NA, Concentration), 
+               unique_values = n_distinct(detected_obs, na.rm = TRUE))
+        
+```
+
+<br>
+
+Flag sites with less than 3 unique values.
+```{r, message=F}
+
+data <- data %>% 
+          group_by(AQSID, POC, Param_Code, CAS, Year) %>%
+          summarize(unique_values = unique_values[1],
+                    unique_flag   = unique_values < 3) %>%
+          ungroup()
+        
+```
+
+<br>
+
+
+__Final table with added `unique_flag`.__
+```{r message=F, echo=F}
+
+DT::datatable(sample_n(data, size = 10, replace = F), options = list(scrollX = 0, autoWidth = 0, searching = F, ordering = F, lengthChange = F, paginate = F, pageLength = 10, info = 0), rownames = F)
+```
+
+</div>
+
+<br>
+
+## References {#valid_ref}    
 [USEPA Technical Support Document for the Nation Air Toxics Trends Sites](https://www3.epa.gov/ttnamti1/files/ambient/airtox/NATTS%20TAD%20Revision%203_FINAL%20October%202016.pdf)
 
 [European Union Guide to Data Validation](https://webgate.ec.europa.eu/fpfis/mwikis/essvalidserv/images/a/ad/PRACTICAL_GUIDE_TO_DATA_VALIDATION.pdf)

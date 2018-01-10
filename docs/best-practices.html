@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="aqi-explorer.html">
-<link rel="next" href="air-toxics-explorer.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="getting-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -220,10 +220,119 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="criteria-pollutant-explorer" class="section level1">
-<h1><span class="header-section-number"></span> Criteria pollutant explorer</h1>
-<p>This section describes the methods used to summarize the data shown in MPCA’s Criteria pollutant explorer.</p>
+<div id="best-practices" class="section level1">
+<h1><span class="header-section-number"></span> Best practices</h1>
+<div class="figure">
+<img src="https://avatars3.githubusercontent.com/u/22032646?s=400&amp;v=4" align="right" style="margin-left: 20px; margin-right: 20px; margin-top: -42px;" width="260" />
 
+</div>
+<p><br></p>
+<p>This section includes some <em>Best practices</em> to promote efficient and accurate data analysis with <code>R</code>.</p>
+<p><br> <br></p>
+<div id="tidyverse" class="section level2">
+<h2><span class="header-section-number">1.1</span> Tidyverse</h2>
+<p>Use packages within the <em>Tidyverse</em> as much as possible for your analysis.</p>
+<div class="figure">
+<img src="images/tidy_packages.PNG" width="450" />
+
+</div>
+<p>These packages work in harmony by sharing a common data format and syntax. Your scripts will be more readable by others and future you when your scripts stick to the world of <em>tidy</em> data.</p>
+</div>
+<div id="pollutant-names" class="section level2">
+<h2><span class="header-section-number">1.2</span> Pollutant names</h2>
+<p>Pollutants often go by different names depending on the context you’re in. To prevent confusion it helps to include a unique <code>CAS #</code> or parameter code in your analysis results and summary data. If you are working with monitoring data that is missing a unique identifier for each pollutant, an R package named <code>aircas</code> is available to help join CAS numbers to pollutant names.</p>
+</div>
+<div id="keeping-r-up-to-date" class="section level2">
+<h2><span class="header-section-number">1.3</span> Keeping R up-to-date</h2>
+<p><strong>Get the <em>installr</em> package</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&#39;installr&#39;</span>) 
+<span class="kw">library</span>(<span class="st">&#39;installr&#39;</span>)</code></pre></div>
+<p><strong>Download the new R version</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">updateR</span>()</code></pre></div>
+<ul>
+<li>When a popup suggests closing RStudio and running the update from <em>RGUI</em>, click <strong>NO</strong>.</li>
+<li>When asked whether to copy and update all of your packages. Click <strong>Yes</strong>. This will save you heaps of time and prevent future headaches.</li>
+</ul>
+<p>To learn more about <em>installr</em>, see <a href="https://github.com/talgalili/installr/#readme" class="uri">https://github.com/talgalili/installr/#readme</a>.</p>
+</div>
+<div id="script-layout" class="section level2">
+<h2><span class="header-section-number">1.4</span> Script layout</h2>
+<p>The following tips will help make your R scripts easier to read and easier for others to use your code in their own projects.</p>
+<ul>
+<li>Add a description to the top of your script.</li>
+<li>Load all your packages in one block at the top of the script.</li>
+<li>Assign important file paths and parameters near the top of the script.</li>
+<li>Avoid changing working directories with <code>setwd()</code>.</li>
+<li>Load usernames and passwords from a file such as <code>credentials.csv</code>.</li>
+<li>Save files to a local working directory such as <code>&quot;~\results.csv&quot;</code>, rather than to a fixed location, such as <code>X:\EAO\Air Data\Project1\results.csv</code>.</li>
+</ul>
+<p>Here is an example script layout:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># name_of_script.R</span>
+
+<span class="co"># Purpose: This script does amazing things.</span>
+<span class="co"># Assumptions: The monitoring data for the sites is from different years, </span>
+<span class="co">#              but we compare them anyways. </span>
+<span class="co"># Warning! Don&#39;t use this script for Kryptonite. It will break everything.</span>
+
+<span class="co"># Load packages</span>
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(readr)
+
+<span class="co"># Set parameters</span>
+year &lt;-<span class="st"> </span><span class="dv">2017</span>
+data_file &lt;-<span class="st"> &quot;monitors 1 and 2.csv&quot;</span>
+
+
+<span class="co"># Load data</span>
+air_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(data_file)
+
+
+<span class="co"># My functions</span>
+calc_stat &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
+  
+  new_stat &lt;-<span class="st"> </span><span class="kw">step1</span>(data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step2</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step3</span>()
+  
+}
+
+<span class="co"># My analysis</span>
+results &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">stat =</span> <span class="kw">calc_stat</span>(concentration))
+
+
+<span class="co"># Save results to local folder</span>
+<span class="kw">write_csv</span>(results, <span class="st">&quot;results/summary_results.csv&quot;</span>)</code></pre></div>
+</div>
+<div id="divide-and-conquer" class="section level2">
+<h2><span class="header-section-number">1.5</span> Divide and conquer</h2>
+<p>For complex analysis projects many small components is better than one big super script. As much as possible, try to create small functions to perform each task within in your analysis. If it’s a function that you will use across multiple projects, it is often helpful to save the function to it’s own script. These functions will become reusable building blocks that both future you and others can apply to their own projects.</p>
+<p>Using an R Markdown document is an additional way you can split your project into manageable steps. R Markdown makes it easier to include a short description of each step of your analysis. In fact, you are reading an R Markdown document now.</p>
+<p>An example folder structure for a project is shown below:</p>
+<p><code>New_Project\</code></p>
+<blockquote>
+<ul>
+<li>data
+<ul>
+<li>monitors 1 and 2.csv</li>
+</ul></li>
+<li>R
+<ul>
+<li>load_data.R</li>
+<li>calc_ucl95.R<br />
+</li>
+<li>lil_boot_function.R<br />
+</li>
+<li>summary_report.RMD<br />
+</li>
+</ul></li>
+<li>results
+<ul>
+<li>summary_results.csv<br />
+</li>
+<li>summary_report.pdf</li>
+</ul></li>
+</ul>
+</blockquote>
+
+</div>
 </div>
 <script>
   $(".btn_code").click(function() {
@@ -235,8 +344,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="aqi-explorer.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="air-toxics-explorer.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="getting-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -256,7 +365,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/MPCA-air/air-methods/edit/master/92-criteria_explorer.Rmd",
+"link": "https://github.com/MPCA-air/air-methods/edit/master/001-best_practices.Rmd",
 "text": "Edit"
 },
 "download": ["air-methods.pdf"],

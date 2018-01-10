@@ -1,4 +1,4 @@
-# Get data
+# Getting data
 
 ```{r echo=F}
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
@@ -6,9 +6,9 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 
 ![](http://1.bp.blogspot.com/_29-T6ljKdFo/R8JvNNLEnOI/AAAAAAAAAEQ/ursB9KU6dwE/w1200-h630-p-k-nu/sydney%27s+fruit+diagram.jpg){width="62%"}
 
-This section describes the location of data sources relevant to air monitoring and how to access them using R.   
+This section describes how to access and request data relevant to air monitoring.   
 
-These data sources include:  
+These data include:  
 
 __Air monitoring__
 

@@ -1,0 +1,120 @@
+# Best practices
+
+
+![](https://avatars3.githubusercontent.com/u/22032646?s=400&v=4){width="260" align="right" style="margin-left: 20px; margin-right: 20px; margin-top: -42px;"}
+
+<br>
+
+This section includes some _Best practices_ to promote efficient and accurate data analysis with `R`.  
+
+<br> <br>
+
+
+## Tidyverse
+
+Use packages within the _Tidyverse_ as much as possible for your analysis. 
+
+![](images/tidy_packages.PNG){width="450"}
+
+These packages work in harmony by sharing a common data format and syntax. Your scripts will be more readable by others and future you when your scripts stick to the world of _tidy_ data.
+
+
+## Pollutant names
+
+Pollutants often go by different names depending on the context you're in. To prevent confusion it helps to include a unique `CAS #` or parameter code in your analysis results and summary data. If you are working with monitoring data that is missing a unique identifier for each pollutant, an R package named `aircas` is available to help join CAS numbers to pollutant names.   
+
+
+## Keeping R up-to-date
+
+__Get the _installr_ package__
+```{r, eval=F}
+install.packages('installr') 
+library('installr')
+```
+
+__Download the new R version__
+```{r, eval=F}
+updateR()
+```
+
+- When a popup suggests closing RStudio and running the update from _RGUI_, 
+click __NO__. 
+- When asked whether to copy and update all of your packages. Click __Yes__. This will save you heaps of time and prevent future headaches.
+
+To learn more about _installr_, see https://github.com/talgalili/installr/#readme.
+
+
+## Script layout
+
+The following tips will help make your R scripts easier to read and easier for others to use your code in their own projects.
+
+- Add a description to the top of your script.
+- Load all your packages in one block at the top of the script.
+- Assign important file paths and parameters near the top of the script.
+- Avoid changing working directories with `setwd()`.
+- Load usernames and passwords from a file such as `credentials.csv`.
+- Save files to a local working directory such as `"~\results.csv"`, rather than to a fixed location, such as `X:\EAO\Air Data\Project1\results.csv`.
+
+
+Here is an example script layout:
+
+```{r, eval = F}
+# name_of_script.R
+
+# Purpose: This script does amazing things.
+# Assumptions: The monitoring data for the sites is from different years, 
+#              but we compare them anyways. 
+# Warning! Don't use this script for Kryptonite. It will break everything.
+
+# Load packages
+library(dplyr)
+library(readr)
+
+# Set parameters
+year <- 2017
+data_file <- "monitors 1 and 2.csv"
+
+
+# Load data
+air_data <- read_csv(data_file)
+
+
+# My functions
+calc_stat <- function(data) {
+  
+  new_stat <- step1(data) %>% step2() %>% step3()
+  
+}
+
+# My analysis
+results <- air_data %>% summarize(stat = calc_stat(concentration))
+
+
+# Save results to local folder
+write_csv(results, "results/summary_results.csv")
+
+```
+
+
+## Divide and conquer
+
+For complex analysis projects many small components is better than one big super script. As much as possible, try to create small functions to perform each task within in your analysis. If it's a function that you will use across multiple projects, it is often helpful to save the function to it's own script. These functions will become reusable building blocks that both future you and others can apply to their own projects. 
+
+Using an R Markdown document is an additional way you can split your project into manageable steps. R Markdown makes it easier to include a short description of each step of your analysis. In fact, you are reading an R Markdown document now.
+
+An example folder structure for a project is shown below:
+
+`New_Project\` 
+
+> - data  
+>     - monitors 1 and 2.csv 
+> - R    
+>     - load_data.R 
+>     - calc_ucl95.R   
+>     - lil_boot_function.R  
+>     - summary_report.RMD  
+> - results  
+>     - summary_results.csv  
+>     - summary_report.pdf  
+>  
+
