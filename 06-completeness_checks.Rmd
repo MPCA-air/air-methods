@@ -6,11 +6,9 @@ Checking for data completeness before generating summaries ensures that results 
 
 Completeness checks inlcude tests for:  
 
-`Calendar quarter completeness` Number of samples required for a season or quarter.  
+- `Calendar quarter completeness` Number of samples required for a season or quarter.  
+- `Annual completeness` Number of samples required for a year.  
 
-`Annual completeness` Number of samples required for a year.  
-
-`Unique values` Number of unique values required.
 
 
 ## Completeness checks  {#complete}
@@ -48,13 +46,12 @@ In general, these rules apply:
     - Air toxics monitors follow a fixed sampling schedule provided by EPA's [Air Toxics Calendar](https://www3.epa.gov/ttn/amtic/calendar.html).
 1. Count the number of _valid samples_ for each year and quarter.
 1. Divide the number of _valid samples_ by the number of _expected samples_.
-1. Count the number of unique values for each year.
 1. Mark annual results as _incomplete_ if they do not fulfill one of the completeness checks.
 
 <br> __Example `R` script__ 
 
 
-Click the button below to view a step by step example of the methods above.
+Click the button below to view a step by step example.
 
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
 
@@ -110,10 +107,10 @@ sample_calendar <- function(start         = "2012-01-01",
   end   <- ymd(end)
   
   # Set official start date to selected EPA calendar
-  if(type == "air_toxics") {
-      epa_start <- ymd("1990-01-09")
+  if (type == "air_toxics") {
+       epa_start <- ymd("1990-01-09")
   } else {
-      epa_start <- start
+       epa_start <- start
   }
   
   # Create full table of sampling dates
@@ -177,10 +174,10 @@ data <- data %>% mutate(cal_quarter = quarter(Date))
 
 # Count the number of sampling dates for each quarter and year.
 data <- data %>% 
-        group_by(AQSID, POC, Param_Code, CAS, Year, cal_quarter) %>%
-        mutate(valid_quarter_samples = length(unique(Date[!is.na(Concentration)]))) %>%
-        group_by(AQSID, POC, Param_Code, CAS, Year) %>%
-        mutate(valid_annual_samples = length(unique(Date[!is.na(Concentration)]))) 
+          group_by(AQSID, POC, Param_Code, CAS, Year, cal_quarter) %>%
+          mutate(valid_quarter_samples = length(unique(Date[!is.na(Concentration)]))) %>%
+          group_by(AQSID, POC, Param_Code, CAS, Year) %>%
+          mutate(valid_annual_samples = length(unique(Date[!is.na(Concentration)]))) 
         
 ```
 
@@ -197,41 +194,30 @@ data <- left_join(data, epa_schedule, by = c("Year", "cal_quarter"))
 
 # Divide valid samples by expected samples
 data <- data %>% 
-        group_by(AQSID, POC, CAS, Year, cal_quarter) %>%
-        mutate(pct_quarter_samples = round(valid_quarter_samples / expected_quarter_samples, 2)) %>%
-        group_by(AQSID, POC, CAS, Year) %>%
-        mutate(pct_annual_samples = round(valid_annual_samples / expected_annual_samples, 2)) 
+          group_by(AQSID, POC, CAS, Year, cal_quarter) %>%
+          mutate(pct_quarter_samples = round(valid_quarter_samples / expected_quarter_samples, 2)) %>%
+          group_by(AQSID, POC, CAS, Year) %>%
+          mutate(pct_annual_samples = round(valid_annual_samples / expected_annual_samples, 2)) 
         
 ```
 
 <br>
 
-__Step 4:__ Count the number of unique values for each year.
-```{r message=F}
 
-data <- data %>% 
-        group_by(AQSID, POC, Param_Code, CAS, Year) %>%
-        mutate(only_detects = ifelse(Concentration < Dlimit, NA, Concentration), unique_values = 
-                 n_distinct(only_detects, na.rm = TRUE))
-        
-```
-
-<br>
-
-__Step 5:__ Mark results as incomplete if they fail one of the completeness checks.
+__Step 4:__ Mark results as incomplete if they fail one of the completeness checks.
 ```{r message=F}
 
 # Set incomplete to zero if any completeness checks fail
 data <- data %>% 
         rowwise() %>%
         mutate(complete = sum(c(pct_quarter_samples >= 0.75, 
-                                pct_annual_samples  >= 0.75,
-                                unique_values       >= 2)) >= 3)
+                                pct_annual_samples  >= 0.75)) > 1)
 
-#names(data)      
 ```
 
 <br>
+
+
 __Final table with added `complete` column.__
 ```{r message=F, echo=F, fig.cap = "Final table with added `complete` column."}
 
@@ -240,24 +226,25 @@ DT::datatable(sample_n(select(data, -c(Param_Code, Concentration, Null_Code, Dli
 
 <br>
 
-__Step 6 (Optional):__ By collapsing the `complete` status to 1 row per site-pollutant-quarter combination, you can save the table and attach a site's _completeness_ status to future data analysis as needed.
+__Step 6 (Optional):__ By collapsing the `complete` status to 1 row per site-pollutant-quarter combination, you can save the table and attach a site's _completeness_ status to a future data analysis as needed.
 ```{r message=F, warning=F}
 
 # Collapse table to 1 row per unique site-pollutant-quarter
  data <- data %>% 
-         group_by(AQSID, POC, Pollutant, Year, cal_quarter) %>%  #Check completeness for every quarter
+         group_by(AQSID, Pollutant, Year, cal_quarter) %>%  #Check completeness for every quarter
          summarize(complete              = complete[1], 
                    valid_annual_samples  = valid_annual_samples[1],
                    valid_quarter_samples = valid_quarter_samples[1])
 
 # Collapse table to 1 row per unique site-pollutant-year
  data <- data %>%          
-         group_by(AQSID, POC, Pollutant, Year) %>%  
+         group_by(AQSID, Pollutant, Year) %>%  
          summarize(complete            = sum(complete, na.rm = T) == 4,
                    annual_samples      = valid_annual_samples[1],
                    min_quarter_samples = min(valid_quarter_samples, na.rm = T))
       
 ```
+
 
 
 ```{r message=F, echo=F, fig.cap = "Collapsed table showing `completeness` status."}

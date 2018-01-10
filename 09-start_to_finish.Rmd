@@ -33,7 +33,9 @@ install.packages(c(
   "EnvStats",
   "openair",
   "ggbeeswarm",
-  "reshape"
+  "reshape",
+  "corrplot",
+  "RODBC"
 ))
 
 }
@@ -55,7 +57,9 @@ libraries(c(
   "EnvStats",
   "openair",
   "ggbeeswarm",
-  "reshape"
+  "reshape",
+  "corrplot",
+  "RODBC"
 ))
 
 }
@@ -109,6 +113,8 @@ average_duplicates = function(data) {
   return (data)
 }
 
+
+
 time_series_plots = function(data) {
   
   library(shiny)
@@ -121,20 +127,23 @@ time_series_plots = function(data) {
   library(DT)
   library(rsconnect)
 
-colnames(data)[1:10] <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
-data <- mutate(data, sitePOC = paste0(aqs_id,"-", poc) )
-pollutant <- unique(data$pollutant)
+
+data <- mutate(data, sitePOC = paste0(AQSID,"-", POC) )
+pollutant <- unique(data$Pollutant)
 site <- unique(data$sitePOC)
 
 
 shinyApp(
-  ui = fluidPage(responsive = FALSE,
+  ui = fluidPage(
                  fluidRow(
                    column(3,
                           style = "padding-bottom: 20px;",
                           inputPanel(
-                            selectInput("pollutant", label="Choose a pollutant", choices = pollutant, selected="Benzene"),
-                            selectInput("site", label="Choose a site", choices = site, selected=270535501))),
+                            selectInput("pollutant", label="Choose a pollutant", choices = pollutant, 
+                                        selected="Benzene"),
+                            selectInput("site", label="Choose a site", choices = site, selected=270535501),
+                            dateRangeInput("date", label = "Select date range", start = "2009-01-01", end = 
+                                             "2013-12-31", min = "2009-01-01", max = "2013-12-31") ) ),
                    column(9,
                           plotOutput('detlim', height = "400px")))),
   
@@ -145,18 +154,14 @@ shinyApp(
     
     
     output$detlim <- renderPlot({
-      print(input$pollutant)
-      print(input$site)
-      data_sub = filter(data, pollutant==input$pollutant, sitePOC == input$site)
-      data_sub$Censored <- ifelse(data_sub$conc > data_sub$md_limit, FALSE, TRUE)
-      mdl <- max(data_sub$md_limit)
-      ggplot(data=data_sub, aes(x= date, y=conc)) +
+      data_sub = filter(data, Pollutant==input$pollutant, sitePOC == input$site, Date >= input$date[1], Date <= input$date[2])
+      ggplot(data=data_sub, aes(x= Date, y=Result)) +
         geom_point(aes(color=Censored), size =3, alpha=0.55) +
         geom_line() +
         scale_x_date(date_labels = "%D") +
         xlab(NULL) +
         ylab("Result (ug/m3)") +
-        expand_limits(y=c(0, max(data_sub$conc))) +
+        expand_limits(y=c(0, max(data_sub$Result))) +
         scale_colour_manual(values= c("#197519"[FALSE %in% unique(data_sub$Censored)], "#0000FF"[TRUE %in% unique(data_sub$Censored)]), breaks=c(FALSE, TRUE)) +
         theme(text = element_text(size=15), axis.text.x = element_text(angle = -90, vjust = 0.3,  size=14)) +
         ggtitle(paste0("Time series for ", input$pollutant, " at site ", input$site))
@@ -165,6 +170,16 @@ shinyApp(
   })
 
 }
+
+
+
+
+
+
+
+
+
+
 
 POC_compare = function(data) {
 
@@ -179,17 +194,17 @@ data = spread(data, POC, Result) %>% mutate(Status = ifelse(`1` < MDL  & `2` < M
 
 Pollutant <- unique(data$Pollutant)
 Site <- unique(data$AQSID)
-Year <- unique(data$Year)
 
 shinyApp(
-  ui = fluidPage(responsive = FALSE,
+  ui = fluidPage(
                  fluidRow(
                    column(3,
                           style = "padding-bottom: 20px;",
                           inputPanel(
                             selectInput("Pollutant", label="Choose a pollutant", choices = Pollutant),
-                            selectInput("Year", label="Choose a year", choices = Year),
-                            selectInput("Site", label="Choose a site", choices = Site))),
+                            selectInput("Site", label="Choose a site", choices = Site),
+                            dateRangeInput("date", label = "Select date range", start = "2009-01-01", end = 
+                                             "2013-12-31", min = "2009-01-01", max = "2013-12-31"))),
                    column(9,
                           plotOutput('normviz', height = "500px")))),
   
@@ -200,10 +215,7 @@ shinyApp(
     
     
     output$normviz <- renderPlot({
-      print(input$Pollutant)
-      print(input$Site)
-      print(input$Year)
-      data_sub = filter(data, Pollutant==input$Pollutant, AQSID == input$Site, Year == input$Year)
+      data_sub = filter(data, Pollutant==input$Pollutant, AQSID == input$Site, Date >= input$date[1], Date <= input$date[2])
       ggplot(data_sub, aes(x = `1`, y = `2`, color = Status)) +
         geom_point(size = 3) +
         geom_segment(x=-1000, xend=1000, y=-1000, yend=1000, color="red", size=1) +
@@ -314,9 +326,10 @@ data <- data %>%
         summarise(pct_quarter_samples = round(valid_quarter_samples[1] / expected_quarter_samples[1], 2)) %>%
         mutate(Complete = pct_quarter_samples >= 0.75) %>%
         group_by(AQSID, Parameter, Pollutant, Year) %>% 
-        summarise(Complete = sum(Complete, na.rm = T) == 4)
+        summarise(Complete = sum(Complete, na.rm = T) == 4,
+                  lowest_quarter = ifelse(n() == 4, min(pct_quarter_samples, na.rm = T), 0) )
 
-return(data %>% select(AQSID, Parameter, Pollutant, Year, Complete) %>% ungroup() )
+return(data %>% select(AQSID, Parameter, Pollutant, Year, Complete, lowest_quarter) %>% ungroup() )
 
 }
         
@@ -459,15 +472,49 @@ correlation_plots = function(data, site) {
   return(corrplot(coranalytes, method = "circle", type="lower", tl.cex=0.6) )#plot matrix
 }
 
-beeswarm_plot = function(data, pollutant, year) {
-  library(dplyr)
-  library(ggbeeswarm)
-  library(ggplot2)
+
+
+
+correlation_plots = function(data) {
+  library(tidyverse)
+  library(corrplot)
   
-  data = mutate(data, AQSID = as.factor(AQSID) )
-  ggplot(filter(data, Pollutant == pollutant, Year == year), aes(y = AQSID, x = Result, color = Censored) ) + 
-    geom_quasirandom(groupOnX=F) +   
-    labs(title = paste(pollutant, year), x = "Result (ug/m^3)" )
+  site <- unique(data$AQSID)
+
+  shinyApp(
+  ui = fluidPage(
+                 fluidRow(
+                   column(3,
+                          style = "padding-bottom: 20px;",
+                          inputPanel(
+                            selectInput("site", label="Choose a site", choices = site),
+                            dateRangeInput("date", label = "Select date range", start = "2009-01-01", end = 
+                                             "2013-12-31", min = "2009-01-01", max = "2013-12-31"))),
+                            column(9,
+                            plotOutput('normviz', height = "500px")))),
+  
+  
+  server = function(input, output) {
+    
+    
+    
+    
+    output$normviz <- renderPlot({
+      data_sub = filter(data, AQSID==input$site, Date >= input$date[1], Date <= 
+                          input$date[2]) %>% select(Date, Pollutant, Result)
+      analytes <- spread(data_sub, Pollutant, Result, drop=T)
+      analytes$Date <- NULL
+
+      coranalytes <- cor(analytes, method="kendall", use="pairwise.complete.obs") %>% as.data.frame()
+      coranalytes <- select_if(coranalytes, function(x) !all(is.na(x))) %>% filter_all(any_vars(!is.na(.))) %>% 
+      as.matrix()
+      rownames(coranalytes) <- colnames(coranalytes)
+      dummy_obj = corrplot(coranalytes, method = "circle", type="lower", tl.cex=0.6)
+      
+    })
+    
+  })
+  
 }
 
 
@@ -479,7 +526,63 @@ beeswarm_plot = function(data, pollutant, year) {
 
 
 
-pollution_roses = function(data, met_data_filepath, num_breaks = 5) { #Met data must be in Tableau format
+beeswarm_plot = function(data) {
+  library(dplyr)
+  library(ggbeeswarm)
+  library(ggplot2)
+  
+  data = mutate(data, AQSID = as.character(AQSID) )
+    
+  Pollutant <- unique(data$Pollutant)
+  Year <- unique(data$Year)
+
+  shinyApp(
+  ui = fluidPage(
+                 fluidRow(
+                   column(3,
+                          style = "padding-bottom: 20px;",
+                          inputPanel(
+                            selectInput("Pollutant", label="Choose a pollutant", choices = Pollutant),
+                             dateRangeInput("date", label = "Select date range", start = "2009-01-01", end = 
+                                             "2013-12-31", min = "2009-01-01", max = "2013-12-31") ) ),
+                            column(9,
+                            plotOutput('normviz', height = "500px")))),
+  
+  
+  server = function(input, output) {
+    
+    
+    
+    
+    output$normviz <- renderPlot({
+      data_sub = filter(data, Pollutant==input$Pollutant, Date >= input$date[1], Date <= 
+                          input$date[2], !is.na(Result) )
+      ggplot(data_sub, aes(y = AQSID, x = Result, color = Censored) ) + 
+      geom_quasirandom(groupOnX=F) +   
+      labs(title = paste(data_sub$Pollutant[1]), x = "Result (ug/m^3)" )
+      
+    })
+    
+  })
+  
+}
+
+
+
+
+read_met_data_tableau = function(years = 2009:2017, stations = "MSP") {
+  library(tidyverse)
+  years = paste0(years, collapse = ",")
+  stations = paste0(stations, collapse = ",")
+      url = paste0("http://tableau.pca.state.mn.us/views/WeatherObservations2009-2017/HourTable.csv?Station=",
+                   stations, "&Year=",years,"&Month=1,2,3,4,5,6,7,8,9,10,11,12")
+      met_data = read_csv(url, col_types = cols())[,1:10] %>% select(Station, Year, Month, Day, Hour, 
+                                                                     everything() ) %>% arrange(Station, Year, 
+                                                                                                Month, Day, Hour)
+  return(met_data)
+}
+
+pollution_roses = function(data, met_data, num_breaks = 5) { #Met data must be in Tableau format
   
   library(tidyverse)
   library(lubridate)
@@ -490,29 +593,27 @@ pollution_roses = function(data, met_data_filepath, num_breaks = 5) { #Met data 
   
   data$Date = ymd(data$Date)
   
-  met_data = read.csv(met_data_filepath)
-  names(met_data)[c(1,8,9)] = c("Day","wd","ws")
-  met_data = mutate(met_data, date = paste0(Year,"/",Month,"/",Day," ",Hour,":00"))
-  met_data$date = ymd_hm(met_data$date)
-  met_data = met_data[,-c(1:3,10)]
-  met_data = timeAverage(met_data, avg.time = "day")
-  met_data$date = ymd(met_data$date)
+  met_data = dplyr::rename(met_data, wd = `Wind Dir`, ws = `Wind Spd MPH`) %>%
+              mutate(date = paste0(Year,"/",Month,"/",Day," ",Hour,":00"), date = ymd_hm(date)) %>%
+              select(-Day, -Month, -Hour, -Year) %>%
+              timeAverage(avg.time = "day") %>%
+              mutate(date = ymd(date))
   
   data = left_join(data, met_data, by = c("Date" = "date"))
   
   Pollutant <- unique(data$Pollutant)
   Site <- unique(data$AQSID)
-  Year <- unique(data$Year)
 
   shinyApp(
-  ui = fluidPage(responsive = FALSE,
+  ui = fluidPage(
                  fluidRow(
                    column(3,
                           style = "padding-bottom: 20px;",
                           inputPanel(
                             selectInput("Pollutant", label="Choose a pollutant", choices = Pollutant),
-                            selectInput("Year", label="Choose a year", choices = Year),
-                            selectInput("Site", label="Choose a site", choices = Site))),
+                            selectInput("Site", label="Choose a site", choices = Site),
+                            dateRangeInput("date", label = "Select date range", start = "2009-01-01", end = 
+                                             "2013-12-31", min = "2009-01-01", max = "2013-12-31"))),
                    column(9,
                           plotOutput('normviz', height = "500px")))),
   
@@ -523,11 +624,10 @@ pollution_roses = function(data, met_data_filepath, num_breaks = 5) { #Met data 
     
     
     output$normviz <- renderPlot({
-      print(input$Pollutant)
-      print(input$Site)
-      print(input$Year)
-      data_sub = filter(data, Pollutant==input$Pollutant, AQSID == input$Site, Year == input$Year, !is.na(Result))
-      data_sub = data_sub %>% mutate(MDL = max(MDL), minimum = min(Result), maximum = max(Result), Result = ifelse(Censored, 1e-16, Result))
+      data_sub = filter(data, Pollutant==input$Pollutant, AQSID == input$Site, Date >= input$date[1], Date <= 
+                          input$date[2], !is.na(Result))
+      data_sub = data_sub %>% mutate(MDL = max(MDL), minimum = min(Result), maximum = max(Result), Result = 
+                                       ifelse(Censored, 1e-16, Result))
       breaks_site = NULL
       if(!all(data_sub$Censored)){
         
@@ -604,19 +704,20 @@ site_number = 270370020 #Our favorite site
 comparisons_to_FH = data %>% filter(AQSID %in% c(270370020, 270370470, 271230871) ) %>%
   site_compare(site_number, 50)
 
-pollutant_correlations = data %>% correlation_plots(270370020)
+pollutant_correlations = data %>% correlation_plots()
 
-arsenic_beeswarm_plot = data %>% beeswarm_plot("Arsenic", 2013)
+beeswarms = data %>% beeswarm_plot()
+
 
 #8. Pollution Roses
 
-poll_rose_data = filter(data, Year == 2013)
+poll_rose_data = data
 
-met_data_filepath = "X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods/MSP met data 2013.csv" #Need online filepath
+met_data = read_met_data_tableau(2009:2013, "MSP")
 
 num_breaks = 5
 
-pol_roses = poll_rose_data %>% pollution_roses(met_data_filepath, num_breaks)
+pol_roses = poll_rose_data %>% pollution_roses(met_data, num_breaks)
 ```
 
 
