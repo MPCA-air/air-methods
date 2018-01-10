@@ -6,9 +6,8 @@ Checking for data completeness before generating summaries ensures that results 
 
 Completeness checks inlcude tests for:  
 
-- `Calendar quarter completeness` Number of samples required for a season or quarter.  
 - `Annual completeness` Number of samples required for a year.  
-
+- `Calendar quarter completeness` Number of samples required for a season or quarter.  
 
 
 ## Completeness checks  {#complete}
@@ -19,18 +18,17 @@ __Description__
 This section describes completeness guidelines and methods for performing completeness checks.
 
 
-__<i>Air toxic</i> reporting guidelines based on MPCA and EPA guidelines__
+__Air toxics reporting guidelines__
 
 
-Annual results are considered _incomplete_ if any of the following conditions are not met:
+Annual results are considered _complete_ if the following conditions are met:
 
-- `Annual completeness` 75% or more of expected samples collected (rounded up)
-- `Calendar quarter completeness` 75% or more of expected samples collected (rounded up)
-- `Unique values` 2 or more unique values
+- `Annual completeness` 75% or more of expected samples collected
+- `Calendar quarter completeness` 75% or more of expected samples collected
 
 <br>
 
-__<i>Criteria pollutant</i> reporting guidelines__
+__Criteria pollutant reporting guidelines__
 
 Completeness rules for criteria pollutant design values are defined in the [Appendices of 40 CFR 50](https://www.ecfr.gov/cgi-bin/text-idx?tpl=/ecfrbrowse/Title40/40cfr50_main_02.tpl).
 
@@ -63,14 +61,15 @@ library(DT)
 
 #names(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
 
-dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 
 ```
 
 <br>
 Packages
-```{r message=F}
+```{r message=F, warning=F}
 library(tidyverse)
+library(lubridate)
 
 ```
 
@@ -174,9 +173,9 @@ data <- data %>% mutate(cal_quarter = quarter(Date))
 
 # Count the number of sampling dates for each quarter and year.
 data <- data %>% 
-          group_by(AQSID, POC, Param_Code, CAS, Year, cal_quarter) %>%
+          group_by(AQSID, Param_Code, CAS, Year, cal_quarter) %>%
           mutate(valid_quarter_samples = length(unique(Date[!is.na(Concentration)]))) %>%
-          group_by(AQSID, POC, Param_Code, CAS, Year) %>%
+          group_by(AQSID, Param_Code, CAS, Year) %>%
           mutate(valid_annual_samples = length(unique(Date[!is.na(Concentration)]))) 
         
 ```
@@ -194,10 +193,10 @@ data <- left_join(data, epa_schedule, by = c("Year", "cal_quarter"))
 
 # Divide valid samples by expected samples
 data <- data %>% 
-          group_by(AQSID, POC, CAS, Year, cal_quarter) %>%
-          mutate(pct_quarter_samples = round(valid_quarter_samples / expected_quarter_samples, 2)) %>%
-          group_by(AQSID, POC, CAS, Year) %>%
-          mutate(pct_annual_samples = round(valid_annual_samples / expected_annual_samples, 2)) 
+          group_by(AQSID, CAS, Year, cal_quarter) %>%
+          mutate(pct_quarter_samples = valid_quarter_samples / expected_quarter_samples) %>%
+          group_by(AQSID, CAS, Year) %>%
+          mutate(pct_annual_samples = valid_annual_samples / expected_annual_samples) 
         
 ```
 
@@ -257,7 +256,7 @@ DT::datatable(head(data, 10), options = dt_options, rownames = F)
 </div>
 
 
-<br> __Contributors__  
+<br> __Page maintainers__  
 
 > Dorian Kvale, Cassie McMahon
 
