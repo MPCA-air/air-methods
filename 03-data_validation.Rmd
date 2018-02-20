@@ -10,9 +10,6 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 knitr::include_graphics("https://i0.wp.com/catscradleshelter.org/wp-content/uploads/2015/10/8-quality-control.jpg?fit=1200%2C800")
 ```
 
-__Maintains chapter__  
-
-> Kristie
 
 <br>
 

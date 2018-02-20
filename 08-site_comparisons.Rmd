@@ -28,7 +28,6 @@ Click the button below to view example R script.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
-
 ```{r, eval=F, warning=F}
 
 library(dplyr)
@@ -113,8 +112,11 @@ set.seed(seed)
 
 compare = site_compare(data, site_number, 50) #minimum 50 repeats
 ```
+</div>
+
 
 ## Tools to visualize data
+
 
 ### Beeswarm Plots
 
@@ -152,13 +154,14 @@ beeswarm_plot(data, "Arsenic", 2013)
 
 beeswarm_plot(data, "Benzene", 2013)
 ```
+</div>
 
+<br> 
 
-<br> _References_  
+_References_  
 
-[Visualizing uncertainty in housing data](http://lenkiefer.com/2017/04/26/housing-data-uncertainty/)
-
-R packages: [Beeswarm](https://github.com/eclarke/ggbeeswarm)
+- [Visualizing uncertainty in housing data](http://lenkiefer.com/2017/04/26/housing-data-uncertainty/)
+- R packages: [Beeswarm](https://github.com/eclarke/ggbeeswarm)
 
 <br>
 
@@ -166,7 +169,7 @@ R packages: [Beeswarm](https://github.com/eclarke/ggbeeswarm)
 
 Correlation matrices help visualize the relationship between different pollutants at a site.
 
-Click the button below to view example R script.
+Click the button below to view an example R script.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
@@ -197,3 +200,6 @@ names(data)[1:10] <- c("AQSID", "POC", "Param_Code", "Date","Result",
 
 data %>% correlation_plots(270530962)
 ```
+
+</div>
+

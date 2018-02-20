@@ -1,9 +1,5 @@
 # Data cleaning
 
-<br> __Maintains Chapter__  
-
-> Derek
-
 ```{r out.width='55%', echo=F}
 knitr::include_graphics("images/data-cleaning.jpg")
 knitr::opts_chunk$set(echo = T, warning = F, message = F)

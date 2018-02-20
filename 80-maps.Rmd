@@ -1,16 +1,7 @@
 # Maps
 
-## Kriging
 
-Coming soon...   
-
-
-## Spatial averaging and aggregation  
-
-To average across...  
-
-
-## Creating shapefiles in R adn joining to EJ areas
+## Creating shapefiles in R and joining to EJ areas
 
 I don't really remember the points of this. This bit of script creates a shapefile from air monitoring data with coordinates and then joins to the EJ status for census tracts. Let's discuss how to make this useful.
 
@@ -57,3 +48,9 @@ names(point_sources_tracts_ej) <- c("Facility_ID",  "Facility_Name", "Resident_C
 #Output file name (including path)
 point_sources_tracts_ej <- unique(point_sources_tracts_ej)
 ```
+
+
+
+## Spatial averaging and aggregation  
+
+_Coming soon..._  

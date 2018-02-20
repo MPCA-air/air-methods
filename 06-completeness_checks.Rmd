@@ -6,10 +6,6 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 
 ```
 
-__Chapter owners__  
-
-> Dorian Kvale, Cassie McMahon
-
 
 Checking for data completeness before generating summaries ensures that results will be comparable from one year to the next. Without completeness checks, changes in the seasonal coverage from year to year may create the illusion of increasing or decreasing trends. 
 

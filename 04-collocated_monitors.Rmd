@@ -1,10 +1,11 @@
 # Collocated monitors
 
 ```{r out.width='95%', echo=F}
-knitr::include_graphics("https://imgs.xkcd.com/comics/box_plot.png")
 knitr::opts_chunk$set(echo = T, warning = F, message = F)
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 ```
+
+![](https://imgs.xkcd.com/comics/box_plot.png)
 
 
 Analysis steps for collocated monitors include:
@@ -13,9 +14,7 @@ Analysis steps for collocated monitors include:
 \@ref(pripocs)  __Prioritize observations from collocated monitors__ 
 
 <br>
-_Chapter Maintainance_
-<Derek Nagel
-<br> <br>
+
 
 ## Evaluate collocated air monitors {#evalpocs}  
 

@@ -4,16 +4,16 @@
 To pull it all together we created some R packages to streamline the cleaning and analysis steps. 
 
 
-> `airclean`   Cleaning and analysis functions for air monitoring data. 
->
-> `airplot`    Plotting functions for air monitoring data.
->
-> `airrisk`    Inhalation health benchmarks for air toxics.
+`airclean`   &emsp; Cleaning and analysis functions for air monitoring data. 
 
+`airplot`    &emsp; Plotting functions for air monitoring data.
+
+
+<br>
 
 The script below shows an example workflow that starts with 24-hour air toxics data from MPCA's Air Toxics Results database, walks through each of the analysis steps outlined in the previous sections, and produces data validation tools, POC analysis tools, completeness checks, annual summaries, site comparisons, and pollution roses.
 
-## __Functions__  
+## Functions  
 
 Click the button below to view example R script.
 
@@ -21,6 +21,7 @@ Click the button below to view example R script.
 <button class = "btn_code">Show __R__ code</button>
 
 ```{r, eval=F}
+
 #Functions
 
 install.MPCAair.packages = function() {
@@ -176,13 +177,6 @@ shinyApp(
   })
 
 }
-
-
-
-
-
-
-
 
 
 
@@ -525,13 +519,6 @@ correlation_plots = function(data) {
 
 
 
-
-
-
-
-
-
-
 beeswarm_plot = function(data) {
   library(dplyr)
   library(ggbeeswarm)
@@ -661,9 +648,11 @@ pollution_roses = function(data, met_data, num_breaks = 5) { #Met data must be i
 
 ```
 
+</div>
+
 <br>
 
-## __Analysis Steps__
+## Analysis steps
 
 Click the button below to view example R script.
 
@@ -729,11 +718,9 @@ num_breaks = 5
 pol_roses = poll_rose_data %>% pollution_roses(met_data, num_breaks)
 ```
 
+</div>
 
-<br> __Contributors__   
+<br><br> 
 
-> Dorian, Derek
-
-
-<br> [Back to top](#start-finish)
+[Back to top](#start-finish)
 

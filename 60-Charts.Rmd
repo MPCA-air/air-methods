@@ -15,12 +15,12 @@ Dividing by zero is an amazing super power. Unfortunately for you your computer 
 
 ### Log boxplots 
 
-Coming soon... 
+_Coming soon..._
 
 
 ### Outliers  
 
-Coming soon...   
+_Coming soon..._   
 
 
 ## Calendar plots
@@ -43,14 +43,13 @@ calendarPlot(formaldehyde_963,pollutant<- "Concentration",statistic="mean", year
 
 
 ## Color palettes
-
-
 ```{r, echo = F, eval = F}
 The MPCA only uses Ghibli colors. See [Ghibli](https://github.com/ewenme/ghibli).
 
-![Ghibli colors](https://github.com/ewenme/ghibli/raw/master/ghibli.jpg){width="80%"}
+![Ghibli colors](https://github.com/ewenme/ghibli/raw/master/ghibli.jpg){width="70%"}
 
 ```
+
 
 
 ## Pollution roses 
@@ -59,7 +58,17 @@ Pollution roses are a visual display of pollutant concentrations and wind direct
 
 Note that for 24-hour samples, wind direction is the vector averaged wind direction of each hour in a day.
 
-<br> __Sample `R` script__ 
+<br> 
+
+__Sample `R` script__ 
+
+Click the button below to view an example R script.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+<br>
+
+This script produces an interactive shiny App for exploring pollutant concentrations in relation to wind direction and speed.
 
 ```{r roses, eval=F, message=F, warning=F}
 
@@ -138,3 +147,6 @@ pollution_roses = function(data, met_data_filepath, num_breaks = 5) { #Met data 
 }
 
 ```
+
+</div>
+
