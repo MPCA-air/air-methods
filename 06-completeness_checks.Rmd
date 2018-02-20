@@ -1,5 +1,15 @@
 # Completeness checks
 
+```{r, out.width='40%', echo=F, fig.align="center"}
+knitr::opts_chunk$set(echo = T, warning = F, message = F)
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
+
+```
+
+__Chapter owners__  
+
+> Dorian Kvale, Cassie McMahon
+
 
 Checking for data completeness before generating summaries ensures that results will be comparable from one year to the next. Without completeness checks, changes in the seasonal coverage from year to year may create the illusion of increasing or decreasing trends. 
 
@@ -53,13 +63,9 @@ Click the button below to view a step by step example.
 
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
 
-
-
 ```{r eval=T, message=F, warning=F, echo=F}
 library(knitr)
 library(DT)
-
-#names(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
 
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 
@@ -255,10 +261,6 @@ DT::datatable(head(data, 10), options = dt_options, rownames = F)
 
 </div>
 
-
-<br> __Page maintainers__  
-
-> Dorian Kvale, Cassie McMahon
 
 
 <br> __References__    

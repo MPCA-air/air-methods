@@ -1,71 +1,48 @@
 # Data validation
 
 
+```{r, include=F}
+knitr::opts_chunk$set(echo = T, warning = F, message = F)
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
+```
+
 ```{r out.width='62%', echo=F}
 knitr::include_graphics("https://i0.wp.com/catscradleshelter.org/wp-content/uploads/2015/10/8-quality-control.jpg?fit=1200%2C800")
 ```
 
+__Maintains chapter__  
 
-Environmental monitoring data can be subject to error. Some important errors to check for include:
+> Kristie
+
+<br>
+
+Environmental monitoring data can be subject to error. One way to catch these errors is to complete routines to find data that are inconsistent with expectations or do not comply with data rules. Data validation tasks should be completed at a scheduled frequency depending on the data frequency and the resources available.
+
+Some important errors to check for include:
 
 - \@ref(leaks)    __Leaks, instrument drift, and sample contamination__
 - \@ref(outs)     __Outliers and extreme values__  
 - \@ref(sticky2)  __Sequential repeats and _sticky_ numbers__  
 - \@ref(unique)   __Unique values__ 
 
-  
-<br> __Validation steps__
-
-1. Identify potential instrument drift.
-1. Identify exceptional values.
-1. Identify sequential identical values (sticking).
-1. Report findings to laboratory for further investigation.
-
+<br>
+There are other potential validation steps that may be done for specific sets of pollutants. The description of these methods in this web book are in development.
 
 <br> __Why not average the exceptional data over the year?__
 
 Further investigation by laboratory staff is required if the laboratory equipment or system is in error. If the laboratory is not in error, these concentrations require additional investigation by data analysts and potentially by air pollution source specialists. For these reasons, these data validation steps are critical. A decreasing signal or repeated sequential measurement means that the data are not interpretable. An exceptionally high value could mean laboratory contamination or potentially could contribute to human health impacts if the high value is accurate.    
 
+<br> __Basic validation tests__
 
-<br> __Notes__  
+1. Identify potential instrument drift.
+  1. Find low values where this is not common.
+1. Identify exceptional values.
+  1. Find extreme values that may be in error or from contamination.
+1. Identify sequential identical values (sticking).
+  1. Test - Find 3 repeating values that are exactly the same.
+1. Report findings to laboratory for further investigation.
 
-
-- Possible Contamination Issues-by site and pollutant
-  - 3*IQR: I used as a simple outlier identifier in EU guidelines. This includes a lot of data for UFPs.
-
-Cassie has tried:  
-
-  - 3*75th percentile(UFP) - quantiles from previous year of data
-  - 2.5 *75th percentile of the data (put in Derek's explanation) this is for integrated air toxics data
-  - 3*SD (Poor performance)
-  - Site mean more than twice the second highest site mean(NO)
-  - Sites with maxima over 2X the next highest value(NO)
-  - Only one detection at a site (special case)
-    - And Detection was greater than 3X the MDL
-    - And Detection was within 10% of state maximum that year  
-
-
-Possible Sample loss issues (leaks) by site and pollutant  
-
-- Check for several (2,3) below MDL values when values have been above MDLs previously (need discussion). MDL would be from the previous year.  
-- I tried taking the mean of 5 sequential values, and then the next 5 sequential values. If the second set of means was 1.5 times less than the first mean I flagged the values.  
-- __Recommendation:__ Use the `[75th percentile * 3]` for all pollutants.  
-
-
-<br> __Sample `R` script__ 
-
-Click the button below to view a step by step example of the methods above.
-
-<div class="toggle"><button class = "btn_code">Show __R__ code</button>
-
-__Goals:__ 
-
-1. Find extreme values that may be in error or from contamination.
-1. Find 3 repeating values that are exactly the same.
-1. Find low values where this is not common.
-1. Do this in a routine way (identify frequency of validation checks).
-
-
+<br> <br>
 The following sections on data validation will use the example monitoring data loaded below.
 
 ```{r validation, eval=T, message=F, warning=F}
@@ -93,7 +70,8 @@ datatable(head(data, 10), options = dt_options)
 ```
 
 </div>
-_First it's always a good idea to look at the data
+_First it's always a good idea to look at the data. If there are a lower number of numeric data points the statistical tests that follow may not be necessary.
+
 _Open this web tool to chart all measured pollutants for each site for the cleaned data set. (https://mpca-pahs.shinyapps.io/ChartCleanData/)
 
 ```{r out.width='100%', echo=F, fig.align="center"}
@@ -162,7 +140,7 @@ shinyApp(
 
 ## Instrument drift or leaks in a system. {#leaks} 
 
-The test looks for a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. 
+The example test set up to detect intrument drift checks for a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. This test works for VOC air toxics measurements only. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. This test could be applied to other surrogate compounds where there are multiple analytes, or could be applied to single measurements when there is only one analyte for the instrument in questions (i.e. PM2.5).
 
 
 <br> __Sample `R` script__ 
@@ -229,11 +207,10 @@ datatable(head(leak_table, 10), options = dt_options) %>% formatSignif(c("fvalue
 
 ## Exceptional values and outliers {#outs} 
 
-These are detected by comparing each measured concentration to 3 X the 75th percentile of the data set by year, site, and pollutant. For now, pocs collocated measurements are not tested separately. 
+These are detected by comparing each measured concentration to 3 x the 75th percentile of the data set by year, site, and pollutant. For now, collocated measurements (POCS) are not tested separately. For data with higher temporal variability, such as black carbon and ultrafine particulates, a criteria of 3 x the 95th percentile of the data set by year, site and pollutant should be used. The criteria for exceptional values was designed to balance sensitivity to actually find extremely high values with a limit to the number of extreme values that may be expected in a year of air monitoring. For example, most air pollution measurements are much higher during fire works, such as occurrs on July 4th and December 31st. These data are not in error, they are accurate representations of the air concentrations during those times.
 
 
 <br> __Sample `R` script__ 
-
 
 
 Click the button to view a step by step example.
@@ -256,9 +233,7 @@ high_data <- unique(high_data)
 datatable(head(high_data, 10), options = dt_options) 
 
 high_data <- high_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
-##Toxics - Multiplying by 3 returns ~4000/1176818 values as extreme, multiplying by 1.5 returns >20,000. Multiplying by 3 returns between 2 and 45% of analyte/site/year groups.
-##UFP - Multiplying by 3 returns 28894 of 1335083 total values. Multiplying by 3 returns between 2 and 15% of analyte/site/year groups.
-##PAHs - Multiplying by 3 returns 168 of 39298 total values. Multiplying by 3 returns between 3 and 10% of analyte/site/year groups.
+
 ```
 
 </div>
@@ -295,11 +270,6 @@ warnings_table <- rbind(repeat_data, high_data)
 
 datatable(head(warnings_table, 10), options = dt_options, rownames = FALSE)
 ```
-
-<br> __Contributors__  
-
-> Kristie, Cassie, Dorian, Derek
-
 
 
 ## Unique detected values {#unique}
@@ -382,17 +352,13 @@ DT::datatable(sample_n(data, size = 10, replace = F), options = list(scrollX = 0
 
 [European Union Guide to Data Validation](https://webgate.ec.europa.eu/fpfis/mwikis/essvalidserv/images/a/ad/PRACTICAL_GUIDE_TO_DATA_VALIDATION.pdf)
 
-[US EPA Guidance on Data Verification and Data Validation] (https://www.epa.gov/sites/production/files/2015-06/documents/g8-final.pdf)
+[US EPA Guidance on Data Verification and Data Validation](https://www.epa.gov/sites/production/files/2015-06/documents/g8-final.pdf)
 
-[US EPA Data Validation Workbook Presentation and Training Materials] (https://www3.epa.gov/ttnamti1/files/ambient/airtox/workbook/T-Workbook_Secs1-8.pdf)
+[US EPA Data Validation Workbook Presentation and Training Materials](https://www3.epa.gov/ttnamti1/files/ambient/airtox/workbook/T-Workbook_Secs1-8.pdf)
 
-[US EPA Data Validation Workbook] (https://nepis.epa.gov/Exe/ZyNET.exe/P1006PAB.TXT?ZyActionD=ZyDocument&Client=EPA&Index=2006+Thru+2010&Docs=&Query=&Time=&EndTime=&SearchMethod=1&TocRestrict=n&Toc=&TocEntry=&QField=&QFieldYear=&QFieldMonth=&QFieldDay=&IntQFieldOp=0&ExtQFieldOp=0&XmlQuery=&File=D%3A%5Czyfiles%5CIndex%20Data%5C06thru10%5CTxt%5C00000016%5CP1006PAB.txt&User=ANONYMOUS&Password=anonymous&SortMethod=h%7C-&MaximumDocuments=1&FuzzyDegree=0&ImageQuality=r75g8/r75g8/x150y150g16/i425&Display=hpfr&DefSeekPage=x&SearchBack=ZyActionL&Back=ZyActionS&BackDesc=Results%20page&MaximumPages=1&ZyEntry=1&SeekPage=x&ZyPURL)
+[US EPA Data Analysis Workbook](https://nepis.epa.gov/Exe/ZyPDF.cgi/P1006PAB.PDF?Dockey=P1006PAB.PDF)
 
-[Review article by Helsel, D about non-detects and substitution methods.] (https://academic.oup.com/annweh/article/54/3/257/223531/Much-Ado-About-Next-to-Nothing-Incorporating)
+[Temporal variability of selected air toxics in the United States](http://www.sciencedirect.com/science/article/pii/S1352231007004840)
 
-[A Chemosphere review article describing why BDL substitution should not be done.] (https://pdfs.semanticscholar.org/182e/9278fc36dd73d48a414b8fbc30a44ea314d3.pdf)
-
-[Temporal variability of selected air toxics in the United States] (http://www.sciencedirect.com/science/article/pii/S1352231007004840)
-
-[Spatial and temporal analysis of national air toxics data] (http://www.tandfonline.com/doi/pdf/10.1080/10473289.2006.10464576)
+[Spatial and temporal analysis of national air toxics data](http://www.tandfonline.com/doi/pdf/10.1080/10473289.2006.10464576)
 

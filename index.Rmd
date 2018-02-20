@@ -29,7 +29,14 @@ knitr::include_graphics('images/cover.jpeg', dpi = NA)
 ```
 
 
-This guide describes the methods used at the MPCA to analyze air monitoring data. The charts and code found in this guide were produced using the freely available R statistical software. To follow along with the examples download a copy of R to your computer from the [r-project](https://cran.r-project.org/) or use [R-Fiddle](http://www.r-fiddle.org/#/) in your browser. 
+This guide describes the methods used at the MPCA to analyze air monitoring data. The charts and code found in this guide were produced using the free statistical software R. To follow along with the examples download a copy of R to your computer from the [r-project](https://cran.r-project.org/) or use [R-Fiddle](http://www.r-fiddle.org/#/) in your browser.  
 
-<br>
+This web book is a working body of data analysis methods and code examples. The current contributors are listed below, but you are invited and encouraged to contribute content and add your name to the list below.
+
+<br> __Contributors__   
+
+> Dorian Kvale  
+> Cassie McMahon  
+> Derek Nagel  
+> Kristie Ellickson  
 

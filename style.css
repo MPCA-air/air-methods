@@ -46,3 +46,7 @@ pre code {
 .toggle.open {
     height: auto;
 }
+
+.h3 {
+  margin-top: 25px;
+}

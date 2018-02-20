@@ -2,6 +2,11 @@
 
 ![](http://imgs.xkcd.com/comics/cat_proximity.png){width="45%"}
 
+```{r, include=F}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
+```
 
 
 ## Boxplots
