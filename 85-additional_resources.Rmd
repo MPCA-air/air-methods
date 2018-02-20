@@ -6,9 +6,9 @@ Suggested readings:
 
 - https://www.epa.gov/sites/production/files/2015-06/documents/g8-final.pdf
 
-- Data validation workbook – Kristie will do thing
+- Data validation workbook – Kristie will do a thing
 
-- https://academic.oup.com/annweh/article/54/3/257/223531/Much-Ado-About-Next-to-Nothing-Incorporating - 
+- [Much Ado About Next to Nothing: Incorporating Nondetects in Science](https://academic.oup.com/annweh/article/54/3/257/223531/Much-Ado-About-Next-to-Nothing-Incorporating) 
   
 - Review article by Helsel about non-detects and substitution methods.
 

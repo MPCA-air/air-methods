@@ -1,11 +1,12 @@
 # Summary statistics
 
-```{r out.width='40%', echo=F, fig.align="center"}
+```{r out.width='40%', echo=F, warning = F, message = F,  fig.align="center"}
 library(knitr)
 library(DT)
 library(kableExtra)
 
 knitr::opts_chunk$set(echo = T, warning = F, message = F)
+
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 
 knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/12936/large/1464301097/number-rcatladies.png")
@@ -24,14 +25,15 @@ The summary methods described in this chapter inlcude:
 
 <br>
 
-__Notes__
+## Test for normality
 
 Data should be tested for normality prior to determining the type of summary statistic to report. In general environmental data are non-normal and contain with many low values and a few high values. This causes the mean of the data to be higher than the median (right skewed). Many normality tests exist and they vary in sensitivity. A good article on normality tests can be found at this link: (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3693611/)
 
 The normality test in the example script below is a recommended test for data of sample size between 5-5000 and will allow missing values. A Shapiro-Wilk test may also be performed for the typical sample size of a year of air toxics results. The script below includes a a line to switch to a Shapiro Wilk test.
 
+<br>
 
-Click the button below to view the code for the normality test.
+Click the button below to view code to perform normality test.
 
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
 ```{r, message = F, results = "hide"}
@@ -83,11 +85,16 @@ DT::datatable(head(data_normresults), options = dt_options)
 
 </div>
 
-It is also suggested that one visualize the data to determine if normality may be a valid assumption. The script below are an example for visual normality tests and include explanation for their interpretation.In the Q-Q Plot, normal data will form a straight line with the theoretical distribution quantiles with little deviation from the line. This is a visual test and somewhat subjective. Normal data form histograms that produce a bell shaped curve.  
+
+<br>
 
 
-This web tool will allow visual inspection of air toxics data by year, site and pollutants.
-(https://mpca-pahs.shinyapps.io/NormViz/)
+We also suggest visualizing the data to determine if normality may be a valid assumption. The script below is an example of visual normality tests and includes an explanation of their interpretation. In the Q-Q Plot, normal data will form a straight line with the theoretical distribution quantiles with little deviation from the line. This is a visual test and somewhat subjective. Normal data form histograms that produce a bell shaped curve.  
+
+
+This web tool will allow visual inspection of air toxics data by year, site and pollutants - [https://mpca-pahs.shinyapps.io/NormViz/](https://mpca-pahs.shinyapps.io/NormViz/).
+
+<br>
 
 
 Click the button below to view the code for the shiny tool above.
@@ -151,6 +158,8 @@ shinyApp(
 ```
 
 </div>
+
+<br>
 
 When to use a arithmetic or geometric mean:
 
@@ -397,13 +406,15 @@ annual_summary = UCL_95(data, 100)
 
 There may be situations when a monitoring site does not meet the 75 percent completeness requirement in each quarter of a year, but annual summary statistics are still necessary. In this case, calculate annual summary statistics as usual but note that the site did not meet completeness requirements. The minimum threshold of valid samples required for reporting any annual summary statistics at all is up to the judgement of data analysis staff.
 
+
 ## Comparison of data to inhalation health benchmarks {#health}
 
 Chronic Inhalation Health Benchmarks - The annual 95% upper confidence limit is compared to chronic inhalation health benchmarks which are chosen based on the MPCA/MDH hierarchy for inhalation health benchmarks information sources.These risk results are summarized differently for annual measured data reports (The Air Toxics Data Explorer) or if the comparison is used in a cumulative analysis (cumulative AERA) to inform air permitting or environmental review.
 Acute Inhalation Health Benchmarks - The 2nd highest annual value multiplied by ten is compared to acute inhalation health benchmarks. This adjustment of the 24 hour integrated value approximates an hourly maximum, since acute inhalation health benchmarks are developed to be protective for high short-term exposures (about an hour).
 
-Summarization of risk estimates for a cumulative Air Emission Risk Analaysis - Risk estimates are summed across pollutants thereby applying the concept of additivity. Since not all pollutants are measured at each monitoring site, means of sites are estimated based on population density since we asumme that pollution sources are greater near greater numbers of people. Means are calculated for mid-density sites, and rural sites. Facilities within urban areas are provided risk estimates at the closest or most representative monitor with all pollutants measured. This is described in the cumulative AERA section in the AERA guidance. (https://www.pca.state.mn.us/air/aera-guide) Cumulative AERAs utilitze the mean cumulative risk estimates for the most recent three years of monitored data.
+Summarization of risk estimates for a cumulative Air Emission Risk Analaysis - Risk estimates are summed across pollutants thereby applying the concept of additivity. Since not all pollutants are measured at each monitoring site, means of sites are estimated based on population density since we asumme that pollution sources are greater near greater numbers of people. Means are calculated for mid-density sites, and rural sites. Facilities within urban areas are provided risk estimates at the closest or most representative monitor with all pollutants measured. This is described in the cumulative AERA section in the [AERA guidance](https://www.pca.state.mn.us/air/aera-guide). Cumulative AERAs use the mean cumulative risk estimates for the most recent three years of monitored data.
 
 
 ## Rolling 365 day summaries {#roll365}
 
+_Coming soon..._
