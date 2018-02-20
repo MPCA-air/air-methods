@@ -1,7 +1,13 @@
 # Data cleaning
 
+<br> __Maintains Chapter__  
+
+> Derek
+
 ```{r out.width='55%', echo=F}
 knitr::include_graphics("images/data-cleaning.jpg")
+knitr::opts_chunk$set(echo = T, warning = F, message = F)
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 ```
 
 Before jumping into your analysis you'll want to clean it up with some helpful quality checks and formatting procedures.  
@@ -17,7 +23,7 @@ These procedures include steps to:
 ## Remove blank, NULL, and missing values {#missing}
 
 __Description__  
-Large monitoring data sets often contain observations with missing concentrations, detection limits or other labeling errors that can lead to incorrect summary statistics.  
+Large monitoring data sets often contain observations with missing concentrations, detection limits or other non-instrument result entries that can lead to incorrect summary statistics.  
 
 <br> __Recommended steps__
 
@@ -25,7 +31,7 @@ Large monitoring data sets often contain observations with missing concentration
 1. If available, review Null Data Codes. These codes will tell you why the data is missing. Most data sets will include null data codes. For AQS null code descriptions, see https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.html.
 1. Determine if your analysis needs to account for missing data before deleting observations. You may want to perform a count on all sample dates to quantify the expected number of observations.
 1. If you no longer need these records, remove them from the dataset.
-1. Document your process.
+1. Document your process. Wait, you did that by writing it in an R script.
 
 <br> __Why not keep them?__
 
@@ -46,7 +52,6 @@ library(kableExtra)
 
 options(knitr.table.format = "html") 
 
-dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
 ```
 
 <br> Load example monitoring data
@@ -184,19 +189,12 @@ datatable(data, options = dt_options)
 
 </div>
 
-<br> __Contributors__  
-
-> Dorian Kvale
-
-
-<br> __References__    
-
 
 ## Remove _Qualified_ data {#quals}
 
 
 __Description__  
-Valid sample results may have data qualifiers. These qualifiers provide contextual information about factors that may have influenced the result. In the AQS data format, qualifiers are listed in 10 qualifier fields. A sample may have more than one qualifier. Descriptions of the AQS qualifier codes are available from the EPA at https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.html.  
+Valid sample results may have data qualifiers. These qualifiers provide contextual information about factors that can influence results. In the AQS data format, qualifiers are listed in 10 qualifier fields. A sample may have more than one qualifier. Descriptions of the AQS qualifier codes are available from the EPA at https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.html.  
 
 
 <br> __Recommended steps__ 
@@ -206,13 +204,39 @@ Valid sample results may have data qualifiers. These qualifiers provide contextu
 1. When removing qualified data, maintain a copy of the original data set and document what values have been removed. In some cases, you may want to run your analysis with and without the qualified values to characterize the influence of the qualified data on the results. 
 
 
-<br> __Sample `R` script__ 
+<<br> __Sample `R` script__  
+  
+Click the button below to view a step by step example of the methods above.
 
-<br> __Contributors__    
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
 
-> Cassie McMahon
+```{r echo=F, message=F, warning=F}  
+library(RCurl)
+library(dplyr)
+library(tidyr)
 
-<br> __References__    
+qualifier_data <- read_csv("X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods/qualifier_date.csv")
+
+qualified_data <- filter(qualifier_data, !is.na(qual_code))
+
+download <- getURL("https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.csv")
+
+qualifiers <- read_csv(download)
+qualifiers <- qualifiers %>% 
+  select(`Qualifier Code`, `Qualifier Description`, `Qualifier Type`)
+
+qualified_data <- left_join(qualified_data, qualifiers, by = c("qual_code" = "Qualifier Code"))
+
+##review qualifier types in the data
+unique(qualifier_data$`Qualifier Description`)
+
+##remove qualified data if appropriate
+data_to_use <- filter(qualifier_data, is.na(qual_code))
+
+```
+
+<br> 
 
 
 
@@ -250,13 +274,11 @@ Click the button below to view a step by step example of the methods above.
 ```{r echo=F, message=F, warning=F}  
 library(knitr)
 library(DT)
-
-dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F)
 ```
 
 <br> Load the sample monitoring data.
 ```{r eval=T, message=F, warning=F}
-library(dplyr)
+
 
 data <- read.csv(text = '
 aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
@@ -280,7 +302,6 @@ aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
 
 <br> _Sample monitoring data_ 
 ```{r, eval=T, echo=F, message=F, warning=F}
-#kable(head(data), booktabs = T, caption = "Sample monitoring data.")
 datatable(data, options = dt_options, rownames = FALSE)
 ```
  
@@ -362,17 +383,15 @@ data <- rbind(data, dupes)
 <br> _The new cleaner data_  
 ```{r, eval=T, echo=F, message=F, warning=F, fig.cap ="Final data set with 1 duplicate removed."}
 
-datatable(select(data, -key, -duplicate), options = list(scrollX = T, autoWidth = T, searching = F, ordering=F, lengthChange = F, paginate=F, info=F), rownames = FALSE)
+datatable(select(data, -key, -duplicate), 
+          options = list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F), 
+          rownames = FALSE)
 
-# Code folding reference: Reference: https://stackoverflow.com/questions/37755037/how-to-add-code-folding-to-output-chunks-in-rmarkdown-html-documents/37839683#37839683
+# Code folding reference: https://stackoverflow.com/questions/37755037/how-to-add-code-folding-to-output-chunks-in-rmarkdown-html-documents/37839683#37839683
 
 ```
 
 </div>
-
-<br> __Contributors__   
-
-> Dorian Kvale, Cassie McMahon 
 
 
 

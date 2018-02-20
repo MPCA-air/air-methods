@@ -1,61 +1,70 @@
 # Getting data
 
-```{r echo=F}
+```{r, include=F}
+
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 ```
 
-This section describes how to access and request air monitoring data. These data include:  
+
+This section describes how to access air monitoring and modeling data. These data include:  
 
 __Air monitoring__
 
-- EPA's AQS DataMart
-    - \@ref(rqamd) RQAMD Package 
-
-- EPA's AirNow
-    - \@ref(aqi-now)  Current AQI observations  
-    - \@ref(monitors) Active AQI monitors 
+- EPA 
+    - \@ref(AQS) AQS Database 
+    - \@ref(rqamd) AQS Datamart (RQAMD Package) 
+    - \@ref(aqi-now)  AirNow: Current AQI observations  
+    - \@ref(monitors) AirNow: Active AQI monitors 
     
-- MPCA sources
-    - \@ref(wair) WAIR Database
+- MPCA
     - \@ref(lims) LIMS data via Tableau
-    - \@ref(AirVision) Airvision - Hourly data
-    
+    - \@ref(AirVision) AirVision: Continuous data
+    - \@ref(wair) WAIR Database
 
 __Health and standards__
 
--	Inhalation health benchmarks
--	NAAQs
-
+- Air toxics
+    - \@ref(IHBs) Inhalation health benchmarks
+- Criteria pollutants
+    - \@ref(NAAQS) Air Quality Standards (NAAQs and MAAQS)
 
 __Air modeling__
 
-- NATA
-- Downscaler for Ozone and PM2.5
-- MNRisks
-- CMAQ 
+- Modeling results
+    - \@ref(nata) NATA
+    - \@ref(mnrisks) MNRISKS
+    - \@ref(downscale) Downscaler for Ozone and PM2.5
+    - \@ref(cmaq) CMAQ 
 
-__Air emissions__
+__Context__
 
-- EPA's NEI
-- Facility locations
+- Emissions
+    - \@ref(mn-ei) MN Emissions Inventory
+    - \@ref(nei) EPA's NEI
+    - \@ref(fac-coords) Facility locations
 
-__Meteorology and Climate__
-
-- Observations
-- HYSPLIT for wind trajectories
-- Forecasts
-
-
-__Geography and American Community Survey (ACS)__
-
-- Census
-- ACS
-- Traffic
-- Land use
+- Meteorology and Climate
+    - \@ref(wx-obs) Weather observations
+    - \@ref(hysplit) HYSPLIT wind trajectories
+    
+- Geography and Census data
+    - \@ref(landuse) Land use maps
+    - \@ref(census) U.S. Census boundaries
+    - \@ref(acs) Demographics from American Community Survey (ACS) 
 
 
-## Retrieving data from AQS DataMart {#rqamd}
+## Air monitoring 
 
+### Retrieving data from AQS  {#AQS}
+The Air Quality System (AQS) contains ambient air pollution data collected by EPA, state, local, and tribal air pollution control agencies from over thousands of monitors.  AQS also contains meteorological data, descriptive information about each monitoring station (including its geographic location and its operator), and data quality assurance/quality control information.
+
+Registered users can access the AQS database via a web application at https://www.epa.gov/aqs. 
+
+
+
+### Retrieving data from AQS DataMart {#rqamd}
 The AQS Data Mart provides a convenient API to access air quality data stored in the EPA's AQS database, [AQS Data Mart] (https://aqs.epa.gov/aqsweb/documents/data_mart_welcome.html)
 
 Note: The AQS Data Mart requires a user name and password.The username and password is not the same as your AQS User Account.To request a Data Mart account, follow the instructions on the Data Mart page. 
@@ -72,11 +81,9 @@ Click the button below to view a step by step example.
 ```{r, eval=FALSE }
 
 ##install raqdm package
-
 library(devtools)
 devtools::install_github("ebailey78/raqdm")
-
-require(raqdm)
+library(raqdm)
 
 ##set Data Mart username and password.
 
@@ -116,20 +123,19 @@ d <- do.call(rbind, y)
 <br>
 
 
-## Current AQI observations {#aqi-now}
-
-Air data for the entire United States is at your finger tips. _EPA's AirNow_ maintains a publicly accessible folder of current air monitoring data at https://files.airnowtech.org/.
+### Current AQI observations {#aqi-now}
+Air data for the entire United States is at your finger tips. _EPA's AirNow_ maintains a publicly accessible folder of current air monitoring data at https://files.airnowtech.org/. Data retrieved from AirNow is preliminary and may change following QA. 
 
 <br> __Sample `R` script__  
   
-Use the following R code to grab the most recent AQI results for the entire country.e.
+Use the following R code to grab the most recent AQI results for the entire country.
 
 
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
 
-```{r }
+```{r}
 library(dplyr)
 library(readr)
 
@@ -155,14 +161,10 @@ aqi_now <- filter(aqi_now, parameter %in% c("OZONE", "PM2.5"))
 ```
 </div>
 
-<br> __Contributors__   
-
-> Dorian Kvale
 
 
-## Active AQI monitors {#monitors}
-
-Current air monitoring locations are published on _AirNow_ to the `monitoring_site_locations.dat` file.
+### Active AQI monitors {#monitors}
+Current air monitoring locations are published on [_AirNow_](https://files.airnowtech.org/?prefix=airnow/today/) to the `monitoring_site_locations.dat` file.
 
 <br> __Sample `R` script__ 
 
@@ -216,91 +218,74 @@ aqi_sites  <- filter(aqi_sites, state_fips %in% c(27))
 </div>
 
 
-<br> __Contributors__    
-
-> Dorian Kvale
-
-<br> __References__    
-
 <br>
 
+### Retrieving data from LIMS via Tableau {#lims}
+The LIMS database is the primary data warehouse for AQ monitoring activities. The LIMS system is being retired and replaced. To ease data accessibilty during this transition LIMS data are available for download via an internal Tableau workbook at http://tableau.pca.state.mn.us/#/workbooks/3342.
 
 
-## Retrieving data from MPCA WAIR database {#wair}
+### Retrieving continuous data from AirVision {#AirVision}
+AirVision is the data acquistion and temporary storage database for continuous air monitoring data. Data collected in AirVision is transfered to LIMs and AQS for final data storage. If you need to access to continuous data before it has been transfered to the final data repository you can run reports from AirVision.
 
-The WAIR database provides a queryable local copy of select air quality data extracted multiple data sources. This database is managed by Margaret McCourtney. Contact Margaret to request login credentials. 
-See [WAIR Data Dictionary] (http://rainier.pca.state.mn.us/documentation/DataDictionary/wair/index.html) for available data tables.
+To run reports, the AirVision client must be installed on your computer and you need an user account. Contact the Air Monitoring Supervisor to request credentials. Alternatively, an AirVision administator can create a report task that will generate a data report and send it to a specified location (FTP site or e-mail). 
 
-Use the following code to query WAIR using DPLYR
+
+### Retrieving data from MPCA WAIR database {#wair}
+The WAIR database provides a queryable local copy of select air quality data extracted from multiple data sources. This database is managed by Margaret McCourtney. Contact Margaret to request login credentials. 
+
+See [WAIR Data Dictionary](http://rainier.pca.state.mn.us/documentation/DataDictionary/wair/index.html) for available data tables.
+
+Use the following code to query WAIR using the R package `dplyr`.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
 
-```{r, eval=FALSE }
+```{r, eval=FALSE}
 ################################################################################################
 ## This script loads the library and driver and connects to WAIR.  A dplyr query extracts 
 ## data from the database into a format specified by Cassie McMahon for calculating           
 ## OZONE DESIGN VALUES                                                                        
 ##                                                                                    
-## Please disconnect from database before proceeding with analysis of the data in your 
-## dataframe.
+## Note: WAIR does not contain values for SamplingFrequency and MonitorProtocolID 
 ##
-## Cassie's headings
-## "State.Code", "County.Code", "Site.ID", "Parameter", "POC", "Sample.Duration", "Unit",
-## "Method", "Date", "Start.Time", "Sample.Value", "NullDataCode", "SamplingFrequency",
-## "MonitorProtocolID", "Qual1"  
-##  Note: WAIR does not contain values for SamplingFrequency and MonitorProtocolID 
-##
-## Note:  dplyr does not have a command to disconnect to the database.  Connection will
-## terminate upon quitting R.  So please do not keep (many) connections open for long periods of
-## time
+## Note:  dplyr does not have a command to disconnect from the database. Connection will
+## terminate upon quitting R.  Please do not keep (many) connections open for long periods of
+## time.
 ################################################################################################
 
-## Load the library
+## Load the package
 library(dplyr)
 
-
 ## Open a connection to the database WAIR, schema AQS ##
-my_wair <- src_postgres(dbname='wair',host="eiger",user="username",password="password",
-options="-c search_path=aqs")
-
+my_wair <- src_postgres(dbname = 'wair', host = "eiger", user = "username", password = "password",
+options = "-c search_path=aqs")
 
 ## Reference a table, or two if combining, in the database (e.g. aqs.monitor & aqs.obs_value) ##
 ## Select columns and filter by row ##
 
 #aqs.monitor table in WAIR ##
-my_monitor <- filter(select(tbl(my_wair, "monitor"), id_mon:poc_code), stateid==27 &&
-parm_code==44201)
+my_monitor <- tbl(my_wair, "monitor") %>% 
+                select(id_mon:poc_code) %>%  
+                filter(stateid==27 && parm_code == 44201)
 
 #aqs.obs_value table in WAIR ##
-my_obs <- filter(select(tbl(my_wair, "obs_value"), id_mon, dur_code, unitid, method_code,
-sampldate, startime, value, nulldata, qual_code), parm_code==44201 && between(sampldate,
-"2014-06-01", "2014-06-07"))
+my_obs <- tbl(my_wair, "obs_value") %>% 
+            filter(parm_code == 44201 && between(sampldate, "2014-06-01", "2014-06-07")) %>%
+              select(id_mon, dur_code, unitid, method_code,
+                     sampldate, startime, value, nulldata, qual_code)
 
-
-## Combine monitor data with observations ##
+## Combine monitor data with observations 
 my_mn_o3 <- inner_join(my_monitor, my_obs, type = "inner", by = c("id_mon")) 
 
 
-## Arrange combined data in specified order
-## Collect data into a dataframe or table ('collect' only works on dataframe, if don't 'collect'
-## will only get first 100,000 rows with tbl_df or tbl_dt)
-
-my_mn_o3_df <- collect(my_mn_o3, arrange(my_mn_o3, stateid, cntyid, siteid,
-parm_code, poc_code, dur_code, unitid, method_code, sampldate, startime, value, nulldata,
-qual_code))
-
-## To store data in a data.table instead of data.frame
-# my_mn_o3_dt <- tbl_dt(my_mn_o3_df)  
-
-
-## To avoid "Variables not shown"
-options(dplyr.width = Inf)
-
+## Collect data into a dataframe or table 
+my_mn_o3_df <- collect(my_mn_o3) %>% 
+                 arrange(stateid, cntyid, siteid, parm_code,  # Arrange combined data in specified order
+                         poc_code, dur_code, unitid, method_code, 
+                         sampldate, startime, value, nulldata, qual_code)
 
 ## 
 head(my_mn_o3_df)
-
 
 ```
 </div>
@@ -308,18 +293,18 @@ head(my_mn_o3_df)
 <br>
 
 
-Use the following code to query WAIR using RPostgrSQL
+Use the following code to query WAIR using the package `RPostgrSQL`.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
-
-```{r, eval = FALSE }
+```{r, eval = FALSE}
 ################################################################################################
 ## This script loads the library and driver and connects to WAIR.  A PostgrSQL query extracts 
 ## data from the database into a format specified by Cassie McMahon for calculating           
 ## OZONE DESIGN VALUES                                                                        
 ##                                                                                    
-## Please disconnect from database and unload the driver before proceeding with analysis of the data in your dataframe.
+## Please disconnect from database and unload the driver before proceeding with analysis of 
+## the data in your dataframe.
 ##
 ## Cassie's headings
 ## "State.Code", "County.Code", "Site.ID", "Parameter", "POC", "Sample.Duration", "Unit",
@@ -336,7 +321,7 @@ library(RPostgreSQL)
 drv <- dbDriver("PostgreSQL")
 
 ## Open a connection 
-con <- dbConnect(drv, dbname="wair",host='eiger',user='username',password='password')
+con <- dbConnect(drv, dbname = "wair", host = 'eiger', user = 'username', password = 'password')
 
 #***************************** all in 1 step ***************************************************
 
@@ -377,6 +362,355 @@ dbDisconnect(con)
 
 ## Frees all the resources on the driver
 dbUnloadDriver(drv)
+
+```
+</div>
+
+
+## Health and standards
+
+### Inhalation health benchmarks {#IHBs}
+
+The inhalation health benchmarks used by MPCA are available on the web in these formats:
+
+- PDF: https://www.pca.state.mn.us/sites/default/files/aq9-28.pdf 
+- Excel: https://www.pca.state.mn.us/sites/default/files/aq9-22.xlsm
+- CSV: https://raw.githubusercontent.com/MPCA-air/health-values/master/Inhalation_Health_Benchmarks(IHBs).csv
+
+<br>
+
+Use the following R code to grab the most recent inhalation health benchmarks and references used by MPCA.
+
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+
+```{r, eval = F}
+library(readxl)
+
+rass_web <- read_excel("X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/AERA program/RASS/AERA RASS (aq9-22-7)_2018-01.xlsx", 
+                       sheet = "ToxValues", 
+                       skip = 19)
+
+ihbs <- rass_web[ , c("Surrogate?", "Group", "CAS # or MPCA#", "Chemical Name", "HAP?", "Tox Value Source", "Acute Air Conc. (ug/m3)", "General Toxic Endpoint", "Specific Toxic Endpoint", "Notes", "Surrogate CAS", "Surrogate Name", "Tox Value Source__1", "Unit Risk (ug/m3)-1", "10-5 Cancer-based Air Conc (ug/m3)", "Notes__1", "Surrogate CAS__1", "Surrogate Name__1", "Tox Value Source__2", "Reference Conc. (ug/m3)", "General Toxic Endpoint__1", "Specific Toxic Endpoint__1", "Notes__2", "Surrogate CAS__2", "Surrogate Name__2")]
+
+names(ihbs) <- c("Surrogate", "Group", "CAS", "Chemical Name", "is_HAP", "Acute Source", "Acute Air Conc", "Acute Toxic Endpoint", "Acute Specific Endpoint", "Acute Notes", "Acute Surrogate CAS", "Acute Surrogate Name", "Cancer Tox Value Source", "Unit Risk", "Cancer-based Air Conc", "Cancer Notes", "Cancer Surrogate CAS", "Cancer Surrogate Name", "NC Tox Value Source", "Reference Conc", "NC Toxic Endpoint", "NC Specific Toxic Endpoint", "Chronic Notes", "Chronic Surrogate CAS", "Chronic Surrogate Name")
+
+```
+
+</div>
+
+<br>
+
+You can also pull a simple table of inhalation health benchmarks from a table on Github. 
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+```{r, warnings = FALSE}
+library(readr)
+
+url  <- "https://raw.githubusercontent.com/MPCA-air/health-values/master/Inhalation_Health_Benchmarks(IHBs).csv"
+
+ihbs <- read_csv(url) 
+```
+</div>
+
+<br>
+
+
+### Air Quality Standards (NAAQs and MAAQS) {#NAAQS}
+Criteria air pollutants including: particulate (TSP, PM10, PM2.5), ozone, lead, sulfur dioxide, nitrogen dioxide, and carbon monoxide are regulated via ambient air quality standards. Ambient air quality standards are set at the national (NAAQS) and state (MAAQS) level. 
+
+
+__NAAQS__
+
+The Clean Air Act, which was last amended in 1990, requires EPA to set National Ambient Air Quality Standards (40 CFR part 50) for pollutants considered harmful to public health and the environment. The Clean Air Act identifies two types of national ambient air quality standards. Primary standards provide public health protection, including protecting the health of "sensitive" populations such as asthmatics, children, and the elderly. Secondary standards provide public welfare protection, including protection against decreased visibility and damage to animals, crops, vegetation, and buildings.
+
+- A summary of current NAAQS is available on EPA's website:
+    - https://www.epa.gov/criteria-air-pollutants/naaqs-table
+- When calculating NAAQS design values, analysts must follow the procedures defined in the pollutant specific [appendices to 40 CFR 50](https://www.ecfr.gov/cgi-bin/text-idx?SID=c118ce8b63f65737a282c4281a59abf0&mc=true&node=pt40.2.50&rgn=div5).
+- In August each year, EPA posts official design values here: 
+   - https://www.epa.gov/air-trends/air-quality-design-values
+
+<br>
+
+
+__MAAQS__
+
+Minnesota Ambient Air Quality Standards (MAAQS) are established in [Minnesota Administrative Rules 7009](https://www.revisor.mn.gov/rules?id=7009&keyword_type=all&keyword=7009&keyword_sg=rule&redirect=0).
+
+In most cases, the MAAQS are the same as the NAAQS. The MAAQS also include standards for two pollutants that are not covered by the NAAQS: TSP and hydrogen sulfide. The MAAQS were last updated in January 2017.
+
+When calculating MAAQS design values:
+
+- If MAAQS = NAAQS, use methods described in appendices to 40 CFR 50.
+- If MAAQS = revoked NAAQS, use methods described in archived appendices to 40 CFR 50.
+- For MAAQS without a NAAQS, such as H2S, use the "Form of the standard" language to guide your calculations.  
+
+
+
+## Air modeling
+
+### NATA modeling {#nata}
+The National Air Toxics Assessment is a nationwide air modeling effort to provide air concentrations and risks for all U.S. census tracts. These results may be pulled from a map project or data tables at this website: https://www.epa.gov/national-air-toxics-assessment.
+
+After each inventory is completed the Minnesota statewide cumulative air pollution model is compared to these results.
+
+<br>
+
+
+### MNRISKS statewide risk modeling {#mnrisks}
+MNRISKS is the statewide cumulative air pollution model that is produced by MPCA every three years with the air toxics emissions inventory publication. The model itself produces point estimates for air concentrations and potential human health risks for hundreds of air pollutants across Minnesota. The model also incorporates a date and transport component that produces multi-pathway risk results. Census block group averaged results are available on the MPCA webpage in the following location:
+https://www.pca.state.mn.us/air/air-modeling-and-human-health.
+
+<br>
+
+
+### Downscaler modeling results for Ozone and PM2.5 {#downscale}
+Downscaled data (_a blend of modeling and monitoring results_) are provided by the CDC in cooperation with the EPA for the pollutants ozone and PM-2.5. Daily predicitons are available for each Census tract throughout the country for the years 2001 to 2013.
+
+- CDC information about this platform is available online at [https://ephtracking.cdc.gov/showAirData.action](https://ephtracking.cdc.gov/showAirData.action)
+- Data from this platform can be downloaded from the EPA at [https://www.epa.gov/air-research/downscaler-model-predicting-daily-air-pollution](https://www.epa.gov/air-research/downscaler-model-predicting-daily-air-pollution).
+- Downloaded data filtered to Minnesota results is available internally in the data folder: `X:\Programs\Air_Quality_Programs\Air Monitoring Data and Risks\6 Air Data\EPA Downscaler Modeling`.
+
+
+### CMAQ Ozone modeling {#cmaq}
+The Community Multiscale Air Quality Modeling System (CMAQ) is defined by EPA as:
+
+> CMAQ _(see-mak)_: an active open-source development project of the EPA that consists of a suite of programs for conducting air quality model simulations. CMAQ combines current knowledge in atmospheric science and air quality modeling, and an open-source framework to deliver fast, technically sound estimates of ozone, particulates, air toxics and acids deposition.
+
+
+The information and data from this platform can be found at the following website [https://www.epa.gov/cmaq](https://www.epa.gov/cmaq).
+
+<br>
+
+
+## Context
+
+
+### MN Emissions Inventory {#mn-ei}
+Every year all facilities (stationary point sources) report criteria pollutant emissions and every three years facilities report air toxics emissions. The EPA and the state of Minnesota emissions inventory team also calculate and report emissions for all other types of emissions sources such as mobile, non-road mobile, and area sources. These non-point emissions are reported every three years with the air toxics emissions. The Minnesota emission inventory is the foundation of MNRISKS. These emissions levels are reported in several data tools on the MPCA website. Their data and the visualization tools can be found on the following website [https://www.pca.state.mn.us/air/emissions-data](https://www.pca.state.mn.us/air/emissions-data).
+
+<br>
+
+
+### EPA's NEI {#nei}
+The National Emissions Inventory (NEI) provides air toxics and criteria and air toxic pollutant emissions for the entire U.S. on the same schedule as described in the Minnesota Emissions Inventory section. This information can be found at the following website [https://www.epa.gov/air-emissions-inventories/national-emissions-inventory-nei](https://www.epa.gov/air-emissions-inventories/national-emissions-inventory-nei).
+
+
+### Facility locations {#fac-coords}
+The most recent compilation of facility coordinates was performed for the 2017 emission inventory. This data is available in the `INV_SOURCES` table found in the _RAPIDS_ schema within MPCA's _DELTA_ database.
+
+Use the following code to load the current facility coordinates.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+```{r, eval = T}
+# This script connects to the MPCA database DELTA. 
+# A dplyr query collects source coordinates from the RAPIDS schema.
+                                                                          
+# Load packages
+library(dplyr)
+library(RODBC)
+library(readr)
+
+```
+
+You can view available database connections in R using the function `odbcDataSources()`.
+```{r}
+
+odbcDataSources()
+
+```
+
+
+<br>
+
+To connect to `deltaw`, use the function `odbcConnect()`.
+
+```{r, warning = F}
+
+# Load credentials
+credentials <- read_csv("X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Student Folder/credentials.csv")
+
+user      <- credentials$delta_user
+password  <- credentials$delta_pwd
+
+# Alternatively, use your own
+#user      <- "ta*******"
+#password  <- "da**_*******"
+  
+# Connect to DELTA
+deltaw <- odbcConnect("deltaw", 
+                      uid = user, 
+                      pwd = password,
+                      believeNRows = FALSE)
+
+
+# Show all tables in RAPIDS schema
+rapids_tbls <- sqlTables(deltaw, tableType = "TABLE", schema = "RAPIDS")  
+
+head(rapids_tbls)
+
+# Get inventory year codes
+inv_codes  <- sqlQuery(deltaw, "SELECT * FROM RAPIDS.INV_INVENTORIES", max = 100, stringsAsFactors = F)
+
+# Get code for 2017
+inv_id  <- filter(inv_codes, INVENTORY_YEAR == 2017)$RID
+
+# Get sources for inventory year
+sources   <- sqlQuery(deltaw, paste0("SELECT * FROM RAPIDS.INV_SOURCES WHERE INVENTORY_RID = ", inv_id),
+                        max              = 10000, 
+                        stringsAsFactors = F, 
+                        as.is            = T)
+
+
+# Get source coordinates
+src_coords   <- sqlQuery(deltaw, "SELECT * FROM RAPIDS.INV_COORDINATES",
+                        max              = 100000, 
+                        stringsAsFactors = F, 
+                        as.is            = T)
+
+
+# Join coordinates to sources
+sources <- left_join(sources, src_coords, by = c("RID" = "ENTITY_RID"))
+
+
+# View data 
+sources %>% select(SOURCE_ID, SOURCE_TYPE, SOURCE_NAME, LONGITUDE, LATITUDE) %>% glimpse()
+
+```
+</div>
+
+
+### Weather observations {#wx-obs}
+Historical meteorological observations are available from multiple sources. These data may come in a raw unprocessd format or be pre-cleaned and quality controlled for machine errors.
+
+1. An internal Tableau workbook provides __raw__ results for Minnesota meteorological stations: [tableau.pca.state.mn.us/#/workbooks/5714](tableau.pca.state.mn.us/#/workbooks/5714).
+
+
+2. The AQI forecast uses a web API provided by [_DarkSky_](https://darksky.net/dev) for current forecast information and quality assurred historical observations.
+
+
+### HYSPLIT wind trajectories {#hysplit}
+Wind trajectories are useful for determining the primary sources contributing to elevated monitoring results. Trajectory results for the air monitoring netowork are available in WAIR for the years 2007 to 2017. The R package [SplitR](https://github.com/rich-iannone/SplitR) was used to run the HYSPLIT model for each air monitor.
+
+Use the following code to query WAIR for HYSPLIT results.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+```{r, eval = F}
+# This script connects to the MPCA database WAIR.  
+# A dplyr query collects HYSPLIT modeling results for Anoka Airport.
+                                                                                
+
+# Load packages
+library(dplyr)
+
+# Open a connection to the database WAIR, schema hys ##
+my_wair <- src_postgres(dbname = 'wair', host = "eiger", user = "username", password = "password")
+
+# Show tables
+src_tbls(my_wair) %>% sort()
+
+
+# Connect to hys.backtrajectory table ##
+hys <- tbl(my_wair, "hys.backtrajectory")
+
+hys <- tbl(my_wair, sql('hys.backtrajectory'))
+
+# Collect data for Anoka Airport after year 2010 ##
+hys_mpls  <- hys %>% 
+               select(-the_geom) %>%
+               filter(site_catid == "27-003-1002", yr > 10) %>% 
+               collect(n = 2000)
+
+# View data 
+head(hys_mpls)
+
+```
+</div>
+
+
+    
+### Land use maps {#landuse}
+Land use shapefiles are maintained by MPCA GIS technical staff and stored on the agency R-drive at `R:\landuse_landcover`.
+
+
+
+### United States Census boundaries {#census}
+Census boundaries can be loaded into R for mapping air data to Census tracts and block groups.
+
+
+Use the following code to download and map MN boundaries.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+```{r, eval = T}
+# This script downloads shapefiles of Minnesota 
+## Counties
+## Census tracts
+## Census Block groups  
+
+# Load packages
+library(tigris)
+
+# Load boundaries
+county_bnds <- counties(state = "MN", cb = T)
+
+tract_bnds  <- tracts(state = "MN", cb = T)
+
+bg_bnds     <- block_groups(state = "MN", cb = T)
+
+# Plot 
+plot(county_bnds)
+
+```
+</div>
+
+
+### American Community Survey (ACS) {#acs}
+The ACS provides updated demographic statistics used for population estimates and Environmental Justice indicators.  
+
+Use the following code to download Minnesota ACS results.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+```{r, eval = F}
+# This script downloads American Community Survey (ACS) results for MN
+
+# Load packages
+library(tidycensus)
+
+# ACS data requires a Census key
+# Visit: http://api.census.gov/data/key_signup.html
+census_api_key("Your_API_key")
+
+# View all ACS variables
+acs_variables <- load_variables(2015, "acs5", cache = TRUE)
+
+
+# Download 5-yr population estimates for 2015
+pops_2015 <- get_acs(geography = "tract", 
+                     state     = "MN", 
+                     variables = "B01003_001", 
+                     survey    = "acs5", 
+                     year      = 2015)
+
+
+# Download decennial population estimates for 2010
+pops_2010 <- get_decennial(geography = "tract", 
+                           state     = "MN", 
+                           variables = "P0080001", 
+                           year      = 2010)
+
+
+# Download household median income for 2015
+med_inc_2015 <- get_acs(geography = "tract", 
+                        state     = "MN", 
+                        variables = "B19013_001", 
+                        survey    = "acs5", 
+                        year      = 2015)
 
 ```
 </div>

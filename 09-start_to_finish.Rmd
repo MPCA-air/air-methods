@@ -11,9 +11,15 @@ To pull it all together we created some R packages to streamline the cleaning an
 > `airrisk`    Inhalation health benchmarks for air toxics.
 
 
-The script below shows an example workflow that starts with a raw data set from the lab, walks through each of the analysis steps outlined in the previous sections, and finishes by producing a summary PDF report. 
+The script below shows an example workflow that starts with 24-hour air toxics data from MPCA's Air Toxics Results database, walks through each of the analysis steps outlined in the previous sections, and produces data validation tools, POC analysis tools, completeness checks, annual summaries, site comparisons, and pollution roses.
 
-<br> __Functions__  
+## __Functions__  
+
+Click the button below to view example R script.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+
 ```{r, eval=F}
 #Functions
 
@@ -265,7 +271,7 @@ sample_calendar <- function(start         = "2012-01-01",
   
   # Set official start date to selected EPA calendar
   if(type == "air_toxics") {
-      epa_start <- ymd("1990-01-09")
+      epa_start <- ymd("1989-12-24")
   } else {
       epa_start <- start
   }
@@ -576,7 +582,7 @@ read_met_data_tableau = function(years = 2009:2017, stations = "MSP") {
   stations = paste0(stations, collapse = ",")
       url = paste0("http://tableau.pca.state.mn.us/views/WeatherObservations2009-2017/HourTable.csv?Station=",
                    stations, "&Year=",years,"&Month=1,2,3,4,5,6,7,8,9,10,11,12")
-      met_data = read_csv(url, col_types = cols())[,1:10] %>% select(Station, Year, Month, Day, Hour, 
+      met_data = read_csv(url, col_types = "??????????-") %>% select(Station, Year, Month, Day, Hour, 
                                                                      everything() ) %>% arrange(Station, Year, 
                                                                                                 Month, Day, Hour)
   return(met_data)
@@ -655,10 +661,14 @@ pollution_roses = function(data, met_data, num_breaks = 5) { #Met data must be i
 
 ```
 
+<br>
 
+## __Analysis Steps__
 
+Click the button below to view example R script.
 
-<br> __Analysis Steps__  
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
 
 ```{r, eval=F, message=F, warning=F}
 
@@ -669,7 +679,7 @@ data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/
 names(data)[1:10] <- c("AQSID", "POC", "Parameter", "Date","Result",
                        "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
 
-#1. Data cleaning
+# Data cleaning
 
 flagged = data %>% flag() #Check with QA about flagged values if necessary.
 
@@ -677,27 +687,26 @@ duplicates_flagged = data %>% flag_duplicates()
 
 data = data %>% mutate(Censored = Result < MDL) %>% average_duplicates() #We decide to average the duplicates here
 
-#2. Data Validation
+# Data Validation
 
 time_series = data %>% time_series_plots()
 
-#3. Collocated monitors
+# Collocated monitors
 
 poc_comparisons = data %>% POC_compare()
 
 data = data %>% POC_average()
 
-#4. Detection limits
 
-#5. Completeness checks
+# Completeness checks
 
 complete = data %>% completeness_check()
 
-#6. Summary statistics
+# Summary statistics
 
 annual_summary = data %>% filter(AQSID == 270370020) %>% UCL_95(100)
 
-#7. Site Comparisons
+# Site Comparisons
 
 site_number = 270370020 #Our favorite site
 
@@ -709,7 +718,7 @@ pollutant_correlations = data %>% correlation_plots()
 beeswarms = data %>% beeswarm_plot()
 
 
-#8. Pollution Roses
+# Pollution Roses
 
 poll_rose_data = data
 

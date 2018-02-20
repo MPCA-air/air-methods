@@ -1,22 +1,22 @@
 # Best practices
 
 
-![](https://avatars3.githubusercontent.com/u/22032646?s=400&v=4){width="260" align="right" style="margin-left: 20px; margin-right: 20px; margin-top: -42px;"}
+![](https://avatars3.githubusercontent.com/u/22032646?s=400&v=4){width="250" align="right" style="margin-left: 20px; margin-right: 20px; margin-top: -42px;"}
+
 
 <br>
 
-This section includes some _Best practices_ to promote efficient and accurate data analysis with `R`.  
+This section includes some _Best practices_ to promote consistent, efficient, and accurate data analysis with `R`.  
+
 
 <br> <br>
 
-
 ## Tidyverse
 
-Use packages within the _Tidyverse_ as much as possible for your analysis. 
+These R packages work in harmony by sharing a common data format and syntax. Using packages within the _Tidyverse_ for your analysis will make your scripts easier to read for others and _future you_.
 
-![](images/tidy_packages.PNG){width="450"}
+![](images/tidy_packages.PNG){width="460"}
 
-These packages work in harmony by sharing a common data format and syntax. Your scripts will be more readable by others and future you when your scripts stick to the world of _tidy_ data.
 
 
 ## Pollutant names
@@ -32,7 +32,7 @@ install.packages('installr')
 library('installr')
 ```
 
-__Download the new R version__
+__Install the new R version__
 ```{r, eval=F}
 updateR()
 ```
@@ -41,7 +41,7 @@ updateR()
 click __NO__. 
 - When asked whether to copy and update all of your packages. Click __Yes__. This will save you heaps of time and prevent future headaches.
 
-To learn more about _installr_, see https://github.com/talgalili/installr/#readme.
+To learn more about _installr_ see https://github.com/talgalili/installr/#readme.
 
 
 ## Script layout
@@ -98,7 +98,7 @@ write_csv(results, "results/summary_results.csv")
 
 ## Divide and conquer
 
-For complex analysis projects many small components is better than one big super script. As much as possible, try to create small functions to perform each task within in your analysis. If it's a function that you will use across multiple projects, it is often helpful to save the function to it's own script. These functions will become reusable building blocks that both future you and others can apply to their own projects. 
+For complex analysis projects many small components are often better than one big super script. As much as possible, try to create small functions to perform each task within in your analysis. If it's a function that you will use across multiple projects, it is often helpful to save the function to it's own script. These functions will become reusable building blocks that both future you and others can apply to their own projects. 
 
 Using an R Markdown document is an additional way you can split your project into manageable steps. R Markdown makes it easier to include a short description of each step of your analysis. In fact, you are reading an R Markdown document now.
 

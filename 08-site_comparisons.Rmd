@@ -1,5 +1,12 @@
 # Site comparisons
 
+```{r, include=F}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
+```
+
+
 
 __Notes__
 
@@ -17,8 +24,12 @@ If data is not normal, use bootstraping to generate means for each site and take
 
 The script below uses bootstrap sampling to generate 1000 differences in site means which are ordered to create a 95% confidence interval for the difference in means. If the lower bound of the interval is greater than zero, then the second site has a higher mean concentration than the first site. If the upper bound of the confidence interval is less than zero, then the second site has a lower mean concentration than the first site.
 
-```{r, eval=F}
-# Data must have names "AQSID", "POC", "Parameter", "Date", "Result", "MDL", "Pollutant"
+Click the button below to view example R script.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+
+```{r, eval=F, warning=F}
 
 library(dplyr)
 library(EnvStats)
@@ -105,11 +116,16 @@ compare = site_compare(data, site_number, 50) #minimum 50 repeats
 
 ## Tools to visualize data
 
-## Beeswarm Plots
+### Beeswarm Plots
 
 Beeswarm plots are useful for visualizing concentrations measured at different sites with more detail than boxplots.
+
+Click the button below to view example R script.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+
 ```{r}
-# Data must have columns "AQSID", "POC", "Param_Code", "Date", "Result", "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS"
 
 beeswarm_plot = function(data, pollutant, year) {
   library(dplyr)
@@ -118,7 +134,7 @@ beeswarm_plot = function(data, pollutant, year) {
   
   data = mutate(data, AQSID = as.factor(AQSID) )
   ggplot(filter(data, Pollutant == pollutant, Year == year), aes(y = AQSID, x = Result, color = Censored) ) + 
-    geom_quasirandom(groupOnX=F) +   
+    geom_quasirandom(groupOnX = F) +   
     labs(title = paste(pollutant, year), x = "Result (ug/m^3)" )
 }
 
@@ -146,10 +162,16 @@ R packages: [Beeswarm](https://github.com/eclarke/ggbeeswarm)
 
 <br>
 
-## Correlation matrices
+### Correlation matrices
 
 Correlation matrices help visualize the relationship between different pollutants at a site.
-```{r}
+
+Click the button below to view example R script.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+
+```{r, warning=F}
 library(tidyverse)
 
 correlation_plots = function(data, site) {

@@ -45,11 +45,14 @@
 
 
 
-<script src="libs/htmlwidgets-0.9/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.3/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -115,83 +118,110 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.5" data-path="best-practices.html"><a href="best-practices.html#divide-and-conquer"><i class="fa fa-check"></i><b>1.5</b> Divide and conquer</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="getting-data.html"><a href="getting-data.html"><i class="fa fa-check"></i><b>2</b> Getting data</a><ul>
-<li class="chapter" data-level="2.1" data-path="getting-data.html"><a href="getting-data.html#rqamd"><i class="fa fa-check"></i><b>2.1</b> Retrieving data from AQS DataMart</a></li>
-<li class="chapter" data-level="2.2" data-path="getting-data.html"><a href="getting-data.html#aqi-now"><i class="fa fa-check"></i><b>2.2</b> Current AQI observations</a></li>
-<li class="chapter" data-level="2.3" data-path="getting-data.html"><a href="getting-data.html#monitors"><i class="fa fa-check"></i><b>2.3</b> Active AQI monitors</a></li>
-<li class="chapter" data-level="2.4" data-path="getting-data.html"><a href="getting-data.html#wair"><i class="fa fa-check"></i><b>2.4</b> Retrieving data from MPCA WAIR database</a></li>
+<li class="chapter" data-level="2.1" data-path="getting-data.html"><a href="getting-data.html#air-monitoring"><i class="fa fa-check"></i><b>2.1</b> Air monitoring</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="getting-data.html"><a href="getting-data.html#AQS"><i class="fa fa-check"></i><b>2.1.1</b> Retrieving data from AQS</a></li>
+<li class="chapter" data-level="2.1.2" data-path="getting-data.html"><a href="getting-data.html#rqamd"><i class="fa fa-check"></i><b>2.1.2</b> Retrieving data from AQS DataMart</a></li>
+<li class="chapter" data-level="2.1.3" data-path="getting-data.html"><a href="getting-data.html#aqi-now"><i class="fa fa-check"></i><b>2.1.3</b> Current AQI observations</a></li>
+<li class="chapter" data-level="2.1.4" data-path="getting-data.html"><a href="getting-data.html#monitors"><i class="fa fa-check"></i><b>2.1.4</b> Active AQI monitors</a></li>
+<li class="chapter" data-level="2.1.5" data-path="getting-data.html"><a href="getting-data.html#lims"><i class="fa fa-check"></i><b>2.1.5</b> Retrieving data from LIMS via Tableau</a></li>
+<li class="chapter" data-level="2.1.6" data-path="getting-data.html"><a href="getting-data.html#AirVision"><i class="fa fa-check"></i><b>2.1.6</b> Retrieving continuous data from AirVision</a></li>
+<li class="chapter" data-level="2.1.7" data-path="getting-data.html"><a href="getting-data.html#wair"><i class="fa fa-check"></i><b>2.1.7</b> Retrieving data from MPCA WAIR database</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-data.html"><a href="getting-data.html#health-and-standards"><i class="fa fa-check"></i><b>2.2</b> Health and standards</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="getting-data.html"><a href="getting-data.html#IHBs"><i class="fa fa-check"></i><b>2.2.1</b> Inhalation health benchmarks</a></li>
+<li class="chapter" data-level="2.2.2" data-path="getting-data.html"><a href="getting-data.html#NAAQS"><i class="fa fa-check"></i><b>2.2.2</b> Air Quality Standards (NAAQs and MAAQS)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="getting-data.html"><a href="getting-data.html#air-modeling"><i class="fa fa-check"></i><b>2.3</b> Air modeling</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="getting-data.html"><a href="getting-data.html#nata"><i class="fa fa-check"></i><b>2.3.1</b> NATA modeling</a></li>
+<li class="chapter" data-level="2.3.2" data-path="getting-data.html"><a href="getting-data.html#mnrisks"><i class="fa fa-check"></i><b>2.3.2</b> MNRISKS statewide risk modeling</a></li>
+<li class="chapter" data-level="2.3.3" data-path="getting-data.html"><a href="getting-data.html#downscale"><i class="fa fa-check"></i><b>2.3.3</b> Downscaler modeling results for Ozone and PM2.5</a></li>
+<li class="chapter" data-level="2.3.4" data-path="getting-data.html"><a href="getting-data.html#cmaq"><i class="fa fa-check"></i><b>2.3.4</b> CMAQ Ozone modeling</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="getting-data.html"><a href="getting-data.html#context"><i class="fa fa-check"></i><b>2.4</b> Context</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="getting-data.html"><a href="getting-data.html#mn-ei"><i class="fa fa-check"></i><b>2.4.1</b> MN Emissions Inventory</a></li>
+<li class="chapter" data-level="2.4.2" data-path="getting-data.html"><a href="getting-data.html#nei"><i class="fa fa-check"></i><b>2.4.2</b> EPA’s NEI</a></li>
+<li class="chapter" data-level="2.4.3" data-path="getting-data.html"><a href="getting-data.html#fac-coords"><i class="fa fa-check"></i><b>2.4.3</b> Facility locations</a></li>
+<li class="chapter" data-level="2.4.4" data-path="getting-data.html"><a href="getting-data.html#wx-obs"><i class="fa fa-check"></i><b>2.4.4</b> Weather observations</a></li>
+<li class="chapter" data-level="2.4.5" data-path="getting-data.html"><a href="getting-data.html#hysplit"><i class="fa fa-check"></i><b>2.4.5</b> HYSPLIT wind trajectories</a></li>
+<li class="chapter" data-level="2.4.6" data-path="getting-data.html"><a href="getting-data.html#landuse"><i class="fa fa-check"></i><b>2.4.6</b> Land use maps</a></li>
+<li class="chapter" data-level="2.4.7" data-path="getting-data.html"><a href="getting-data.html#census"><i class="fa fa-check"></i><b>2.4.7</b> United States Census boundaries</a></li>
+<li class="chapter" data-level="2.4.8" data-path="getting-data.html"><a href="getting-data.html#acs"><i class="fa fa-check"></i><b>2.4.8</b> American Community Survey (ACS)</a></li>
+</ul></li>
 </ul></li>
 <li><a href="quality-assurance-methods.html#quality-assurance-methods"><strong>Quality assurance methods</strong></a></li>
 <li class="chapter" data-level="3" data-path="data-cleaning.html"><a href="data-cleaning.html"><i class="fa fa-check"></i><b>3</b> Data cleaning</a><ul>
 <li class="chapter" data-level="3.1" data-path="data-cleaning.html"><a href="data-cleaning.html#missing"><i class="fa fa-check"></i><b>3.1</b> Remove blank, NULL, and missing values</a></li>
 <li class="chapter" data-level="3.2" data-path="data-cleaning.html"><a href="data-cleaning.html#quals"><i class="fa fa-check"></i><b>3.2</b> Remove <em>Qualified</em> data</a></li>
-<li class="chapter" data-level="3.3" data-path="data-cleaning.html"><a href="data-cleaning.html#dups"><i class="fa fa-check"></i><b>3.3</b> Duplicate observations</a></li>
+<li class="chapter" data-level="3.3" data-path="data-cleaning.html"><a href="data-cleaning.html#leaks"><i class="fa fa-check"></i><b>3.3</b> Instrument drift or leaks in a system.</a></li>
+<li class="chapter" data-level="3.4" data-path="data-cleaning.html"><a href="data-cleaning.html#outs"><i class="fa fa-check"></i><b>3.4</b> Exceptional values and outliers</a></li>
+<li class="chapter" data-level="3.5" data-path="data-cleaning.html"><a href="data-cleaning.html#sticky2"><i class="fa fa-check"></i><b>3.5</b> Sequential repeats and “sticky” numbers</a></li>
+<li class="chapter" data-level="3.6" data-path="data-cleaning.html"><a href="data-cleaning.html#unique"><i class="fa fa-check"></i><b>3.6</b> Unique detected values</a></li>
+<li class="chapter" data-level="3.7" data-path="data-cleaning.html"><a href="data-cleaning.html#valid_ref"><i class="fa fa-check"></i><b>3.7</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="data-validation.html"><a href="data-validation.html"><i class="fa fa-check"></i><b>4</b> Data validation</a><ul>
-<li class="chapter" data-level="4.1" data-path="data-validation.html"><a href="data-validation.html#leaks"><i class="fa fa-check"></i><b>4.1</b> Instrument drift or leaks in a system.</a></li>
-<li class="chapter" data-level="4.2" data-path="data-validation.html"><a href="data-validation.html#outs"><i class="fa fa-check"></i><b>4.2</b> Exceptional values and outliers</a></li>
-<li class="chapter" data-level="4.3" data-path="data-validation.html"><a href="data-validation.html#sticky2"><i class="fa fa-check"></i><b>4.3</b> Sequential repeats and “sticky” numbers</a></li>
-<li class="chapter" data-level="4.4" data-path="data-validation.html"><a href="data-validation.html#unique"><i class="fa fa-check"></i><b>4.4</b> Unique detected values</a></li>
-<li class="chapter" data-level="4.5" data-path="data-validation.html"><a href="data-validation.html#valid_ref"><i class="fa fa-check"></i><b>4.5</b> References</a></li>
+<li class="chapter" data-level="4" data-path="collocated-monitors.html"><a href="collocated-monitors.html"><i class="fa fa-check"></i><b>4</b> Collocated monitors</a><ul>
+<li class="chapter" data-level="4.1" data-path="collocated-monitors.html"><a href="collocated-monitors.html#evalpocs"><i class="fa fa-check"></i><b>4.1</b> Evaluate collocated air monitors</a></li>
+<li class="chapter" data-level="4.2" data-path="collocated-monitors.html"><a href="collocated-monitors.html#pripocs"><i class="fa fa-check"></i><b>4.2</b> Prioritize multiple air monitors (POCs)</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="collocated-monitors.html"><a href="collocated-monitors.html"><i class="fa fa-check"></i><b>5</b> Collocated monitors</a><ul>
-<li class="chapter" data-level="5.1" data-path="collocated-monitors.html"><a href="collocated-monitors.html#evalpocs"><i class="fa fa-check"></i><b>5.1</b> Evaluate collocated air monitors (POCs)</a></li>
-<li class="chapter" data-level="5.2" data-path="collocated-monitors.html"><a href="collocated-monitors.html#pripocs"><i class="fa fa-check"></i><b>5.2</b> Prioritize multiple air monitors (POCs)</a></li>
+<li class="chapter" data-level="5" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>5</b> Detection limits</a><ul>
+<li class="chapter" data-level="5.1" data-path="detection-limits.html"><a href="detection-limits.html#method-detection-limit---definition"><i class="fa fa-check"></i><b>5.1</b> Method Detection Limit - <em>Definition</em></a></li>
+<li class="chapter" data-level="5.2" data-path="detection-limits.html"><a href="detection-limits.html#procedure-for-calculating-method-detection-limits"><i class="fa fa-check"></i><b>5.2</b> Procedure for calculating method detection limits</a></li>
+<li class="chapter" data-level="5.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-detection-limits"><i class="fa fa-check"></i><b>5.3</b> Finding detection limits</a></li>
+<li class="chapter" data-level="5.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>5.4</b> Qualifier Codes for Detection Limits</a></li>
+<li class="chapter" data-level="5.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>5.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
+<li class="chapter" data-level="5.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>5.6</b> Below detection values</a></li>
+<li class="chapter" data-level="5.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>5.7</b> Multiple detection limits</a></li>
+<li class="chapter" data-level="5.8" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>5.8</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>6</b> Detection limits</a><ul>
-<li class="chapter" data-level="6.1" data-path="detection-limits.html"><a href="detection-limits.html#method-detection-limit---definition"><i class="fa fa-check"></i><b>6.1</b> Method Detection Limit - Definition</a></li>
-<li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#procedure-for-calculating-method-detection-limits"><i class="fa fa-check"></i><b>6.2</b> Procedure for calculating method detection limits</a></li>
-<li class="chapter" data-level="6.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-detection-limits-cassie"><i class="fa fa-check"></i><b>6.3</b> Finding detection limits (Cassie)</a></li>
-<li class="chapter" data-level="6.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>6.4</b> Qualifier Codes for Detection Limits</a></li>
-<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.5</b> Below detection values</a><ul>
-<li class="chapter" data-level="" data-path="detection-limits.html"><a href="detection-limits.html#example-charts-for-visualizing-data-below-detection-limits"><i class="fa fa-check"></i>Example charts for visualizing data below detection limits</a></li>
-</ul></li>
-<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.6</b> Multiple detection limits</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="completeness-checks.html"><a href="completeness-checks.html"><i class="fa fa-check"></i><b>7</b> Completeness checks</a><ul>
-<li class="chapter" data-level="7.1" data-path="completeness-checks.html"><a href="completeness-checks.html#complete"><i class="fa fa-check"></i><b>7.1</b> Completeness checks</a></li>
+<li class="chapter" data-level="6" data-path="completeness-checks.html"><a href="completeness-checks.html"><i class="fa fa-check"></i><b>6</b> Completeness checks</a><ul>
+<li class="chapter" data-level="6.1" data-path="completeness-checks.html"><a href="completeness-checks.html#complete"><i class="fa fa-check"></i><b>6.1</b> Completeness checks</a></li>
 </ul></li>
 <li><a href="summary-methods.html#summary-methods"><strong>Summary methods</strong></a></li>
-<li class="chapter" data-level="8" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>8</b> Summary statistics</a><ul>
-<li class="chapter" data-level="8.1" data-path="summary-statistics.html"><a href="summary-statistics.html#boots"><i class="fa fa-check"></i><b>8.1</b> Bootstrapping</a></li>
-<li class="chapter" data-level="8.2" data-path="summary-statistics.html"><a href="summary-statistics.html#below"><i class="fa fa-check"></i><b>8.2</b> Below the detection limit</a></li>
-<li class="chapter" data-level="8.3" data-path="summary-statistics.html"><a href="summary-statistics.html#confidence"><i class="fa fa-check"></i><b>8.3</b> Upper confidence limits (UCLs)</a></li>
-<li class="chapter" data-level="8.4" data-path="summary-statistics.html"><a href="summary-statistics.html#incomplete"><i class="fa fa-check"></i><b>8.4</b> Annual summaries for incomplete data</a></li>
-<li class="chapter" data-level="8.5" data-path="summary-statistics.html"><a href="summary-statistics.html#health"><i class="fa fa-check"></i><b>8.5</b> Comparison of data to inhalation health benchmarks</a></li>
+<li class="chapter" data-level="7" data-path="summary-statistics.html"><a href="summary-statistics.html"><i class="fa fa-check"></i><b>7</b> Summary statistics</a><ul>
+<li class="chapter" data-level="7.1" data-path="summary-statistics.html"><a href="summary-statistics.html#boots"><i class="fa fa-check"></i><b>7.1</b> Bootstrapping</a></li>
+<li class="chapter" data-level="7.2" data-path="summary-statistics.html"><a href="summary-statistics.html#below"><i class="fa fa-check"></i><b>7.2</b> Below the detection limit</a></li>
+<li class="chapter" data-level="7.3" data-path="summary-statistics.html"><a href="summary-statistics.html#confidence"><i class="fa fa-check"></i><b>7.3</b> Upper confidence limits (UCLs)</a></li>
+<li class="chapter" data-level="7.4" data-path="summary-statistics.html"><a href="summary-statistics.html#incomplete"><i class="fa fa-check"></i><b>7.4</b> Annual summaries for incomplete data</a></li>
+<li class="chapter" data-level="7.5" data-path="summary-statistics.html"><a href="summary-statistics.html#health"><i class="fa fa-check"></i><b>7.5</b> Comparison of data to inhalation health benchmarks</a></li>
+<li class="chapter" data-level="7.6" data-path="summary-statistics.html"><a href="summary-statistics.html#roll365"><i class="fa fa-check"></i><b>7.6</b> Rolling 365 day summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>9</b> Site comparisons</a><ul>
-<li class="chapter" data-level="9.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a></li>
-<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize data</a></li>
-<li class="chapter" data-level="9.3" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>9.3</b> Beeswarm Plots</a></li>
-<li class="chapter" data-level="9.4" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.4</b> Correlation matrices</a></li>
+<li class="chapter" data-level="8" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>8</b> Site comparisons</a><ul>
+<li class="chapter" data-level="8.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>8.1</b> Confidence intervals</a></li>
+<li class="chapter" data-level="8.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>8.2</b> Tools to visualize data</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>8.2.1</b> Beeswarm Plots</a></li>
+<li class="chapter" data-level="8.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>8.2.2</b> Correlation matrices</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> Start to finish</a></li>
-<li class="chapter" data-level="11" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>11</b> Charts</a><ul>
-<li class="chapter" data-level="11.1" data-path="charts.html"><a href="charts.html#boxplots"><i class="fa fa-check"></i><b>11.1</b> Boxplots</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="charts.html"><a href="charts.html#log-boxplots"><i class="fa fa-check"></i><b>11.1.1</b> Log boxplots</a></li>
-<li class="chapter" data-level="11.1.2" data-path="charts.html"><a href="charts.html#outliers"><i class="fa fa-check"></i><b>11.1.2</b> Outliers</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="charts.html"><a href="charts.html#calendar-plots"><i class="fa fa-check"></i><b>11.2</b> Calendar plots</a></li>
-<li class="chapter" data-level="11.3" data-path="charts.html"><a href="charts.html#color-palettes"><i class="fa fa-check"></i><b>11.3</b> Color palettes</a></li>
-<li class="chapter" data-level="11.4" data-path="charts.html"><a href="charts.html#pollution-roses"><i class="fa fa-check"></i><b>11.4</b> Pollution roses</a></li>
+<li class="chapter" data-level="9" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>9</b> Start to finish</a><ul>
+<li class="chapter" data-level="9.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>9.1</b> <strong>Functions</strong></a></li>
+<li class="chapter" data-level="9.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>9.2</b> <strong>Analysis Steps</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>12</b> Time series</a><ul>
-<li class="chapter" data-level="12.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>12.1</b> Seasonality</a></li>
+<li class="chapter" data-level="10" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>10</b> Charts</a><ul>
+<li class="chapter" data-level="10.1" data-path="charts.html"><a href="charts.html#boxplots"><i class="fa fa-check"></i><b>10.1</b> Boxplots</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="charts.html"><a href="charts.html#log-boxplots"><i class="fa fa-check"></i><b>10.1.1</b> Log boxplots</a></li>
+<li class="chapter" data-level="10.1.2" data-path="charts.html"><a href="charts.html#outliers"><i class="fa fa-check"></i><b>10.1.2</b> Outliers</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>13</b> Maps</a><ul>
-<li class="chapter" data-level="13.1" data-path="maps.html"><a href="maps.html#kriging"><i class="fa fa-check"></i><b>13.1</b> Kriging</a></li>
-<li class="chapter" data-level="13.2" data-path="maps.html"><a href="maps.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>13.2</b> Spatial averaging and aggregation</a></li>
-<li class="chapter" data-level="13.3" data-path="maps.html"><a href="maps.html#creating-shapefiles-in-r-adn-joining-to-ej-areas"><i class="fa fa-check"></i><b>13.3</b> Creating shapefiles in R adn joining to EJ areas</a></li>
+<li class="chapter" data-level="10.2" data-path="charts.html"><a href="charts.html#calendar-plots"><i class="fa fa-check"></i><b>10.2</b> Calendar plots</a></li>
+<li class="chapter" data-level="10.3" data-path="charts.html"><a href="charts.html#color-palettes"><i class="fa fa-check"></i><b>10.3</b> Color palettes</a></li>
+<li class="chapter" data-level="10.4" data-path="charts.html"><a href="charts.html#pollution-roses"><i class="fa fa-check"></i><b>10.4</b> Pollution roses</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>14</b> Additional resources</a></li>
+<li class="chapter" data-level="11" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>11</b> Time series</a><ul>
+<li class="chapter" data-level="11.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>11.1</b> Seasonality</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>12</b> Maps</a><ul>
+<li class="chapter" data-level="12.1" data-path="maps.html"><a href="maps.html#kriging"><i class="fa fa-check"></i><b>12.1</b> Kriging</a></li>
+<li class="chapter" data-level="12.2" data-path="maps.html"><a href="maps.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>12.2</b> Spatial averaging and aggregation</a></li>
+<li class="chapter" data-level="12.3" data-path="maps.html"><a href="maps.html#creating-shapefiles-in-r-adn-joining-to-ej-areas"><i class="fa fa-check"></i><b>12.3</b> Creating shapefiles in R adn joining to EJ areas</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>13</b> Additional resources</a></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
-<li class="chapter" data-level="15" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>15</b> AQI explorer</a></li>
-<li class="chapter" data-level="16" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>16</b> Criteria pollutant explorer</a></li>
-<li class="chapter" data-level="17" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>17</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="17.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>17.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="17.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>17.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="17.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>17.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="17.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>17.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="17.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>17.1.4</b> Producing Annual Summaries</a></li>
+<li class="chapter" data-level="14" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>14</b> AQI explorer</a></li>
+<li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
+<li class="chapter" data-level="16" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>16</b> Air toxics explorer</a><ul>
+<li class="chapter" data-level="16.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>16.1</b> MPCA Air Toxics Methods</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>16.1.1</b> Data Cleaning</a></li>
+<li class="chapter" data-level="16.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>16.1.2</b> Data Validation</a></li>
+<li class="chapter" data-level="16.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>16.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="16.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>16.1.4</b> Producing Annual Summaries</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a></li>
@@ -217,7 +247,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="quality-assurance-methods" class="section level1 unnumbered">
 <h1><strong>Quality assurance methods</strong></h1>
-<p>The following sections describe the data quality assurance methods used to find anomalies or errors in the air monitoring data meets.</p>
+<p>The following sections describe the data quality assurance methods used to find anomalies or errors in the air monitoring data.</p>
 
 </div>
 <script>

@@ -1,12 +1,27 @@
 # Time series
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
 
 ## Seasonality
 
-The trend is up.  
+This section is a work in progress.  
 
-```{r, echo = F, eval = F}
+```{r test21, echo = F}
+library(ggplot2)
+library(dplyr)
 
 ## Changepoints (before & after tests)  
-    
+df <- data_frame(time = seq(as.Date("2016-01-01"), as.Date("2018-02-01"), 1), 
+                 obs  = sample(25:110, 763, replace = T)) %>% 
+       mutate(n = 1:n())
+
+ df <- df %>% 
+         rowwise() %>%
+         mutate(obs = mean(df$obs[max(0, n - 5):(n + 3)], na.rm = T))   
+
+ggplot(df, aes(time, obs)) + geom_line(linetype = "dashed") + geom_point(aes(color = format(time, "%Y"))) + guides(color = guide_legend(title = "Year"))
+
 ```
