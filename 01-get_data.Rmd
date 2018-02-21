@@ -1,14 +1,19 @@
-# Getting data
+# Get data
 
-```{r, include=F}
+```{r, echo=F}
 
 knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 ```
 
+<br>
 
-This section describes how to access air monitoring and modeling data. These data include:  
+![](images/cover1.jpg){align="right" style="margin-top: -4px; margin-left: 20px; width: 36%;"}
+
+This section describes how to access air monitoring and modeling data. 
+
+These data include:  
 
 __Air monitoring__
 

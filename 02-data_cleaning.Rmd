@@ -1,10 +1,18 @@
 # Data cleaning
 
-```{r out.width='55%', echo=F}
-knitr::include_graphics("images/data-cleaning.jpg")
+```{r out.width='75%', echo=F}
+
 knitr::opts_chunk$set(echo = T, warning = F, message = F)
+
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
+
+# Image ref: "U.S. Department of Agriculture Pomological Watercolor Collection. Rare and Special Collections, National Agricultural Library, Beltsville, MD 20705"
 ```
+
+
+![](images/cover2.jpg){align="right" style="margin-top: -4px; margin-left: 20px; width: 36%;"}
+
+<br>
 
 Before jumping into your analysis you'll want to clean it up with some helpful quality checks and formatting procedures.  
 
@@ -15,8 +23,10 @@ These procedures include steps to:
 \@ref(dups)     __Remove duplicate observations__ 
  
 
+<br>
+
  
-## Remove blank, NULL, and missing values {#missing}
+## Blank, NULL, and missing values {#missing}
 
 __Description__  
 Large monitoring data sets often contain observations with missing concentrations, detection limits or other non-instrument result entries that can lead to incorrect summary statistics.  

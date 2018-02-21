@@ -7,6 +7,8 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 ```
 
 
+![](images/cover8.jpg){align="right" style="margin-top: -4px; margin-left: 24px; width: 34%;"}
+
 
 __Notes__
 
@@ -24,10 +26,15 @@ If data is not normal, use bootstraping to generate means for each site and take
 
 The script below uses bootstrap sampling to generate 1000 differences in site means which are ordered to create a 95% confidence interval for the difference in means. If the lower bound of the interval is greater than zero, then the second site has a higher mean concentration than the first site. If the upper bound of the confidence interval is less than zero, then the second site has a lower mean concentration than the first site.
 
+
 Click the button below to view example R script.
+
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
+
+<br>
+
 ```{r, eval=F, warning=F}
 
 library(dplyr)
@@ -99,7 +106,7 @@ site_compare = function(data, site_number, Boot_Repeats = 1000) {
   
 }
 
-data = read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
+data <- read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
 
 names(data)[1:10] <- c("AQSID", "POC", "Parameter", "Date","Result",
                        "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
@@ -111,6 +118,7 @@ seed = 2017
 set.seed(seed)
 
 compare = site_compare(data, site_number, 50) #minimum 50 repeats
+
 ```
 </div>
 
@@ -126,6 +134,8 @@ Click the button below to view example R script.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
+
+<br>
 
 ```{r}
 
@@ -173,6 +183,7 @@ Click the button below to view an example R script.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
+<br>
 
 ```{r, warning=F}
 library(tidyverse)

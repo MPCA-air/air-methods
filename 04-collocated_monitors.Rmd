@@ -7,6 +7,7 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 
 ![](https://imgs.xkcd.com/comics/box_plot.png)
 
+<br>
 
 Analysis steps for collocated monitors include:
 

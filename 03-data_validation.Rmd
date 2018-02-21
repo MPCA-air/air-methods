@@ -11,8 +11,6 @@ knitr::include_graphics("https://i0.wp.com/catscradleshelter.org/wp-content/uplo
 ```
 
 
-<br>
-
 Environmental monitoring data can be subject to error. One way to catch these errors is to complete routines to find data that are inconsistent with expectations or do not comply with data rules. Data validation tasks should be completed at a scheduled frequency depending on the data frequency and the resources available.
 
 Some important errors to check for include:
@@ -23,6 +21,7 @@ Some important errors to check for include:
 - \@ref(unique)   __Unique values__ 
 
 <br>
+
 There are other potential validation steps that may be done for specific sets of pollutants. The description of these methods in this web book are in development.
 
 <br> __Why not average the exceptional data over the year?__
@@ -40,6 +39,7 @@ Further investigation by laboratory staff is required if the laboratory equipmen
 1. Report findings to laboratory for further investigation.
 
 <br> <br>
+
 The following sections on data validation will use the example monitoring data loaded below.
 
 ```{r validation, eval=T, message=F, warning=F}
@@ -66,14 +66,19 @@ library(DT)
 datatable(head(data, 10), options = dt_options)
 ```
 
-</div>
-_First it's always a good idea to look at the data. If there are a lower number of numeric data points the statistical tests that follow may not be necessary.
 
-_Open this web tool to chart all measured pollutants for each site for the cleaned data set. (https://mpca-pahs.shinyapps.io/ChartCleanData/)
 
+First it's always a good idea to look at the data. If there are a lower number of numeric data points the statistical tests that follow may not be necessary.
+
+Open the web tool below to chart the measured pollutants at each site.
+
+[Shiny Data tool](https://mpca-pahs.shinyapps.io/ChartCleanData/)
+
+<a href=https://mpca-pahs.shinyapps.io/ChartCleanData/>
 ```{r out.width='100%', echo=F, fig.align="center"}
 knitr::include_graphics("images/data-detectionlimits.jpg")
 ```
+</a>
 
 ```{r, eval=F, echo=F, message=F, warning=F}
 library(shiny)
@@ -235,6 +240,7 @@ high_data <- high_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
 
 </div>
    
+   
 ## Sequential repeats and "sticky" numbers {#sticky2}
  
 Three sequential replicate values may be a result of a machine error.
@@ -274,7 +280,6 @@ datatable(head(warnings_table, 10), options = dt_options, rownames = FALSE)
 In some cases the detected observations at a site may all be an identical value. Identical observations scattered throughout monitoring results at a single monitor can indicate a machine error. In addition, calculating summary statistics often requires a minimum number of unique values, as it is difficult to make assumptions about the distribution of a data set when the values are all `1` or `2`. 
 
 
-
 <br> __Example `R` script__ 
 
 Click the button below to view a step by step example of counting unqiue detected values.
@@ -289,6 +294,7 @@ library(DT)
 ```
 
 <br>
+
 Packages
 ```{r message=F}
 library(tidyverse)
@@ -334,7 +340,7 @@ data <- data %>%
 <br>
 
 
-__Final table with added `unique_flag`.__
+__Final table with added `unique_flag`__
 ```{r message=F, echo=F}
 
 DT::datatable(sample_n(data, size = 10, replace = F), options = list(scrollX = 0, autoWidth = 0, searching = F, ordering = F, lengthChange = F, paginate = F, pageLength = 10, info = 0), rownames = F)
@@ -342,7 +348,7 @@ DT::datatable(sample_n(data, size = 10, replace = F), options = list(scrollX = 0
 
 </div>
 
-<br>
+
 
 ## References {#valid_ref}    
 [USEPA Technical Support Document for the Nation Air Toxics Trends Sites](https://www3.epa.gov/ttnamti1/files/ambient/airtox/NATTS%20TAD%20Revision%203_FINAL%20October%202016.pdf)
