@@ -45,14 +45,6 @@
 
 
 
-<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.3/datatables.js"></script>
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -127,25 +119,60 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.1.6" data-path="get-data.html"><a href="get-data.html#AirVision"><i class="fa fa-check"></i><b>2.1.6</b> Retrieving continuous data from AirVision</a></li>
 <li class="chapter" data-level="2.1.7" data-path="get-data.html"><a href="get-data.html#wair"><i class="fa fa-check"></i><b>2.1.7</b> Retrieving data from MPCA WAIR database</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="get-data.html"><a href="get-data.html#health-and-standards"><i class="fa fa-check"></i><b>2.2</b> Health and standards</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="get-data.html"><a href="get-data.html#IHBs"><i class="fa fa-check"></i><b>2.2.1</b> Inhalation health benchmarks</a></li>
-<li class="chapter" data-level="2.2.2" data-path="get-data.html"><a href="get-data.html#NAAQS"><i class="fa fa-check"></i><b>2.2.2</b> Air Quality Standards (NAAQs and MAAQS)</a></li>
+<li class="chapter" data-level="2.2" data-path="get-data.html"><a href="get-data.html#this-script-loads-the-library-and-driver-and-connects-to-wair.-a-dplyr-query-extracts"><i class="fa fa-check"></i><b>2.2</b> This script loads the library and driver and connects to WAIR. A dplyr query extracts</a></li>
+<li class="chapter" data-level="2.3" data-path="get-data.html"><a href="get-data.html#data-from-the-database-into-a-format-specified-by-cassie-mcmahon-for-calculating"><i class="fa fa-check"></i><b>2.3</b> data from the database into a format specified by Cassie McMahon for calculating</a></li>
+<li class="chapter" data-level="2.4" data-path="get-data.html"><a href="get-data.html#ozone-design-values"><i class="fa fa-check"></i><b>2.4</b> OZONE DESIGN VALUES</a></li>
+<li class="chapter" data-level="2.5" data-path="get-data.html"><a href="get-data.html#section"><i class="fa fa-check"></i><b>2.5</b> </a></li>
+<li class="chapter" data-level="2.6" data-path="get-data.html"><a href="get-data.html#note-wair-does-not-contain-values-for-samplingfrequency-and-monitorprotocolid"><i class="fa fa-check"></i><b>2.6</b> Note: WAIR does not contain values for SamplingFrequency and MonitorProtocolID</a></li>
+<li class="chapter" data-level="2.7" data-path="get-data.html"><a href="get-data.html#note-dplyr-does-not-have-a-command-to-disconnect-from-the-database.-connection-will"><i class="fa fa-check"></i><b>2.7</b> Note: dplyr does not have a command to disconnect from the database. Connection will</a></li>
+<li class="chapter" data-level="2.8" data-path="get-data.html"><a href="get-data.html#terminate-upon-quitting-r.-please-do-not-keep-many-connections-open-for-long-periods-of"><i class="fa fa-check"></i><b>2.8</b> terminate upon quitting R. Please do not keep (many) connections open for long periods of</a></li>
+<li class="chapter" data-level="2.9" data-path="get-data.html"><a href="get-data.html#time."><i class="fa fa-check"></i><b>2.9</b> time.</a></li>
+<li class="chapter" data-level="2.10" data-path="get-data.html"><a href="get-data.html#load-the-package"><i class="fa fa-check"></i><b>2.10</b> Load the package</a></li>
+<li class="chapter" data-level="2.11" data-path="get-data.html"><a href="get-data.html#open-a-connection-to-the-database-wair-schema-aqs"><i class="fa fa-check"></i><b>2.11</b> Open a connection to the database WAIR, schema AQS</a></li>
+<li class="chapter" data-level="2.12" data-path="get-data.html"><a href="get-data.html#reference-a-table-or-two-if-combining-in-the-database-e.g.aqs.monitor-aqs.obs_value"><i class="fa fa-check"></i><b>2.12</b> Reference a table, or two if combining, in the database (e.g. aqs.monitor &amp; aqs.obs_value)</a></li>
+<li class="chapter" data-level="2.13" data-path="get-data.html"><a href="get-data.html#select-columns-and-filter-by-row"><i class="fa fa-check"></i><b>2.13</b> Select columns and filter by row</a></li>
+<li class="chapter" data-level="2.14" data-path="get-data.html"><a href="get-data.html#combine-monitor-data-with-observations"><i class="fa fa-check"></i><b>2.14</b> Combine monitor data with observations</a></li>
+<li class="chapter" data-level="2.15" data-path="get-data.html"><a href="get-data.html#collect-data-into-a-dataframe-or-table"><i class="fa fa-check"></i><b>2.15</b> Collect data into a dataframe or table</a></li>
+<li class="chapter" data-level="2.16" data-path="get-data.html"><a href="get-data.html#section-1"><i class="fa fa-check"></i><b>2.16</b> </a></li>
+<li class="chapter" data-level="2.17" data-path="get-data.html"><a href="get-data.html#this-script-loads-the-library-and-driver-and-connects-to-wair.-a-postgrsql-query-extracts"><i class="fa fa-check"></i><b>2.17</b> This script loads the library and driver and connects to WAIR. A PostgrSQL query extracts</a></li>
+<li class="chapter" data-level="2.18" data-path="get-data.html"><a href="get-data.html#data-from-the-database-into-a-format-specified-by-cassie-mcmahon-for-calculating-1"><i class="fa fa-check"></i><b>2.18</b> data from the database into a format specified by Cassie McMahon for calculating</a></li>
+<li class="chapter" data-level="2.19" data-path="get-data.html"><a href="get-data.html#ozone-design-values-1"><i class="fa fa-check"></i><b>2.19</b> OZONE DESIGN VALUES</a></li>
+<li class="chapter" data-level="2.20" data-path="get-data.html"><a href="get-data.html#section-2"><i class="fa fa-check"></i><b>2.20</b> </a></li>
+<li class="chapter" data-level="2.21" data-path="get-data.html"><a href="get-data.html#please-disconnect-from-database-and-unload-the-driver-before-proceeding-with-analysis-of"><i class="fa fa-check"></i><b>2.21</b> Please disconnect from database and unload the driver before proceeding with analysis of</a></li>
+<li class="chapter" data-level="2.22" data-path="get-data.html"><a href="get-data.html#the-data-in-your-dataframe."><i class="fa fa-check"></i><b>2.22</b> the data in your dataframe.</a></li>
+<li class="chapter" data-level="2.23" data-path="get-data.html"><a href="get-data.html#cassies-headings"><i class="fa fa-check"></i><b>2.23</b> Cassie’s headings</a></li>
+<li class="chapter" data-level="2.24" data-path="get-data.html"><a href="get-data.html#state.code-county.code-site.id-parameter-poc-sample.duration-unit"><i class="fa fa-check"></i><b>2.24</b> “State.Code”, “County.Code”, “Site.ID”, “Parameter”, “POC”, “Sample.Duration”, “Unit”,</a></li>
+<li class="chapter" data-level="2.25" data-path="get-data.html"><a href="get-data.html#method-date-start.time-sample.value-nulldatacode-samplingfrequency"><i class="fa fa-check"></i><b>2.25</b> “Method”, “Date”, “Start.Time”, “Sample.Value”, “NullDataCode”, “SamplingFrequency”,</a></li>
+<li class="chapter" data-level="2.26" data-path="get-data.html"><a href="get-data.html#monitorprotocolid-qual1"><i class="fa fa-check"></i><b>2.26</b> “MonitorProtocolID”, “Qual1”</a></li>
+<li class="chapter" data-level="2.27" data-path="get-data.html"><a href="get-data.html#note-wair-does-not-contain-values-for-samplingfrequency-and-monitorprotocolid-1"><i class="fa fa-check"></i><b>2.27</b> Note: WAIR does not contain values for SamplingFrequency and MonitorProtocolID</a></li>
+<li class="chapter" data-level="2.28" data-path="get-data.html"><a href="get-data.html#call-the-library"><i class="fa fa-check"></i><b>2.28</b> call the library</a></li>
+<li class="chapter" data-level="2.29" data-path="get-data.html"><a href="get-data.html#load-the-postgresql-driver"><i class="fa fa-check"></i><b>2.29</b> load the PostgreSQL driver</a></li>
+<li class="chapter" data-level="2.30" data-path="get-data.html"><a href="get-data.html#open-a-connection"><i class="fa fa-check"></i><b>2.30</b> Open a connection</a></li>
+<li class="chapter" data-level="2.31" data-path="get-data.html"><a href="get-data.html#closes-the-connection"><i class="fa fa-check"></i><b>2.31</b> Closes the connection</a></li>
+<li class="chapter" data-level="2.32" data-path="get-data.html"><a href="get-data.html#frees-all-the-resources-on-the-driver"><i class="fa fa-check"></i><b>2.32</b> Frees all the resources on the driver</a></li>
+<li class="chapter" data-level="2.33" data-path="get-data.html"><a href="get-data.html#health-and-standards"><i class="fa fa-check"></i><b>2.33</b> Health and standards</a><ul>
+<li class="chapter" data-level="2.33.1" data-path="get-data.html"><a href="get-data.html#IHBs"><i class="fa fa-check"></i><b>2.33.1</b> Inhalation health benchmarks</a></li>
+<li class="chapter" data-level="2.33.2" data-path="get-data.html"><a href="get-data.html#NAAQS"><i class="fa fa-check"></i><b>2.33.2</b> Air Quality Standards (NAAQs and MAAQS)</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="get-data.html"><a href="get-data.html#air-modeling"><i class="fa fa-check"></i><b>2.3</b> Air modeling</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="get-data.html"><a href="get-data.html#nata"><i class="fa fa-check"></i><b>2.3.1</b> NATA modeling</a></li>
-<li class="chapter" data-level="2.3.2" data-path="get-data.html"><a href="get-data.html#mnrisks"><i class="fa fa-check"></i><b>2.3.2</b> MNRISKS statewide risk modeling</a></li>
-<li class="chapter" data-level="2.3.3" data-path="get-data.html"><a href="get-data.html#downscale"><i class="fa fa-check"></i><b>2.3.3</b> Downscaler modeling results for Ozone and PM2.5</a></li>
-<li class="chapter" data-level="2.3.4" data-path="get-data.html"><a href="get-data.html#cmaq"><i class="fa fa-check"></i><b>2.3.4</b> CMAQ Ozone modeling</a></li>
+<li class="chapter" data-level="2.34" data-path="get-data.html"><a href="get-data.html#air-modeling"><i class="fa fa-check"></i><b>2.34</b> Air modeling</a><ul>
+<li class="chapter" data-level="2.34.1" data-path="get-data.html"><a href="get-data.html#nata"><i class="fa fa-check"></i><b>2.34.1</b> NATA modeling</a></li>
+<li class="chapter" data-level="2.34.2" data-path="get-data.html"><a href="get-data.html#mnrisks"><i class="fa fa-check"></i><b>2.34.2</b> MNRISKS statewide risk modeling</a></li>
+<li class="chapter" data-level="2.34.3" data-path="get-data.html"><a href="get-data.html#downscale"><i class="fa fa-check"></i><b>2.34.3</b> Downscaler modeling results for Ozone and PM2.5</a></li>
+<li class="chapter" data-level="2.34.4" data-path="get-data.html"><a href="get-data.html#cmaq"><i class="fa fa-check"></i><b>2.34.4</b> CMAQ Ozone modeling</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="get-data.html"><a href="get-data.html#context"><i class="fa fa-check"></i><b>2.4</b> Context</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="get-data.html"><a href="get-data.html#mn-ei"><i class="fa fa-check"></i><b>2.4.1</b> MN Emissions Inventory</a></li>
-<li class="chapter" data-level="2.4.2" data-path="get-data.html"><a href="get-data.html#nei"><i class="fa fa-check"></i><b>2.4.2</b> EPA’s NEI</a></li>
-<li class="chapter" data-level="2.4.3" data-path="get-data.html"><a href="get-data.html#fac-coords"><i class="fa fa-check"></i><b>2.4.3</b> Facility locations</a></li>
-<li class="chapter" data-level="2.4.4" data-path="get-data.html"><a href="get-data.html#wx-obs"><i class="fa fa-check"></i><b>2.4.4</b> Weather observations</a></li>
-<li class="chapter" data-level="2.4.5" data-path="get-data.html"><a href="get-data.html#hysplit"><i class="fa fa-check"></i><b>2.4.5</b> HYSPLIT wind trajectories</a></li>
-<li class="chapter" data-level="2.4.6" data-path="get-data.html"><a href="get-data.html#landuse"><i class="fa fa-check"></i><b>2.4.6</b> Land use maps</a></li>
-<li class="chapter" data-level="2.4.7" data-path="get-data.html"><a href="get-data.html#census"><i class="fa fa-check"></i><b>2.4.7</b> United States Census boundaries</a></li>
-<li class="chapter" data-level="2.4.8" data-path="get-data.html"><a href="get-data.html#acs"><i class="fa fa-check"></i><b>2.4.8</b> American Community Survey (ACS)</a></li>
+<li class="chapter" data-level="2.35" data-path="get-data.html"><a href="get-data.html#context"><i class="fa fa-check"></i><b>2.35</b> Context</a><ul>
+<li class="chapter" data-level="2.35.1" data-path="get-data.html"><a href="get-data.html#mn-ei"><i class="fa fa-check"></i><b>2.35.1</b> MN Emissions Inventory</a></li>
+<li class="chapter" data-level="2.35.2" data-path="get-data.html"><a href="get-data.html#nei"><i class="fa fa-check"></i><b>2.35.2</b> EPA’s NEI</a></li>
+<li class="chapter" data-level="2.35.3" data-path="get-data.html"><a href="get-data.html#fac-coords"><i class="fa fa-check"></i><b>2.35.3</b> Facility locations</a></li>
+<li class="chapter" data-level="2.35.4" data-path="get-data.html"><a href="get-data.html#wx-obs"><i class="fa fa-check"></i><b>2.35.4</b> Weather observations</a></li>
+<li class="chapter" data-level="2.35.5" data-path="get-data.html"><a href="get-data.html#hysplit"><i class="fa fa-check"></i><b>2.35.5</b> HYSPLIT wind trajectories</a></li>
+<li class="chapter" data-level="2.35.6" data-path="get-data.html"><a href="get-data.html#landuse"><i class="fa fa-check"></i><b>2.35.6</b> Land use maps</a></li>
+<li class="chapter" data-level="2.35.7" data-path="get-data.html"><a href="get-data.html#census"><i class="fa fa-check"></i><b>2.35.7</b> United States Census boundaries</a></li>
+</ul></li>
+<li class="chapter" data-level="2.36" data-path="get-data.html"><a href="get-data.html#counties"><i class="fa fa-check"></i><b>2.36</b> Counties</a></li>
+<li class="chapter" data-level="2.37" data-path="get-data.html"><a href="get-data.html#census-tracts"><i class="fa fa-check"></i><b>2.37</b> Census tracts</a></li>
+<li class="chapter" data-level="2.38" data-path="get-data.html"><a href="get-data.html#census-block-groups"><i class="fa fa-check"></i><b>2.38</b> Census Block groups</a><ul>
+<li class="chapter" data-level="2.38.1" data-path="get-data.html"><a href="get-data.html#acs"><i class="fa fa-check"></i><b>2.38.1</b> American Community Survey (ACS)</a></li>
 </ul></li>
 </ul></li>
 <li><a href="quality-assurance-methods.html#quality-assurance-methods"><strong>Quality assurance methods</strong></a></li>
@@ -158,8 +185,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.1" data-path="data-validation.html"><a href="data-validation.html#leaks"><i class="fa fa-check"></i><b>4.1</b> Instrument drift or leaks in a system.</a></li>
 <li class="chapter" data-level="4.2" data-path="data-validation.html"><a href="data-validation.html#outs"><i class="fa fa-check"></i><b>4.2</b> Exceptional values and outliers</a></li>
 <li class="chapter" data-level="4.3" data-path="data-validation.html"><a href="data-validation.html#sticky2"><i class="fa fa-check"></i><b>4.3</b> Sequential repeats and “sticky” numbers</a></li>
-<li class="chapter" data-level="4.4" data-path="data-validation.html"><a href="data-validation.html#unique"><i class="fa fa-check"></i><b>4.4</b> Unique detected values</a></li>
-<li class="chapter" data-level="4.5" data-path="data-validation.html"><a href="data-validation.html#valid_ref"><i class="fa fa-check"></i><b>4.5</b> References</a></li>
+<li class="chapter" data-level="4.4" data-path="data-validation.html"><a href="data-validation.html#there-are-many-repeating-values-in-the-toxics-data.-none-in-pahs.-approximately-3200-for-ufps-but-this-is-15-minute-data.-we-may-need-a-more-stringent-test-for-ufps."><i class="fa fa-check"></i><b>4.4</b> There are many repeating values in the Toxics data. None in PAHs. Approximately 3,200 for UFPs, but this is 15 minute data. We may need a more stringent test for UFPs.</a></li>
+<li class="chapter" data-level="4.5" data-path="data-validation.html"><a href="data-validation.html#unique"><i class="fa fa-check"></i><b>4.5</b> Unique detected values</a></li>
+<li class="chapter" data-level="4.6" data-path="data-validation.html"><a href="data-validation.html#valid_ref"><i class="fa fa-check"></i><b>4.6</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="collocated-monitors.html"><a href="collocated-monitors.html"><i class="fa fa-check"></i><b>5</b> Collocated monitors</a><ul>
 <li class="chapter" data-level="5.1" data-path="collocated-monitors.html"><a href="collocated-monitors.html#evalpocs"><i class="fa fa-check"></i><b>5.1</b> Evaluate collocated air monitors</a></li>
@@ -210,10 +238,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="12" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>12</b> Time series</a><ul>
 <li class="chapter" data-level="12.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>12.1</b> Seasonality</a></li>
+<li class="chapter" data-level="12.2" data-path="time-series.html"><a href="time-series.html#changepoints-before-after-tests"><i class="fa fa-check"></i><b>12.2</b> Changepoints (before &amp; after tests)</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>13</b> Maps</a><ul>
 <li class="chapter" data-level="13.1" data-path="maps.html"><a href="maps.html#creating-shapefiles-in-r-and-joining-to-ej-areas"><i class="fa fa-check"></i><b>13.1</b> Creating shapefiles in R and joining to EJ areas</a></li>
-<li class="chapter" data-level="13.2" data-path="maps.html"><a href="maps.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>13.2</b> Spatial averaging and aggregation</a></li>
+<li class="chapter" data-level="13.2" data-path="maps.html"><a href="maps.html#spatial-join-to-census-tracts-and-then-left_join-to-ej-areas-status"><i class="fa fa-check"></i><b>13.2</b> Spatial join to census tracts and then left_join to EJ areas status</a></li>
+<li class="chapter" data-level="13.3" data-path="maps.html"><a href="maps.html#spatial-averaging-and-aggregation"><i class="fa fa-check"></i><b>13.3</b> Spatial averaging and aggregation</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>14</b> Additional resources</a></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
@@ -251,7 +281,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="best-practices" class="section level1">
 <h1><span class="header-section-number"></span> Best practices</h1>
 <div class="figure">
-<img src="https://avatars3.githubusercontent.com/u/22032646?s=400&amp;v=4" align="right" style="margin-left: 20px; margin-right: 20px; margin-top: -42px;" width="250" />
+<img src="https://avatars3.githubusercontent.com/u/22032646?s=400&amp;v=4" align="right" style="margin-left: 20px; margin-right: 18px; margin-top: -24px;" width="240" />
 
 </div>
 <p><br></p>
@@ -259,7 +289,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><br> <br></p>
 <div id="tidyverse" class="section level2">
 <h2><span class="header-section-number">1.1</span> Tidyverse</h2>
-<p>These R packages work in harmony by sharing a common data format and syntax. Using packages within the <em>Tidyverse</em> for your analysis will make your scripts easier to read for others and <em>future you</em>.</p>
+<p>The <em>Tidyverse</em> consists of a group of R packages that work in harmony by sharing a common data format and syntax. Using packages within the <em>Tidyverse</em> for your analysis will make your scripts easier to read for others and <em>future you</em>.</p>
 <div class="figure">
 <img src="images/tidy_packages.PNG" width="460" />
 

@@ -1,10 +1,14 @@
 # Completeness checks
 
-```{r, out.width='40%', echo=F, fig.align="center"}
+```{r, include=F}
 knitr::opts_chunk$set(echo = T, warning = F, message = F)
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 
 ```
+
+![](images/cover6.jpg){align="right" style="margin-top: -14px; margin-left: 32px; width: 34%;"}
+
+<br>
 
 
 Checking for data completeness before generating summaries ensures that results will be comparable from one year to the next. Without completeness checks, changes in the seasonal coverage from year to year may create the illusion of increasing or decreasing trends. 

@@ -1,7 +1,7 @@
 # Best practices
 
 
-![](https://avatars3.githubusercontent.com/u/22032646?s=400&v=4){width="250" align="right" style="margin-left: 20px; margin-right: 20px; margin-top: -42px;"}
+![](https://avatars3.githubusercontent.com/u/22032646?s=400&v=4){width="240" align="right" style="margin-left: 20px; margin-right: 18px; margin-top: -24px;"}
 
 
 <br>
@@ -13,7 +13,7 @@ This section includes some _best practices_ to promote consistent, efficient, an
 
 ## Tidyverse
 
-These R packages work in harmony by sharing a common data format and syntax. Using packages within the _Tidyverse_ for your analysis will make your scripts easier to read for others and _future you_.
+The  _Tidyverse_ consists of a group of R packages that work in harmony by sharing a common data format and syntax. Using packages within the _Tidyverse_ for your analysis will make your scripts easier to read for others and _future you_.
 
 ![](images/tidy_packages.PNG){width="460"}
 
