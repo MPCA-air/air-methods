@@ -1,19 +1,24 @@
 # Detection limits
 
 
-```{r out.width='40%', echo=F, fig.align="center"}
+```{r, echo=F}
 knitr::opts_chunk$set(echo = T, warning = F, message = F)
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
-knitr::include_graphics("https://pbs.twimg.com/media/CyW_of8XAAAbKul.jpg")
 ```
+
+
+![](images/cover5.jpg){align="right" style="margin-top: -14px; margin-left: 32px; width: 34%;"}
+
+<br>
 
 
 ## Method Detection Limit
 
 The method detection limit (MDL) is the minimum concentration of a substance that can be measured and reported with 99% confidence that the analyte concentration is greater than zero and is determined from analysis of a sample in a given matrix containing the analyte.
 
+<br>
 
-## Procedure for calculating method detection limits
+## Calculating method detection limits
 
 - Prior to 2017, the lab calculated detection limits according to the procedures defined in 40 CFR Appendix B to Part 136 - [Definition and Procedure for the determination of Method Detection Limit](https://www.gpo.gov/fdsys/granule/CFR-2011-title40-vol23/CFR-2011-title40-vol23-part136-appB/content-detail.html) 
 - Begining in 2017, the lab adopted a modified method for calcuating the method detection limit. Known as the "Method Update Rule(MUR)", this method accounts for media background contamination when establishing the MDL. This method is defined in the [NATTS TAD (October 2016)](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjJ3Y6AyfzVAhVL2IMKHXe_DI0QFggoMAA&url=https%3A%2F%2Fwww3.epa.gov%2Fttnamti1%2Ffiles%2Fambient%2Fairtox%2FNATTS%2520TAD%2520Revision%25203_FINAL%2520October%25202016.pdf&usg=AFQjCNGVu-9E0zS1-Gjkt_5sULzOPNeymg). EPA has proposed to revise 40 CFR Appendix B to Part 136 to reflect this methodology. 
@@ -35,7 +40,7 @@ New method requires calculation of the MDL of the method blanks(MDL_b)
 - Compare MDL_sp and MDL_b. The higher of the two values is reported as the laboratory MDL.  
 
 
-## Finding detection limits
+## Finding MPCA detection limits
 
 - Annual method detection limits used for data analysis are stored on the X-drive at `X:\\Databases\\AQ\\AQ Lab\\Data Analysis\\Air Toxics\\Detection Limits\\Annual Detection Limits (micrograms).xlsx`
 - Use the `ParamYear` field to join data
@@ -44,7 +49,7 @@ New method requires calculation of the MDL of the method blanks(MDL_b)
     - Metals (ug/mL): conversion to ug/m3 requires accounting of flow rate, runtime, and 1/9 filter strip, and 40 mL liquid extraction
     - Carbonyls (ug/mL): conversion requires account of flow rate, runtime, and extraction volume. 
     - VOCs (ppb):conversion can be done using MW and Standard Temp/Pressure. 
-- When Promium is adopted, method detection limits will be applied on a sample basis and will account for the varying air volumes of samples. As a result, there will be multiple detection limits for an analyte. 
+- When _Promium_ is adopted, method detection limits will be applied on a sample basis and will account for the varying air volumes of samples. As a result, there will be multiple detection limits for an analyte. 
 
 
 ## Qualifier Codes for Detection Limits

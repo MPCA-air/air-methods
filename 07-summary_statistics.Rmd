@@ -1,6 +1,6 @@
 # Summary statistics
 
-```{r out.width='40%', echo=F, warning = F, message = F,  fig.align="center"}
+```{r, echo=F, warning = F, message = F}
 library(knitr)
 library(DT)
 library(kableExtra)
@@ -9,12 +9,17 @@ knitr::opts_chunk$set(echo = T, warning = F, message = F)
 
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 
-knitr::include_graphics("https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/12936/large/1464301097/number-rcatladies.png")
-
 ```
+
+
+![](images/cover7.jpg){align="right" style="margin-top: -4px; margin-left: 24px; width: 34%;"}
+
+<br>
+
 
 The summary methods described in this chapter inlcude:  
 
+\@ref(normal)      __Normality__  
 \@ref(boots)       __Bootstrapping__  
 \@ref(below)       __Below the detection limit__  
 \@ref(confidence)  __Confidence intervals__  
@@ -22,12 +27,11 @@ The summary methods described in this chapter inlcude:
 \@ref(health)      __Comparison of data to inhalation health benchmarks__  
 \@ref(roll365)     __Rolling 365 day summaries__   
 
-
 <br>
 
-## Test for normality
+## Test for normality {#normal}
 
-Data should be tested for normality prior to determining the type of summary statistic to report. In general environmental data are non-normal and contain with many low values and a few high values. This causes the mean of the data to be higher than the median (right skewed). Many normality tests exist and they vary in sensitivity. A good article on normality tests can be found at this link: (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3693611/)
+Data should be tested for normality prior to determining the type of summary statistic to report. In general environmental data are non-normal and contain with many low values and a few high values. This causes the mean of the data to be higher than the median (right skewed). Many normality tests exist and they vary in sensitivity. A good article on normality tests can be found at this link [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3693611/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3693611/).
 
 The normality test in the example script below is a recommended test for data of sample size between 5-5000 and will allow missing values. A Shapiro-Wilk test may also be performed for the typical sample size of a year of air toxics results. The script below includes a a line to switch to a Shapiro Wilk test.
 

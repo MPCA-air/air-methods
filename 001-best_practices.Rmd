@@ -6,7 +6,7 @@
 
 <br>
 
-This section includes some _Best practices_ to promote consistent, efficient, and accurate data analysis with `R`.  
+This section includes some _best practices_ to promote consistent, efficient, and accurate data analysis with `R`.  
 
 
 <br> <br>
