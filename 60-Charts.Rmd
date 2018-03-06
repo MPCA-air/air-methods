@@ -10,8 +10,7 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 
 
 ## Boxplots
-Dividing by zero is an amazing super power. Unfortunately for you your computer does not have this power. Making a log boxplot with data containing zeros or negative values will result in your computer melting itself. It will never forgive you.
-
+Dividing by zero is an amazing super power. Unfortunately for you your computer does not have this power. Making a log boxplot with data containing zeros or negative values is problematic. 
 
 ### Log boxplots 
 
@@ -42,9 +41,172 @@ calendarPlot(formaldehyde_963,pollutant<- "Concentration",statistic="mean", year
 ```
 
 
-## Color palettes
+## Colors and themes
+
+R offers a wide variety of color palettes and chart themes to use in your plots. 
+
+Some __color palettes__ include:
+
+- [Viridis colors](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+- [Ghibli Movie colors](https://github.com/ewenme/ghibli)
+- [Wes Anderson Movie colors](https://github.com/karthik/wesanderson)
+
+
+Some __chart themes__ include:
+
+- [hrbrthemes](https://github.com/hrbrmstr/hrbrthemes)
+- [XKCD](http://xkcd.r-forge.r-project.org/)
+- [ggthemes](http://xkcd.r-forge.r-project.org/)
+- [ggpomological](https://github.com/gadenbuie/ggpomological)
+- [ggthemr](https://github.com/cttobin/ggthemr)
+- [lato](https://github.com/briandconnelly/lato)
+
+
+The example below shows a few charts using the `ggpomological` theme.
+
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+
+<br>
+
+A pollutant scatterplot with _pomological_ colors.
+```{r}
+#devtools::install_github("gadenbuie/ggpomological")
+library(ggpomological)
+library(tidyverse)
+
+# Load air pollution data
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+
+names(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
+
+data <- filter(data, pollutant %in% c("Formaldehyde", "Benzene", "1,3-Butadiene"))
+
+data$pollutant <- factor(data$pollutant, levels = c("Formaldehyde", "Benzene", "1,3-Butadiene"))
+
+# Make scatterplot w/ pomo colors
+ggplot(data, aes(x = pollutant, y = conc, color = pollutant, fill = pollutant)) +
+     scale_y_log10() +
+     geom_boxplot(aes(fill = factor(pollutant)), alpha = 0.8) + 
+     scale_color_pomological() + 
+     scale_fill_pomological() + 
+     labs(title = "Air monitoring results")
+
+
+```
+
+<br>
+
+You can even add a calm cream paper background.
+```{r, warning = F}
+
+# Make scatterplot w/ pomo colors and cream background
+ggplot(data, aes(x = year, y = conc, color = pollutant)) +
+     scale_y_log10() +
+     geom_jitter(size = 2, alpha = 0.6) + 
+     scale_color_pomological() + 
+     theme_pomological() + 
+     labs(title = "Air monitoring results", subtitle = "2009 - 2013")
+
+```
+
+<br>
+
+Or create a fancy chart in the style of an old fashioned nature journal.
+```{r, results=F, warning=F, message = F}
+library(extrafont)
+
+
+## Download fancyfont here - https://fonts.google.com/specimen/Homemade+Apple/
+## Add to this folder - "Control Panel\All Control Panel Items\Fonts"
+
+# Check loaded fonts
+loadfonts(device = "win")
+
+#windowsFonts()
+
+fonts_df <- fonttable()
+
+font_import(pattern = "HomemadeApple-Regular")
+```
+
+
+```{r, cache = T, warning=F, message = F, out.width = "100%"}
+
+# Make fancy scatterplot w/ pomo colors, paper background and cursive fonts
+fancy_plot <- ggplot(data, aes(x = year, y = conc, color = pollutant)) +
+                   scale_y_log10() +
+                   geom_jitter(size = 2, alpha = 0.3) + 
+                   scale_color_pomological() +
+                   theme_pomological_fancy() +
+                   labs(title = "Air monitoring data", subtitle = "2009 - 2013")
+
+# Create web image
+paint_pomological(fancy_plot, res = 120)
+
+```
+
+
+<br>
+
+Or create a nice density plot.
+```{r, cache = T, warning=F}
+#devtools::install_github("yixuan/showtext")
+library(showtext)
+
+# Get fancy font
+font_add_google(name = "Homemade Apple", family = "Homemade Apple")
+
+#font_add_google(name = "Indie Flower", family = "Indie Flower")
+
+
+# Create density plot
+#showtext_begin()
+#showtext_end()
+
+ggplot(data, aes(x = sqrt(conc), fill = pollutant, color = pollutant)) +
+                   scale_x_log10() +
+                   geom_density(alpha = 0.7) + 
+                   scale_fill_pomological() +
+                   scale_color_pomological() +
+                   labs(title    = "Air monitoring data", 
+                        subtitle = "2009 - 2013", 
+                        x        = "concentration") +
+                   theme_pomological("Homemade Apple")  #theme(text = element_text(family = "Homemade Apple"))
+                
+                   
+```
+
+<br>
+
+
+Or split up the density plot into separate rows.
+```{r, cache = T, warning=F, out.width = "100%", fig.asp = .62}
+
+library(ggridges)
+
+# Create fancy_plot
+fancy_plot <-  ggplot(data, aes(x = sqrt(conc), y = forcats::fct_rev(pollutant), fill = pollutant, color = pollutant)) +
+                   geom_density_ridges(alpha = 0.7) + 
+                   theme_pomological(base_family = 'Homemade Apple',
+                                     base_size   = 16,
+                                     base_theme  = ggridges::theme_ridges()) + 
+                   scale_fill_pomological() +
+                   scale_color_pomological() +
+                   labs(title    = "Air monitoring data", 
+                        subtitle = "2009 - 2013", 
+                        x        = "concentration", 
+                        y        = "pollutant")
+
+# Create web image
+paint_pomological(fancy_plot, res = 120)
+```
+
+
+</div>
+
+
 ```{r, echo = F, eval = F}
-The MPCA only uses Ghibli colors. See [Ghibli](https://github.com/ewenme/ghibli).
+See [Ghibli](https://github.com/ewenme/ghibli).
 
 ![Ghibli colors](https://github.com/ewenme/ghibli/raw/master/ghibli.jpg){width="70%"}
 

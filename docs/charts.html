@@ -167,7 +167,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="6" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>6</b> Detection limits</a><ul>
 <li class="chapter" data-level="6.1" data-path="detection-limits.html"><a href="detection-limits.html#method-detection-limit"><i class="fa fa-check"></i><b>6.1</b> Method Detection Limit</a></li>
-<li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-method-detection-limits"><i class="fa fa-check"></i><b>6.2</b> Calculating method detection limits</a></li>
+<li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-mdls"><i class="fa fa-check"></i><b>6.2</b> Calculating MDLs</a></li>
 <li class="chapter" data-level="6.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-mpca-detection-limits"><i class="fa fa-check"></i><b>6.3</b> Finding MPCA detection limits</a></li>
 <li class="chapter" data-level="6.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>6.4</b> Qualifier Codes for Detection Limits</a></li>
 <li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
@@ -205,7 +205,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.1.2" data-path="charts.html"><a href="charts.html#outliers"><i class="fa fa-check"></i><b>11.1.2</b> Outliers</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="charts.html"><a href="charts.html#calendar-plots"><i class="fa fa-check"></i><b>11.2</b> Calendar plots</a></li>
-<li class="chapter" data-level="11.3" data-path="charts.html"><a href="charts.html#color-palettes"><i class="fa fa-check"></i><b>11.3</b> Color palettes</a></li>
+<li class="chapter" data-level="11.3" data-path="charts.html"><a href="charts.html#colors-and-themes"><i class="fa fa-check"></i><b>11.3</b> Colors and themes</a></li>
 <li class="chapter" data-level="11.4" data-path="charts.html"><a href="charts.html#pollution-roses"><i class="fa fa-check"></i><b>11.4</b> Pollution roses</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>12</b> Time series</a><ul>
@@ -256,7 +256,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="boxplots" class="section level2">
 <h2><span class="header-section-number">11.1</span> Boxplots</h2>
-<p>Dividing by zero is an amazing super power. Unfortunately for you your computer does not have this power. Making a log boxplot with data containing zeros or negative values will result in your computer melting itself. It will never forgive you.</p>
+<p>Dividing by zero is an amazing super power. Unfortunately for you your computer does not have this power. Making a log boxplot with data containing zeros or negative values is problematic.</p>
 <div id="log-boxplots" class="section level3">
 <h3><span class="header-section-number">11.1.1</span> Log boxplots</h3>
 <p><em>Coming soon…</em></p>
@@ -271,8 +271,135 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The openair package provides a convenient function, calendarPlot, for presenting data in a calendar format.</p>
 <p><img src="air-methods_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
 </div>
-<div id="color-palettes" class="section level2">
-<h2><span class="header-section-number">11.3</span> Color palettes</h2>
+<div id="colors-and-themes" class="section level2">
+<h2><span class="header-section-number">11.3</span> Colors and themes</h2>
+<p>R offers a wide variety of color palettes and chart themes to use in your plots.</p>
+<p>Some <strong>color palettes</strong> include:</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html">Viridis colors</a></li>
+<li><a href="https://github.com/ewenme/ghibli">Ghibli Movie colors</a></li>
+<li><a href="https://github.com/karthik/wesanderson">Wes Anderson Movie colors</a></li>
+</ul>
+<p>Some <strong>chart themes</strong> include:</p>
+<ul>
+<li><a href="https://github.com/hrbrmstr/hrbrthemes">hrbrthemes</a></li>
+<li><a href="http://xkcd.r-forge.r-project.org/">XKCD</a></li>
+<li><a href="http://xkcd.r-forge.r-project.org/">ggthemes</a></li>
+<li><a href="https://github.com/gadenbuie/ggpomological">ggpomological</a></li>
+<li><a href="https://github.com/cttobin/ggthemr">ggthemr</a></li>
+<li><a href="https://github.com/briandconnelly/lato">lato</a></li>
+</ul>
+<p>The example below shows a few charts using the <code>ggpomological</code> theme.</p>
+<div class="toggle">
+<button class="btn_code">
+Show <strong>R</strong> code
+</button>
+<p><br></p>
+<p>A pollutant scatterplot with <em>pomological</em> colors.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#devtools::install_github(&quot;gadenbuie/ggpomological&quot;)</span>
+<span class="kw">library</span>(ggpomological)
+<span class="kw">library</span>(tidyverse)
+
+<span class="co"># Load air pollution data</span>
+data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)
+
+<span class="kw">names</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)
+
+data &lt;-<span class="st"> </span><span class="kw">filter</span>(data, pollutant <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Formaldehyde&quot;</span>, <span class="st">&quot;Benzene&quot;</span>, <span class="st">&quot;1,3-Butadiene&quot;</span>))
+
+data<span class="op">$</span>pollutant &lt;-<span class="st"> </span><span class="kw">factor</span>(data<span class="op">$</span>pollutant, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Formaldehyde&quot;</span>, <span class="st">&quot;Benzene&quot;</span>, <span class="st">&quot;1,3-Butadiene&quot;</span>))
+
+<span class="co"># Make scatterplot w/ pomo colors</span>
+<span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> pollutant, <span class="dt">y =</span> conc, <span class="dt">color =</span> pollutant, <span class="dt">fill =</span> pollutant)) <span class="op">+</span>
+<span class="st">     </span><span class="kw">scale_y_log10</span>() <span class="op">+</span>
+<span class="st">     </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> <span class="kw">factor</span>(pollutant)), <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">     </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">     </span><span class="kw">scale_fill_pomological</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">     </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Air monitoring results&quot;</span>)</code></pre></div>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<p><br></p>
+<p>You can even add a calm cream paper background.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make scatterplot w/ pomo colors and cream background</span>
+<span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> conc, <span class="dt">color =</span> pollutant)) <span class="op">+</span>
+<span class="st">     </span><span class="kw">scale_y_log10</span>() <span class="op">+</span>
+<span class="st">     </span><span class="kw">geom_jitter</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.6</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">     </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">     </span><span class="kw">theme_pomological</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">     </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Air monitoring results&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>)</code></pre></div>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<p><br></p>
+<p>Or create a fancy chart in the style of an old fashioned nature journal.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(extrafont)
+
+
+## Download fancyfont here - https://fonts.google.com/specimen/Homemade+Apple/
+## Add to this folder - &quot;Control Panel\All Control Panel Items\Fonts&quot;
+
+<span class="co"># Check loaded fonts</span>
+<span class="kw">loadfonts</span>(<span class="dt">device =</span> <span class="st">&quot;win&quot;</span>)
+
+<span class="co">#windowsFonts()</span>
+
+fonts_df &lt;-<span class="st"> </span><span class="kw">fonttable</span>()
+
+<span class="kw">font_import</span>(<span class="dt">pattern =</span> <span class="st">&quot;HomemadeApple-Regular&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make fancy scatterplot w/ pomo colors, paper background and cursive fonts</span>
+fancy_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> conc, <span class="dt">color =</span> pollutant)) <span class="op">+</span>
+<span class="st">                   </span><span class="kw">scale_y_log10</span>() <span class="op">+</span>
+<span class="st">                   </span><span class="kw">geom_jitter</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">                   </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span>
+<span class="st">                   </span><span class="kw">theme_pomological_fancy</span>() <span class="op">+</span>
+<span class="st">                   </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Air monitoring data&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>)
+
+<span class="co"># Create web image</span>
+<span class="kw">paint_pomological</span>(fancy_plot, <span class="dt">res =</span> <span class="dv">120</span>)</code></pre></div>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-99-1.png" width="100%" /></p>
+<p><br></p>
+<p>Or create a nice density plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#devtools::install_github(&quot;yixuan/showtext&quot;)</span>
+<span class="kw">library</span>(showtext)
+
+<span class="co"># Get fancy font</span>
+<span class="kw">font_add_google</span>(<span class="dt">name =</span> <span class="st">&quot;Homemade Apple&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;Homemade Apple&quot;</span>)
+
+<span class="co">#font_add_google(name = &quot;Indie Flower&quot;, family = &quot;Indie Flower&quot;)</span>
+
+
+<span class="co"># Create density plot</span>
+<span class="co">#showtext_begin()</span>
+<span class="co">#showtext_end()</span>
+
+<span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">sqrt</span>(conc), <span class="dt">fill =</span> pollutant, <span class="dt">color =</span> pollutant)) <span class="op">+</span>
+<span class="st">                   </span><span class="kw">scale_x_log10</span>() <span class="op">+</span>
+<span class="st">                   </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">                   </span><span class="kw">scale_fill_pomological</span>() <span class="op">+</span>
+<span class="st">                   </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span>
+<span class="st">                   </span><span class="kw">labs</span>(<span class="dt">title    =</span> <span class="st">&quot;Air monitoring data&quot;</span>, 
+                        <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>, 
+                        <span class="dt">x        =</span> <span class="st">&quot;concentration&quot;</span>) <span class="op">+</span>
+<span class="st">                   </span><span class="kw">theme_pomological</span>(<span class="st">&quot;Homemade Apple&quot;</span>)  <span class="co">#theme(text = element_text(family = &quot;Homemade Apple&quot;))</span></code></pre></div>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
+<p><br></p>
+<p>Or split up the density plot into separate rows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggridges)
+
+<span class="co"># Create fancy_plot</span>
+fancy_plot &lt;-<span class="st">  </span><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">sqrt</span>(conc), <span class="dt">y =</span> forcats<span class="op">::</span><span class="kw">fct_rev</span>(pollutant), <span class="dt">fill =</span> pollutant, <span class="dt">color =</span> pollutant)) <span class="op">+</span>
+<span class="st">                   </span><span class="kw">geom_density_ridges</span>(<span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">                   </span><span class="kw">theme_pomological</span>(<span class="dt">base_family =</span> <span class="st">&#39;Homemade Apple&#39;</span>,
+                                     <span class="dt">base_size   =</span> <span class="dv">16</span>,
+                                     <span class="dt">base_theme  =</span> ggridges<span class="op">::</span><span class="kw">theme_ridges</span>()) <span class="op">+</span><span class="st"> </span>
+<span class="st">                   </span><span class="kw">scale_fill_pomological</span>() <span class="op">+</span>
+<span class="st">                   </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span>
+<span class="st">                   </span><span class="kw">labs</span>(<span class="dt">title    =</span> <span class="st">&quot;Air monitoring data&quot;</span>, 
+                        <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>, 
+                        <span class="dt">x        =</span> <span class="st">&quot;concentration&quot;</span>, 
+                        <span class="dt">y        =</span> <span class="st">&quot;pollutant&quot;</span>)
+
+<span class="co"># Create web image</span>
+<span class="kw">paint_pomological</span>(fancy_plot, <span class="dt">res =</span> <span class="dv">120</span>)</code></pre></div>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-101-1.png" width="100%" /></p>
+</div>
 </div>
 <div id="pollution-roses" class="section level2">
 <h2><span class="header-section-number">11.4</span> Pollution roses</h2>
