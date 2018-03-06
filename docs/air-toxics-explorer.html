@@ -167,7 +167,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="6" data-path="detection-limits.html"><a href="detection-limits.html"><i class="fa fa-check"></i><b>6</b> Detection limits</a><ul>
 <li class="chapter" data-level="6.1" data-path="detection-limits.html"><a href="detection-limits.html#method-detection-limit"><i class="fa fa-check"></i><b>6.1</b> Method Detection Limit</a></li>
-<li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-method-detection-limits"><i class="fa fa-check"></i><b>6.2</b> Calculating method detection limits</a></li>
+<li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-mdls"><i class="fa fa-check"></i><b>6.2</b> Calculating MDLs</a></li>
 <li class="chapter" data-level="6.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-mpca-detection-limits"><i class="fa fa-check"></i><b>6.3</b> Finding MPCA detection limits</a></li>
 <li class="chapter" data-level="6.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>6.4</b> Qualifier Codes for Detection Limits</a></li>
 <li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
@@ -205,7 +205,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.1.2" data-path="charts.html"><a href="charts.html#outliers"><i class="fa fa-check"></i><b>11.1.2</b> Outliers</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="charts.html"><a href="charts.html#calendar-plots"><i class="fa fa-check"></i><b>11.2</b> Calendar plots</a></li>
-<li class="chapter" data-level="11.3" data-path="charts.html"><a href="charts.html#color-palettes"><i class="fa fa-check"></i><b>11.3</b> Color palettes</a></li>
+<li class="chapter" data-level="11.3" data-path="charts.html"><a href="charts.html#colors-and-themes"><i class="fa fa-check"></i><b>11.3</b> Colors and themes</a></li>
 <li class="chapter" data-level="11.4" data-path="charts.html"><a href="charts.html#pollution-roses"><i class="fa fa-check"></i><b>11.4</b> Pollution roses</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>12</b> Time series</a><ul>
@@ -267,7 +267,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ol style="list-style-type: lower-roman">
 <li><p>If there is only one result greater than or equal to the detection limit (see information about method detection limits below), use that result.</p></li>
 <li><p>If there are multiple results greater than or equal to the detection limit, use the average of those results.</p></li>
-<li><pre><code>If there are no results greater than or equal to the detection limit, use the result with the lowest detection limit. If all results have the same detection limit, then select any one of the results since it does not matter which one is selected.</code></pre></li>
+<li><p>If there are no results greater than or equal to the detection limit, use the result with the lowest detection limit. If all results have the same detection limit, then select any one of the results since it does not matter which one is selected.</p></li>
 </ol>
 </div>
 <div id="data-validation-1" class="section level3">
@@ -321,7 +321,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ol style="list-style-type: lower-roman">
 <li><p>At least 75 percent of scheduled samples in the calendar year must produce a valid measurement. In addition, at least 75 percent of scheduled samples in each quarter must produce a valid measurement.</p></li>
 <li><p>At least 20 percent of valid samples must have a result equal to or greater than the detection limit.</p></li>
-<li><pre><code>There must be at least two unique results above the detection limit.</code></pre></li>
+<li><p>There must be at least two unique results above the detection limit.</p></li>
 </ol>
 <p>If any of these criteria are not met for a pollutant, then it is not recommended to report an annual mean for that pollutant.</p>
 <p>The annual mean for the concentration of a pollutant is the arithmetic mean of all samples in a calendar year after all null values are excluded and results below the detection limit are replaced with estimates using maximum likelihood estimation.</p>
@@ -331,7 +331,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ol>
 <ol start="2" style="list-style-type: lower-roman">
 <li><p>Nonparametric bootstrap sampling is used for calculating upper confidence limits since most air toxics data is not normally distributed. Information about bootstrapping can be found here: <a href="https://web.stanford.edu/class/psych252/tutorials/doBootstrapPrimer.pdf" class="uri">https://web.stanford.edu/class/psych252/tutorials/doBootstrapPrimer.pdf</a>. At least 1,000 bootstrap samples should be taken, and a larger number of samples is better depending on the computation times.</p></li>
-<li><pre><code>MPCA uses 95 percent upper confidence limits for comparisons to inhalation health benchmarks.</code></pre></li>
+<li><p>MPCA uses 95 percent upper confidence limits for comparisons to inhalation health benchmarks.</p></li>
 </ol>
 <ol start="5" style="list-style-type: lower-alpha">
 <li>Comparing site annual means</li>
@@ -340,7 +340,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ol style="list-style-type: lower-roman">
 <li><p>MPCA does not use parametric methods for normally distrusted data such as t-tests since most air toxics data is not normally distributed.</p></li>
 <li><p>Pairwise comparisons of samples taken at different sites at the same time are not used since null values and values below the method detection limit make it difficult to perform pairwise comparisons across sites while still utilizing most of the samples collected.</p></li>
-<li><pre><code>Bootstrap sampling is used to generate a confidence interval for the difference in annual means between years / sites. A confidence interval for the difference in annual means is generated instead of confidence intervals for each individual annual mean since the joint probability of two means being approximately the same is lower than the marginal probabilities of each mean existing in the other&#39;s mean&#39;s confidence interval.</code></pre></li>
+<li><p>Bootstrap sampling is used to generate a confidence interval for the difference in annual means between years / sites. A confidence interval for the difference in annual means is generated instead of confidence intervals for each individual annual mean since the joint probability of two means being approximately the same is lower than the marginal probabilities of each mean existing in the other’s mean’s confidence interval.</p></li>
 <li><p>MPCA uses 95 percent two-sided confidence intervals for the difference in annual means. If the lower bound of the interval is greater than zero or the upper bound is less than zero, then there is a significant difference between the annual means. If the confidence interval includes zero, then there is no significant difference.</p></li>
 </ol>
 
