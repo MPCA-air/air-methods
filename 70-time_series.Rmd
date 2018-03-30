@@ -5,23 +5,57 @@ knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 ```
 
 
+This section describes various approaches to visualize long-term trends and patterns in air monitoring data.
+
+
+
 ## Seasonality
+The R script below shows a time series chart that is color coded by the quarter of the year.
 
-This section is a work in progress.  
 
-```{r test21, echo = F}
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+<br>
+
+```{r test_series, echo = F}
 library(ggplot2)
 library(dplyr)
+library(lubridate)
 
-## Changepoints (before & after tests)  
+# Sample data
 df <- data_frame(time = seq(as.Date("2016-01-01"), as.Date("2018-02-01"), 1), 
                  obs  = sample(25:110, 763, replace = T)) %>% 
-       mutate(n = 1:n())
+       mutate(n       = 1:n(),
+              quarter = quarter(time))
 
  df <- df %>% 
          rowwise() %>%
          mutate(obs = mean(df$obs[max(0, n - 5):(n + 3)], na.rm = T))   
 
-ggplot(df, aes(time, obs)) + geom_line(linetype = "dashed") + geom_point(aes(color = format(time, "%Y"))) + guides(color = guide_legend(title = "Year"))
+ggplot(df, aes(time, obs)) + geom_line(linetype = "dashed") +
+  geom_point(aes(color = quarter)) + guides(color = guide_legend(title = "Quarter"))
+
+
+## Finding changepoints (ex. before & after monitor calibration)  
 
 ```
+
+</div>
+
+
+
+## Day of the week
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+<br>
+
+```{r week_day_chart, echo = F}
+```
+</div>
+
+
+## Hour of the day
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+<br>
+
+```{r hour_day_chart, echo = F}
+```
+</div>

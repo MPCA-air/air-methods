@@ -11,36 +11,36 @@ knitr::include_graphics("https://i0.wp.com/catscradleshelter.org/wp-content/uplo
 ```
 
 
-Environmental monitoring data can be subject to error. One way to catch these errors is to complete routines to find data that are inconsistent with expectations or do not comply with data rules. Data validation tasks should be completed at a scheduled frequency depending on the data frequency and the resources available.
+Environmental monitoring data can be subject to error. One way to catch these errors is to complete routines to find data that are inconsistent with expectations or do not comply with data rules. The first of these routines should always be to visually inspect data in a variety of ways to focus data validation steps. These steps should be completed at a scheduled frequency depending on the data duration and frequency and the resources available.
 
-Some important errors to check for include:
+Some important data validation checks include:
 
 - \@ref(leaks)    __Leaks, instrument drift, and sample contamination__
 - \@ref(outs)     __Outliers and extreme values__  
 - \@ref(sticky2)  __Sequential repeats and _sticky_ numbers__  
-- \@ref(unique)   __Unique values__ 
+- \@ref(unique)   __Insufficient unique values__ 
 
 <br>
 
-There are other potential validation steps that may be done for specific sets of pollutants. The description of these methods in this web book are in development.
+There may be other data validation steps you want to carry out dependent on the pollutant of interest.
 
-<br> __Why not average the exceptional data over the year?__
+<br> __What is the importance of data validation steps above and beyond the typical laboratory calibration and qualifying procedures that always occur?__
 
-Further investigation by laboratory staff is required if the laboratory equipment or system is in error. If the laboratory is not in error, these concentrations require additional investigation by data analysts and potentially by air pollution source specialists. For these reasons, these data validation steps are critical. A decreasing signal or repeated sequential measurement means that the data are not interpretable. An exceptionally high value could mean laboratory contamination or potentially could contribute to human health impacts if the high value is accurate.    
+A decreasing signal or repeated sequential measurements may mean that the data are not interpretable. An exceptionally high value could mean laboratory contamination or potentially could contribute to human health impacts if the high value is accurate. Data validation steps are critical for these reasons.     
+
+Data that fail validation tests may imply that laboratory equipment or system is in error. A failed validation test may also imply that there are extreme values at a site because of a significant air pollution source. In either case, a data validation routine is important to distiguish which of these may be the case and what program to contact for futher information.
 
 <br> __Basic validation tests__
 
-1. Identify potential instrument drift.
-  1. Find low values where this is not common.
-1. Identify exceptional values.
-  1. Find extreme values that may be in error or from contamination.
-1. Identify sequential identical values (sticking).
-  1. Test - Find 3 repeating values that are exactly the same.
-1. Report findings to laboratory for further investigation.
+1. Identify potential instrument drift: Find a significant change in variation in the data in the same time frame from one year to the next. This, or a sudden shift in magnitude of signal, could imply that there is a drift or concentrations are only different due to a new calibration or insturment change.
+1. Identify extreme values: Find extreme values that may be in error, from contamination, or from a loss in signal.
+1. Identify sequential identical values (sticking): Find 4 sequential identical values within the same site and pollutants.
+1. Identify data sets with too few unique values.
+1. Report any failed test or significant finding to the laboratory if instrument failure is suspected. If there are several extreme values, communicate this to monitoring staff to find out if anything significant happened in the field. If there is no suggestion that the values could be from instrument or sampling issues, than a pollution source specialist should be consulted.
 
 <br> <br>
 
-The following sections on data validation will use the example monitoring data loaded below.
+The following sections are examples of data validation steps that could be used to identify these issues. 
 
 ```{r validation, eval=T, message=F, warning=F}
 library(tidyverse)
@@ -48,8 +48,6 @@ library(stringr)
 library(RcppRoll)
 library(lubridate)
 
-
-##need to confirm that this data set has sequential repeats, some high values and at least 10 dates with numbers
 data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
 
 names(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
@@ -62,13 +60,13 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 ```{r, eval=T, echo=F, message=F, warning=F}
 library(knitr)
 library(DT)
-#kable(head(data), booktabs = T, caption = "Sample monitoring data.")
+
+kable(head(data), booktabs = T, caption = "Sample monitoring data.")
+
 datatable(head(data, 10), options = dt_options)
 ```
 
-
-
-First it's always a good idea to look at the data. If there are a lower number of numeric data points the statistical tests that follow may not be necessary.
+First it's always a good idea to look at the data. If there are a low number of numeric data points the statistical tests that follow may not be advised.
 
 Open the web tool below to chart the measured pollutants at each site.
 
@@ -142,7 +140,7 @@ shinyApp(
 
 ## Instrument drift or leaks in a system. {#leaks} 
 
-The example test set up to detect intrument drift checks for a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. This test works for VOC air toxics measurements only. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. This test could be applied to other surrogate compounds where there are multiple analytes, or could be applied to single measurements when there is only one analyte for the instrument in questions (i.e. PM2.5).
+The example test was set up to detect intrument drift checks for a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. This test works for VOC air toxics measurements only. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. This test could be applied to other surrogate compounds where there are multiple analytes, or could be applied to single measurements when there is only one analyte for the instrument in questions (i.e. PM2.5). Another way to test for instrument drift is to test for significant differences between equal numbers of measurements before and after a calibration or tuning.
 
 
 <br> __Sample `R` script__ 
@@ -207,9 +205,9 @@ datatable(head(leak_table, 10), options = dt_options) %>% formatSignif(c("fvalue
 
 
 
-## Exceptional values and outliers {#outs} 
+## Extreme values and outliers {#outs} 
 
-These are detected by comparing each measured concentration to 3 x the 75th percentile of the data set by year, site, and pollutant. For now, collocated measurements (POCS) are not tested separately. For data with higher temporal variability, such as black carbon and ultrafine particulates, a criteria of 3 x the 95th percentile of the data set by year, site and pollutant should be used. The criteria for exceptional values was designed to balance sensitivity to actually find extremely high values with a limit to the number of extreme values that may be expected in a year of air monitoring. For example, most air pollution measurements are much higher during fire works, such as occurrs on July 4th and December 31st. These data are not in error, they are accurate representations of the air concentrations during those times.
+We recommend testing air toxics for extreme values by comparing each measured concentration to 3 x the 75th percentile of the data set by year, site, and pollutant. For now, collocated measurements (POCS) are not tested separately. For data with higher temporal variability, such as black carbon and ultrafine particulates, a criteria of 3 x the 95th percentile of the data set by year, site and pollutant should be used. There are a variety of outlier tests. The recommended criteria are sensitive enough to find outliers each year but not so sensitive that values reflecting site conditions are flagged. For example, most air pollution measurements are much higher during fire works, such as occurrs on July 4th and December 31st. These data are not in error, they are accurate representations of the air concentrations during those times.
 
 
 <br> __Sample `R` script__ 
@@ -223,7 +221,7 @@ Click the button to view a step by step example.
 
 ```{r, eval=T, message=F, warning=F}
 
-# Test for exceptionally high values [above 75th percentile X 3]
+# Test for exceptionally high values [above 75th percentile X 3] This can be modified to 95% for continous or other short duration data.
 high_data <- group_by(data, year, aqs_id, pollutant) %>% mutate(AR_Mean = mean(conc, na.rm=T), Percentile_75 = quantile(conc, 0.75, na.rm = T), Percentile_75_X3 = Percentile_75*3) %>% ungroup()
 
 high_data <- filter(high_data, conc>Percentile_75_X3, !is.na(conc), AR_Mean>md_limit, Percentile_75>0)
@@ -243,15 +241,15 @@ high_data <- high_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
    
 ## Sequential repeats and "sticky" numbers {#sticky2}
  
-Three sequential replicate values may be a result of a machine error.
+Three or more sequential replicate values may be a result of a machine error.
 
 ```{r eval=T, message=F, warning=F}
-
-# Test for exceptionally high values [above 75th percentile X 3]
+##Search for three repeating identical values.
 repeat_data <- group_by(data, poc, year, aqs_id, pollutant) %>% 
   arrange(year, aqs_id, poc, pollutant, date) %>% 
   mutate(Previous_Day   = lag(conc, 1), 
          Two_Days_Prior = lag(conc, 2)) %>% ungroup()
+
 repeat_data <- mutate(repeat_data, Repeat_Test = ifelse(round(conc, digits = 4) == round(Previous_Day, digits = 4) & round(Previous_Day, digits = 4) == round(Two_Days_Prior, digits=4), "TRUE", "FALSE"))
 
 repeat_data$Warning_Type <- "Repeat_Test"
@@ -262,8 +260,6 @@ datatable(head(repeat_data, 10), options = dt_options)
 
 repeat_data <- repeat_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
 
-# Note
-## There are many repeating values in the Toxics data. None in PAHs. Approximately 3,200 for UFPs, but this is 15 minute data. We may need a more stringent test for UFPs.
 ```
 
 
@@ -277,8 +273,7 @@ datatable(head(warnings_table, 10), options = dt_options, rownames = FALSE)
 
 ## Unique detected values {#unique}
 
-In some cases the detected observations at a site may all be an identical value. Identical observations scattered throughout monitoring results at a single monitor can indicate a machine error. In addition, calculating summary statistics often requires a minimum number of unique values, as it is difficult to make assumptions about the distribution of a data set when the values are all `1` or `2`. 
-
+In some cases the detected observations at a site may all be an identical value. Identical observations scattered throughout monitoring results at a single monitor can indicate a machine error. In addition, calculating summary statistics often requires a minimum number of unique values. 
 
 <br> __Example `R` script__ 
 

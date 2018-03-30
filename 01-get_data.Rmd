@@ -13,31 +13,33 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 
 This section describes how to access air monitoring and modeling data. 
 
-These data include:  
 
 __Air monitoring data__
 
-- EPA 
-  Final data
-    - \@ref(AQS) AQS Database 
-    - \@ref(rqamd) AQS Datamart (RQAMD Package) 
-  Preliminary data
+- Final Data <br>
+    - \@ref(AQS) EPA AQS Database 
+    - \@ref(rqamd)EPA AQS Datamart (RQAMD Package)
+    - \@ref(lims) MPCA LIMS data via Tableau
+    - \@ref(wair) MPCA WAIR Database
+    - \@ref(EQuIS)MPCA EQuIS (coming in 2019)
+- Preliminary data <br>
     - \@ref(aqi-now)  AirNow: Current AQI observations
-    - \@ref(monitors) AirNow: Active AQI monitors 
-    
-- MPCA
-  Final data
-    - \@ref(lims) LIMS data via Tableau
-    - \@ref(wair) WAIR Database
-   
-  Preliminary data  
     - \@ref(AirVision) AirVision: Continuous data
+ - Air Monitoring Site Information <br>
+    - \@ref(wairsites) WAIR Site Table
+    - \@ref(monitors) AirNow: Active AQI monitors 
+    - \@ref(EPAsites) EPA Google Earth Site Explorer
+    - \@ref(AQSsites) EPA AQS Site Table
 
 __Summarized air monitoring results__
+
+- External Data Explorers <br>
     - \@ref(toxics) Air Toxics Data Explorer
     - \@ref(criteria) Criteria Pollutant Data Explorer
     - \@ref(AQI) Air Quality Index Summary Reports
-    - \@ref(PAHs) 
+    - \@ref(PAHs) Air Monitoring for PAHs 
+- Internal Data Explorers <br>
+    - \@ref(tableau) MPCA Tableau Server
 
 __Health and standards__
 
@@ -55,6 +57,8 @@ __Air modeling__
     - \@ref(cmaq) CMAQ 
 
 __Context__
+
+
 
 - Emissions
     - \@ref(mn-ei) MN Emissions Inventory
@@ -74,16 +78,15 @@ __Context__
 ## Air monitoring 
 
 ### Retrieving data from AQS {#AQS}
-The Air Quality System (AQS) contains ambient air pollution data collected by EPA, state, local, and tribal air pollution control agencies from over thousands of monitors.  AQS also contains meteorological data, descriptive information about each monitoring station (including its geographic location and its operator), and data quality assurance/quality control information.
+The Air Quality System (AQS) contains ambient air pollution data collected by EPA, state, local, and tribal air pollution control agencies from over thousands of monitors. AQS also contains meteorological data, descriptive information about each monitoring station (including its geographic location and its operator), and data quality assurance/quality control information.
 
-Registered users can access the AQS database via a web application at https://www.epa.gov/aqs. 
-
+Registered users can access the AQS database via a web application at https://www.epa.gov/aqs. Raw data extracts can be run using the AMP501 report. The AMP501 provides data in the pipe delimited RD transaction format. 
 
 
 ### Retrieving data from AQS DataMart {#rqamd}
 The AQS Data Mart provides a convenient API to access air quality data stored in the EPA's AQS database, [AQS Data Mart] (https://aqs.epa.gov/aqsweb/documents/data_mart_welcome.html)
 
-Note: The AQS Data Mart requires a user name and password.The username and password is not the same as your AQS User Account.To request a Data Mart account, follow the instructions on the Data Mart page. 
+Note: The AQS Data Mart requires a user name and password. The username and password is not the same as your AQS User Account. To request a Data Mart account, follow the instructions on the Data Mart page. 
 
 The `RQAMD` package allows users to query the AQS Data Mart in R, see [RQAMD](https://github.com/ebailey78/raqdm) on Github.
 
@@ -143,7 +146,7 @@ d <- do.call(rbind, y)
 
 ### Current AQI observations {#aqi-now}
 
-Air data for the entire United States is at your finger tips. _EPA's AirNow_ maintains a publicly accessible folder of current air monitoring data at https://files.airnowtech.org/. Data retrieved from AirNow is preliminary and may change following quality assurance. 
+Real-time air data for the entire United States is at your finger tips. _EPA's AirNow_ maintains a publicly accessible folder of current air monitoring data at https://files.airnowtech.org/. Data retrieved from AirNow is preliminary and may change following quality assurance. 
 
 <br> __Sample `R` script__  
   
@@ -180,9 +183,42 @@ aqi_now <- filter(aqi_now, parameter %in% c("OZONE", "PM2.5"))
 ```
 </div>
 
+### WAIR Site information table {#wairsites}
+The WAIR database includes a copy of the EPA site information table, which includes site names and location information. 
 
 
-### Active air monitors {#monitors}
+__Sample `R` script__ 
+
+Click the button below to view a step by step example.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+
+
+```{r, eval=F }
+library(RPostgreSQL)
+username<-#Add WAIR UserName
+pass<-#Add WAIR password
+
+drv <- dbDriver("PostgreSQL")## load the PostgreSQL driver
+
+con <- dbConnect(drv, dbname="wair",host='eiger',user=username,password=pass)## Open a connection 
+sites <- dbGetQuery(con, 
+                    statement = paste(
+                      "SELECT *
+                      FROM wair.aqs.site  \
+                      "
+                    )); 
+
+dbDisconnect(con)## Closes the connection
+dbUnloadDriver(drv)## Frees all the resources on the driver
+
+```
+
+</div>
+
+
+### AirNow:Active AQI monitors {#monitors}
 
 A map of MPCA's air monitoring network is available online at [Minnesota air monitoring sites](https://www.pca.state.mn.us/air/minnesota-air-monitoring-sites).
 
@@ -242,6 +278,10 @@ aqi_sites  <- filter(aqi_sites, state_fips %in% c(27))
 
 
 <br>
+### EPA Google Earth Site Maps {#EPAsites}
+The AirData Air Quality Monitors app is a mapping application available on the web and on mobile devices that displays monitor locations and monitor-specific information. It also allows the querying and downloading of data daily and annual summary data.  Static KMZ files are also available to download.
+
+https://www.epa.gov/outdoor-air-quality-data/interactive-map-air-quality-monitors
 
 ### Retrieving data from LIMS via Tableau {#lims}
 The LIMS database is the primary data warehouse for AQ monitoring activities. The LIMS system is being retired and replaced. To ease data accessibilty during this transition LIMS data are available for download via an internal Tableau workbook at http://tableau.pca.state.mn.us/#/workbooks/3342
@@ -336,13 +376,13 @@ read_AT_data_tableau = function(Sites, Parameter_list, Start_date = "2016-01-01"
 ```
 
 ### Retrieving continuous data from AirVision {#AirVision}
-AirVision is the data acquistion and temporary storage database for continuous air monitoring data. Data collected in AirVision is transfered to LIMs and AQS for final data storage. If you need the most recent monioring observations and would like to access continuous data before it has been transfered to the final data repository you can run reports from AirVision.
+AirVision is the data acquistion and temporary storage database for continuous air monitoring data. Data collected in AirVision is transfered to LIMs and AQS for final data storage. If you need the most recent monitoring observations and would like to access continuous data before it has been transfered to the final data repository you can run reports from AirVision.
 
-To run reports, the AirVision client must be installed on your computer and you need an user account. Contact the Air Monitoring Supervisor to request credentials. Alternatively, an AirVision administator can create a report task that will generate a data report and send it to a specified location (FTP site or e-mail). 
+To run reports, the AirVision client must be installed on your computer and you need a user account. Contact the Air Monitoring Supervisor to request credentials. Alternatively, an AirVision administator can create a report task that will generate a data report and send it to a specified location (FTP site or e-mail). 
 
 
 ### Retrieving data from MPCA WAIR database {#wair}
-The WAIR database provides a queryable local copy of select air quality data extracted from multiple data sources. This database is managed by Margaret McCourtney. Contact Margaret to request login credentials. 
+The WAIR database provides a queryable local copy of select air quality data extracted from multiple data sources. This database is managed by Margaret McCourtney.Contact Margaret to request login credentials. 
 
 See [WAIR Data Dictionary](http://rainier.pca.state.mn.us/documentation/DataDictionary/wair/index.html) for available data tables.
 
@@ -479,11 +519,26 @@ dbUnloadDriver(drv)
 
 
 
-### Air toxics {#toxics}
+### Air toxics Data Explorer{#toxics}
 
 View and download summarized air toxics monitoring data results from the online [Air Toxics Data Explorer](https://www.pca.state.mn.us/air/air-toxics-data-explorer).
 
+### Criteria Pollutant Data Explorer{#criteria}
 
+View and download MPCA calculated annual criteria pollutant design values from the online [Criteria Pollutant Data Explorer] (https://www.pca.state.mn.us/air/criteria-pollutant-data-explorer).
+
+### Air Quality Index Summary Reports{#AQI}
+
+View and download annual AQI Summary Reports (based on final montiroing data) from the online [Air Quality Index Data Explorer](https://www.pca.state.mn.us/air/annual-aqi-summary-reports).
+
+### Air Monitoring for PAHs{#AQI}
+
+View and download PAH monitoring results from the community and facility based special projects online at [Air Monitoring for PAHs](https://www.pca.state.mn.us/air/pah-study-results).
+
+### Internal Data Explorers{#tableau}
+Not all data analysis projects are ready or intended for external audiences. You can find a variety of analzyed monitoring results on the internal Tableau Server. 
+    - [Air Data Analysis] (http://tableau.pca.state.mn.us/#/projects/113/workbooks) 
+    - [Air Modeling and Risk Evaluation](http://tableau.pca.state.mn.us/#/projects/72/workbooks)
 
 ## Health and standards
 

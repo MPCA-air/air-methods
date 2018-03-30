@@ -13,6 +13,7 @@ To pull it all together we created some R packages to streamline the cleaning an
 
 The script below shows an example workflow that starts with 24-hour air toxics data from MPCA's Air Toxics Results database, walks through each of the analysis steps outlined in the previous sections, and produces data validation tools, POC analysis tools, completeness checks, annual summaries, site comparisons, and pollution roses.
 
+
 ## Functions  
 
 Click the button below to view example R script.
@@ -20,9 +21,11 @@ Click the button below to view example R script.
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
 
+<br>
+
 ```{r, eval=F}
 
-#Functions
+# Functions
 
 install.MPCAair.packages = function() {
 
