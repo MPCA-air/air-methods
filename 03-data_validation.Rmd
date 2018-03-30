@@ -32,9 +32,10 @@ Data that fail validation tests may imply that laboratory equipment or system is
 
 <br> __Basic validation tests__
 
-1. Identify potential instrument drift: Find a significant change in variation in the data in the same time frame from one year to the next. This, or a sudden shift in magnitude of signal, could imply that there is a drift or concentrations are only different due to a new calibration or insturment change.
+1. Visualize the data to help focus data validation steps.
+1. Identify potential instrument drift: Find a significant change in variation in the data in the same time frame from one year to the next. This, or a sudden shift in magnitude of signal, could imply that there is drift or concentrations results are only different due to a new calibration or instrument change.
 1. Identify extreme values: Find extreme values that may be in error, from contamination, or from a loss in signal.
-1. Identify sequential identical values (sticking): Find 4 sequential identical values within the same site and pollutants.
+1. Identify sequential identical values (sticking): Find 3 or more sequential identical values within the same site and pollutants.
 1. Identify data sets with too few unique values.
 1. Report any failed test or significant finding to the laboratory if instrument failure is suspected. If there are several extreme values, communicate this to monitoring staff to find out if anything significant happened in the field. If there is no suggestion that the values could be from instrument or sampling issues, than a pollution source specialist should be consulted.
 
@@ -68,7 +69,7 @@ datatable(head(data, 10), options = dt_options)
 
 First it's always a good idea to look at the data. If there are a low number of numeric data points the statistical tests that follow may not be advised.
 
-Open the web tool below to chart the measured pollutants at each site.
+Open the web tool below to chart the measured pollutants at each site. Script to recreate the webtool for other data is included as well.
 
 [Shiny Data tool](https://mpca-pahs.shinyapps.io/ChartCleanData/)
 
@@ -140,8 +141,7 @@ shinyApp(
 
 ## Instrument drift or leaks in a system. {#leaks} 
 
-The example test was set up to detect intrument drift checks for a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. This test works for VOC air toxics measurements only. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. This test could be applied to other surrogate compounds where there are multiple analytes, or could be applied to single measurements when there is only one analyte for the instrument in questions (i.e. PM2.5). Another way to test for instrument drift is to test for significant differences between equal numbers of measurements before and after a calibration or tuning.
-
+The intrument drift test returns a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. This test works for VOC air toxics measurements only. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. This test could be applied to other surrogate compounds where there are multiple analytes, or could be applied to single analyte measurements (i.e. PM2.5). Another way to test for instrument drift is to test for significant differences between equal numbers of measurements before and after a calibration or tuning. (See site comparison section of this book for these tests)
 
 <br> __Sample `R` script__ 
 

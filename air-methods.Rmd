@@ -1,3 +1,37 @@
+--- 
+title: ''
+author: ''
+bibliography:
+- book.bib
+- packages.bib
+cover-image: images/cover.jpeg
+documentclass: book
+fontsize: 14pt
+github-repo: MPCA-air/air-methods
+link-citations: yes
+monofont: Source Code Pro
+monofontoptions: Scale=0.75
+site: bookdown::bookdown_site
+biblio-style: apalike
+url: https\://github.com/MPCA-air/air-methods
+---
+
+# Introduction {-}  
+
+<!--chapter:end:index.Rmd-->
+
+
+# Best practices
+## Tidyverse
+## Keeping R up-to-date
+## Script layout
+## Divide and conquer
+## Codebooks, metadata, and data dictionaries
+## Pollutant names
+## Formatting data
+
+<!--chapter:end:001-best_practices.Rmd-->
+
 # Get data
 
 ```{r, echo=F}
@@ -892,4 +926,150 @@ med_inc_2015 <- get_acs(geography = "tract",
 
 
 <br> [Back to top](#rqamd)
+
+
+<!--chapter:end:01-get_data.Rmd-->
+
+
+# __Quality assurance methods__ {-}
+
+<!--chapter:end:015-quality_assurance-section.Rmd-->
+
+
+# Data cleaning
+## Blank, NULL, and missing values {#missing}
+## Remove _Qualified_ data {#quals}
+## Duplicate observations {#dups}
+
+<!--chapter:end:02-data_cleaning.Rmd-->
+
+
+# Data validation
+## Instrument drift or leaks in a system. {#leaks} 
+## Extreme values and outliers {#outs} 
+## Sequential repeats and "sticky" numbers {#sticky2}
+## Unique detected values {#unique}
+## References {#valid_ref}    
+
+<!--chapter:end:03-data_validation.Rmd-->
+
+
+# Collocated monitors
+## Evaluate collocated air monitors {#evalpocs}  
+## Prioritize multiple air monitors (POCs) {#pripocs}  
+
+<!--chapter:end:04-collocated_monitors.Rmd-->
+
+
+# Detection limits
+## Method Detection Limit
+## Calculating MDLs
+## Finding MPCA detection limits
+## Qualifier Codes for Detection Limits
+## Estimating below detection values _(what not to do)_
+## Below detection values
+## Multiple detection limits   
+## References
+
+<!--chapter:end:05-detection_limits.Rmd-->
+
+
+# Completeness checks
+## Completeness checks  {#complete}
+
+<!--chapter:end:06-completeness_checks.Rmd-->
+
+
+# __Summary methods__ {-}
+
+<!--chapter:end:065-summary_section.Rmd-->
+
+
+# Summary statistics
+## Test for normality {#normal}
+## Bootstrapping {#boots}
+## Below the detection limit {#below}
+## Upper confidence limits (UCLs) {#confidence}
+## Annual summaries for incomplete data {#incomplete}
+## Comparison of data to inhalation health benchmarks {#health}
+## Rolling 365 day summaries {#roll365}
+
+<!--chapter:end:07-summary_statistics.Rmd-->
+
+
+# Site comparisons
+## Confidence intervals 
+## Tools to visualize data
+### Beeswarm Plots
+### Correlation matrices
+
+<!--chapter:end:08-site_comparisons.Rmd-->
+
+
+# Start to finish {#start-finish}
+## Functions  
+## Analysis steps
+
+<!--chapter:end:09-start_to_finish.Rmd-->
+
+
+# Charts 
+## Calendar plots
+## Colors and themes
+## Download fancyfont here - https://fonts.google.com/specimen/Homemade+Apple/
+## Add to this folder - "Control Panel\All Control Panel Items\Fonts"
+## Pollution roses 
+
+<!--chapter:end:60-Charts.Rmd-->
+
+
+# Time series
+## Seasonality
+## Finding changepoints (ex. before & after monitor calibration)  
+## Day of the week
+## Hour of the day
+
+<!--chapter:end:70-time_series.Rmd-->
+
+
+# Maps
+## Creating shapefiles in R
+## Spatial join to census tracts and then left_join to EJ areas        #
+
+<!--chapter:end:80-maps.Rmd-->
+
+
+# Additional resources
+
+<!--chapter:end:85-additional_resources.Rmd-->
+
+
+# __MPCA data tools__ {-}
+
+<!--chapter:end:90-mpca_tools_section.Rmd-->
+
+
+# AQI explorer
+
+<!--chapter:end:91-AQI_explorer.Rmd-->
+
+
+# Criteria pollutant explorer
+
+<!--chapter:end:92-criteria_explorer.Rmd-->
+
+
+# Air toxics explorer
+## MPCA Air Toxics Methods
+### Data Cleaning
+### Data Validation
+### Parameter Occurrence Codes (POCs)
+### Producing Annual Summaries
+
+<!--chapter:end:93-airtoxics_explorer.Rmd-->
+
+
+# Edit this book {-}  
+
+<!--chapter:end:99-edit_document.Rmd-->
 

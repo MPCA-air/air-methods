@@ -14,9 +14,9 @@ __Notes__
 
 Steps:  
 
-- Chart data with box and whisker plots. Some site differences may be very apparent and not require statistical comparisons. The data analyst should use careful judgement to determine whether site means are obviously different enough that a statistical test is not necessary. Even if site means appear to be almost exactly the same, a statistical test should still be used to confirm that since boxplots can be deceiving when trying to determine that two means are not significanlty different.
+- Chart data with box and whisker plots. Some site differences may be very apparent and not require statistical comparisons. The data analyst should use careful judgement to determine whether site means are obviously different enough that a statistical test is not necessary. Even if site means appear to be almost exactly the same, a statistical test should still be used to confirm that since boxplots can be deceiving when trying to determine that two means are not significantly different.
 - Check for normality Chi-squared test. If the data are normal, and there is equal variance complete an ANOVA to compare sites. If there are more than 2 sites, follow with a post hoc test.
-- If the data are not normal, and there is not equal variance, complete a Kruskal Wallis test (or other test depending on the number of valid samples for each site). If there are more than 2 sites to compare, use Dunns test for post hoc site by site comparisons.
+- If the data are not normal, and there is not equal variance, complete a Kruskal Wallis test (or other test depending on the number of valid samples for each site). If there are more than 2 sites to compare, use Dunn's test for post hoc site by site comparisons.
 
 
 
