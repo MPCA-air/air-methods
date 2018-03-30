@@ -14,7 +14,7 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 
 <br>
 
-Before jumping into your analysis you'll want to clean it up with some helpful quality checks and formatting procedures.  
+Before jumping into your analysis you'll want to clean up your data with some helpful quality checks and formatting procedures.  
 
 These procedures include steps to:  
 
@@ -37,7 +37,7 @@ Large monitoring data sets often contain observations with missing concentration
 1. If available, review Null Data Codes. These codes will tell you why the data is missing. Most data sets will include null data codes. For AQS null code descriptions, see https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.html.
 1. Determine if your analysis needs to account for missing data before deleting observations. You may want to perform a count on all sample dates to quantify the expected number of observations.
 1. If you no longer need these records, remove them from the dataset.
-1. Document your process. Wait, you did that by writing it in an R script.
+1. Document your process. It is recommended that you document your data processing by writing it in the form of a script in a language such as R or Python.
 
 <br> __Why not keep them?__
 
@@ -206,11 +206,11 @@ Valid sample results may have data qualifiers. These qualifiers provide contextu
 <br> __Recommended steps__ 
 
 1. Filter data to view samples with Qualifier codes
-1. Evaluate whether any of the qualified data will unduly influence your analysis. For example, you may want to remove samples influenced by unique events. 
+1. Evaluate whether any of the qualified data will unduly influence your analysis. For example, you may want to remove samples influenced by unique events. In other instances, you may want to create a rule to remove a set of data with a certain level of qualified data.
 1. When removing qualified data, maintain a copy of the original data set and document what values have been removed. In some cases, you may want to run your analysis with and without the qualified values to characterize the influence of the qualified data on the results. 
 
 
-<<br> __Sample `R` script__  
+<br> __Sample `R` script__  
   
 Click the button below to view a step by step example of the methods above.
 
@@ -218,27 +218,41 @@ Click the button below to view a step by step example of the methods above.
 <button class = "btn_code">Show __R__ code</button>
 
 ```{r echo=F, message=F, warning=F}  
-library(RCurl)
-library(dplyr)
-library(tidyr)
+library(readr)
 
 qualifier_data <- read_csv("X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods/qualifier_date.csv")
 
-qualified_data <- filter(qualifier_data, !is.na(qual_code))
+#qualifier data is your data set with qualifier codes
+#names are what you want to name the output objects
 
-download <- getURL("https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.csv")
+view_qualifiers <- function(qualifier_data, names = c("data_with_qual_desc", "qualified_data", "qualifiers_present", "non_qualified_data")) {
+  
+  library(RCurl)
+  library(dplyr)
+  library(tidyr)
 
-qualifiers <- read_csv(download)
-qualifiers <- qualifiers %>% 
-  select(`Qualifier Code`, `Qualifier Description`, `Qualifier Type`)
+  download <- getURL("https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.csv")
+  
+  qualifiers <- read_csv(download)
+  qualifiers <- qualifiers %>% 
+    select(`Qualifier Code`, `Qualifier Description`, `Qualifier Type`)
 
-qualified_data <- left_join(qualified_data, qualifiers, by = c("qual_code" = "Qualifier Code"))
-
+  qualifier_data <- left_join(qualifier_data, qualifiers, by = c("qual_code" = "Qualifier Code"))
+  
+  qualified_data <- filter(qualifier_data, !is.na(qual_code))
 ##review qualifier types in the data
-unique(qualifier_data$`Qualifier Description`)
+  qualifiers_present <- unique(qualified_data$`Qualifier Description`)
+  print(qualifiers_present)
 
 ##remove qualified data if appropriate
-data_to_use <- filter(qualifier_data, is.na(qual_code))
+  non_qualified_data <- filter(qualifier_data, is.na(qual_code)) %>% select(-c(`Qualifier Description`, `Qualifier Type`))
+
+  list2env(list(qualifier_data, qualified_data, qualifiers_present, non_qualified_data) %>% set_names(names), envir = .GlobalEnv)
+
+  return()
+}
+
+view_qualifiers(qualifier_data)
 
 ```
 

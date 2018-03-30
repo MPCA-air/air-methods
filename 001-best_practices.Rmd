@@ -13,15 +13,10 @@ This section includes some _best practices_ to promote consistent, efficient, an
 
 ## Tidyverse
 
-The  _Tidyverse_ consists of a group of R packages that work in harmony by sharing a common data format and syntax. Using packages within the _Tidyverse_ for your analysis will make your scripts easier to read for others and _future you_.
+The  _Tidyverse_ consists of a group of R packages that work in harmony by sharing a common data format and syntax. Using packages within the _Tidyverse_ for your analysis will make your scripts easier to read for others.
 
 ![](images/tidy_packages.PNG){width="460"}
 
-
-
-## Pollutant names
-
-Pollutants often go by different names depending on the context you're in. To prevent confusion it helps to include a unique `CAS #` or parameter code in your analysis results and summary data. If you are working with monitoring data that is missing a unique identifier for each pollutant, an R package named `aircas` is available to help join CAS numbers to pollutant names.   
 
 
 ## Keeping R up-to-date
@@ -96,6 +91,7 @@ write_csv(results, "results/summary_results.csv")
 ```
 
 
+
 ## Divide and conquer
 
 For complex analysis projects many small components are often better than one big super script. As much as possible, try to create small functions to perform each task within in your analysis. If it's a function that you will use across multiple projects, it is often helpful to save the function to it's own script. These functions will become reusable building blocks that both future you and others can apply to their own projects. 
@@ -117,4 +113,45 @@ An example folder structure for a project is shown below:
 >     - summary_results.csv  
 >     - summary_report.pdf  
 >  
+
+
+## Codebooks, metadata, and data dictionaries
+
+A __codebook__ provides essential technical details and references for the variables in a dataset. The codebook ensures someone unfamiliar with your data wll have the necessary information to complete their analysis and help them to estimate the uncertainty of their results. An R package named `dataMaid` is available to assist with creating documentation for your datasets.
+
+__An example codebook generated with _dataMaid_.__
+
+![](images/tidy_packages.PNG){width="460"}
+
+```{r, eval = F}
+
+library(dataMaid)
+library(readr)
+
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+
+names(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
+
+attr(data$aqs_id, "labels") <- "Monitor ID"
+attr(data$aqs_id, "shortDescription") <- "EPA assigned monitor ID for the national Air Quality System (AQS)."
+
+makeCodebook(data, vol = 1, reportTitle = "Codebook for air toxics monitoring data", replace = TRUE)
+
+
+```
+
+
+
+## Pollutant names
+
+Pollutants often go by different names depending on the context you're in. To prevent confusion it helps to include a unique `CAS #` or parameter code in your analysis results and summary data. If you are working with monitoring data that is missing a unique identifier for each pollutant, an R package named `aircas` is available to help join CAS numbers to pollutant names.   
+
+## Formatting data
+
+Performing similar analysis on multiple pollutants at multiple sites over multiple years becomes much easier when data is in a consitent format. MPCA prefers tidy data where each result has its own row in a table. More information on tidy data can be found here: https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html. For monitoring data, each row should contain columns with the monitoring site ID (ASQ ID is best, but other unique identifiers for each site are okay) parameter code, 
+
+https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html
+
+
+
 
