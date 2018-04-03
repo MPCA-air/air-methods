@@ -34,3 +34,6 @@ vignettes/*.pdf
 .Rproj.user
 
 images/*.db
+
+*.zip
+/*.zip

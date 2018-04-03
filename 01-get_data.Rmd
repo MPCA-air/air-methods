@@ -11,17 +11,16 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 
 ![](images/cover1.jpg){align="right" style="margin-top: -4px; margin-left: 20px; width: 36%;"}
 
-This section describes how to access air monitoring and modeling data. 
+This section describes how to download air monitoring and modeling data. 
 
 
 __Air monitoring data__
 
-- Final Data <br>
+- Final data <br>
     - \@ref(AQS) EPA AQS Database 
     - \@ref(rqamd)EPA AQS Datamart (RQAMD Package)
     - \@ref(lims) MPCA LIMS data via Tableau
     - \@ref(wair) MPCA WAIR Database
-    - \@ref(EQuIS)MPCA EQuIS (coming in 2019)
 - Preliminary data <br>
     - \@ref(aqi-now)  AirNow: Current AQI observations
     - \@ref(AirVision) AirVision: Continuous data
@@ -29,11 +28,12 @@ __Air monitoring data__
     - \@ref(wairsites) WAIR Site Table
     - \@ref(monitors) AirNow: Active AQI monitors 
     - \@ref(EPAsites) EPA Google Earth Site Explorer
-    - \@ref(AQSsites) EPA AQS Site Table
+    
+
 
 __Summarized air monitoring results__
 
-- External Data Explorers <br>
+- External Data Explorers
     - \@ref(toxics) Air Toxics Data Explorer
     - \@ref(criteria) Criteria Pollutant Data Explorer
     - \@ref(AQI) Air Quality Index Summary Reports
@@ -41,7 +41,7 @@ __Summarized air monitoring results__
 - Internal Data Explorers <br>
     - \@ref(tableau) MPCA Tableau Server
 
-__Health and standards__
+__Health benchmarks and air quality standards__
 
 - Air toxics
     - \@ref(IHBs) Inhalation health benchmarks
@@ -56,9 +56,8 @@ __Air modeling__
     - \@ref(downscale) Downscaler for Ozone and PM2.5
     - \@ref(cmaq) CMAQ 
 
+
 __Context__
-
-
 
 - Emissions
     - \@ref(mn-ei) MN Emissions Inventory
@@ -73,6 +72,8 @@ __Context__
     - \@ref(landuse) Land use maps
     - \@ref(census) U.S. Census boundaries
     - \@ref(acs) Demographics from American Community Survey (ACS) 
+
+<br>
 
 
 ## Air monitoring 
@@ -113,14 +114,14 @@ setAQDMuser("User Name","PW",save=TRUE) #Note save=TRUE creates a file that stor
 setAQDMdefaults(pc="CRITERIA", state="27", save=TRUE) #Set defaults that are locally stored for queries. This eliminates need to define the data type and state code. 
 
 
-##Single Paramteer Query
+## Single parameter query
 
 x <- getAQDMdata(state="27",pc="CRITERIA",param="42602",format="AQCSV",bdate="20140101",edate="20141231",synchronous = FALSE) # Queries Data Mart DataBase
 
 aqcsv <- getAQDMrequest(x) # Wait for email confirming file is ready. 
 
 
-##Multiple Parameter Loops
+## Multiple parameter loops
 
 
 params <- c("45201", "42602", "44201") #Create a vector with the parameters you are interested in
@@ -130,12 +131,12 @@ x <- lapply(params, function(p) {
   return(getAQDMdata(param=p))
 })
 
-# now loop through the requests to retrieve the data
+# Now loop through the requests to retrieve the data
 y <- lapply(x, function(r) {
   return(getAQDMrequest(r))
 })
 
-# You could then use do.call and rbind to combine them into one data.frame
+# Use do.call and rbind to combine them into one data.frame
 d <- do.call(rbind, y)
 
 ```
@@ -156,6 +157,7 @@ Use the following R code to grab the most recent AQI results for the entire coun
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
+<br>
 
 ```{r}
 library(dplyr)
@@ -197,12 +199,15 @@ Click the button below to view a step by step example.
 
 ```{r, eval=F }
 library(RPostgreSQL)
-username<-#Add WAIR UserName
-pass<-#Add WAIR password
+username <- #Add WAIR UserName
+pass <- #Add WAIR password
 
-drv <- dbDriver("PostgreSQL")## load the PostgreSQL driver
+## Load the PostgreSQL driver
+drv <- dbDriver("PostgreSQL") 
 
-con <- dbConnect(drv, dbname="wair",host='eiger',user=username,password=pass)## Open a connection 
+## Open a connection 
+con <- dbConnect(drv, dbname="wair",host='eiger',user=username,password=pass) 
+
 sites <- dbGetQuery(con, 
                     statement = paste(
                       "SELECT *
@@ -210,8 +215,8 @@ sites <- dbGetQuery(con,
                       "
                     )); 
 
-dbDisconnect(con)## Closes the connection
-dbUnloadDriver(drv)## Frees all the resources on the driver
+dbDisconnect(con)   ## Closes the connection
+dbUnloadDriver(drv) ## Frees all the resources on the driver
 
 ```
 
@@ -231,7 +236,7 @@ Click the button below to view a step by step example.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
-
+<br>
 
 ```{r }
 library(dplyr)
@@ -276,14 +281,17 @@ aqi_sites  <- filter(aqi_sites, state_fips %in% c(27))
 
 </div>
 
-
 <br>
+
+
 ### EPA Google Earth Site Maps {#EPAsites}
+
 The AirData Air Quality Monitors app is a mapping application available on the web and on mobile devices that displays monitor locations and monitor-specific information. It also allows the querying and downloading of data daily and annual summary data.  Static KMZ files are also available to download.
 
 https://www.epa.gov/outdoor-air-quality-data/interactive-map-air-quality-monitors
 
 ### Retrieving data from LIMS via Tableau {#lims}
+
 The LIMS database is the primary data warehouse for AQ monitoring activities. The LIMS system is being retired and replaced. To ease data accessibilty during this transition LIMS data are available for download via an internal Tableau workbook at http://tableau.pca.state.mn.us/#/workbooks/3342
 
 <br> __Sample `R` script__ 
@@ -298,6 +306,8 @@ Pollutant_Groups: Character vector of pollutant groups to extract. Air toxics in
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
+<br>
+
 ```{r}
 read_AT_data_tableau = function(Sites, Parameter_list, Start_date = "2016-01-01", End_date = "2016-03-31", Pollutant_Groups = c("metals (TSP)", "VOCs", "carbonyls")) {
   
@@ -332,17 +342,17 @@ read_AT_data_tableau = function(Sites, Parameter_list, Start_date = "2016-01-01"
     
   }
   
-  #Generate air toxics sampling dates
+  # Generate air toxics sampling dates
   
   Dates = sample_calendar(Start_date, End_date)
   
-  #Break dates into quarters
+  # Break dates into quarters
   
   Quarters = quarter(Dates, with_year = T)
   
   library(tidyverse)
   
-  #Convert fields to Tableau url format
+  # Convert fields to Tableau url format
   
   base_url = "http://tableau.pca.state.mn.us/views/exportDailyData/Datawithnullcodes.csv?"
   Sites = paste(paste0(Sites,"-1", collapse = ","), paste0(Sites,"-2", collapse = ","), sep = ",")
@@ -351,7 +361,7 @@ read_AT_data_tableau = function(Sites, Parameter_list, Start_date = "2016-01-01"
   Parameter_list = paste0(Parameter_list, collapse = ",")
   AT_data = NULL
   
-  for(i in unique(Quarters) ) {
+  for (i in unique(Quarters) ) {
   
   Dates2 = paste0(Dates[Quarters == i], collapse = ",")
   
@@ -365,7 +375,7 @@ read_AT_data_tableau = function(Sites, Parameter_list, Start_date = "2016-01-01"
                 "&RUNDATE=", Dates2
   )
   
-  #Read data from Tableau server
+  # Read data from Tableau server
   
   AT_data = bind_rows(AT_data, read_csv(url, col_types = "ccccicccd") )
   
@@ -374,14 +384,17 @@ read_AT_data_tableau = function(Sites, Parameter_list, Start_date = "2016-01-01"
   return(AT_data)
 }
 ```
+</div>
 
 ### Retrieving continuous data from AirVision {#AirVision}
+
 AirVision is the data acquistion and temporary storage database for continuous air monitoring data. Data collected in AirVision is transfered to LIMs and AQS for final data storage. If you need the most recent monitoring observations and would like to access continuous data before it has been transfered to the final data repository you can run reports from AirVision.
 
 To run reports, the AirVision client must be installed on your computer and you need a user account. Contact the Air Monitoring Supervisor to request credentials. Alternatively, an AirVision administator can create a report task that will generate a data report and send it to a specified location (FTP site or e-mail). 
 
 
 ### Retrieving data from MPCA WAIR database {#wair}
+
 The WAIR database provides a queryable local copy of select air quality data extracted from multiple data sources. This database is managed by Margaret McCourtney.Contact Margaret to request login credentials. 
 
 See [WAIR Data Dictionary](http://rainier.pca.state.mn.us/documentation/DataDictionary/wair/index.html) for available data tables.
@@ -390,6 +403,8 @@ Use the following code to query WAIR using the R package `dplyr`.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
+
+<br>
 
 ```{r, eval=FALSE}
 ################################################################################################
@@ -448,6 +463,8 @@ Use the following code to query WAIR using the package `RPostgrSQL`.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
+<br>
+
 ```{r, eval = FALSE}
 ################################################################################################
 ## This script loads the library and driver and connects to WAIR.  A PostgrSQL query extracts 
@@ -531,15 +548,16 @@ View and download MPCA calculated annual criteria pollutant design values from t
 
 View and download annual AQI Summary Reports (based on final montiroing data) from the online [Air Quality Index Data Explorer](https://www.pca.state.mn.us/air/annual-aqi-summary-reports).
 
-### Air Monitoring for PAHs{#AQI}
+### Air Monitoring for PAHs{#PAHs}
 
 View and download PAH monitoring results from the community and facility based special projects online at [Air Monitoring for PAHs](https://www.pca.state.mn.us/air/pah-study-results).
 
-### Internal Data Explorers{#tableau}
+### Internal Data Explorers {#tableau}
+
 Not all data analysis projects are ready or intended for external audiences. You can find a variety of analzyed monitoring results on the internal Tableau Server. 
 
-    - [Air Data Analysis] (http://tableau.pca.state.mn.us/#/projects/113/workbooks) 
-    - [Air Modeling and Risk Evaluation](http://tableau.pca.state.mn.us/#/projects/72/workbooks)
+- [Air Data Analysis](http://tableau.pca.state.mn.us/#/projects/113/workbooks) 
+- [Air Modeling and Risk Evaluation](http://tableau.pca.state.mn.us/#/projects/72/workbooks)
 
 ## Health and standards
 
@@ -559,6 +577,7 @@ Use the following R code to grab the most recent inhalation health benchmarks an
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
+<br>
 
 ```{r, eval = F}
 library(readxl)
@@ -581,6 +600,8 @@ You can also pull a simple table of inhalation health benchmarks from a table on
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
+<br>
+
 ```{r, warnings = FALSE}
 library(readr)
 
@@ -589,6 +610,7 @@ url  <- "https://raw.githubusercontent.com/MPCA-air/health-values/master/Inhalat
 ihbs <- read_csv(url) 
 ```
 </div>
+
 
 <br>
 
@@ -675,6 +697,7 @@ Use the following code to load the current facility coordinates.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
+<br>
 ```{r, eval = T}
 # This script connects to the MPCA database DELTA. 
 # A dplyr query collects source coordinates from the RAPIDS schema.

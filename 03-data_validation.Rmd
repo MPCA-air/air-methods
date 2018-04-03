@@ -1,6 +1,5 @@
 # Data validation
 
-
 ```{r, include=F}
 knitr::opts_chunk$set(echo = T, warning = F, message = F)
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
@@ -39,9 +38,13 @@ Data that fail validation tests may imply that laboratory equipment or system is
 1. Identify data sets with too few unique values.
 1. Report any failed test or significant finding to the laboratory if instrument failure is suspected. If there are several extreme values, communicate this to monitoring staff to find out if anything significant happened in the field. If there is no suggestion that the values could be from instrument or sampling issues, than a pollution source specialist should be consulted.
 
-<br> <br>
+<br><br>
 
-The following sections are examples of data validation steps that could be used to identify these issues. 
+
+The following sections show examples of data validation steps. 
+
+
+__Load example data__
 
 ```{r validation, eval=T, message=F, warning=F}
 library(tidyverse)
@@ -53,23 +56,29 @@ data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/
 
 names(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
 
-dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 
 ```
 
-<br> _Table: Sample monitoring data_   
+
+<br> __Sample monitoring data__   
 ```{r, eval=T, echo=F, message=F, warning=F}
 library(knitr)
 library(DT)
 
-kable(head(data), booktabs = T, caption = "Sample monitoring data.")
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 
-datatable(head(data, 10), options = dt_options)
+#kable(head(data), booktabs = T, caption = "Sample monitoring data.")
+
+datatable(head(data, 8), options = dt_options, rownames = F)
 ```
 
-First it's always a good idea to look at the data. If there are a low number of numeric data points the statistical tests that follow may not be advised.
+<br>
 
-Open the web tool below to chart the measured pollutants at each site. Script to recreate the webtool for other data is included as well.
+
+First, it's always a good idea to plot the data. If there are a low number of numeric data points the statistical tests that follow may not be advised.
+
+Open the web tool below to chart the measured pollutants at each site. A script to recreate the webtool for other monitoring data is included as well.
+
 
 [Shiny Data tool](https://mpca-pahs.shinyapps.io/ChartCleanData/)
 
@@ -139,17 +148,16 @@ shinyApp(
 ```
 
 
+
 ## Instrument drift or leaks in a system. {#leaks} 
 
 The intrument drift test returns a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. This test works for VOC air toxics measurements only. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. This test could be applied to other surrogate compounds where there are multiple analytes, or could be applied to single analyte measurements (i.e. PM2.5). Another way to test for instrument drift is to test for significant differences between equal numbers of measurements before and after a calibration or tuning. (See site comparison section of this book for these tests)
 
 <br> __Sample `R` script__ 
 
-Click the button below to view a step by step example of the method above.
+Click the button below to view a step by step example of checking for instrument drift.
 
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
-
-<br>
 
 ```{r echo=T, message=F, warning=F}  
 
@@ -217,8 +225,6 @@ Click the button to view a step by step example.
 
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
 
-<br>
-
 ```{r, eval=T, message=F, warning=F}
 
 # Test for exceptionally high values [above 75th percentile X 3] This can be modified to 95% for continous or other short duration data.
@@ -281,14 +287,10 @@ Click the button below to view a step by step example of counting unqiue detecte
 
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
 
-
-
 ```{r eval=T, message=F, warning=F, echo=F}
 library(knitr)
 library(DT)
 ```
-
-<br>
 
 Packages
 ```{r message=F}
@@ -346,6 +348,7 @@ DT::datatable(sample_n(data, size = 10, replace = F), options = list(scrollX = 0
 
 
 ## References {#valid_ref}    
+
 [USEPA Technical Support Document for the Nation Air Toxics Trends Sites](https://www3.epa.gov/ttnamti1/files/ambient/airtox/NATTS%20TAD%20Revision%203_FINAL%20October%202016.pdf)
 
 [European Union Guide to Data Validation](https://webgate.ec.europa.eu/fpfis/mwikis/essvalidserv/images/a/ad/PRACTICAL_GUIDE_TO_DATA_VALIDATION.pdf)

@@ -14,10 +14,11 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 Checking for data completeness before generating summaries ensures that results will be comparable from one year to the next. Without completeness checks, changes in the seasonal coverage from year to year may create the illusion of increasing or decreasing trends. 
 
 
-Completeness checks inlcude tests for:  
+Completeness checks include tests for:  
 
 - `Annual completeness` Number of samples required for a year.  
 - `Calendar quarter completeness` Number of samples required for a season or quarter.  
+
 
 
 ## Completeness checks  {#complete}
@@ -33,10 +34,12 @@ __Air toxics reporting guidelines__
 
 Annual results are considered _complete_ if the following conditions are met:
 
-- `Annual completeness` 75% or more of expected samples collected
+
 - `Calendar quarter completeness` 75% or more of expected samples collected
+- `Annual completeness` All four calendar quarters are complete
 
 <br>
+
 
 __Criteria pollutant reporting guidelines__
 
@@ -97,6 +100,7 @@ __Step 1:__ Find the expected number of samples.
 Monitors in EPA's Air Quality System are required to follow the [Air Toxics Monitoring Calendar](https://www3.epa.gov/ttn/amtic/calendar.html). The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. If you are uncertain about the sampling schedule for your data consult the lab to confirm the expected number of samples. 
 
 Entering the start and end date into the `sample_calendar()` function below will create a list of the expected sampling dates based on EPA's air toxics monitoring schedule.
+
 ```{r message=F, eval=T}
 
 # Create a sampling calendar based on EPA's air toxics monitoring schedule
@@ -137,6 +141,7 @@ sample_calendar <- function(start         = "2012-01-01",
 
 
 Find the date range of the data and create the expected sampling schedule with the function above.
+
 ```{r message=F, eval=T}
 
 # Find the year range of your data

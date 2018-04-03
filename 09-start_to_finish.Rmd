@@ -1,13 +1,7 @@
 # Start to finish {#start-finish}
 
 
-To pull it all together we created some R packages to streamline the cleaning and analysis steps. 
-
-
-`airclean`   &emsp; Cleaning and analysis functions for air monitoring data. 
-
-`airplot`    &emsp; Plotting functions for air monitoring data.
-
+To pull it all together we created some functions to streamline the cleaning and analysis steps.
 
 <br>
 

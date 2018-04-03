@@ -196,7 +196,7 @@ datatable(data, options = dt_options)
 </div>
 
 
-## Remove _Qualified_ data {#quals}
+## Qualified data {#quals}
 
 
 __Description__  
@@ -414,6 +414,6 @@ datatable(select(data, -key, -duplicate),
 </div>
 
 
-
 <br> [Back to top](#missing)
 
+  

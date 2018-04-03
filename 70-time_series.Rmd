@@ -14,7 +14,6 @@ The R script below shows a time series chart that is color coded by the quarter 
 
 
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
-<br>
 
 ```{r test_series, echo = F}
 library(ggplot2)
@@ -34,9 +33,6 @@ df <- data_frame(time = seq(as.Date("2016-01-01"), as.Date("2018-02-01"), 1),
 ggplot(df, aes(time, obs)) + geom_line(linetype = "dashed") +
   geom_point(aes(color = quarter)) + guides(color = guide_legend(title = "Quarter"))
 
-
-## Finding changepoints (ex. before & after monitor calibration)  
-
 ```
 
 </div>
@@ -45,17 +41,45 @@ ggplot(df, aes(time, obs)) + geom_line(linetype = "dashed") +
 
 ## Day of the week
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
-<br>
 
-```{r week_day_chart, echo = F}
+```{r week_day_chart, echo = F, eval=F}
+
+# Sample data
+df <- data_frame(time = seq(as.Date("2016-01-01"), as.Date("2018-02-01"), 1), 
+                 obs  = sample(25:110, 763, replace = T)) %>% 
+       mutate(n       = 1:n(),
+              weekdays = weekdays(time))
+
+ df <- df %>% 
+         rowwise() %>%
+         mutate(obs = mean(df$obs[max(0, n - 5):(n + 3)], na.rm = T))   
+
+ggplot(df, aes(time, obs)) + geom_line(linetype = "dashed") +
+  geom_point(aes(color = weekdays)) + guides(color = guide_legend(title = "Weekday"))
+
+
 ```
 </div>
 
 
 ## Hour of the day
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
-<br>
 
-```{r hour_day_chart, echo = F}
+```{r hour_day_chart, echo = F, eval=F}
+
+# Sample data
+df <- data_frame(time = seq(ymd_hms("2016-01-01 12:00:00"), ymd_hms("2018-02-01 12:00:00"), 1), 
+                 obs  = sample(25:110, 763, replace = T)) %>% 
+       mutate(n       = 1:n(),
+              hour = hour(time))
+
+ df <- df %>% 
+         rowwise() %>%
+         mutate(obs = mean(df$obs[max(0, n - 5):(n + 3)], na.rm = T))   
+
+ggplot(df, aes(time, obs)) + geom_line(linetype = "dashed") +
+  geom_point(aes(color = hour)) + guides(color = guide_legend(title = "Hour of the Day"))
+
+
 ```
 </div>

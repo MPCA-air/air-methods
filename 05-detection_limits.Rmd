@@ -44,7 +44,7 @@ New method requires calculation of the MDL of the method blanks (MDL_b).
     - `X:\Databases\AQ\AQ Lab\Data Analysis\Air Toxics\Detection Limits\Annual Detection Limits (micrograms).xlsx`
 - Use the `ParamYear` field to join monitoring observations to their respective detection limits.
 - Detection limits are updated when received from the lab. Current year samples may not have a detection limit in the file if the lab has not performed the test. 
-- If you receive a detection limit from the lab it is likely in "_instrument units_".
+- If you receive a detection limit directly from the lab it is likely in "_instrument units_".
     - Metals (ug/mL): conversion to ug/m3 requires accounting of flow rate, runtime, and 1/9 filter strip, and 40 mL liquid extraction
     - Carbonyls (ug/mL): conversion requires account of flow rate, runtime, and extraction volume. 
     - VOCs (ppb):conversion can be done using MW and Standard Temp/Pressure. 
@@ -76,7 +76,7 @@ New method requires calculation of the MDL of the method blanks (MDL_b).
 
 __Recommended Steps__ 
 
-24-hour samples which are below the method detection limit should be noted as "Censored" and the machine values should not be reported to the public unless explicitly requested. It is advised to replace the machine value with note, such as `MDL`, so the machine value is not used in independent analysis and to alert users of the data that censored values exist in the monitoring results. For details on how to deal with censored values in calculating annual summaries, see the summary methods section.
+24-hour samples which are below the method detection limit should be noted as "<MDL" and the machine values should not be reported to the public unless explicitly requested. It is advised to replace the machine value with note, such as `MDL`, so the machine value is not used in independent analysis and to alert users of the data that censored values exist in the monitoring results. For details on how to deal with censored values in calculating annual summaries, see the summary methods section.
 
 <br> 
 

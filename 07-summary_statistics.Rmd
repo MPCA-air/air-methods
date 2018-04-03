@@ -17,7 +17,7 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 <br>
 
 
-The summary methods described in this chapter inlcude:  
+The summary methods described in this chapter include:  
 
 \@ref(normal)      __Normality__  
 \@ref(boots)       __Bootstrapping__  
@@ -25,7 +25,6 @@ The summary methods described in this chapter inlcude:
 \@ref(confidence)  __Confidence intervals__  
 \@ref(incomplete)  __Annual summaries for incomplete data__  
 \@ref(health)      __Comparison of data to inhalation health benchmarks__  
-\@ref(roll365)     __Rolling 365 day summaries__   
 
 <br>
 
@@ -167,7 +166,7 @@ shinyApp(
 
 When to use a arithmetic or geometric mean:
 
-- Use an arithmetic mean when your data are normal and there are less than 5% below detection limit values per year/analyte/site [Kristie made up the 5%, but there is an EPA document looking at the impacts of BDL data. Will cite and incorporate.].
+- Use an arithmetic mean when your data are normal and there are less than 5% below detection limit values per year/analyte/site.
 - For non-automated scripts: Use a geometric mean if your data are log-normally distributed and there are less than 5% below detection limit values per year/analyte/site.
 
 
@@ -211,10 +210,10 @@ kable(df)
 
 __Bootstrap function__
 
-We currently use the `EnvStats` package to generate our summary values. It has built in functions to account for non-detect data and allows for different distributions. However, if you're not dealing with non-detects you can use a simple loop to boot things yourself.
-
+We currently use the `EnvStats` package to generate air toxics summary values. It has built in functions to account for non-detect data and allows for different distributions. However, if you're not dealing with non-detects you can use a simple loop to boot things yourself.
 
 Before you start you'll want to set the random number generator to ensure you'll be able to reproduce your results. I'll use `#27` below.
+
 ```{r message=F}
 set.seed(27)
 ```
@@ -239,6 +238,7 @@ quantile(random_df, 0.1)
 
 
 To repeat this 3,000 times we can wrap these steps into a `resample` function, and then use `sapply` to collect the results.
+
 ```{r message=F}
 
 # Create  resample function
@@ -408,17 +408,14 @@ annual_summary = UCL_95(data, 100)
 
 ## Annual summaries for incomplete data {#incomplete}
 
-There may be situations when a monitoring site does not meet the 75 percent completeness requirement in each quarter of a year, but annual summary statistics are still necessary. In this case, calculate annual summary statistics as usual but note that the site did not meet completeness requirements. The minimum threshold of valid samples required for reporting any annual summary statistics at all is up to the judgement of data analysis staff.
-
+There may be situations when a monitoring site does not meet the 75 percent completeness requirement in each quarter of a year, but annual summary statistics are still necessary. In this case, calculate annual summary statistics as usual but note that the site did not meet completeness requirements. The minimum threshold of valid samples required for reporting annual summary statistics may be based on the professional judgement of data analysis staff, but must meet statistical test assumptions.
 
 ## Comparison of data to inhalation health benchmarks {#health}
 
 Chronic Inhalation Health Benchmarks - The annual 95% upper confidence limit is compared to chronic inhalation health benchmarks which are chosen based on the MPCA/MDH hierarchy for inhalation health benchmarks information sources.These risk results are summarized differently for annual measured data reports (The Air Toxics Data Explorer) or if the comparison is used in a cumulative analysis (cumulative AERA) to inform air permitting or environmental review.
+
+<br>
+
 Acute Inhalation Health Benchmarks - The 2nd highest annual value multiplied by ten is compared to acute inhalation health benchmarks. This adjustment of the 24 hour integrated value approximates an hourly maximum, since acute inhalation health benchmarks are developed to be protective for high short-term exposures (about an hour).
 
-Summarization of risk estimates for a cumulative Air Emission Risk Analaysis - Risk estimates are summed across pollutants thereby applying the concept of additivity. Since not all pollutants are measured at each monitoring site, means of sites are estimated based on population density since we asumme that pollution sources are greater near greater numbers of people. Means are calculated for mid-density sites, and rural sites. Facilities within urban areas are provided risk estimates at the closest or most representative monitor with all pollutants measured. This is described in the cumulative AERA section in the [AERA guidance](https://www.pca.state.mn.us/air/aera-guide). Cumulative AERAs use the mean cumulative risk estimates for the most recent three years of monitored data.
-
-
-## Rolling 365 day summaries {#roll365}
-
-_Coming soon..._
+Summarization of risk estimates for a cumulative Air Emission Risk Analaysis - Risk estimates are summed across pollutants thereby applying the concept of additivity. Since not all pollutants are measured at each monitoring site, means of sites are estimated based on population density since we asumme that pollution sources are greater near greater numbers of people. Means are calculated for mid-density sites, and rural sites. Facilities within urban areas are provided risk estimates at the closest or most representative monitor with all pollutants measured. This is described in the cumulative AERA section in the [AERA guidance](https://www.pca.state.mn.us/air/aera-guide). Cumulative AERAs use the mean cumulative risk estimate for the most recent three years of monitored data.

@@ -21,7 +21,7 @@ Analysis steps for collocated monitors include:
 
 __Description__ 
 
-Collocated samples are multiple samples taken for a pollutant from the same monitoring site at the same time. Collocated samples provide an extra layer of quality assurance by taking multiple measurements under very similar conditions which helps detect machine, lab, and human error. Depending on the results from collocated monitors, only one of the monitors, or potentially neither may be considered as valid measurements.
+Collocated samples are multiple samples taken for a pollutant from the same monitoring site at the same time, using two pieces of monitoring equipment. Collocated samples provide an extra layer of quality assurance by taking multiple measurements under very similar conditions which helps detect machine, lab, and human error. Depending on the results from collocated monitors, only one of the monitors, or potentially neither may be considered as valid measurements.
 
 
 <br> __Why not keep all the data?__
@@ -39,20 +39,14 @@ If collocated monitors do not agree, then consult with the lab, field or quality
  
 
 
-
-
-
-
-
 <br> __Sample `R` script__ 
 
-The function `POC_compare` below generates scatterplots comparing sample values from POC 1 and POC 2 for sites with collocated monitors. If most points on the scatterplot are close to the red line and the correlation is high, then measurements from both POCs are considered equally valid. If points are not close to the red line or the correlation is not high, then both POCs need to be investigated to determine if one POC is more relaible.
+The function `POC_compare()` below generates scatterplots comparing sample values from POC 1 and POC 2 for sites with collocated monitors. If most points on the scatterplot are close to the red line and the correlation is high, then measurements from both POCs are considered equally valid. If points are not close to the red line or the correlation is not high, then both POCs need to be investigated to determine if one POC is more relaible.
 
-Click the button below to view example R script.
+Click the button below to view the script.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
-
 
 ```{r message=F, echo=T, eval=F, warning = FALSE}
 library(tidyverse)

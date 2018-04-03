@@ -7,7 +7,6 @@ The code below shows how to create a shapefile from air monitoring locations. Th
 
 
 <div class = "toggle"><button class = "btn_code">Show __R__ code</button>
-<br>
 
 ```{r shapefiles, eval=F, message=F, warning=F}
 library(tidyverse)

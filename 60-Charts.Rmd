@@ -10,7 +10,7 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 
 <br>
 
-This section describes various charts for exploring and reporting air monitoring data summaries.
+This section describes various charts for exploring and reporting air monitoring data.
 
 
 ## Calendar plots
@@ -63,7 +63,6 @@ The example below shows a few charts using the `ggpomological` theme.
 
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
 
-<br>
 
 A pollutant scatterplot with _pomological_ colors.
 ```{r}
@@ -231,9 +230,7 @@ __Sample `R` script__
 
 The script below produces an interactive Shiny App for exploring pollutant concentrations in relation to wind direction and speed.
 
-<div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
-<br>
+<div class="toggle"><button class = "btn_code">Show __R__ code</button>
 
 ```{r roses, eval=F, message=F, warning=F}
 
