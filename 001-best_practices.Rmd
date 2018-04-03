@@ -20,7 +20,7 @@ The  _Tidyverse_ consists of a group of R packages that work in harmony by shari
 <br>
 
 
-__Recomended packages__
+__Recommended packages__
 
 
 > __Loading data__
@@ -39,7 +39,7 @@ __Recomended packages__
 
 `googledrive` Read and write files to your Google Drive.
 
-`foreign`   Load data from Minitab and Systat
+`foreign`   Load data from Minitab and Systat.
 
 `R.matlab`  Load data from Matlab.
 
@@ -59,6 +59,8 @@ __Recomended packages__
 `lubridate`    Tools to format dates and perform calculations based on time.
 
 `forcats`      Set, re-order and change levels of _factors_ (ordered character variables).
+
+`magrittr`     Simplify your scripts by chaining multiple commands together with the pipe `%>%`.
 
 <br>
 
@@ -128,9 +130,9 @@ __Recomended packages__
 
 ![](https://raw.githubusercontent.com/RhoInc/CRANsearcher/master/inst/image/hex/CRANsearcher_hexSticker.png){width=23% align="right" style="margin-left: 8px; margin-right: 10px; margin-top: -60px; max-width: 23%;"}
 
-- Install the addin [CRANsearcher](https://github.com/RhoInc/CRANsearcher) to browse all published packages.
+- Install the Addin [CRANsearcher](https://github.com/RhoInc/CRANsearcher) to browse all published packages.
 
-- Vist [rOpenSci](https://ropensci.org/packages/) to view a selection of peer reviewed science packages.
+- Visit [rOpenSci](https://ropensci.org/packages/) to view a selection of peer reviewed science packages.
 
 <br>
 

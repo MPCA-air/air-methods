@@ -270,7 +270,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 </div>
 <p><br></p>
-<p><strong>Recomended packages</strong></p>
+<p><strong>Recommended packages</strong></p>
 <blockquote>
 <p><strong>Loading data</strong></p>
 </blockquote>
@@ -281,7 +281,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><code>rvest</code> Read and scrape content from webpages.</p>
 <p><code>pdftools</code> Read PDF documents.</p>
 <p><code>googledrive</code> Read and write files to your Google Drive.</p>
-<p><code>foreign</code> Load data from Minitab and Systat</p>
+<p><code>foreign</code> Load data from Minitab and Systat.</p>
 <p><code>R.matlab</code> Load data from Matlab.</p>
 <p><code>haven</code> Load data from SAS, SPSS, and Stata.</p>
 <p><br></p>
@@ -293,6 +293,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><code>stringr</code> Tools to edit and clean text and character strings.</p>
 <p><code>lubridate</code> Tools to format dates and perform calculations based on time.</p>
 <p><code>forcats</code> Set, re-order and change levels of <em>factors</em> (ordered character variables).</p>
+<p><code>magrittr</code> Simplify your scripts by chaining multiple commands together with the pipe <code>%&gt;%</code>.</p>
 <p><br></p>
 <blockquote>
 <p><strong>Charts and visuals</strong></p>
@@ -338,8 +339,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 </div>
 <ul>
-<li><p>Install the addin <a href="https://github.com/RhoInc/CRANsearcher">CRANsearcher</a> to browse all published packages.</p></li>
-<li><p>Vist <a href="https://ropensci.org/packages/">rOpenSci</a> to view a selection of peer reviewed science packages.</p></li>
+<li><p>Install the Addin <a href="https://github.com/RhoInc/CRANsearcher">CRANsearcher</a> to browse all published packages.</p></li>
+<li><p>Visit <a href="https://ropensci.org/packages/">rOpenSci</a> to view a selection of peer reviewed science packages.</p></li>
 </ul>
 <p><br></p>
 </div>
@@ -464,8 +465,8 @@ data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class=
 </ul>
 <p><br></p>
 <blockquote>
-<p><strong>Example Tidy data</strong> <div id="htmlwidget-7e7a3afde00c010c0fed" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7e7a3afde00c010c0fed">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15"],[null,null,null,null,null,null,null,null],[-999.99,0.23,0.35,0.22,null,0.07,0.02,0.06],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.08,0.06,0.06,0.08]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>duration<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,5,7]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<p><strong>Example Tidy data</strong> <div id="htmlwidget-9ae6bdb164f339cbe666" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9ae6bdb164f339cbe666">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15"],[null,null,null,null,null,null,null,null],[-999.99,0.23,0.35,0.22,null,0.07,0.02,0.06],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.08,0.06,0.06,0.08]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>duration<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,5,7]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 </blockquote>
 <p><br></p>
 <p>Additional columns may include qualifier codes and method detection limits. Fields directly associated with one or more of the columns above can be removed and stored in their own tables whenever possible. For example, the site address and site name are both fields that are directly associated with the monitor’s AQS ID. If your data file already has the AQS ID column, you can perform all analysis based on AQS ID and then join the site information after the analysis is completed. EPA’s AQS data is stored in a recommended format for air monitoring data, as it meets all of the requirements for tidy data.</p>

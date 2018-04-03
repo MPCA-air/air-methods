@@ -270,12 +270,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="get-data.html#lims">2.1.7</a> MPCA LIMS data via Tableau</li>
 <li><a href="get-data.html#wair">2.1.9</a> MPCA WAIR Database</li>
 </ul></li>
-<li>Preliminary data <br>
+<li>Preliminary data
 <ul>
 <li><a href="get-data.html#aqi-now">2.1.3</a> AirNow: Current AQI observations</li>
 <li><a href="get-data.html#AirVision">2.1.8</a> AirVision: Continuous data</li>
 </ul></li>
-<li>Air Monitoring Site Information <br>
+<li>Air Monitoring Site Information
 <ul>
 <li><a href="get-data.html#wairsites">2.1.4</a> WAIR Site Table</li>
 <li><a href="get-data.html#monitors">2.1.5</a> AirNow: Active AQI monitors</li>
@@ -291,7 +291,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="get-data.html#AQI">2.1.12</a> Air Quality Index Summary Reports</li>
 <li><a href="get-data.html#PAHs">2.1.13</a> Air Monitoring for PAHs</li>
 </ul></li>
-<li>Internal Data Explorers <br>
+<li>Internal Data Explorers
 <ul>
 <li><a href="get-data.html#tableau">2.1.14</a> MPCA Tableau Server</li>
 </ul></li>
@@ -405,7 +405,6 @@ d &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, y)</code>
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(readr)
 
@@ -469,7 +468,6 @@ sites &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(con,
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(readr)
 
@@ -525,7 +523,6 @@ aqi_sites  &lt;-<span class="st"> </span><span class="kw">filter</span>(aqi_site
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">read_AT_data_tableau =<span class="st"> </span><span class="cf">function</span>(Sites, Parameter_list, <span class="dt">Start_date =</span> <span class="st">&quot;2016-01-01&quot;</span>, <span class="dt">End_date =</span> <span class="st">&quot;2016-03-31&quot;</span>, <span class="dt">Pollutant_Groups =</span> <span class="kw">c</span>(<span class="st">&quot;metals (TSP)&quot;</span>, <span class="st">&quot;VOCs&quot;</span>, <span class="st">&quot;carbonyls&quot;</span>)) {
   
   sample_calendar &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">start         =</span> <span class="st">&quot;2016-01-01&quot;</span>, 
@@ -616,7 +613,6 @@ Show <strong>R</strong> code
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">################################################################################################
 ## This script loads the library and driver and connects to WAIR.  A dplyr query extracts 
 ## data from the database into a format specified by Cassie McMahon for calculating           
@@ -669,7 +665,6 @@ my_mn_o3_df &lt;-<span class="st"> </span><span class="kw">collect</span>(my_mn_
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">################################################################################################
 ## This script loads the library and driver and connects to WAIR.  A PostgrSQL query extracts 
 ## data from the database into a format specified by Cassie McMahon for calculating           
@@ -777,7 +772,6 @@ dframe &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(con,
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readxl)
 
 rass_web &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/AERA program/RASS/AERA RASS (aq9-22-7)_2018-01.xlsx&quot;</span>, 
@@ -794,7 +788,6 @@ ihbs &lt;-<span class="st"> </span>rass_web[ , <span class="kw">c</span>(<span c
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
 
 url  &lt;-<span class="st"> &quot;https://raw.githubusercontent.com/MPCA-air/health-values/master/Inhalation_Health_Benchmarks(IHBs).csv&quot;</span>
@@ -877,7 +870,6 @@ ihbs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(url) </code>
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This script connects to the MPCA database DELTA. </span>
 <span class="co"># A dplyr query collects source coordinates from the RAPIDS schema.</span>
                                                                           

@@ -21,10 +21,10 @@ __Air monitoring data__
     - \@ref(rqamd)EPA AQS Datamart (RQAMD Package)
     - \@ref(lims) MPCA LIMS data via Tableau
     - \@ref(wair) MPCA WAIR Database
-- Preliminary data <br>
+- Preliminary data 
     - \@ref(aqi-now)  AirNow: Current AQI observations
     - \@ref(AirVision) AirVision: Continuous data
- - Air Monitoring Site Information <br>
+ - Air Monitoring Site Information 
     - \@ref(wairsites) WAIR Site Table
     - \@ref(monitors) AirNow: Active AQI monitors 
     - \@ref(EPAsites) EPA Google Earth Site Explorer
@@ -38,7 +38,7 @@ __Summarized air monitoring results__
     - \@ref(criteria) Criteria Pollutant Data Explorer
     - \@ref(AQI) Air Quality Index Summary Reports
     - \@ref(PAHs) Air Monitoring for PAHs 
-- Internal Data Explorers <br>
+- Internal Data Explorers 
     - \@ref(tableau) MPCA Tableau Server
 
 __Health benchmarks and air quality standards__
@@ -157,7 +157,7 @@ Use the following R code to grab the most recent AQI results for the entire coun
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
-<br>
+
 
 ```{r}
 library(dplyr)
@@ -236,7 +236,7 @@ Click the button below to view a step by step example.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
-<br>
+
 
 ```{r }
 library(dplyr)
@@ -306,7 +306,7 @@ Pollutant_Groups: Character vector of pollutant groups to extract. Air toxics in
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
-<br>
+
 
 ```{r}
 read_AT_data_tableau = function(Sites, Parameter_list, Start_date = "2016-01-01", End_date = "2016-03-31", Pollutant_Groups = c("metals (TSP)", "VOCs", "carbonyls")) {
@@ -404,7 +404,7 @@ Use the following code to query WAIR using the R package `dplyr`.
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
 
-<br>
+
 
 ```{r, eval=FALSE}
 ################################################################################################
@@ -463,7 +463,7 @@ Use the following code to query WAIR using the package `RPostgrSQL`.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
-<br>
+
 
 ```{r, eval = FALSE}
 ################################################################################################
@@ -577,7 +577,7 @@ Use the following R code to grab the most recent inhalation health benchmarks an
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
-<br>
+
 
 ```{r, eval = F}
 library(readxl)
@@ -600,7 +600,7 @@ You can also pull a simple table of inhalation health benchmarks from a table on
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
-<br>
+
 
 ```{r, warnings = FALSE}
 library(readr)
@@ -697,7 +697,7 @@ Use the following code to load the current facility coordinates.
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
-<br>
+
 ```{r, eval = T}
 # This script connects to the MPCA database DELTA. 
 # A dplyr query collects source coordinates from the RAPIDS schema.
@@ -716,8 +716,8 @@ odbcDataSources()
 
 ```
 
-
 <br>
+
 
 To connect to `deltaw`, use the function `odbcConnect()`.
 
