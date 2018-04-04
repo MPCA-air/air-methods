@@ -88,9 +88,14 @@ __Recommended packages__
 
 `leaflet`      Display spatial data and make interactive maps.
 
-`sf`           Simple features, a spatial format using data frames to perform spatial 
+`sf`           Simple features, a spatial format using data frames to perform spatial.
+
+`tigris`       Download geography boundaries: States, Counties, Census tracts, Block groups.
+
+`tidycensus`   Download Census and American Community Survey data.
 
 <br>
+
 
 > __Files and folders__
 
