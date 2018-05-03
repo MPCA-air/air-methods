@@ -45,7 +45,7 @@
 
 
 
-<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.3/datatables.js"></script>
 <link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -232,7 +232,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="16.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>16.1.4</b> Producing Annual Summaries</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a></li>
+<li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
+<li class="chapter" data-level="16.2" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.2</b> References</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
 
@@ -846,7 +848,7 @@ ihbs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(url) </code>
 <h3><span class="header-section-number">2.3.4</span> CMAQ Ozone modeling</h3>
 <p>The Community Multiscale Air Quality Modeling System (CMAQ) is defined by EPA as:</p>
 <blockquote>
-<p>CMAQ <em>(see-mak)</em>: an active open-source development project of the EPA that consists of a suite of programs for conducting air quality model simulations. CMAQ combines current knowledge in atmospheric science and air quality modeling, and an open-source framework to deliver fast, technically sound estimates of ozone, particulates, air toxics and acids deposition.</p>
+<p>an active open-source project of the EPA that consists of a suite of programs for conducting air quality model simulations. CMAQ combines current knowledge in atmospheric science and air quality modeling, and an open-source framework to deliver fast, technically sound estimates of ozone, particulates, air toxics and acids deposition.</p>
 </blockquote>
 <p>The information and data from this platform can be found at the following website <a href="https://www.epa.gov/cmaq">CMAQ</a>.</p>
 </div>
@@ -961,7 +963,7 @@ sources &lt;-<span class="st"> </span><span class="kw">left_join</span>(sources,
 
 <span class="co"># View data </span>
 sources <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(SOURCE_ID, SOURCE_TYPE, SOURCE_NAME, LONGITUDE, LATITUDE) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">glimpse</span>()</code></pre></div>
-<pre><code>## Observations: 2,182
+<pre><code>## Observations: 2,169
 ## Variables: 5
 ## $ SOURCE_ID   &lt;chr&gt; &quot;2705300965&quot;, &quot;2704100003&quot;, &quot;2712300491&quot;, &quot;2716300...
 ## $ SOURCE_TYPE &lt;chr&gt; &quot;POINT&quot;, &quot;POINT&quot;, &quot;POINT&quot;, &quot;POINT&quot;, &quot;POINT&quot;, &quot;POIN...

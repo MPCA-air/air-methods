@@ -670,7 +670,7 @@ Downscaled data _(a blend of modeling and monitoring results)_ are provided by t
 ### CMAQ Ozone modeling {#cmaq}
 The Community Multiscale Air Quality Modeling System (CMAQ) is defined by EPA as:
 
-> CMAQ _(see-mak)_: an active open-source development project of the EPA that consists of a suite of programs for conducting air quality model simulations. CMAQ combines current knowledge in atmospheric science and air quality modeling, and an open-source framework to deliver fast, technically sound estimates of ozone, particulates, air toxics and acids deposition.
+> an active open-source project of the EPA that consists of a suite of programs for conducting air quality model simulations. CMAQ combines current knowledge in atmospheric science and air quality modeling, and an open-source framework to deliver fast, technically sound estimates of ozone, particulates, air toxics and acids deposition.
 
 The information and data from this platform can be found at the following website [CMAQ](https://www.epa.gov/cmaq).
 
