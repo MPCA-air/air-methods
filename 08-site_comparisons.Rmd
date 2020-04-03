@@ -33,25 +33,31 @@ The code below shows an example R script for calculating confidence intervals.
 
 
 <div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
+<button class="btn_code">Show __R__ code</button>
 
 <br>
 
 ```{r, eval=F, warning=F}
 
-library(dplyr)
+library(tidyverse)
 library(EnvStats)
-library(lubridate)
 
-site_compare = function(data, site_number, Boot_Repeats = 1000) {
+site_compare <- function(data, site_number, Boot_Repeats = 1000) {
+  
   library(EnvStats)
+  
   set.seed(2017)
   
-  annual_AT_means = function(air_toxics) {
+  annual_AT_means <- function(air_toxics) {
   
-  air_toxics = mutate(air_toxics, Year = year(ymd(Date)), Quarter = quarter(ymd(Date)) )
-  sample_complete = air_toxics %>% group_by(AQSID, Pollutant, Year, Quarter, MDL) %>% summarise(Complete = ( (sum(!is.na(Result) ) / length(Result) ) >= 0.75 ) ) %>%
-    mutate(Complete = ifelse(is.na(Complete), F, Complete) ) %>% group_by(AQSID, Pollutant, Year, MDL) %>% summarise(Complete = all(Complete) )
+  air_toxics <- mutate(air_toxics, Year = year(ymd(Date)), Quarter = quarter(ymd(Date)) )
+  
+  sample_complete <- air_toxics %>% 
+    group_by(AQSID, Pollutant, Year, Quarter, MDL) %>% 
+    summarise(Complete = ( (sum(!is.na(Result) ) / length(Result) ) >= 0.75 ) ) %>%
+    mutate(Complete = ifelse(is.na(Complete), F, Complete) ) %>%
+    group_by(AQSID, Pollutant, Year, MDL) %>% 
+    summarise(Complete = all(Complete) )
   
   enough_detects = air_toxics %>% group_by(AQSID, Pollutant, Year, MDL) %>% summarise(Detected = mean(Censored, na.rm = T) <= 0.8 )
   
@@ -75,17 +81,20 @@ site_compare = function(data, site_number, Boot_Repeats = 1000) {
     }
     
     else {
-      random.rows = NULL  
+      
+      random.rows = NULL 
+      
       random.rows = sample(which(!is.na(censored) & (!censored) & !duplicated(results) ), 2, replace = FALSE)
+      
       random.rows = c(random.rows, sample(which(!is.na(censored)), n-2, replace = TRUE))
       
-      MLE_means = ifelse(sum(censored[random.rows], na.rm = T) == 0, mean(results[random.rows]), elnormAltCensored(results[random.rows], censored[random.rows], method = "impute.w.mle", ci = F)$parameters[[1]] )
+      MLE_means <- ifelse(sum(censored[random.rows], na.rm = T) == 0, mean(results[random.rows]), elnormAltCensored(results[random.rows], censored[random.rows], method = "impute.w.mle", ci = F)$parameters[[1]] )
     }
     
     return(MLE_means)
   }
   
-  data = mutate(data, Result = ifelse(Censored, MDL, Result), ID = paste(AQSID, Pollutant, Year))
+  data <- mutate(data, Result = ifelse(Censored, MDL, Result), ID = paste(AQSID, Pollutant, Year))
   
   Bootstrap_means = replicate(Boot_Repeats, (by(data, data$ID, MLE_est) ) )
   
@@ -108,12 +117,14 @@ site_compare = function(data, site_number, Boot_Repeats = 1000) {
   
 }
 
-data <- read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
 
 names(data)[1:10] <- c("AQSID", "POC", "Parameter", "Date","Result",
                        "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
 
-data = data %>% filter(AQSID %in% c(270370020, 270370470, 271230871) ) %>% mutate(Censored = Result < MDL)
+data <- data %>% 
+        filter(AQSID %in% c(270370020, 270370470, 271230871) ) %>%
+        mutate(Censored = Result < MDL)
 
 site_number = 271230871
 seed = 2017
@@ -132,33 +143,38 @@ compare = site_compare(data, site_number, 50) #minimum 50 repeats
 
 Beeswarm plots are useful for visualizing concentrations measured at different sites with more detail than boxplots.
 
-Click the button below to view example R script.
+Click below to view an example R script.
 
 <div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
+<button class="btn_code">Show __R__ code</button>
 
 <br>
 
 ```{r}
+library(tidyverse)
 
-beeswarm_plot = function(data, pollutant, year) {
+beeswarm_plot <- function(data, pollutant, year) {
+  
   library(dplyr)
   library(ggbeeswarm)
   library(ggplot2)
   
-  data = mutate(data, AQSID = as.factor(AQSID) )
-  ggplot(filter(data, Pollutant == pollutant, Year == year), aes(y = AQSID, x = Result, color = Censored) ) + 
+  data <- mutate(data, AQSID = as.factor(AQSID))
+  
+  filter(data, Pollutant == pollutant, Year == year) %>%
+    ggplot(aes(y = AQSID, x = Result, color = Censored) ) + 
     geom_quasirandom(groupOnX = F) +   
-    labs(title = paste(pollutant, year), x = "Result (ug/m^3)" )
+    labs(title = paste(pollutant, year), x = "Result (ug/m^3)")
+  
 }
 
-library(tidyverse)
 
-data = read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+
 names(data)[1:10] <- c("AQSID", "POC", "Param_Code", "Date","Result",
                        "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
 
-data = mutate(data, Censored = Result < MDL)
+data <- mutate(data, Censored = Result < MDL)
 
 beeswarm_plot(data, "Lead", 2013)
 
@@ -181,10 +197,10 @@ _References_
 
 Correlation matrices help visualize the relationship between different pollutants at a site.
 
-Click the button below to view an example R script.
+Click below to view an example R script.
 
 <div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
+<button class="btn_code">Show __R__ code</button>
 <br>
 
 ```{r, warning=F}
@@ -215,4 +231,6 @@ data %>% correlation_plots(270530962)
 ```
 
 </div>
+
+<br> [Back to top](#site-comparisons)
 

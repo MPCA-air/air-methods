@@ -191,6 +191,7 @@ library(readr)
 
 # Set parameters
 year <- 2017
+
 data_file <- "monitors 1 and 2.csv"
 
 
@@ -199,7 +200,9 @@ air_data <- read_csv(data_file)
 
 # My functions
 calc_stat <- function(data) {
+  
   new_stat <- step1(data) %>% step2() %>% step3()
+  
 }
 
 # My analysis
@@ -214,9 +217,11 @@ write_csv(results, "results/summary_results.csv")
 
 ## Divide and conquer
 
-For complex analysis projects many small components are often better than one big super script. As much as possible, try to create small functions to perform each task within in your analysis. If it's a function that you will use across multiple projects, it is often helpful to save the function to it's own script. These functions will become reusable building blocks that both future you and others can apply to their own projects. 
+For complex projects, many small components are often better than one big super script. Try to create small functions to perform each task within your analysis. If it's a function that you will use across multiple projects, it is helpful to save the function to it's own script. 
 
-Using an R Markdown document is an additional way you can split your project into manageable steps. R Markdown makes it easier to include a short description of each step of your analysis. In fact, you are reading an R Markdown document now.
+These functions will become reusable building blocks that both future you and others can apply to their own projects. 
+
+Using an R Markdown document is an additional way to split your project into manageable steps. R Markdown makes it easier to add a short description of each step to your analysis. In fact, you are reading the output of an R Markdown document right now.
 
 An example folder structure for a project is shown below:
 

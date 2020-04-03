@@ -1,14 +1,72 @@
 # Maps
 
+```{r out.width='95%', echo=F}
+knitr::opts_chunk$set(echo = T, warning = F, message = F)
+dt_options <- list(scrollX = T, autoWidth = T, searching = F, 
+                   ordering = F, lengthChange = F, paginate = F, info = F)
+```
 
-## Creating shapefiles in R
+
+
+```{r air-sites-intro, echo=F} 
+library(tidyverse)
+library(leaflet)
+
+# Load site coordinates
+sites <- read_csv('https://raw.githubusercontent.com/MPCA-air/aqi-watch/master/data-raw/locations.csv')
+
+# Add basemap
+leaflet(sites[1, ]) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addMarkers()
+```
+
+
+## Interactive map of air monitors {-}
+
+<div class = "toggle"><button class = "btn_code">Show __R__ code</button>
+
+**Site map**
+```{r air-sites, eval=F} 
+library(tidyverse)
+library(leaflet)
+
+# Load site coordinates
+sites <- read_csv('https://raw.githubusercontent.com/MPCA-air/aqi-watch/master/data-raw/locations.csv')
+
+# Map sites
+leaflet(sites) %>%
+   addMarkers()
+```
+
+
+**Add a basemap**
+```{r air-sites-base} 
+# Add basemap
+leaflet(sites) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addMarkers()
+```
+
+**Add pop-ups**
+```{r darkbase-map, eval=T} 
+# Add site name popup labels and dark basemap
+leaflet(sites) %>%
+  addProviderTiles(providers$CartoDB.DarkMatter) %>%
+  addMarkers(popup = ~`Site Name`)
+```
+
+</div>
+
+
+## Creating shapefiles in R {-}
 
 The code below shows how to create a shapefile from air monitoring locations. This map is then joined to the Environmental Justice status for Census tracts.
 
 
 <div class = "toggle"><button class = "btn_code">Show __R__ code</button>
 
-```{r shapefiles, eval=F, message=F, warning=F}
+```{r shapefiles, eval=F}
 library(tidyverse)
 library(stringr)
 library(RcppRoll)

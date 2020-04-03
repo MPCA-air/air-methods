@@ -48,7 +48,7 @@ In most cases, our analyses do not require or allow filling in missing values. F
 
 Click the button below to view a step by step example of the methods above.
 
-<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+<div class="toggle"><button class="btn_code">Show __R__ code</button>
 
 
 ```{r echo=F, message=F, warning=F}  
@@ -215,9 +215,9 @@ Valid sample results may have data qualifiers. These qualifiers provide contextu
 Click the button below to view a step by step example of the methods above.
 
 <div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
+<button class="btn_code">Show __R__ code</button>
 
-```{r echo=F, message=F, warning=F}  
+```{r echo=T, message=F, warning=F}  
 library(readr)
 
 qualifier_data <- read_csv("X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods/qualifier_date.csv")
@@ -225,7 +225,8 @@ qualifier_data <- read_csv("X:/Programs/Air_Quality_Programs/Air Monitoring Data
 #qualifier data is your data set with qualifier codes
 #names are what you want to name the output objects
 
-view_qualifiers <- function(qualifier_data, names = c("data_with_qual_desc", "qualified_data", "qualifiers_present", "non_qualified_data")) {
+view_qualifiers <- function(qualifier_data, 
+                            names = c("data_with_qual_desc", "qualified_data", "qualifiers_present", "non_qualified_data")) {
   
   library(RCurl)
   library(dplyr)
@@ -234,30 +235,35 @@ view_qualifiers <- function(qualifier_data, names = c("data_with_qual_desc", "qu
   download <- getURL("https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.csv")
   
   qualifiers <- read_csv(download)
+  
   qualifiers <- qualifiers %>% 
     select(`Qualifier Code`, `Qualifier Description`, `Qualifier Type`)
 
-  qualifier_data <- left_join(qualifier_data, qualifiers, by = c("qual_code" = "Qualifier Code"))
+  qualifier_data <- left_join(qualifier_data, qualifiers, 
+                              by = c("qual_code" = "Qualifier Code"))
   
   qualified_data <- filter(qualifier_data, !is.na(qual_code))
-##review qualifier types in the data
+  
+## review qualifier types in the data
   qualifiers_present <- unique(qualified_data$`Qualifier Description`)
   print(qualifiers_present)
 
-##remove qualified data if appropriate
-  non_qualified_data <- filter(qualifier_data, is.na(qual_code)) %>% select(-c(`Qualifier Description`, `Qualifier Type`))
+## remove qualified data if appropriate
+  non_qualified_data <- filter(qualifier_data, is.na(qual_code)) %>%
+                        select(-c(`Qualifier Description`, `Qualifier Type`))
 
   list2env(list(qualifier_data, qualified_data, qualifiers_present, non_qualified_data) %>% set_names(names), envir = .GlobalEnv)
 
-  return()
+  return("")
 }
 
 view_qualifiers(qualifier_data)
 
 ```
 
-<br> 
+</div>
 
+<br> 
 
 
 ## Duplicate observations {#dups}
@@ -289,16 +295,18 @@ Leaving multiple observations for some dates in the data set is likely to bias c
 Click the button below to view a step by step example of the methods above.
 
 <div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
+<button class="btn_code">Show __R__ code</button>
 
 ```{r echo=F, message=F, warning=F}  
 library(knitr)
 library(DT)
 ```
 
-<br> Load the sample monitoring data.
-```{r eval=T, message=F, warning=F}
+<br> 
 
+Load the sample monitoring data.
+
+```{r eval=T, message=F, warning=F}
 
 data <- read.csv(text = '
 aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
@@ -338,7 +346,7 @@ data    <- data[!duplicated(data), ]
 ```
   
   
-<br> Add a unique column ID to each site/poc/param-code/date combination.
+<br> Add a unique column ID to each `site/poc/param-code/date` combination.
 ```{r, eval=T, message=F, warning=F}
 
 # Add unique key to each row
@@ -377,15 +385,12 @@ datatable(head(dupes), options = dt_options, rownames = FALSE)
 1. If all observations are censored and the detection limits are equal, select a single observation.
     
 ```{r, eval=T, message=F, warning=F}
-
-
 # Replace censored observations with NA
 dupes <- dupes %>% mutate(conc = ifelse(conc >= md_limit, conc, NA))
 
 # Calculate the mean of non-censored observations
 dupes <- group_by(dupes, unique_sample_id) %>% 
          mutate(conc = mean(conc, na.rm = T))
-
 
 # Arrange by concentration and detection limit, then select the first observation
 dupes <- group_by(dupes, unique_sample_id) %>% 

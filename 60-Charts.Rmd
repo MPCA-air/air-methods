@@ -3,7 +3,7 @@
 ![](http://imgs.xkcd.com/comics/cat_proximity.png){width="45%"}
 
 ```{r, include=F}
-knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+knitr::opts_chunk$set(echo = T, warning = F, message = F)
 
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 ```
@@ -59,9 +59,9 @@ Some __chart themes__ include:
 - [lato](https://github.com/briandconnelly/lato)
 
 
-The example below shows a few charts using the `ggpomological` theme.
+The example below shows charts with the `ggpomological` theme.
 
-<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+<div class="toggle"><button class="btn_code">Show __R__ code</button>
 
 
 A pollutant scatterplot with _pomological_ colors.
@@ -230,20 +230,19 @@ __Sample `R` script__
 
 The script below produces an interactive Shiny App for exploring pollutant concentrations in relation to wind direction and speed.
 
-<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+<div class="toggle"><button class="btn_code">Show __R__ code</button>
 
 ```{r roses, eval=F, message=F, warning=F}
 
 pollution_roses = function(data, met_data_filepath, num_breaks = 5) { #Met data must be in Tableau format
   
   library(tidyverse)
-  library(lubridate)
   library(openair)
   library(reshape)
   library(shiny)
   library(rsconnect)
   
-  data$Date = ymd(data$Date)
+  data$Date <- ymd(data$Date)
   
   met_data = read.csv(met_data_filepath)
   names(met_data)[c(1,8,9)] = c("Day","wd","ws")
@@ -253,7 +252,7 @@ pollution_roses = function(data, met_data_filepath, num_breaks = 5) { #Met data 
   met_data = timeAverage(met_data, avg.time = "day")
   met_data$date = ymd(met_data$date)
   
-  data = left_join(data, met_data, by = c("Date" = "date"))
+  data <- left_join(data, met_data, by = c("Date" = "date"))
   
   Pollutant <- unique(data$Pollutant)
   Site <- unique(data$AQSID)
@@ -312,3 +311,4 @@ pollution_roses = function(data, met_data_filepath, num_breaks = 5) { #Met data 
 
 </div>
 
+<br>[Back to top](#charts)

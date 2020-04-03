@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="generator" content="bookdown 0.7.4 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> Best practices | air-methods.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="" />
+  <meta property="og:title" content=" Best practices | air-methods.utf8" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/MPCA-air/air-methods" />
   <meta property="og:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
@@ -17,27 +16,30 @@
   <meta name="github-repo" content="MPCA-air/air-methods" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="" />
+  <meta name="twitter:title" content=" Best practices | air-methods.utf8" />
   
   
   <meta name="twitter:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
 
+<meta name="author" content="" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="get-data.html">
+<link rel="prev" href="index.html"/>
+<link rel="next" href="get-data.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -45,52 +47,88 @@
 
 
 
-<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.3/datatables.js"></script>
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script src="libs/datatables-binding-0.13/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.3/leaflet-providers-plugin.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -182,7 +220,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
 <li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.6</b> Below detection values</a></li>
 <li class="chapter" data-level="6.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.7</b> Multiple detection limits</a></li>
-<li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.8</b> References</a></li>
+<li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#reporting-limits"><i class="fa fa-check"></i><b>6.8</b> Reporting limits</a></li>
+<li class="chapter" data-level="6.9" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.9</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="completeness-checks.html"><a href="completeness-checks.html"><i class="fa fa-check"></i><b>7</b> Completeness checks</a><ul>
 <li class="chapter" data-level="7.1" data-path="completeness-checks.html"><a href="completeness-checks.html#complete"><i class="fa fa-check"></i><b>7.1</b> Completeness checks</a></li>
@@ -203,7 +242,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.2.2</b> Correlation matrices</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> Start to finish</a><ul>
+<li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> From start to finish</a><ul>
 <li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>10.1</b> Functions</a></li>
 <li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>10.2</b> Analysis steps</a></li>
 </ul></li>
@@ -214,26 +253,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.3" data-path="charts.html"><a href="charts.html#pollution-roses"><i class="fa fa-check"></i><b>11.3</b> Pollution roses</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>12</b> Time series</a><ul>
-<li class="chapter" data-level="12.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>12.1</b> Seasonality</a></li>
-<li class="chapter" data-level="12.2" data-path="time-series.html"><a href="time-series.html#day-of-the-week"><i class="fa fa-check"></i><b>12.2</b> Day of the week</a></li>
-<li class="chapter" data-level="12.3" data-path="time-series.html"><a href="time-series.html#hour-of-the-day"><i class="fa fa-check"></i><b>12.3</b> Hour of the day</a></li>
+<li class="chapter" data-level="" data-path="time-series.html"><a href="time-series.html#hour-of-the-day"><i class="fa fa-check"></i>Hour of the day</a></li>
+<li class="chapter" data-level="" data-path="time-series.html"><a href="time-series.html#day-of-the-week"><i class="fa fa-check"></i>Day of the week</a></li>
+<li class="chapter" data-level="" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i>Seasonality</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>13</b> Maps</a><ul>
-<li class="chapter" data-level="13.1" data-path="maps.html"><a href="maps.html#creating-shapefiles-in-r"><i class="fa fa-check"></i><b>13.1</b> Creating shapefiles in R</a></li>
+<li class="chapter" data-level="" data-path="maps.html"><a href="maps.html#interactive-map-of-air-monitors"><i class="fa fa-check"></i>Interactive map of air monitors</a></li>
+<li class="chapter" data-level="" data-path="maps.html"><a href="maps.html#creating-shapefiles-in-r"><i class="fa fa-check"></i>Creating shapefiles in R</a></li>
 </ul></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
-<li class="chapter" data-level="14" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>14</b> AQI explorer</a></li>
+<li class="chapter" data-level="14" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>14</b> Air toxics explorer</a><ul>
+<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>14.1</b> MPCA Air Toxics Methods</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1.1</b> Data Cleaning</a></li>
+<li class="chapter" data-level="14.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.1.2</b> Data Validation</a></li>
+<li class="chapter" data-level="14.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>14.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="14.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.1.4</b> Producing Annual Summaries</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
-<li class="chapter" data-level="16" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>16</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="16.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>16.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>16.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="16.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>16.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="16.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>16.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="16.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>16.1.4</b> Producing Annual Summaries</a></li>
-</ul></li>
-</ul></li>
+<li class="chapter" data-level="16" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>16</b> AQI explorer</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
-<li class="chapter" data-level="16.2" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.2</b> References</a></li>
+<li class="chapter" data-level="16.1" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.1</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -257,20 +297,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="best-practices" class="section level1">
 <h1><span class="header-section-number"></span> Best practices</h1>
-<div class="figure">
-<img src="https://avatars3.githubusercontent.com/u/22032646?s=400&amp;v=4" align="right" style="margin-left: 20px; margin-right: 18px; margin-top: -24px;" width="230" />
-
-</div>
+<p><img src="https://avatars3.githubusercontent.com/u/22032646?s=400&amp;v=4" align="right" style="margin-left: 20px; margin-right: 18px; margin-top: -24px;" width="230" /></p>
 <p><br></p>
 <p>This section includes some <em>best practices</em> to promote consistent, efficient, and accurate data analysis with <code>R</code>.</p>
 <p><br></p>
 <div id="welcome-to-the-tidyverse" class="section level2">
 <h2><span class="header-section-number">1.1</span> Welcome to the Tidyverse</h2>
 <p>The <em>Tidyverse</em> consists of a group of R packages that work in harmony by sharing a common data format and syntax. Using packages within the <em>Tidyverse</em> for your analysis will make your scripts easier to read for others and the <em>future you</em>.</p>
-<div class="figure">
-<img src="images/tidy_packages.PNG" width="460" />
-
-</div>
+<p><img src="images/tidy_packages.PNG" width="460" /></p>
 <p><br></p>
 <p><strong>Recommended packages</strong></p>
 <blockquote>
@@ -338,10 +372,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <blockquote>
 <p><strong>Find new packages</strong></p>
 </blockquote>
-<div class="figure">
-<img src="https://raw.githubusercontent.com/RhoInc/CRANsearcher/master/inst/image/hex/CRANsearcher_hexSticker.png" align="right" style="margin-left: 8px; margin-right: 10px; margin-top: -60px; max-width: 23%;" style="width:23.0%" />
-
-</div>
+<p><img src="https://raw.githubusercontent.com/RhoInc/CRANsearcher/master/inst/image/hex/CRANsearcher_hexSticker.png" align="right" style="margin-left: 8px; margin-right: 10px; margin-top: -60px; max-width: 23%;" style="width:23.0%" /></p>
 <ul>
 <li><p>Install the Addin <a href="https://github.com/RhoInc/CRANsearcher">CRANsearcher</a> to browse all published packages.</p></li>
 <li><p>Visit <a href="https://ropensci.org/packages/">rOpenSci</a> to view a selection of peer reviewed science packages.</p></li>
@@ -351,12 +382,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="keep-r-updated" class="section level2">
 <h2><span class="header-section-number">1.2</span> Keep R updated</h2>
 <p><strong>Get the <em>installr</em> package</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&#39;installr&#39;</span>) 
-<span class="kw">library</span>(<span class="st">&#39;installr&#39;</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">&#39;installr&#39;</span>) </a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(<span class="st">&#39;installr&#39;</span>)</a></code></pre></div>
 <p><strong>Update your R version</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">updateR</span>()</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">updateR</span>()</a></code></pre></div>
 <ul>
-<li>When a popup suggests closing RStudio and running the update from <em>RGUI</em>, click <strong>NO</strong>.</li>
+<li>When a popup suggests closing RStudio and running the update from <em>RGUI</em>,
+click <strong>NO</strong>.</li>
 <li>When asked whether to copy and update all of your packages. Click <strong>Yes</strong>. This will save you buckets of time.</li>
 </ul>
 <p>To learn more about <em>installr</em> see <a href="https://github.com/talgalili/installr/#readme" class="uri">https://github.com/talgalili/installr/#readme</a>.</p>
@@ -369,47 +401,51 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Load all packages at the top of the script.</li>
 <li>Assign important file paths and parameters near the top of the script.</li>
 <li>Avoid changing working directories with <code>setwd()</code>.</li>
-<li>Save files to a local working directory such as <code>&quot;~\results.csv&quot;</code>, rather than to a fixed location, such as <code>X:\EAO\Air Data\Project1\results.csv</code>.</li>
+<li>Save files to a local working directory such as <code>"~\results.csv"</code>, rather than to a fixed location, such as <code>X:\EAO\Air Data\Project1\results.csv</code>.</li>
 <li>Load usernames and passwords from a file such as <code>credentials.csv</code>.</li>
 </ul>
 <p><br></p>
 <blockquote>
 <p><strong>An example R script</strong></p>
 </blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># name_of_script.R</span>
-
-<span class="co"># Purpose: This script does amazing things.</span>
-<span class="co"># Assumptions: The monitoring data for the sites is from different years, </span>
-<span class="co">#              but we compare them anyways. </span>
-<span class="co"># Warning! Don&#39;t use this script for Kryptonite. It will break everything.</span>
-
-<span class="co"># Load packages</span>
-<span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(readr)
-
-<span class="co"># Set parameters</span>
-year &lt;-<span class="st"> </span><span class="dv">2017</span>
-data_file &lt;-<span class="st"> &quot;monitors 1 and 2.csv&quot;</span>
-
-
-<span class="co"># Load data</span>
-air_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(data_file)
-
-<span class="co"># My functions</span>
-calc_stat &lt;-<span class="st"> </span><span class="cf">function</span>(data) {
-  new_stat &lt;-<span class="st"> </span><span class="kw">step1</span>(data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step2</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step3</span>()
-}
-
-<span class="co"># My analysis</span>
-results &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">stat =</span> <span class="kw">calc_stat</span>(concentration))
-
-<span class="co"># Save results to local folder</span>
-<span class="kw">write_csv</span>(results, <span class="st">&quot;results/summary_results.csv&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># name_of_script.R</span></a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co"># Purpose: This script does amazing things.</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co"># Assumptions: The monitoring data for the sites is from different years, </span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">#              but we compare them anyways. </span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co"># Warning! Don&#39;t use this script for Kryptonite. It will break everything.</span></a>
+<a class="sourceLine" id="cb3-7" title="7"></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co"># Load packages</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb3-11" title="11"></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="co"># Set parameters</span></a>
+<a class="sourceLine" id="cb3-13" title="13">year &lt;-<span class="st"> </span><span class="dv">2017</span></a>
+<a class="sourceLine" id="cb3-14" title="14"></a>
+<a class="sourceLine" id="cb3-15" title="15">data_file &lt;-<span class="st"> &quot;monitors 1 and 2.csv&quot;</span></a>
+<a class="sourceLine" id="cb3-16" title="16"></a>
+<a class="sourceLine" id="cb3-17" title="17"></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="co"># Load data</span></a>
+<a class="sourceLine" id="cb3-19" title="19">air_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(data_file)</a>
+<a class="sourceLine" id="cb3-20" title="20"></a>
+<a class="sourceLine" id="cb3-21" title="21"><span class="co"># My functions</span></a>
+<a class="sourceLine" id="cb3-22" title="22">calc_stat &lt;-<span class="st"> </span><span class="cf">function</span>(data) {</a>
+<a class="sourceLine" id="cb3-23" title="23">  </a>
+<a class="sourceLine" id="cb3-24" title="24">  new_stat &lt;-<span class="st"> </span><span class="kw">step1</span>(data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step2</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step3</span>()</a>
+<a class="sourceLine" id="cb3-25" title="25">  </a>
+<a class="sourceLine" id="cb3-26" title="26">}</a>
+<a class="sourceLine" id="cb3-27" title="27"></a>
+<a class="sourceLine" id="cb3-28" title="28"><span class="co"># My analysis</span></a>
+<a class="sourceLine" id="cb3-29" title="29">results &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">stat =</span> <span class="kw">calc_stat</span>(concentration))</a>
+<a class="sourceLine" id="cb3-30" title="30"></a>
+<a class="sourceLine" id="cb3-31" title="31"><span class="co"># Save results to local folder</span></a>
+<a class="sourceLine" id="cb3-32" title="32"><span class="kw">write_csv</span>(results, <span class="st">&quot;results/summary_results.csv&quot;</span>)</a></code></pre></div>
 </div>
 <div id="divide-and-conquer" class="section level2">
 <h2><span class="header-section-number">1.4</span> Divide and conquer</h2>
-<p>For complex analysis projects many small components are often better than one big super script. As much as possible, try to create small functions to perform each task within in your analysis. If it’s a function that you will use across multiple projects, it is often helpful to save the function to it’s own script. These functions will become reusable building blocks that both future you and others can apply to their own projects.</p>
-<p>Using an R Markdown document is an additional way you can split your project into manageable steps. R Markdown makes it easier to include a short description of each step of your analysis. In fact, you are reading an R Markdown document now.</p>
+<p>For complex projects, many small components are often better than one big super script. Try to create small functions to perform each task within your analysis. If it’s a function that you will use across multiple projects, it is helpful to save the function to it’s own script.</p>
+<p>These functions will become reusable building blocks that both future you and others can apply to their own projects.</p>
+<p>Using an R Markdown document is an additional way to split your project into manageable steps. R Markdown makes it easier to add a short description of each step to your analysis. In fact, you are reading the output of an R Markdown document right now.</p>
 <p>An example folder structure for a project is shown below:</p>
 <p><code>New_Project\</code></p>
 <blockquote>
@@ -441,17 +477,17 @@ results &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><sp
 <h2><span class="header-section-number">1.5</span> Codebooks, metadata, and data dictionaries</h2>
 <p>A <strong>codebook</strong> provides essential technical details and references for the variables in a dataset. The codebook ensures someone unfamiliar with your data will have the necessary information to complete their analysis and help them to estimate the uncertainty of their results. An R package named <code>dataMaid</code> is available to assist with creating documentation for your data sets.</p>
 <p><strong>An example codebook generated with <em>dataMaid</em> </strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dataMaid)
-<span class="kw">library</span>(readr)
-
-data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)
-
-<span class="kw">names</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)
-
-<span class="kw">attr</span>(data<span class="op">$</span>aqs_id, <span class="st">&quot;labels&quot;</span>) &lt;-<span class="st"> &quot;Monitor ID&quot;</span>
-<span class="kw">attr</span>(data<span class="op">$</span>aqs_id, <span class="st">&quot;shortDescription&quot;</span>) &lt;-<span class="st"> &quot;EPA assigned monitor ID for the national Air Quality System (AQS).&quot;</span>
-
-<span class="kw">makeCodebook</span>(data, <span class="dt">vol =</span> <span class="dv">1</span>, <span class="dt">reportTitle =</span> <span class="st">&quot;Codebook for air toxics monitoring data&quot;</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">library</span>(dataMaid)</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="kw">names</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)</a>
+<a class="sourceLine" id="cb4-7" title="7"></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="kw">attr</span>(data<span class="op">$</span>aqs_id, <span class="st">&quot;labels&quot;</span>) &lt;-<span class="st"> &quot;Monitor ID&quot;</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="kw">attr</span>(data<span class="op">$</span>aqs_id, <span class="st">&quot;shortDescription&quot;</span>) &lt;-<span class="st"> &quot;EPA assigned monitor ID for the national Air Quality System (AQS).&quot;</span></a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="kw">makeCodebook</span>(data, <span class="dt">vol =</span> <span class="dv">1</span>, <span class="dt">reportTitle =</span> <span class="st">&quot;Codebook for air toxics monitoring data&quot;</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="data-formatting" class="section level2">
 <h2><span class="header-section-number">1.6</span> Data formatting</h2>
@@ -469,8 +505,9 @@ data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class=
 </ul>
 <p><br></p>
 <blockquote>
-<p><strong>Example Tidy data</strong> <div id="htmlwidget-7008d8ccdd783e1c7ba1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7008d8ccdd783e1c7ba1">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15"],[null,null,null,null,null,null,null,null],[-999.99,0.23,0.35,0.22,null,0.07,0.02,0.06],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.08,0.06,0.06,0.08]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>duration<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,5,7]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<p><strong>Example Tidy data</strong>
+<div id="htmlwidget-455277b93cb8161c1385" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-455277b93cb8161c1385">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15"],[null,null,null,null,null,null,null,null],[-999.99,0.23,0.35,0.22,null,0.07,0.02,0.06],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.08,0.06,0.06,0.08]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>duration<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,5,7]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 </blockquote>
 <p><br></p>
 <p>Additional columns may include qualifier codes and method detection limits. Fields directly associated with one or more of the columns above can be removed and stored in their own tables whenever possible. For example, the site address and site name are both fields that are directly associated with the monitor’s AQS ID. If your data file already has the AQS ID column, you can perform all analysis based on AQS ID and then join the site information after the analysis is completed. EPA’s AQS data is stored in a recommended format for air monitoring data, as it meets all of the requirements for tidy data.</p>
@@ -499,11 +536,13 @@ data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class=
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -517,7 +556,15 @@ gitbook.start({
 "link": "https://github.com/MPCA-air/air-methods/edit/master/001-best_practices.Rmd",
 "text": "Edit"
 },
-"download": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["air-methods.pdf", "air-methods.epub"],
 "toc": {
 "collapse": "section"
 }

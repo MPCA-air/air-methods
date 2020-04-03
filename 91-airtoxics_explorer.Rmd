@@ -53,7 +53,9 @@ For any summary statistic calculated from a sample, the reliability of that stat
 
 i. The EPA recommends that at least 75 percent of scheduled samples in a calendar year for a pollutant at a site produce a valid measurement (non-null result) in order to report summary statistics for the pollutant at that site. If fewer than 75 percent of scheduled samples in a calendar year produce a valid measurement, then annual summary statistics should not be reported for the pollutant at that site for that year. It may be reported that the summary statistic could not be calculated because this requirement was not met.
 
-ii.	EPA recommends that every 3-month quarter of a calendar year also have at least 75 percent of scheduled samples in that quarter produce a valid measurement. If any quarter of the year does not meet this requirement, then annual summary statistics should not be reported for the pollutant at that site for that year. It may be reported that the summary statistic could not be calculated because this requirement was not met.
+ii.	EPA recommends that every 3-month quarter of a calendar year also have at least 75 percent of scheduled samples in that quarter produce a valid measurement.
+
+iii. MPCA reports annual summary statistics as valid if at least 75% percent of scheduled samples in the warm (May - October) and cold (January - April, November - December) seasons produce a valid measurement. If either season of the year does not meet this requirement, then annual summary statistics should not be reported for the pollutant at that site for that year. It may be reported that the summary statistic could not be calculated because this requirement was not met. MPCA uses a less stringent seasonal completeness requirement instead of the quarter completeness requirement due to the difficulties of achieving 75% completeness for all four quarters in a year.
 
 b. Results below the detection limit
 

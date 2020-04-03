@@ -16,8 +16,8 @@ Checking for data completeness before generating summaries ensures that results 
 
 Completeness checks include tests for:  
 
-- `Annual completeness` Number of samples required for a year.  
-- `Calendar quarter completeness` Number of samples required for a season or quarter.  
+- `Annual completeness` Number of samples required per year.  
+- `Seasonal completeness` Number of samples required per season.  
 
 
 
@@ -35,8 +35,8 @@ __Air toxics reporting guidelines__
 Annual results are considered _complete_ if the following conditions are met:
 
 
-- `Calendar quarter completeness` 75% or more of expected samples collected
-- `Annual completeness` All four calendar quarters are complete
+- `Seasonal completeness` 75% or more of samples collected in colder months (January - April, November, Decmeber) and in warmer months (May - October)
+- `Annual completeness` Both seasons are complete
 
 <br>
 
@@ -47,24 +47,22 @@ Completeness rules for criteria pollutant design values are defined in the [Appe
 
 In general, these rules apply:
 
-- `Annual completeness` 75% or more of samples collected
-- `Calendar quarter completeness` 75% or more of samples collected
+- `Annual completeness` 75% or more of samples collected per year
+- `Calendar quarter completeness` 75% or more of samples collected in each calendar quarter
 
+<br> __Recommended steps for air toxics__
 
-<br> __Recommended steps__
-
-1. Based on the monitoring schedule, record the total _expected samples_ for each year and quarter.
+1. Based on the monitoring schedule, record the total _expected samples_ for each year and season.
     - Air toxics monitors follow a fixed sampling schedule provided by EPA's [Air Toxics Calendar](https://www3.epa.gov/ttn/amtic/calendar.html).
-1. Count the number of _valid samples_ for each year and quarter.
+1. Count the number of _valid samples_ for each year and season.
 1. Divide the number of _valid samples_ by the number of _expected samples_.
-1. Mark annual results as _incomplete_ if they do not fulfill one of the completeness checks.
+1. Mark annual results as _incomplete_ if one or both seasons do not fulfill the completeness checks.
 
 <br> __Example `R` script__ 
 
+Click below to view an example.
 
-Click the button below to view a step by step example.
-
-<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+<div class="toggle"><button class="btn_code">Show __R__ code</button>
 
 ```{r eval=T, message=F, warning=F, echo=F}
 library(knitr)
@@ -267,9 +265,9 @@ DT::datatable(head(data, 10), options = dt_options, rownames = F)
 </div>
 
 
-
 <br> __References__    
 
 [Appendices of 40 CFR 50](https://www.ecfr.gov/cgi-bin/text-idx?tpl=/ecfrbrowse/Title40/40cfr50_main_02.tpl)  
 
 
+<br> [Back to top](#completeness-checks)

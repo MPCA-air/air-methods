@@ -8,20 +8,12 @@ knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 This section describes various approaches to visualize long-term trends and patterns in air monitoring data.
 
 
-
-## Seasonality
-The R script below shows a time series chart that is color coded by the quarter of the year.
-
-
-<div class="toggle"><button class = "btn_code">Show __R__ code</button>
-
-```{r test_series, echo = F}
-library(ggplot2)
-library(dplyr)
+```{r test_series, echo=F}
+library(tidyverse)
 library(lubridate)
 
 # Sample data
-df <- data_frame(time = seq(as.Date("2016-01-01"), as.Date("2018-02-01"), 1), 
+df <- tibble(time = seq(as.Date("2016-01-01"), as.Date("2018-02-01"), 1), 
                  obs  = sample(25:110, 763, replace = T)) %>% 
        mutate(n       = 1:n(),
               quarter = quarter(time))
@@ -30,56 +22,117 @@ df <- data_frame(time = seq(as.Date("2016-01-01"), as.Date("2018-02-01"), 1),
          rowwise() %>%
          mutate(obs = mean(df$obs[max(0, n - 5):(n + 3)], na.rm = T))   
 
-ggplot(df, aes(time, obs)) + geom_line(linetype = "dashed") +
-  geom_point(aes(color = quarter)) + guides(color = guide_legend(title = "Quarter"))
+ 
+ggplot(df, aes(time, obs)) + 
+  geom_line(linetype = "dashed") +
+  geom_point(aes(color = quarter)) + 
+  guides(color = guide_legend(title = "Quarter"))
 
 ```
 
+
+
+## Hour of the day {-}
+
+> Looking for the impact of a specific activity?
+
+The R script below shows the concentration distribution for each hour of the day.
+
+<div class="toggle"><button class="btn_code">Show __R__ code</button>
+
+```{r hour_day_chart, echo=T, eval=T}
+
+library(ggridges)
+
+# Sample data
+df <- tibble(time = seq(ymd_hm("2017-06-01 12:00"), ymd_hm("2018-02-01 12:00"), by = "hour"), 
+             obs  = rnorm(length(time), 55, 12)) %>% 
+      mutate(n    = 1:n(),
+             hour = hour(time) %>% as.factor,
+             obs = ifelse(hour %in% c(16:18), obs+29, obs))
+
+
+ggplot(df, aes(obs, y = hour)) + 
+  geom_density_ridges(aes(fill=obs))
+
+
+# Add color gradient + title
+ggplot(df, aes(obs, y = hour, fill = stat(x))) + 
+  geom_density_ridges_gradient(scale = 2) +
+  scale_fill_viridis_c() +
+  labs(title    = "Ozone concentration by hour",
+       subtitle = "Evening rush hour?")
+
+```
+</div>
+
+
+## Day of the week {-}
+
+> Do high traffic days show up on your air monitor? 
+
+The R script below shows air concentrations by day of the week.
+
+<div class="toggle"><button class="btn_code">Show __R__ code</button>
+
+```{r week_day_chart, echo=T, eval=T}
+
+# Generate sample data
+df <- tibble(time = seq(as.Date("2017-04-01"), as.Date("2018-02-01"), 1), 
+             obs  = rnorm(length(time), 55, 12)) %>% 
+       mutate(n       = 1:n(),
+              weekday = wday(time, label = T))
+
+df <- df %>% 
+      rowwise() %>%
+      mutate(obs = mean(df$obs[max(0, n - 5):(n + 3)], na.rm = T),
+             obs = ifelse(weekday %in% c("Thu", "Fri"), obs+3, obs))   
+
+# Create a boxplot, grouped by weekday
+ggplot(df, aes(weekday, obs)) + 
+  geom_boxplot(aes(fill = weekday %in% c("Thu", "Fri")), show.legend = F) +
+  labs(title = "Ozone by day of the week")
+
+
+```
 </div>
 
 
 
-## Day of the week
-<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+## Seasonality {-}
 
-```{r week_day_chart, echo = F, eval=F}
+The R script below shows a time series chart that is color coded by the quarter of the year.
+
+
+<div class="toggle"><button class="btn_code">Show __R__ code</button>
+
+```{r test_series2, echo=T}
+library(tidyverse)
+library(lubridate)
 
 # Sample data
-df <- data_frame(time = seq(as.Date("2016-01-01"), as.Date("2018-02-01"), 1), 
+df <- tibble(time = seq(as.Date("2016-01-01"), as.Date("2018-02-01"), 1), 
                  obs  = sample(25:110, 763, replace = T)) %>% 
        mutate(n       = 1:n(),
-              weekdays = weekdays(time))
+              quarter = quarter(time))
 
  df <- df %>% 
          rowwise() %>%
          mutate(obs = mean(df$obs[max(0, n - 5):(n + 3)], na.rm = T))   
 
-ggplot(df, aes(time, obs)) + geom_line(linetype = "dashed") +
-  geom_point(aes(color = weekdays)) + guides(color = guide_legend(title = "Weekday"))
-
+# Dotted line plot 
+ggplot(df, aes(time, obs)) + 
+  geom_line(linetype = "dashed") +
+  geom_point(aes(color = quarter)) + 
+  guides(color = guide_legend(title = "Quarter"))
 
 ```
+
 </div>
 
 
-## Hour of the day
-<div class="toggle"><button class = "btn_code">Show __R__ code</button>
-
-```{r hour_day_chart, echo = F, eval=F}
-
-# Sample data
-df <- data_frame(time = seq(ymd_hms("2016-01-01 12:00:00"), ymd_hms("2018-02-01 12:00:00"), 1), 
-                 obs  = sample(25:110, 763, replace = T)) %>% 
-       mutate(n       = 1:n(),
-              hour = hour(time))
-
- df <- df %>% 
-         rowwise() %>%
-         mutate(obs = mean(df$obs[max(0, n - 5):(n + 3)], na.rm = T))   
-
-ggplot(df, aes(time, obs)) + geom_line(linetype = "dashed") +
-  geom_point(aes(color = hour)) + guides(color = guide_legend(title = "Hour of the Day"))
 
 
-```
-</div>
+<br>[Back to top](#time-series)
+
+

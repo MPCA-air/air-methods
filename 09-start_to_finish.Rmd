@@ -1,19 +1,18 @@
-# Start to finish {#start-finish}
+# From start to finish {#start-finish}
 
 
-To pull it all together we created some functions to streamline the cleaning and analysis steps.
+> We can pull all these steps together with a few functions to streamline the cleaning and analysis steps.
 
-<br>
 
-The script below shows an example workflow that starts with 24-hour air toxics data from MPCA's Air Toxics Results database, walks through each of the analysis steps outlined in the previous sections, and produces data validation tools, POC analysis tools, completeness checks, annual summaries, site comparisons, and pollution roses.
+The script below shows an example workflow that starts with 24-hour air toxics data from MPCA's Air Toxics database, walks through each of the analysis steps outlined in the previous sections, and produces a suite of data validation tools, POC analysis tools, completeness checks, annual summaries, site comparisons, and pollution roses.
 
 
 ## Functions  
 
-Click the button below to view example R script.
+Click below to view the example R script.
 
 <div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
+<button class="btn_code">Show __R__ code</button>
 
 <br>
 
@@ -26,8 +25,7 @@ install.MPCAair.packages = function() {
 install.packages(c(
   "easypackages",
   "tidyverse",
-  "lubridate",
-  "knitr",
+  "data.table",
   "nortest",
   "car",
   "DT",
@@ -50,7 +48,6 @@ library(easypackages)
 libraries(c(
   "tidyverse",
   "lubridate",
-  "knitr",
   "stats",
   "nortest",
   "car",
@@ -68,10 +65,12 @@ libraries(c(
 
 }
 
-flag = function(data) {
+flag <- function(data) {
+  
   library(tidyverse)
   library(lubridate)
-  data = mutate(data,
+  
+  data <- mutate(data,
                 AQSID_flag = is.na(AQSID),
                 POC_flag = is.na(as.numeric(POC) ) | as.numeric(POC) < 0 | as.numeric(POC) > 4,
                 Parameter_flag = is.na(as.numeric(Parameter)) | nchar(as.character(Parameter)) != 5,
@@ -85,9 +84,13 @@ flag = function(data) {
                 )
 }
 
-remove_flagged = function(data) {
+remove_flagged <- function(data) {
+  
   library(tidyverse)
-  return(filter(data, !any_flag) %>% select(-contains("flag") ) %>% mutate(Result = as.numeric(Result) ) )
+  
+  return(filter(data, !any_flag) %>% 
+           select(-contains("flag") ) %>%
+           mutate(Result = as.numeric(Result) ) )
 }
 
 flag_duplicates = function(data) {
@@ -122,12 +125,8 @@ average_duplicates = function(data) {
 time_series_plots = function(data) {
   
   library(shiny)
-  library(readr)
-  library(ggplot2)
   library(tidyverse)
-  library(stringr)
   library(RcppRoll)
-  library(lubridate)
   library(DT)
   library(rsconnect)
 
@@ -153,8 +152,6 @@ shinyApp(
   
   
   server = function(input, output) {
-    
-    
     
     
     output$detlim <- renderPlot({
@@ -184,12 +181,15 @@ library(shiny)
 library(tidyverse)
 library(rsconnect)  
   
-data = distinct(data, AQSID, POC, Parameter, Date, Pollutant, Year, .keep_all = T) #replace with better cleaning function
-data = spread(data, POC, Result) %>% mutate(Status = ifelse(`1` < MDL  & `2` < MDL, "POCs 1 and 2 below MDL", ifelse(`1` < MDL, "POC 1 below MDL", ifelse(`2` < MDL, "POC 2 below MDL", "POCs 1 and 2 above MDL") ) ) ) %>% drop_na(Status)
+data <- distinct(data, AQSID, POC, Parameter, Date, Pollutant, Year, .keep_all = T) #replace with better cleaning function
 
+data <- spread(data, POC, Result) %>% 
+        mutate(Status = ifelse(`1` < MDL  & `2` < MDL, "POCs 1 and 2 below MDL", ifelse(`1` < MDL, "POC 1 below MDL", ifelse(`2` < MDL, "POC 2 below MDL", "POCs 1 and 2 above MDL") ) ) ) %>% 
+       drop_na(Status)
 
 
 Pollutant <- unique(data$Pollutant)
+
 Site <- unique(data$AQSID)
 
 shinyApp(
@@ -285,7 +285,7 @@ sample_calendar <- function(start         = "2012-01-01",
 date_range <- range(data$Date)
 
 # Create expected sample calendar
-epa_schedule <- data_frame(Date = sample_calendar(start = format(date_range[1], "%Y-01-01"), #Extend range to first day of the year
+epa_schedule <- tibble(Date = sample_calendar(start = format(date_range[1], "%Y-01-01"), #Extend range to first day of the year
                                                   end   = format(date_range[2], "%Y-12-31"), #Extend range to last day of the year
                                                   day_interval = 6))
 
@@ -560,38 +560,45 @@ beeswarm_plot = function(data) {
 
 
 
-read_met_data_tableau = function(years = 2009:2017, stations = "MSP") {
+read_met_data_tableau <- function(years = 2009:2017, stations = "MSP") {
+  
   library(tidyverse)
-  years = paste0(years, collapse = ",")
-  stations = paste0(stations, collapse = ",")
-      url = paste0("http://tableau.pca.state.mn.us/views/WeatherObservations2009-2017/HourTable.csv?Station=",
-                   stations, "&Year=",years,"&Month=1,2,3,4,5,6,7,8,9,10,11,12")
-      met_data = read_csv(url, col_types = "??????????-") %>% select(Station, Year, Month, Day, Hour, 
-                                                                     everything() ) %>% arrange(Station, Year, 
-                                                                                                Month, Day, Hour)
+  
+  years <- paste0(years, collapse = ",")
+  
+  stations <- paste0(stations, collapse = ",")
+  
+  url <- paste0("http://tableau.pca.state.mn.us/views/WeatherObservations2009-2017/HourTable.csv?Station=",
+               stations, "&Year=", years, "&Month=1,2,3,4,5,6,7,8,9,10,11,12")
+  
+  met_data <- read_csv(url, col_types = "??????????-") %>% 
+              select(Station, Year, Month, Day, Hour, everything()) %>% 
+              arrange(Station, Year, Month, Day, Hour)
+  
   return(met_data)
 }
 
-pollution_roses = function(data, met_data, num_breaks = 5) { #Met data must be in Tableau format
+pollution_roses = function(data, met_data, num_breaks = 5) { 
+  # Met data must be in Tableau format
   
   library(tidyverse)
-  library(lubridate)
   library(openair)
   library(reshape)
   library(shiny)
   library(rsconnect)
   
-  data$Date = ymd(data$Date)
+  data$Date <- ymd(data$Date)
   
-  met_data = dplyr::rename(met_data, wd = `Wind Dir`, ws = `Wind Spd MPH`) %>%
+  met_data <- dplyr::rename(met_data, wd = `Wind Dir`, ws = `Wind Spd MPH`) %>%
               mutate(date = paste0(Year,"/",Month,"/",Day," ",Hour,":00"), date = ymd_hm(date)) %>%
               select(-Day, -Month, -Hour, -Year) %>%
               timeAverage(avg.time = "day") %>%
               mutate(date = ymd(date))
   
-  data = left_join(data, met_data, by = c("Date" = "date"))
+  data <- left_join(data, met_data, by = c("Date" = "date"))
   
   Pollutant <- unique(data$Pollutant)
+  
   Site <- unique(data$AQSID)
 
   shinyApp(
@@ -651,17 +658,20 @@ pollution_roses = function(data, met_data, num_breaks = 5) { #Met data must be i
 
 ## Analysis steps
 
-Click the button below to view example R script.
+Click below to view the example R script.
 
 <div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
+<button class="btn_code">Show __R__ code</button>
 
 ```{r, eval=F, message=F, warning=F}
 
 #Import data
 MPCA_air_libraries()
+
 library(tidyverse)
+
 data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+
 names(data)[1:10] <- c("AQSID", "POC", "Parameter", "Date","Result",
                        "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
 
@@ -706,18 +716,18 @@ beeswarms = data %>% beeswarm_plot()
 
 # Pollution Roses
 
-poll_rose_data = data
+poll_rose_data <- data
 
-met_data = read_met_data_tableau(2009:2013, "MSP")
+met_data <- read_met_data_tableau(2009:2013, "MSP")
 
-num_breaks = 5
+num_breaks <- 5
 
-pol_roses = poll_rose_data %>% pollution_roses(met_data, num_breaks)
+pol_roses <- poll_rose_data %>% pollution_roses(met_data, num_breaks)
 ```
 
 </div>
 
-<br><br> 
+<br> 
 
-[Back to top](#start-finish)
+<br>[Back to top](#start-finish)
 

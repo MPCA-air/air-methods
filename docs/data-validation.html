@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="generator" content="bookdown 0.7.4 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> Data validation | air-methods.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="" />
+  <meta property="og:title" content=" Data validation | air-methods.utf8" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/MPCA-air/air-methods" />
   <meta property="og:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
@@ -17,27 +16,30 @@
   <meta name="github-repo" content="MPCA-air/air-methods" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="" />
+  <meta name="twitter:title" content=" Data validation | air-methods.utf8" />
   
   
   <meta name="twitter:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
 
+<meta name="author" content="" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="data-cleaning.html">
-<link rel="next" href="collocated-monitors.html">
+<link rel="prev" href="data-cleaning.html"/>
+<link rel="next" href="collocated-monitors.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -45,52 +47,88 @@
 
 
 
-<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.3/datatables.js"></script>
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script src="libs/datatables-binding-0.13/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.3/leaflet-providers-plugin.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -182,7 +220,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
 <li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.6</b> Below detection values</a></li>
 <li class="chapter" data-level="6.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.7</b> Multiple detection limits</a></li>
-<li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.8</b> References</a></li>
+<li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#reporting-limits"><i class="fa fa-check"></i><b>6.8</b> Reporting limits</a></li>
+<li class="chapter" data-level="6.9" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.9</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="completeness-checks.html"><a href="completeness-checks.html"><i class="fa fa-check"></i><b>7</b> Completeness checks</a><ul>
 <li class="chapter" data-level="7.1" data-path="completeness-checks.html"><a href="completeness-checks.html#complete"><i class="fa fa-check"></i><b>7.1</b> Completeness checks</a></li>
@@ -203,7 +242,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.2.2</b> Correlation matrices</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> Start to finish</a><ul>
+<li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> From start to finish</a><ul>
 <li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>10.1</b> Functions</a></li>
 <li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>10.2</b> Analysis steps</a></li>
 </ul></li>
@@ -214,26 +253,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.3" data-path="charts.html"><a href="charts.html#pollution-roses"><i class="fa fa-check"></i><b>11.3</b> Pollution roses</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>12</b> Time series</a><ul>
-<li class="chapter" data-level="12.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>12.1</b> Seasonality</a></li>
-<li class="chapter" data-level="12.2" data-path="time-series.html"><a href="time-series.html#day-of-the-week"><i class="fa fa-check"></i><b>12.2</b> Day of the week</a></li>
-<li class="chapter" data-level="12.3" data-path="time-series.html"><a href="time-series.html#hour-of-the-day"><i class="fa fa-check"></i><b>12.3</b> Hour of the day</a></li>
+<li class="chapter" data-level="" data-path="time-series.html"><a href="time-series.html#hour-of-the-day"><i class="fa fa-check"></i>Hour of the day</a></li>
+<li class="chapter" data-level="" data-path="time-series.html"><a href="time-series.html#day-of-the-week"><i class="fa fa-check"></i>Day of the week</a></li>
+<li class="chapter" data-level="" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i>Seasonality</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>13</b> Maps</a><ul>
-<li class="chapter" data-level="13.1" data-path="maps.html"><a href="maps.html#creating-shapefiles-in-r"><i class="fa fa-check"></i><b>13.1</b> Creating shapefiles in R</a></li>
+<li class="chapter" data-level="" data-path="maps.html"><a href="maps.html#interactive-map-of-air-monitors"><i class="fa fa-check"></i>Interactive map of air monitors</a></li>
+<li class="chapter" data-level="" data-path="maps.html"><a href="maps.html#creating-shapefiles-in-r"><i class="fa fa-check"></i>Creating shapefiles in R</a></li>
 </ul></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
-<li class="chapter" data-level="14" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>14</b> AQI explorer</a></li>
+<li class="chapter" data-level="14" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>14</b> Air toxics explorer</a><ul>
+<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>14.1</b> MPCA Air Toxics Methods</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1.1</b> Data Cleaning</a></li>
+<li class="chapter" data-level="14.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.1.2</b> Data Validation</a></li>
+<li class="chapter" data-level="14.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>14.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="14.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.1.4</b> Producing Annual Summaries</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
-<li class="chapter" data-level="16" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>16</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="16.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>16.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>16.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="16.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>16.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="16.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>16.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="16.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>16.1.4</b> Producing Annual Summaries</a></li>
-</ul></li>
-</ul></li>
+<li class="chapter" data-level="16" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>16</b> AQI explorer</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
-<li class="chapter" data-level="16.2" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.2</b> References</a></li>
+<li class="chapter" data-level="16.1" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.1</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -285,164 +325,167 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><br><br></p>
 <p>The following sections show examples of data validation steps.</p>
 <p><strong>Load example data</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(stringr)
-<span class="kw">library</span>(RcppRoll)
-<span class="kw">library</span>(lubridate)
-
-data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)
-
-<span class="kw">names</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="kw">library</span>(stringr)</a>
+<a class="sourceLine" id="cb39-3" title="3"><span class="kw">library</span>(RcppRoll)</a>
+<a class="sourceLine" id="cb39-4" title="4"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb39-5" title="5"></a>
+<a class="sourceLine" id="cb39-6" title="6">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</a>
+<a class="sourceLine" id="cb39-7" title="7"></a>
+<a class="sourceLine" id="cb39-8" title="8"><span class="kw">names</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)</a></code></pre></div>
 <p><br> <strong>Sample monitoring data</strong><br />
-<div id="htmlwidget-4b0ec0a412170c03382c" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4b0ec0a412170c03382c">{"x":{"filter":"none","data":[[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1],[12102,12102,12102,12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29"],[0.00127,0.00223,0.0037,0.0018,0.0027,0.00173,0.00257,0.00101],[null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>year<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,8]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-7a5415378913284965bc" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7a5415378913284965bc">{"x":{"filter":"none","data":[[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1],[12102,12102,12102,12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29"],[0.00127,0.00223,0.0037,0.0018,0.0027,0.00173,0.00257,0.00101],[null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>year<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,8]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 <p><br></p>
 <p>First, it’s always a good idea to plot the data. If there are a low number of numeric data points the statistical tests that follow may not be advised.</p>
 <p>Open the web tool below to chart the measured pollutants at each site. A script to recreate the webtool for other monitoring data is included as well.</p>
 <p><a href="https://mpca-pahs.shinyapps.io/ChartCleanData/">Shiny Data tool</a></p>
-<p><a href=https://mpca-pahs.shinyapps.io/ChartCleanData/> <img src="images/data-detectionlimits.jpg" width="100%" style="display: block; margin: auto;" /> </a></p>
+<p><a href=https://mpca-pahs.shinyapps.io/ChartCleanData/>
+<img src="images/data-detectionlimits.jpg" width="100%" style="display: block; margin: auto;" />
+</a></p>
 <div id="leaks" class="section level2">
 <h2><span class="header-section-number">4.1</span> Instrument drift or leaks in a system.</h2>
 <p>The intrument drift test returns a difference in variance of carbon tetrachloride between a calendar quarter for two consecutive years. This test works for VOC air toxics measurements only. Carbon tetrachloride was chosen because it is a banned substance and no longer in use, it has very few below detection limit values, and no direct sources. It has seasonally variable concentrations, so calendar quarters were compared to eliminate the detection of seasonal differences. The statistical test used was a Levenes Test for homogeneity of variance. This test could be applied to other surrogate compounds where there are multiple analytes, or could be applied to single analyte measurements (i.e. PM2.5). Another way to test for instrument drift is to test for significant differences between equal numbers of measurements before and after a calibration or tuning. (See site comparison section of this book for these tests)</p>
 <p><br> <strong>Sample <code>R</code> script</strong></p>
-<p>Click the button below to view a step by step example of checking for instrument drift.</p>
+<p>Click below to view an example of checking for instrument drift.</p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(car)
-
-data<span class="op">$</span>conc &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(data<span class="op">$</span>conc)
-data<span class="op">$</span>aqs_id &lt;-<span class="st"> </span><span class="kw">as.character</span>(data<span class="op">$</span>aqs_id)
-sites &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>aqs_id)
-years &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>year)
-data<span class="op">$</span>quarter =<span class="st"> </span><span class="kw">quarter</span>(data<span class="op">$</span>date)
-quarters &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>quarter)
-pocs &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>poc)
-
-clean_values =<span class="st"> </span><span class="cf">function</span>(data) {
-  data<span class="op">$</span>conc =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(data<span class="op">$</span>conc))
-  data<span class="op">$</span>conc[<span class="kw">abs</span>(data<span class="op">$</span>conc) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">999</span>] =<span class="st"> </span><span class="ot">NA</span>
-  <span class="kw">return</span>(data)
-}
-
-data =<span class="st"> </span><span class="kw">clean_values</span>(data)
-
-levene_function =<span class="st"> </span><span class="cf">function</span>(conc, quarter_year, row, col) {
-  <span class="cf">if</span>(<span class="kw">length</span>(<span class="kw">unique</span>(quarter_year))<span class="op">&lt;</span><span class="dv">2</span>){
-  <span class="kw">return</span>(<span class="ot">NA</span>)} 
-  data =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">conc =</span> conc, <span class="dt">quarter_year =</span> quarter_year)
-  <span class="kw">return</span>(<span class="kw">leveneTest</span>(conc<span class="op">~</span><span class="kw">as.factor</span>(quarter_year), <span class="dt">data =</span> data)[row,col])
-}
-
-leak_table_unfiltered &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">max</span>(years)<span class="op">:</span><span class="kw">max</span>(years)<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(years)){
-  <span class="cf">for</span>(j <span class="cf">in</span> i<span class="op">+</span><span class="dv">1</span>){
-    data_carbontet=<span class="kw">data.frame</span>()
-  data_carbontet &lt;-<span class="st"> </span><span class="kw">filter</span>(data, pollutant<span class="op">==</span><span class="st">&quot;Carbon Tetrachloride&quot;</span>, <span class="op">!</span><span class="kw">is.na</span>(conc), year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(i, j))
-data_carbontet<span class="op">$</span>quarter_year =<span class="st"> </span><span class="kw">paste</span>(data_carbontet<span class="op">$</span>quarter, <span class="st">&quot;_&quot;</span>, data_carbontet<span class="op">$</span>year)
-data_carbontet &lt;-<span class="st"> </span>data_carbontet <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(aqs_id, poc, quarter) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">fvalue_levene =</span> <span class="kw">levene_function</span>(conc, quarter_year, <span class="dv">1</span>,<span class="dv">2</span>), 
-            <span class="dt">pval_levene =</span> <span class="kw">levene_function</span>(conc, quarter_year, <span class="dv">1</span>,<span class="dv">3</span>), 
-            <span class="dt">deg_free_levene =</span> <span class="kw">levene_function</span>(conc, quarter_year, <span class="dv">2</span>,<span class="dv">1</span>),
-            <span class="dt">Year_1 =</span> <span class="kw">min</span>(year), 
-            <span class="dt">Year_2 =</span> <span class="kw">max</span>(year),
-            <span class="dt">Mean_Year_1 =</span> <span class="kw">mean</span>(conc[year<span class="op">==</span><span class="kw">min</span>(year)], <span class="dt">na.rm=</span>T),
-            <span class="dt">Mean_Year_2 =</span> <span class="kw">mean</span>(conc[year<span class="op">==</span><span class="kw">max</span>(year)], <span class="dt">na.rm=</span>T)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()
-leak_table_unfiltered  &lt;-<span class="st"> </span><span class="kw">rbind</span>(leak_table_unfiltered,data_carbontet)
-  }
-}
-leak_table &lt;-<span class="st"> </span><span class="kw">filter</span>(leak_table_unfiltered, pval_levene<span class="op">&lt;</span><span class="fl">0.01</span>, <span class="kw">abs</span>(Year_<span class="dv">1</span><span class="op">-</span>Year_<span class="dv">2</span>)<span class="op">==</span><span class="dv">1</span>)
-leak_table<span class="op">$</span>Warning_Type &lt;-<span class="st"> &quot;Decrease_in_Measurements&quot;</span>
-
-<span class="kw">datatable</span>(<span class="kw">head</span>(leak_table, <span class="dv">10</span>), <span class="dt">options =</span> dt_options) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">formatSignif</span>(<span class="kw">c</span>(<span class="st">&quot;fvalue_levene&quot;</span>, <span class="st">&quot;pval_levene&quot;</span>, <span class="st">&quot;Mean_Year_1&quot;</span>, <span class="st">&quot;Mean_Year_2&quot;</span>), <span class="dt">digits =</span> <span class="dv">2</span>)</code></pre></div>
-<div id="htmlwidget-852146495062fc8b4a39" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-852146495062fc8b4a39">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["270370423","270370020","270530963","270532006","271230871","271630436","271630438","271630438","270370423","270370442"],[1,1,1,1,1,1,1,1,1,1],[4,4,2,4,2,3,3,4,1,1],[12.8321167205998,8.30419781899444,10.1333525159204,7.83209847219974,31.8806166808157,10.0837964429286,7.84104281230434,7.95904130875383,8.69768548121835,15.5590610596442],[0.00186383643593451,0.00766282765700795,0.00355204671115566,0.00935632233004537,6.16044447634282e-006,0.00407513052426005,0.0099248877988128,0.00869911012386778,0.00665583043404958,0.000571273066957217],[20,27,28,27,26,24,24,28,26,25],[2012,2010,2010,2010,2010,2010,2010,2010,2009,2009],[2013,2011,2011,2011,2011,2011,2011,2011,2010,2010],[0.498802857142857,0.514200666666667,0.827502666666667,0.511833571428571,0.844817857142857,0.561594,0.573758,0.512104,0.494757857142857,0.468064666666667],[0.595147333333333,0.474537142857143,0.491134666666667,0.496167333333333,0.500149285714286,0.542759090909091,0.54276,0.489876,0.554974285714286,0.546286666666667],["Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>quarter<\/th>\n      <th>fvalue_levene<\/th>\n      <th>pval_levene<\/th>\n      <th>deg_free_levene<\/th>\n      <th>Year_1<\/th>\n      <th>Year_2<\/th>\n      <th>Mean_Year_1<\/th>\n      <th>Mean_Year_2<\/th>\n      <th>Warning_Type<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false,"rowCallback":"function(row, data) {\nDTWidget.formatSignif(this, row, data, 4, 2, 3, ',', '.');\nDTWidget.formatSignif(this, row, data, 5, 2, 3, ',', '.');\nDTWidget.formatSignif(this, row, data, 9, 2, 3, ',', '.');\nDTWidget.formatSignif(this, row, data, 10, 2, 3, ',', '.');\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">library</span>(car)</a>
+<a class="sourceLine" id="cb40-2" title="2"></a>
+<a class="sourceLine" id="cb40-3" title="3">data<span class="op">$</span>conc &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(data<span class="op">$</span>conc)</a>
+<a class="sourceLine" id="cb40-4" title="4">data<span class="op">$</span>aqs_id &lt;-<span class="st"> </span><span class="kw">as.character</span>(data<span class="op">$</span>aqs_id)</a>
+<a class="sourceLine" id="cb40-5" title="5">sites &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>aqs_id)</a>
+<a class="sourceLine" id="cb40-6" title="6">years &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>year)</a>
+<a class="sourceLine" id="cb40-7" title="7">data<span class="op">$</span>quarter =<span class="st"> </span><span class="kw">quarter</span>(data<span class="op">$</span>date)</a>
+<a class="sourceLine" id="cb40-8" title="8">quarters &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>quarter)</a>
+<a class="sourceLine" id="cb40-9" title="9">pocs &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>poc)</a>
+<a class="sourceLine" id="cb40-10" title="10"></a>
+<a class="sourceLine" id="cb40-11" title="11">clean_values =<span class="st"> </span><span class="cf">function</span>(data) {</a>
+<a class="sourceLine" id="cb40-12" title="12">  data<span class="op">$</span>conc =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(data<span class="op">$</span>conc))</a>
+<a class="sourceLine" id="cb40-13" title="13">  data<span class="op">$</span>conc[<span class="kw">abs</span>(data<span class="op">$</span>conc) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">999</span>] =<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb40-14" title="14">  <span class="kw">return</span>(data)</a>
+<a class="sourceLine" id="cb40-15" title="15">}</a>
+<a class="sourceLine" id="cb40-16" title="16"></a>
+<a class="sourceLine" id="cb40-17" title="17">data =<span class="st"> </span><span class="kw">clean_values</span>(data)</a>
+<a class="sourceLine" id="cb40-18" title="18"></a>
+<a class="sourceLine" id="cb40-19" title="19">levene_function =<span class="st"> </span><span class="cf">function</span>(conc, quarter_year, row, col) {</a>
+<a class="sourceLine" id="cb40-20" title="20">  <span class="cf">if</span>(<span class="kw">length</span>(<span class="kw">unique</span>(quarter_year))<span class="op">&lt;</span><span class="dv">2</span>){</a>
+<a class="sourceLine" id="cb40-21" title="21">  <span class="kw">return</span>(<span class="ot">NA</span>)} </a>
+<a class="sourceLine" id="cb40-22" title="22">  data =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">conc =</span> conc, <span class="dt">quarter_year =</span> quarter_year)</a>
+<a class="sourceLine" id="cb40-23" title="23">  <span class="kw">return</span>(<span class="kw">leveneTest</span>(conc<span class="op">~</span><span class="kw">as.factor</span>(quarter_year), <span class="dt">data =</span> data)[row,col])</a>
+<a class="sourceLine" id="cb40-24" title="24">}</a>
+<a class="sourceLine" id="cb40-25" title="25"></a>
+<a class="sourceLine" id="cb40-26" title="26">leak_table_unfiltered &lt;-<span class="st"> </span><span class="kw">data.frame</span>()</a>
+<a class="sourceLine" id="cb40-27" title="27"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">max</span>(years)<span class="op">:</span><span class="kw">max</span>(years)<span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(years)){</a>
+<a class="sourceLine" id="cb40-28" title="28">  <span class="cf">for</span>(j <span class="cf">in</span> i<span class="op">+</span><span class="dv">1</span>){</a>
+<a class="sourceLine" id="cb40-29" title="29">    data_carbontet=<span class="kw">data.frame</span>()</a>
+<a class="sourceLine" id="cb40-30" title="30">  data_carbontet &lt;-<span class="st"> </span><span class="kw">filter</span>(data, pollutant<span class="op">==</span><span class="st">&quot;Carbon Tetrachloride&quot;</span>, <span class="op">!</span><span class="kw">is.na</span>(conc), year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(i, j))</a>
+<a class="sourceLine" id="cb40-31" title="31">data_carbontet<span class="op">$</span>quarter_year =<span class="st"> </span><span class="kw">paste</span>(data_carbontet<span class="op">$</span>quarter, <span class="st">&quot;_&quot;</span>, data_carbontet<span class="op">$</span>year)</a>
+<a class="sourceLine" id="cb40-32" title="32">data_carbontet &lt;-<span class="st"> </span>data_carbontet <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(aqs_id, poc, quarter) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb40-33" title="33"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">fvalue_levene =</span> <span class="kw">levene_function</span>(conc, quarter_year, <span class="dv">1</span>,<span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb40-34" title="34">            <span class="dt">pval_levene =</span> <span class="kw">levene_function</span>(conc, quarter_year, <span class="dv">1</span>,<span class="dv">3</span>), </a>
+<a class="sourceLine" id="cb40-35" title="35">            <span class="dt">deg_free_levene =</span> <span class="kw">levene_function</span>(conc, quarter_year, <span class="dv">2</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb40-36" title="36">            <span class="dt">Year_1 =</span> <span class="kw">min</span>(year), </a>
+<a class="sourceLine" id="cb40-37" title="37">            <span class="dt">Year_2 =</span> <span class="kw">max</span>(year),</a>
+<a class="sourceLine" id="cb40-38" title="38">            <span class="dt">Mean_Year_1 =</span> <span class="kw">mean</span>(conc[year<span class="op">==</span><span class="kw">min</span>(year)], <span class="dt">na.rm=</span>T),</a>
+<a class="sourceLine" id="cb40-39" title="39">            <span class="dt">Mean_Year_2 =</span> <span class="kw">mean</span>(conc[year<span class="op">==</span><span class="kw">max</span>(year)], <span class="dt">na.rm=</span>T)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb40-40" title="40">leak_table_unfiltered  &lt;-<span class="st"> </span><span class="kw">rbind</span>(leak_table_unfiltered,data_carbontet)</a>
+<a class="sourceLine" id="cb40-41" title="41">  }</a>
+<a class="sourceLine" id="cb40-42" title="42">}</a>
+<a class="sourceLine" id="cb40-43" title="43">leak_table &lt;-<span class="st"> </span><span class="kw">filter</span>(leak_table_unfiltered, pval_levene<span class="op">&lt;</span><span class="fl">0.01</span>, <span class="kw">abs</span>(Year_<span class="dv">1</span><span class="op">-</span>Year_<span class="dv">2</span>)<span class="op">==</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb40-44" title="44">leak_table<span class="op">$</span>Warning_Type &lt;-<span class="st"> &quot;Decrease_in_Measurements&quot;</span></a>
+<a class="sourceLine" id="cb40-45" title="45"></a>
+<a class="sourceLine" id="cb40-46" title="46"><span class="kw">datatable</span>(<span class="kw">head</span>(leak_table, <span class="dv">10</span>), <span class="dt">options =</span> dt_options) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">formatSignif</span>(<span class="kw">c</span>(<span class="st">&quot;fvalue_levene&quot;</span>, <span class="st">&quot;pval_levene&quot;</span>, <span class="st">&quot;Mean_Year_1&quot;</span>, <span class="st">&quot;Mean_Year_2&quot;</span>), <span class="dt">digits =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div id="htmlwidget-669cab34f76a068f5e13" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-669cab34f76a068f5e13">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["270370423","270370020","270530963","270532006","271230871","271630436","271630438","271630438","270370423","270370442"],[1,1,1,1,1,1,1,1,1,1],[4,4,2,4,2,3,3,4,1,1],[12.8321167205998,8.30419781899444,10.1333525159204,7.83209847219974,31.8806166808157,10.0837964429286,7.84104281230434,7.95904130875383,8.69768548121835,15.5590610596442],[0.00186383643593451,0.00766282765700795,0.00355204671115566,0.00935632233004537,6.16044447634282e-006,0.00407513052426005,0.0099248877988128,0.00869911012386778,0.00665583043404958,0.000571273066957217],[20,27,28,27,26,24,24,28,26,25],[2012,2010,2010,2010,2010,2010,2010,2010,2009,2009],[2013,2011,2011,2011,2011,2011,2011,2011,2010,2010],[0.498802857142857,0.514200666666667,0.827502666666667,0.511833571428571,0.844817857142857,0.561594,0.573758,0.512104,0.494757857142857,0.468064666666667],[0.595147333333333,0.474537142857143,0.491134666666667,0.496167333333333,0.500149285714286,0.542759090909091,0.54276,0.489876,0.554974285714286,0.546286666666667],["Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements","Decrease_in_Measurements"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>quarter<\/th>\n      <th>fvalue_levene<\/th>\n      <th>pval_levene<\/th>\n      <th>deg_free_levene<\/th>\n      <th>Year_1<\/th>\n      <th>Year_2<\/th>\n      <th>Mean_Year_1<\/th>\n      <th>Mean_Year_2<\/th>\n      <th>Warning_Type<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"targets":[4,5,9,10],"render":"function(data, type, row, meta) { return DTWidget.formatSignif(data, 2, 3, \",\", \".\"); }"},{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":["options.columnDefs.0.render"],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="outs" class="section level2">
 <h2><span class="header-section-number">4.2</span> Extreme values and outliers</h2>
 <p>We recommend testing air toxics for extreme values by comparing each measured concentration to 3 x the 75th percentile of the data set by year, site, and pollutant. For now, collocated measurements (POCS) are not tested separately. For data with higher temporal variability, such as black carbon and ultrafine particulates, a criteria of 3 x the 95th percentile of the data set by year, site and pollutant should be used. There are a variety of outlier tests. The recommended criteria are sensitive enough to find outliers each year but not so sensitive that values reflecting site conditions are flagged. For example, most air pollution measurements are much higher during fire works, such as occurrs on July 4th and December 31st. These data are not in error, they are accurate representations of the air concentrations during those times.</p>
 <p><br> <strong>Sample <code>R</code> script</strong></p>
-<p>Click the button to view a step by step example.</p>
+<p>Click the button to view an example.</p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Test for exceptionally high values [above 75th percentile X 3] This can be modified to 95% for continous or other short duration data.</span>
-high_data &lt;-<span class="st"> </span><span class="kw">group_by</span>(data, year, aqs_id, pollutant) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">AR_Mean =</span> <span class="kw">mean</span>(conc, <span class="dt">na.rm=</span>T), <span class="dt">Percentile_75 =</span> <span class="kw">quantile</span>(conc, <span class="fl">0.75</span>, <span class="dt">na.rm =</span> T), <span class="dt">Percentile_75_X3 =</span> Percentile_<span class="dv">75</span><span class="op">*</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()
-
-high_data &lt;-<span class="st"> </span><span class="kw">filter</span>(high_data, conc<span class="op">&gt;</span>Percentile_75_X3, <span class="op">!</span><span class="kw">is.na</span>(conc), AR_Mean<span class="op">&gt;</span>md_limit, Percentile_<span class="dv">75</span><span class="op">&gt;</span><span class="dv">0</span>)
-
-
-high_data<span class="op">$</span>Warning_Type &lt;-<span class="st"> &quot;Exceptionally_High_Value_Test&quot;</span>
-high_data &lt;-<span class="st"> </span><span class="kw">unique</span>(high_data)
-
-<span class="kw">datatable</span>(<span class="kw">head</span>(high_data, <span class="dv">10</span>), <span class="dt">options =</span> dt_options) </code></pre></div>
-<div id="htmlwidget-d3a45d246097c797a8b7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d3a45d246097c797a8b7">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["270370465","270370465","270370465","270370465","270370465","270370465","270370465","270370465","270370465","270370465"],[1,2,1,1,1,2,1,2,1,2],[12102,12102,12102,12102,12102,12102,12102,12102,12102,12102],["2009-02-12","2009-02-12","2009-03-26","2009-12-21","2010-08-24","2010-08-24","2010-10-11","2010-10-11","2013-07-09","2013-07-09"],[0.02077,0.02092,0.01616,0.04905,0.04287,0.04097,0.01284,0.01235,0.01329,0.01338],[null,null,null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0023556,0.0023556,0.0023556,0.0023556,0.00218715,0.00218715],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2010,2010,2010,2010,2013,2013],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"],[1,1,1,4,3,3,4,4,3,3],[0.00486700854700855,0.00486700854700855,0.00486700854700855,0.00486700854700855,0.00380803738317757,0.00380803738317757,0.00380803738317757,0.00380803738317757,0.00299623853211009,0.00299623853211009],[0.00521,0.00521,0.00521,0.00521,0.003975,0.003975,0.003975,0.003975,0.00372,0.00372],[0.01563,0.01563,0.01563,0.01563,0.011925,0.011925,0.011925,0.011925,0.01116,0.01116],["Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>year<\/th>\n      <th>cas<\/th>\n      <th>quarter<\/th>\n      <th>AR_Mean<\/th>\n      <th>Percentile_75<\/th>\n      <th>Percentile_75_X3<\/th>\n      <th>Warning_Type<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,5,7,9,11,12,13,14]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">high_data &lt;-<span class="st"> </span>high_data[, <span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;Warning_Type&quot;</span>)]</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># Test for exceptionally high values [above 75th percentile X 3] This can be modified to 95% for continous or other short duration data.</span></a>
+<a class="sourceLine" id="cb41-2" title="2">high_data &lt;-<span class="st"> </span><span class="kw">group_by</span>(data, year, aqs_id, pollutant) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">AR_Mean =</span> <span class="kw">mean</span>(conc, <span class="dt">na.rm=</span>T), <span class="dt">Percentile_75 =</span> <span class="kw">quantile</span>(conc, <span class="fl">0.75</span>, <span class="dt">na.rm =</span> T), <span class="dt">Percentile_75_X3 =</span> Percentile_<span class="dv">75</span><span class="op">*</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb41-3" title="3"></a>
+<a class="sourceLine" id="cb41-4" title="4">high_data &lt;-<span class="st"> </span><span class="kw">filter</span>(high_data, conc<span class="op">&gt;</span>Percentile_<span class="dv">75</span>_X3, <span class="op">!</span><span class="kw">is.na</span>(conc), AR_Mean<span class="op">&gt;</span>md_limit, Percentile_<span class="dv">75</span><span class="op">&gt;</span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb41-5" title="5"></a>
+<a class="sourceLine" id="cb41-6" title="6"></a>
+<a class="sourceLine" id="cb41-7" title="7">high_data<span class="op">$</span>Warning_Type &lt;-<span class="st"> &quot;Exceptionally_High_Value_Test&quot;</span></a>
+<a class="sourceLine" id="cb41-8" title="8">high_data &lt;-<span class="st"> </span><span class="kw">unique</span>(high_data)</a>
+<a class="sourceLine" id="cb41-9" title="9"></a>
+<a class="sourceLine" id="cb41-10" title="10"><span class="kw">datatable</span>(<span class="kw">head</span>(high_data, <span class="dv">10</span>), <span class="dt">options =</span> dt_options) </a></code></pre></div>
+<div id="htmlwidget-9b04cad107e507e182ba" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9b04cad107e507e182ba">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["270370465","270370465","270370465","270370465","270370465","270370465","270370465","270370465","270370465","270370465"],[1,2,1,1,1,2,1,2,1,2],[12102,12102,12102,12102,12102,12102,12102,12102,12102,12102],["2009-02-12","2009-02-12","2009-03-26","2009-12-21","2010-08-24","2010-08-24","2010-10-11","2010-10-11","2013-07-09","2013-07-09"],[0.02077,0.02092,0.01616,0.04905,0.04287,0.04097,0.01284,0.01235,0.01329,0.01338],[null,null,null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0023556,0.0023556,0.0023556,0.0023556,0.00218715,0.00218715],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2010,2010,2010,2010,2013,2013],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"],[1,1,1,4,3,3,4,4,3,3],[0.00486700854700855,0.00486700854700855,0.00486700854700855,0.00486700854700855,0.00380803738317757,0.00380803738317757,0.00380803738317757,0.00380803738317757,0.00299623853211009,0.00299623853211009],[0.00521,0.00521,0.00521,0.00521,0.003975,0.003975,0.003975,0.003975,0.00372,0.00372],[0.01563,0.01563,0.01563,0.01563,0.011925,0.011925,0.011925,0.011925,0.01116,0.01116],["Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test","Exceptionally_High_Value_Test"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>year<\/th>\n      <th>cas<\/th>\n      <th>quarter<\/th>\n      <th>AR_Mean<\/th>\n      <th>Percentile_75<\/th>\n      <th>Percentile_75_X3<\/th>\n      <th>Warning_Type<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,5,7,9,11,12,13,14]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">high_data &lt;-<span class="st"> </span>high_data[, <span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;Warning_Type&quot;</span>)]</a></code></pre></div>
 </div>
 </div>
 <div id="sticky2" class="section level2">
 <h2><span class="header-section-number">4.3</span> Sequential repeats and “sticky” numbers</h2>
 <p>Three or more sequential replicate values may be a result of a machine error.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##Search for three repeating identical values.
-repeat_data &lt;-<span class="st"> </span><span class="kw">group_by</span>(data, poc, year, aqs_id, pollutant) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">arrange</span>(year, aqs_id, poc, pollutant, date) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Previous_Day   =</span> <span class="kw">lag</span>(conc, <span class="dv">1</span>), 
-         <span class="dt">Two_Days_Prior =</span> <span class="kw">lag</span>(conc, <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()
-
-repeat_data &lt;-<span class="st"> </span><span class="kw">mutate</span>(repeat_data, <span class="dt">Repeat_Test =</span> <span class="kw">ifelse</span>(<span class="kw">round</span>(conc, <span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">==</span><span class="st"> </span><span class="kw">round</span>(Previous_Day, <span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">&amp;</span><span class="st"> </span><span class="kw">round</span>(Previous_Day, <span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">==</span><span class="st"> </span><span class="kw">round</span>(Two_Days_Prior, <span class="dt">digits=</span><span class="dv">4</span>), <span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>))
-
-repeat_data<span class="op">$</span>Warning_Type &lt;-<span class="st"> &quot;Repeat_Test&quot;</span>
-
-repeat_data &lt;-<span class="st"> </span><span class="kw">filter</span>(repeat_data, conc <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st">  </span>Repeat_Test <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)
-
-<span class="kw">datatable</span>(<span class="kw">head</span>(repeat_data, <span class="dv">10</span>), <span class="dt">options =</span> dt_options)</code></pre></div>
-<div id="htmlwidget-200e84ad8dc898450c6a" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-200e84ad8dc898450c6a">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020"],[1,1,1,1,1,1,1,1,1,1],[43218,12105,12105,12105,12105,43806,12110,12110,12113,43815],["2009-04-13","2009-03-08","2009-08-11","2009-08-17","2009-12-09","2009-10-16","2009-05-19","2009-11-03","2009-10-28","2009-06-12"],[0.02212,0.00022,1e-005,4e-005,1e-005,0.01034,0.00011,5e-005,0.00012,0.06071],[null,null,null,null,null,null,null,null,null,null],[0.120844061030091,0.0017316,0.0017316,0.0017316,0.0017316,0.387415757930539,0.0022308,0.0022308,0.0015288,0.273432395381246],["1,3-Butadiene","Beryllium","Beryllium","Beryllium","Beryllium","Bromoform","Cadmium","Cadmium","Cobalt","Ethylene Dichloride"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],["106-99-0","7440-41-7","7440-41-7","7440-41-7","7440-41-7","75-25-2","7440-43-9","7440-43-9","7440-48-4","107-06-2"],[2,1,3,3,4,4,2,4,4,2],[0.02212,0.00021,0,1e-005,0,0.01034,0.0001,2e-005,9e-005,0.06071],[0.02212,0.00018,0,0,0,0.01034,0.00015,0,0.00015,0.06071],["TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE"],["Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>year<\/th>\n      <th>cas<\/th>\n      <th>quarter<\/th>\n      <th>Previous_Day<\/th>\n      <th>Two_Days_Prior<\/th>\n      <th>Repeat_Test<\/th>\n      <th>Warning_Type<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,5,7,9,11,12,13]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">repeat_data &lt;-<span class="st"> </span>repeat_data[, <span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;Warning_Type&quot;</span>)]</code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co">##Search for three repeating identical values.</span></a>
+<a class="sourceLine" id="cb43-2" title="2">repeat_data &lt;-<span class="st"> </span><span class="kw">group_by</span>(data, poc, year, aqs_id, pollutant) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="st">  </span><span class="kw">arrange</span>(year, aqs_id, poc, pollutant, date) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Previous_Day   =</span> <span class="kw">lag</span>(conc, <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb43-5" title="5">         <span class="dt">Two_Days_Prior =</span> <span class="kw">lag</span>(conc, <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb43-6" title="6"></a>
+<a class="sourceLine" id="cb43-7" title="7">repeat_data &lt;-<span class="st"> </span><span class="kw">mutate</span>(repeat_data, <span class="dt">Repeat_Test =</span> <span class="kw">ifelse</span>(<span class="kw">round</span>(conc, <span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">==</span><span class="st"> </span><span class="kw">round</span>(Previous_Day, <span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">&amp;</span><span class="st"> </span><span class="kw">round</span>(Previous_Day, <span class="dt">digits =</span> <span class="dv">4</span>) <span class="op">==</span><span class="st"> </span><span class="kw">round</span>(Two_Days_Prior, <span class="dt">digits=</span><span class="dv">4</span>), <span class="st">&quot;TRUE&quot;</span>, <span class="st">&quot;FALSE&quot;</span>))</a>
+<a class="sourceLine" id="cb43-8" title="8"></a>
+<a class="sourceLine" id="cb43-9" title="9">repeat_data<span class="op">$</span>Warning_Type &lt;-<span class="st"> &quot;Repeat_Test&quot;</span></a>
+<a class="sourceLine" id="cb43-10" title="10"></a>
+<a class="sourceLine" id="cb43-11" title="11">repeat_data &lt;-<span class="st"> </span><span class="kw">filter</span>(repeat_data, conc <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st">  </span>Repeat_Test <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb43-12" title="12"></a>
+<a class="sourceLine" id="cb43-13" title="13"><span class="kw">datatable</span>(<span class="kw">head</span>(repeat_data, <span class="dv">10</span>), <span class="dt">options =</span> dt_options)</a></code></pre></div>
+<div id="htmlwidget-f144c60e55b01950ab79" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f144c60e55b01950ab79">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],["270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020"],[1,1,1,1,1,1,1,1,1,1],[43218,12105,12105,12105,12105,43806,12110,12110,12113,43815],["2009-04-13","2009-03-08","2009-08-11","2009-08-17","2009-12-09","2009-10-16","2009-05-19","2009-11-03","2009-10-28","2009-06-12"],[0.02212,0.00022,1e-005,4e-005,1e-005,0.01034,0.00011,5e-005,0.00012,0.06071],[null,null,null,null,null,null,null,null,null,null],[0.120844061030091,0.0017316,0.0017316,0.0017316,0.0017316,0.387415757930539,0.0022308,0.0022308,0.0015288,0.273432395381246],["1,3-Butadiene","Beryllium","Beryllium","Beryllium","Beryllium","Bromoform","Cadmium","Cadmium","Cobalt","Ethylene Dichloride"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],["106-99-0","7440-41-7","7440-41-7","7440-41-7","7440-41-7","75-25-2","7440-43-9","7440-43-9","7440-48-4","107-06-2"],[2,1,3,3,4,4,2,4,4,2],[0.02212,0.00021,0,1e-005,0,0.01034,0.0001,2e-005,9e-005,0.06071],[0.02212,0.00018,0,0,0,0.01034,0.00015,0,0.00015,0.06071],["TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE","TRUE"],["Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>year<\/th>\n      <th>cas<\/th>\n      <th>quarter<\/th>\n      <th>Previous_Day<\/th>\n      <th>Two_Days_Prior<\/th>\n      <th>Repeat_Test<\/th>\n      <th>Warning_Type<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[2,3,5,7,9,11,12,13]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">repeat_data &lt;-<span class="st"> </span>repeat_data[, <span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;Warning_Type&quot;</span>)]</a></code></pre></div>
 <p><br> <em>Table: Dates and pollutants to check including the potential issue</em><br />
-<div id="htmlwidget-d1ad1d97fd3884599f21" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d1ad1d97fd3884599f21">{"x":{"filter":"none","data":[["2009-04-13","2009-03-08","2009-08-11","2009-08-17","2009-12-09","2009-10-16","2009-05-19","2009-11-03","2009-10-28","2009-06-12"],["1,3-Butadiene","Beryllium","Beryllium","Beryllium","Beryllium","Bromoform","Cadmium","Cadmium","Cobalt","Ethylene Dichloride"],["270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020"],["Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>date<\/th>\n      <th>pollutant<\/th>\n      <th>aqs_id<\/th>\n      <th>Warning_Type<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-dea759b6d2e695a0e201" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dea759b6d2e695a0e201">{"x":{"filter":"none","data":[["2009-04-13","2009-03-08","2009-08-11","2009-08-17","2009-12-09","2009-10-16","2009-05-19","2009-11-03","2009-10-28","2009-06-12"],["1,3-Butadiene","Beryllium","Beryllium","Beryllium","Beryllium","Bromoform","Cadmium","Cadmium","Cobalt","Ethylene Dichloride"],["270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020","270370020"],["Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test","Repeat_Test"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>date<\/th>\n      <th>pollutant<\/th>\n      <th>aqs_id<\/th>\n      <th>Warning_Type<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 </div>
 <div id="unique" class="section level2">
 <h2><span class="header-section-number">4.4</span> Unique detected values</h2>
 <p>In some cases the detected observations at a site may all be an identical value. Identical observations scattered throughout monitoring results at a single monitor can indicate a machine error. In addition, calculating summary statistics often requires a minimum number of unique values.</p>
 <p><br> <strong>Example <code>R</code> script</strong></p>
-<p>Click the button below to view a step by step example of counting unqiue detected values.</p>
+<p>Click below to view an example of counting unqiue detected values.</p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
 <p>Packages</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 <p>Our example data is organized by monitoring site and date.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-57"></span>
-<div id="htmlwidget-626512b7b3b9c3026a64" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-626512b7b3b9c3026a64">{"x":{"filter":"none","data":[[270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1],[12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22"],[0.00127,0.00223,0.0037,0.0018,0.0027],[null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Param_Code<\/th>\n      <th>Date<\/th>\n      <th>Concentration<\/th>\n      <th>Null_Code<\/th>\n      <th>Dlimit<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>CAS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,8]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</a></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-56"></span>
+<div id="htmlwidget-e8e51fb6a5fd111e3195" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e8e51fb6a5fd111e3195">{"x":{"filter":"none","data":[[270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1],[12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22"],[0.00127,0.00223,0.0037,0.0018,0.0027],[null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Param_Code<\/th>\n      <th>Date<\/th>\n      <th>Concentration<\/th>\n      <th>Null_Code<\/th>\n      <th>Dlimit<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>CAS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,8]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 4.1: Sample data table.
 </p>
 </div>
 <p><br></p>
 <p>Count the number of unique detected values for each year.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Param_Code, CAS, Year) <span class="op">%&gt;%</span>
-<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">detected_obs  =</span> <span class="kw">ifelse</span>(Concentration <span class="op">&lt;</span><span class="st"> </span>Dlimit, <span class="ot">NA</span>, Concentration), 
-               <span class="dt">unique_values =</span> <span class="kw">n_distinct</span>(detected_obs, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb47-2" title="2"><span class="st">        </span><span class="kw">group_by</span>(AQSID, POC, Param_Code, CAS, Year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb47-3" title="3"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">detected_obs  =</span> <span class="kw">ifelse</span>(Concentration <span class="op">&lt;</span><span class="st"> </span>Dlimit, <span class="ot">NA</span>, Concentration), </a>
+<a class="sourceLine" id="cb47-4" title="4">               <span class="dt">unique_values =</span> <span class="kw">n_distinct</span>(detected_obs, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <p><br></p>
 <p>Flag sites with less than 3 unique values.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">          </span><span class="kw">group_by</span>(AQSID, POC, Param_Code, CAS, Year) <span class="op">%&gt;%</span>
-<span class="st">          </span><span class="kw">summarize</span>(<span class="dt">unique_values =</span> unique_values[<span class="dv">1</span>],
-                    <span class="dt">unique_flag   =</span> unique_values <span class="op">&lt;</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span>
-<span class="st">          </span><span class="kw">ungroup</span>()</code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="st">          </span><span class="kw">group_by</span>(AQSID, POC, Param_Code, CAS, Year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="st">          </span><span class="kw">summarize</span>(<span class="dt">unique_values =</span> unique_values[<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb48-4" title="4">                    <span class="dt">unique_flag   =</span> unique_values <span class="op">&lt;</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="st">          </span><span class="kw">ungroup</span>()</a></code></pre></div>
 <p><br></p>
-<p><strong>Final table with added <code>unique_flag</code></strong> <div id="htmlwidget-1dd2d01a784a556ac476" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1dd2d01a784a556ac476">{"x":{"filter":"none","data":[[270036020,271630436,271377555,271630436,270530966,270370465,270370020,270530966,270750005,270531901],[1,1,1,1,2,1,1,2,1,1],[14129,43504,12132,45809,43510,12136,45220,45203,45202,43503],["7439-92-1","123-38-6","7439-96-5","100-44-7","123-72-8","7440-02-0","100-42-5","100-41-4","108-88-3","75-07-0"],[2013,2011,2009,2011,2013,2011,2010,2010,2010,2013],[25,53,58,0,52,1,0,42,32,14],[false,false,false,true,false,true,true,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Param_Code<\/th>\n      <th>CAS<\/th>\n      <th>Year<\/th>\n      <th>unique_values<\/th>\n      <th>unique_flag<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":0,"autoWidth":0,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"pageLength":10,"info":0,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,5]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<p><strong>Final table with added <code>unique_flag</code></strong>
+<div id="htmlwidget-41fb0c0fba27ba3c6b9d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-41fb0c0fba27ba3c6b9d">{"x":{"filter":"none","data":[[271377555,270370470,271630436,270370020,271377549,270370443,270530963,270370423,271453053,270532006],[2,1,2,1,1,1,1,1,1,1],[12112,43819,45809,43207,43806,43232,45501,43806,12112,43559],["7440-47-3","74-83-9","100-44-7","76-13-1","75-25-2","142-82-5","100-52-7","75-25-2","7440-47-3","591-78-6"],[2012,2010,2013,2010,2009,2011,2011,2009,2013,2011],[10,0,0,34,0,21,54,0,27,4],[false,true,true,false,true,false,false,true,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Param_Code<\/th>\n      <th>CAS<\/th>\n      <th>Year<\/th>\n      <th>unique_values<\/th>\n      <th>unique_flag<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":0,"autoWidth":0,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"pageLength":10,"info":0,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,5]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 </div>
 </div>
 <div id="valid_ref" class="section level2">
@@ -454,6 +497,7 @@ Figure 4.1: Sample data table.
 <p><a href="https://nepis.epa.gov/Exe/ZyPDF.cgi/P1006PAB.PDF?Dockey=P1006PAB.PDF">US EPA Data Analysis Workbook</a></p>
 <p><a href="http://www.sciencedirect.com/science/article/pii/S1352231007004840">Temporal variability of selected air toxics in the United States</a></p>
 <p><a href="http://www.tandfonline.com/doi/pdf/10.1080/10473289.2006.10464576">Spatial and temporal analysis of national air toxics data</a></p>
+<p><br> <a href="data-validation.html#data-validation">Back to top</a></p>
 
 </div>
 </div>
@@ -473,11 +517,13 @@ Figure 4.1: Sample data table.
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -491,7 +537,15 @@ gitbook.start({
 "link": "https://github.com/MPCA-air/air-methods/edit/master/03-data_validation.Rmd",
 "text": "Edit"
 },
-"download": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["air-methods.pdf", "air-methods.epub"],
 "toc": {
 "collapse": "section"
 }

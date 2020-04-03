@@ -2,8 +2,8 @@
 title: ''
 author: ''
 bibliography:
-- book.bib
-- packages.bib
+  - book.bib
+  - packages.bib
 cover-image: images/cover.jpeg
 documentclass: book
 fontsize: 14pt

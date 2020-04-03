@@ -2,6 +2,7 @@ bookdown::gitbook:
   css: style.css
   number_sections: true
   config:
+    download: ["pdf", "epub"]
     sharing: false
     toc:
       collapse: section

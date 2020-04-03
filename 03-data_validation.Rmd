@@ -155,9 +155,9 @@ The intrument drift test returns a difference in variance of carbon tetrachlorid
 
 <br> __Sample `R` script__ 
 
-Click the button below to view a step by step example of checking for instrument drift.
+Click below to view an example of checking for instrument drift.
 
-<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+<div class="toggle"><button class="btn_code">Show __R__ code</button>
 
 ```{r echo=T, message=F, warning=F}  
 
@@ -221,9 +221,9 @@ We recommend testing air toxics for extreme values by comparing each measured co
 <br> __Sample `R` script__ 
 
 
-Click the button to view a step by step example.
+Click the button to view an example.
 
-<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+<div class="toggle"><button class="btn_code">Show __R__ code</button>
 
 ```{r, eval=T, message=F, warning=F}
 
@@ -283,9 +283,9 @@ In some cases the detected observations at a site may all be an identical value.
 
 <br> __Example `R` script__ 
 
-Click the button below to view a step by step example of counting unqiue detected values.
+Click below to view an example of counting unqiue detected values.
 
-<div class="toggle"><button class = "btn_code">Show __R__ code</button>
+<div class="toggle"><button class="btn_code">Show __R__ code</button>
 
 ```{r eval=T, message=F, warning=F, echo=F}
 library(knitr)
@@ -363,3 +363,5 @@ DT::datatable(sample_n(data, size = 10, replace = F), options = list(scrollX = 0
 
 [Spatial and temporal analysis of national air toxics data](http://www.tandfonline.com/doi/pdf/10.1080/10473289.2006.10464576)
 
+
+<br> [Back to top](#data-validation)

@@ -18,7 +18,7 @@ __Air monitoring data__
 
 - Final data <br>
     - \@ref(AQS) EPA AQS Database 
-    - \@ref(rqamd)EPA AQS Datamart (RQAMD Package)
+    - \@ref(rqamd) EPA AQS Datamart (RQAMD Package)
     - \@ref(lims) MPCA LIMS data via Tableau
     - \@ref(wair) MPCA WAIR Database
 - Preliminary data 
@@ -197,7 +197,7 @@ Click the button below to view a step by step example.
 <button class = "btn_code">Show __R__ code</button>
 
 
-```{r, eval=F }
+```{r, eval=F}
 library(RPostgreSQL)
 username <- #Add WAIR UserName
 pass <- #Add WAIR password
@@ -572,31 +572,8 @@ The inhalation health benchmarks used by MPCA are available on the web in these 
 
 <br>
 
-Use the following R code to grab the most recent inhalation health benchmarks and references used by MPCA.
+Use the following R code to fetch the most recent inhalation health benchmarks and references used by MPCA.
 
-
-<div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
-
-
-```{r, eval = F}
-library(readxl)
-
-rass_web <- read_excel("X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/AERA program/RASS/AERA RASS (aq9-22-7)_2018-01.xlsx", 
-                       sheet = "ToxValues", 
-                       skip = 19)
-
-ihbs <- rass_web[ , c("Surrogate?", "Group", "CAS # or MPCA#", "Chemical Name", "HAP?", "Tox Value Source", "Acute Air Conc. (ug/m3)", "General Toxic Endpoint", "Specific Toxic Endpoint", "Notes", "Surrogate CAS", "Surrogate Name", "Tox Value Source__1", "Unit Risk (ug/m3)-1", "10-5 Cancer-based Air Conc (ug/m3)", "Notes__1", "Surrogate CAS__1", "Surrogate Name__1", "Tox Value Source__2", "Reference Conc. (ug/m3)", "General Toxic Endpoint__1", "Specific Toxic Endpoint__1", "Notes__2", "Surrogate CAS__2", "Surrogate Name__2")]
-
-names(ihbs) <- c("Surrogate", "Group", "CAS", "Chemical Name", "is_HAP", "Acute Source", "Acute Air Conc", "Acute Toxic Endpoint", "Acute Specific Endpoint", "Acute Notes", "Acute Surrogate CAS", "Acute Surrogate Name", "Cancer Tox Value Source", "Unit Risk", "Cancer-based Air Conc", "Cancer Notes", "Cancer Surrogate CAS", "Cancer Surrogate Name", "NC Tox Value Source", "Reference Conc", "NC Toxic Endpoint", "NC Specific Toxic Endpoint", "Chronic Notes", "Chronic Surrogate CAS", "Chronic Surrogate Name")
-
-```
-
-</div>
-
-<br>
-
-You can also pull a simple table of inhalation health benchmarks from a table on Github. 
 
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
@@ -696,7 +673,7 @@ The most recent compilation of facility coordinates was performed for the 2017 e
 Use the following code to load the current facility coordinates.
 
 <div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
+<button class="btn_code">Show __R__ code</button>
 
 ```{r, eval = T}
 # This script connects to the MPCA database DELTA. 
@@ -795,7 +772,7 @@ Wind trajectories are useful for determining the primary sources contributing to
 Use the following code to query WAIR for HYSPLIT results.
 
 <div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
+<button class="btn_code">Show __R__ code</button>
 ```{r, eval = F}
 # This script connects to the MPCA database WAIR.  
 # A dplyr query collects HYSPLIT modeling results for Anoka Airport.
@@ -842,8 +819,8 @@ Census boundaries can be loaded into R for mapping air data to Census tracts and
 Use the following code to download and map MN boundaries.
 
 <div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
-```{r, eval = T}
+<button class="btn_code">Show __R__ code</button>
+```{r tigris-1, results="hide"}
 # This script downloads shapefiles of Minnesota 
 ## Counties
 ## Census tracts
@@ -853,14 +830,20 @@ Use the following code to download and map MN boundaries.
 library(tigris)
 
 # Load boundaries
-county_bnds <- counties(state = "MN", cb = T)
+county_bounds <- counties(state = "MN", cb = T)
+```
 
-tract_bnds  <- tracts(state = "MN", cb = T)
-
-bg_bnds     <- block_groups(state = "MN", cb = T)
-
+```{r county-plot}
 # Plot 
-plot(county_bnds)
+plot(county_bounds, col = "steelblue")
+```
+
+
+__Tracts & Block groups__
+```{r, eval=F}
+tract_bounds  <- tracts(state = "MN", cb = T)
+
+bg_bounds     <- block_groups(state = "MN", cb = T)
 
 ```
 </div>
@@ -872,7 +855,7 @@ The ACS provides updated demographic statistics used for population estimates an
 Use the following code to download Minnesota ACS results.
 
 <div class="toggle">
-<button class = "btn_code">Show __R__ code</button>
+<button class="btn_code">Show __R__ code</button>
 ```{r, eval = F}
 # This script downloads American Community Survey (ACS) results for MN
 
@@ -914,5 +897,5 @@ med_inc_2015 <- get_acs(geography = "tract",
 
 
 
-<br> [Back to top](#rqamd)
+<br> [Back to top](#get-data)
 

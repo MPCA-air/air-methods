@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="generator" content="bookdown 0.7.4 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> Detection limits | air-methods.utf8</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="" />
+  <meta property="og:title" content=" Detection limits | air-methods.utf8" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://github.com/MPCA-air/air-methods" />
   <meta property="og:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
@@ -17,27 +16,30 @@
   <meta name="github-repo" content="MPCA-air/air-methods" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="" />
+  <meta name="twitter:title" content=" Detection limits | air-methods.utf8" />
   
   
   <meta name="twitter:image" content="https://github.com/MPCA-air/air-methodsimages/cover.jpeg" />
 
+<meta name="author" content="" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="collocated-monitors.html">
-<link rel="next" href="completeness-checks.html">
+<link rel="prev" href="collocated-monitors.html"/>
+<link rel="next" href="completeness-checks.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -45,52 +47,88 @@
 
 
 
-<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.3/datatables.js"></script>
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script src="libs/datatables-binding-0.13/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.3/leaflet-providers-plugin.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -182,7 +220,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
 <li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.6</b> Below detection values</a></li>
 <li class="chapter" data-level="6.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.7</b> Multiple detection limits</a></li>
-<li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.8</b> References</a></li>
+<li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#reporting-limits"><i class="fa fa-check"></i><b>6.8</b> Reporting limits</a></li>
+<li class="chapter" data-level="6.9" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.9</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="completeness-checks.html"><a href="completeness-checks.html"><i class="fa fa-check"></i><b>7</b> Completeness checks</a><ul>
 <li class="chapter" data-level="7.1" data-path="completeness-checks.html"><a href="completeness-checks.html#complete"><i class="fa fa-check"></i><b>7.1</b> Completeness checks</a></li>
@@ -203,7 +242,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.2.2</b> Correlation matrices</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> Start to finish</a><ul>
+<li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> From start to finish</a><ul>
 <li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>10.1</b> Functions</a></li>
 <li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>10.2</b> Analysis steps</a></li>
 </ul></li>
@@ -214,26 +253,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="11.3" data-path="charts.html"><a href="charts.html#pollution-roses"><i class="fa fa-check"></i><b>11.3</b> Pollution roses</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>12</b> Time series</a><ul>
-<li class="chapter" data-level="12.1" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i><b>12.1</b> Seasonality</a></li>
-<li class="chapter" data-level="12.2" data-path="time-series.html"><a href="time-series.html#day-of-the-week"><i class="fa fa-check"></i><b>12.2</b> Day of the week</a></li>
-<li class="chapter" data-level="12.3" data-path="time-series.html"><a href="time-series.html#hour-of-the-day"><i class="fa fa-check"></i><b>12.3</b> Hour of the day</a></li>
+<li class="chapter" data-level="" data-path="time-series.html"><a href="time-series.html#hour-of-the-day"><i class="fa fa-check"></i>Hour of the day</a></li>
+<li class="chapter" data-level="" data-path="time-series.html"><a href="time-series.html#day-of-the-week"><i class="fa fa-check"></i>Day of the week</a></li>
+<li class="chapter" data-level="" data-path="time-series.html"><a href="time-series.html#seasonality"><i class="fa fa-check"></i>Seasonality</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="maps.html"><a href="maps.html"><i class="fa fa-check"></i><b>13</b> Maps</a><ul>
-<li class="chapter" data-level="13.1" data-path="maps.html"><a href="maps.html#creating-shapefiles-in-r"><i class="fa fa-check"></i><b>13.1</b> Creating shapefiles in R</a></li>
+<li class="chapter" data-level="" data-path="maps.html"><a href="maps.html#interactive-map-of-air-monitors"><i class="fa fa-check"></i>Interactive map of air monitors</a></li>
+<li class="chapter" data-level="" data-path="maps.html"><a href="maps.html#creating-shapefiles-in-r"><i class="fa fa-check"></i>Creating shapefiles in R</a></li>
 </ul></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
-<li class="chapter" data-level="14" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>14</b> AQI explorer</a></li>
+<li class="chapter" data-level="14" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>14</b> Air toxics explorer</a><ul>
+<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>14.1</b> MPCA Air Toxics Methods</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1.1</b> Data Cleaning</a></li>
+<li class="chapter" data-level="14.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.1.2</b> Data Validation</a></li>
+<li class="chapter" data-level="14.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>14.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="14.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.1.4</b> Producing Annual Summaries</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
-<li class="chapter" data-level="16" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>16</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="16.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>16.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="16.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>16.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="16.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>16.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="16.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>16.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="16.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>16.1.4</b> Producing Annual Summaries</a></li>
-</ul></li>
-</ul></li>
+<li class="chapter" data-level="16" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>16</b> AQI explorer</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
-<li class="chapter" data-level="16.2" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.2</b> References</a></li>
+<li class="chapter" data-level="16.1" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.1</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -257,10 +297,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="detection-limits" class="section level1">
 <h1><span class="header-section-number"></span> Detection limits</h1>
-<div class="figure">
-<img src="images/cover5.jpg" align="right" style="margin-top: -8px; margin-bottom: 16px; margin-left: 34px; width: 34%;" />
-
-</div>
+<p><img src="images/cover5.jpg" align="right" style="margin-top: -8px; margin-bottom: 16px; margin-left: 34px; width: 34%;" /></p>
 <div id="method-detection-limit" class="section level2">
 <h2><span class="header-section-number">6.1</span> Method Detection Limit</h2>
 <p>A method detection limit (MDL) is the minimum concentration of a substance that can be measured and reported with 99% confidence that the analyte concentration is greater than zero.</p>
@@ -282,13 +319,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>If no method blank provides a numerical result, no further action needed.</li>
 <li>If method blank pool includes a combination of ND and numeric values, set the method blank MDL to equal the highest of the method blank results.</li>
 <li>If all concentration values for the method blank pool are numeric values, calculate the MDL_b as follows:
-<ul>
-<li>Calculate the average concentration of method blanks</li>
-<li>Calculate the standard deviation of the method blank concentrations</li>
-<li>Multiply the standard deviation by the one-sided student’s T value at 99% confidence corresponding to the number of blanks analyzed</li>
-<li>Calculate the MDL_b as the sum of the average concentration method blanks, and the product of the standard deviation of blanks and the associated student’s T Value</li>
-<li>MDL_b = mean_blanks + stdv_blanks * Student T</li>
-</ul></li>
+- Calculate the average concentration of method blanks
+- Calculate the standard deviation of the method blank concentrations
+- Multiply the standard deviation by the one-sided student’s T value at 99% confidence corresponding to the number of blanks analyzed
+- Calculate the MDL_b as the sum of the average concentration method blanks, and the product of the standard deviation of blanks and the associated student’s T Value
+- MDL_b = mean_blanks + stdv_blanks * Student T</li>
 <li>Compare MDL_sp and MDL_b. The higher of the two values is reported as the laboratory MDL.</li>
 </ul>
 </div>
@@ -344,87 +379,87 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="below-detection-values" class="section level2">
 <h2><span class="header-section-number">6.6</span> Below detection values</h2>
 <p><strong>Recommended Steps</strong></p>
-<p>24-hour samples which are below the method detection limit should be noted as “<MDL" and the machine values should not be reported to the public unless explicitly requested. It is advised to replace the machine value with note, such as `MDL`, so the machine value is not used in independent analysis and to alert users of the data that censored values exist in the monitoring results. For details on how to deal with censored values in calculating annual summaries, see the summary methods section.
-
-<br></p>
-<p><strong>Example <code>R</code> script</strong></p>
-<p>Click the button below to view a step by step example of counting unique detected values.</p>
+<p>24-hour samples which are below the method detection limit should be noted as “&lt;MDL” and the machine values should not be reported to the public unless explicitly requested. It is advised to replace the machine value with note, such as <code>MDL</code>, so the machine value is not used in independent analysis and to alert users of the data that censored values exist in the monitoring results. For details on how to deal with censored values in calculating annual summaries, see the summary methods section.</p>
+<p><br> <strong>Shiny tool for displaying non-detects</strong></p>
+<p>Open this tool to chart pollutant values and detection limits by year</p>
+<ul>
+<li><a href="https://mpca-pahs.shinyapps.io/ChartDetectionLimits/" class="uri">https://mpca-pahs.shinyapps.io/ChartDetectionLimits/</a></li>
+</ul>
+<p><img src="images/detection_boxplot.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p><strong>Shiny code</strong></p>
+<p>Click below to view the R script for the Shiny App.</p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(stringr)
-<span class="kw">library</span>(lubridate)
-<span class="kw">library</span>(car)
-<span class="kw">library</span>(DT)
-<span class="kw">library</span>(shiny)
-
-data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)
-
-<span class="kw">names</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)</code></pre></div>
 <p><br> <em>Table: Sample monitoring data</em><br />
-<div id="htmlwidget-f05c3c3ffdbeebe2d310" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f05c3c3ffdbeebe2d310">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1,1,1],[12102,12102,12102,12102,12102,12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29","2009-09-04","2009-09-10"],[0.00127,0.00223,0.0037,0.0018,0.0027,0.00173,0.00257,0.00101,0.00604,0.0029],[null,null,null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>year<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,5,7,9]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
-<p><br> Shiny tool for displaying non-detects<br />
-_Open this tool to chart pollutant values and detection limits by year (<a href="https://mpca-pahs.shinyapps.io/ChartDetectionLimits/" class="uri">https://mpca-pahs.shinyapps.io/ChartDetectionLimits/</a>)</p>
-<p><img src="images/detection_boxplot.png" width="100%" style="display: block; margin: auto;" /></p>
-<p><br> Shiny code</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
-<span class="kw">library</span>(rsconnect)
-<span class="kw">library</span>(readr)
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(dplyr)
-
-data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)
-<span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)
-pollutant &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>pollutant)
-year &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>year)
-
-<span class="kw">shinyApp</span>(
- <span class="dt">ui =</span> <span class="kw">fluidPage</span>(<span class="dt">responsive =</span> <span class="ot">FALSE</span>,
-                   <span class="kw">fluidRow</span>(
-                     <span class="kw">column</span>(<span class="dv">3</span>,
-                            <span class="dt">style =</span> <span class="st">&quot;padding-bottom: 20px;&quot;</span>,
-                            <span class="kw">inputPanel</span>(
-  <span class="kw">selectInput</span>(<span class="st">&quot;pollutant&quot;</span>, <span class="dt">label=</span><span class="st">&quot;Choose a pollutant&quot;</span>, <span class="dt">choices =</span> pollutant, <span class="dt">selected=</span><span class="st">&quot;Benzene&quot;</span>),
-  <span class="kw">selectInput</span>(<span class="st">&quot;year&quot;</span>, <span class="dt">label=</span><span class="st">&quot;Choose a year&quot;</span>, <span class="dt">choices =</span> years, <span class="dt">selected=</span><span class="dv">2009</span>))),
-                    <span class="kw">column</span>(<span class="dv">9</span>,
-                   <span class="kw">plotOutput</span>(<span class="st">&#39;detlim&#39;</span>, <span class="dt">height =</span> <span class="st">&quot;400px&quot;</span>)))),
-   
-
-  <span class="dt">server =</span> <span class="cf">function</span>(input, output) {
-
-output<span class="op">$</span>detlim &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({
-  <span class="kw">print</span>(input<span class="op">$</span>year)
-  <span class="kw">print</span>(input<span class="op">$</span>pollutant)
-    data_sub =<span class="st"> </span><span class="kw">filter</span>(data, year<span class="op">==</span>input<span class="op">$</span>year, pollutant<span class="op">==</span>input<span class="op">$</span>pollutant)
-    mdl &lt;-<span class="st"> </span><span class="kw">mean</span>(data_sub<span class="op">$</span>md_limit)
-    data_sub<span class="op">$</span>Censored &lt;-<span class="st"> </span><span class="kw">ifelse</span>(data_sub<span class="op">$</span>conc <span class="op">&gt;</span><span class="st"> </span>data_sub<span class="op">$</span>md_limit, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)
-    <span class="kw">ggplot</span>(<span class="dt">data=</span>data_sub, <span class="kw">aes</span>(<span class="dt">x=</span> <span class="kw">factor</span>(aqs_id), <span class="dt">y=</span>conc)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">scale_colour_manual</span>(<span class="dt">values=</span> <span class="kw">c</span>(<span class="st">&quot;#197519&quot;</span>[<span class="ot">FALSE</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(data_sub<span class="op">$</span>Censored)], <span class="st">&quot;#0000FF&quot;</span>[<span class="ot">TRUE</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(data_sub<span class="op">$</span>Censored)]), <span class="dt">breaks=</span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour=</span><span class="ot">NA</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_jitter</span>(<span class="kw">aes</span>(<span class="dt">color=</span>Censored), <span class="dt">size =</span><span class="fl">2.4</span>, <span class="dt">alpha=</span><span class="fl">0.55</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> mdl) <span class="op">+</span>
-<span class="st">    </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Result (ug/m3)&quot;</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">expand_limits</span>(<span class="dt">y=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">max</span>(data_sub<span class="op">$</span>conc))) <span class="op">+</span>
-<span class="st">    </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>), <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="op">-</span><span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.3</span>,  <span class="dt">size=</span><span class="dv">14</span>)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">paste0</span>(<span class="st">&quot;Site Comparison Boxplot with Censored and Non-Censored Values for &quot;</span>, input<span class="op">$</span>pollutant, <span class="st">&quot;, from &quot;</span>, input<span class="op">$</span>year),
-            <span class="dt">subtitle =</span> <span class="st">&quot;---- Horizontal Line ----  =  Detection Limit&quot;</span>)
-})
-
-})</code></pre></div>
+<div id="htmlwidget-08bbe95e4883bc7e9d7b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-08bbe95e4883bc7e9d7b">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10"],[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1,1,1],[12102,12102,12102,12102,12102,12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29","2009-09-04","2009-09-10"],[0.00127,0.00223,0.0037,0.0018,0.0027,0.00173,0.00257,0.00101,0.00604,0.0029],[null,null,null,null,null,null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>year<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,5,7,9]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="kw">library</span>(rsconnect)</a>
+<a class="sourceLine" id="cb51-3" title="3"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb51-4" title="4"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb51-5" title="5"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb51-6" title="6"></a>
+<a class="sourceLine" id="cb51-7" title="7">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</a>
+<a class="sourceLine" id="cb51-8" title="8"></a>
+<a class="sourceLine" id="cb51-9" title="9"><span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)</a>
+<a class="sourceLine" id="cb51-10" title="10"></a>
+<a class="sourceLine" id="cb51-11" title="11">pollutant &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>pollutant)</a>
+<a class="sourceLine" id="cb51-12" title="12"></a>
+<a class="sourceLine" id="cb51-13" title="13">year &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>year)</a>
+<a class="sourceLine" id="cb51-14" title="14"></a>
+<a class="sourceLine" id="cb51-15" title="15"><span class="kw">shinyApp</span>(</a>
+<a class="sourceLine" id="cb51-16" title="16"> <span class="dt">ui =</span> <span class="kw">fluidPage</span>(<span class="dt">responsive =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb51-17" title="17">                   <span class="kw">fluidRow</span>(</a>
+<a class="sourceLine" id="cb51-18" title="18">                     <span class="kw">column</span>(<span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb51-19" title="19">                            <span class="dt">style =</span> <span class="st">&quot;padding-bottom: 20px;&quot;</span>,</a>
+<a class="sourceLine" id="cb51-20" title="20">                            <span class="kw">inputPanel</span>(</a>
+<a class="sourceLine" id="cb51-21" title="21">  <span class="kw">selectInput</span>(<span class="st">&quot;pollutant&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;Choose a pollutant&quot;</span>, <span class="dt">choices =</span> pollutant, <span class="dt">selected =</span> <span class="st">&quot;Benzene&quot;</span>),</a>
+<a class="sourceLine" id="cb51-22" title="22">  <span class="kw">selectInput</span>(<span class="st">&quot;year&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;Choose a year&quot;</span>, <span class="dt">choices =</span> years, <span class="dt">selected =</span> <span class="dv">2009</span>))),</a>
+<a class="sourceLine" id="cb51-23" title="23">                    <span class="kw">column</span>(<span class="dv">9</span>,</a>
+<a class="sourceLine" id="cb51-24" title="24">                   <span class="kw">plotOutput</span>(<span class="st">&#39;detlim&#39;</span>, <span class="dt">height =</span> <span class="st">&quot;400px&quot;</span>)))),</a>
+<a class="sourceLine" id="cb51-25" title="25">   </a>
+<a class="sourceLine" id="cb51-26" title="26"></a>
+<a class="sourceLine" id="cb51-27" title="27">  <span class="dt">server =</span> <span class="cf">function</span>(input, output) {</a>
+<a class="sourceLine" id="cb51-28" title="28"></a>
+<a class="sourceLine" id="cb51-29" title="29">output<span class="op">$</span>detlim &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({</a>
+<a class="sourceLine" id="cb51-30" title="30">  <span class="kw">print</span>(input<span class="op">$</span>year)</a>
+<a class="sourceLine" id="cb51-31" title="31">  <span class="kw">print</span>(input<span class="op">$</span>pollutant)</a>
+<a class="sourceLine" id="cb51-32" title="32">    data_sub =<span class="st"> </span><span class="kw">filter</span>(data, year<span class="op">==</span>input<span class="op">$</span>year, pollutant<span class="op">==</span>input<span class="op">$</span>pollutant)</a>
+<a class="sourceLine" id="cb51-33" title="33">    mdl &lt;-<span class="st"> </span><span class="kw">mean</span>(data_sub<span class="op">$</span>md_limit)</a>
+<a class="sourceLine" id="cb51-34" title="34">    data_sub<span class="op">$</span>Censored &lt;-<span class="st"> </span><span class="kw">ifelse</span>(data_sub<span class="op">$</span>conc <span class="op">&gt;</span><span class="st"> </span>data_sub<span class="op">$</span>md_limit, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb51-35" title="35">    <span class="kw">ggplot</span>(<span class="dt">data=</span>data_sub, <span class="kw">aes</span>(<span class="dt">x=</span> <span class="kw">factor</span>(aqs_id), <span class="dt">y=</span>conc)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb51-36" title="36"><span class="st">      </span><span class="kw">scale_colour_manual</span>(<span class="dt">values=</span> <span class="kw">c</span>(<span class="st">&quot;#197519&quot;</span>[<span class="ot">FALSE</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(data_sub<span class="op">$</span>Censored)], <span class="st">&quot;#0000FF&quot;</span>[<span class="ot">TRUE</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(data_sub<span class="op">$</span>Censored)]), <span class="dt">breaks=</span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb51-37" title="37"><span class="st">    </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour=</span><span class="ot">NA</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb51-38" title="38"><span class="st">    </span><span class="kw">geom_jitter</span>(<span class="kw">aes</span>(<span class="dt">color=</span>Censored), <span class="dt">size =</span><span class="fl">2.4</span>, <span class="dt">alpha=</span><span class="fl">0.55</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb51-39" title="39"><span class="st">    </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> mdl) <span class="op">+</span></a>
+<a class="sourceLine" id="cb51-40" title="40"><span class="st">    </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb51-41" title="41"><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;Result (ug/m3)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb51-42" title="42"><span class="st">    </span><span class="kw">expand_limits</span>(<span class="dt">y=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">max</span>(data_sub<span class="op">$</span>conc))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb51-43" title="43"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">15</span>), <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">-90</span>, <span class="dt">vjust =</span> <span class="fl">0.3</span>,  <span class="dt">size=</span><span class="dv">14</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb51-44" title="44"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">paste0</span>(<span class="st">&quot;Site Comparison Boxplot with Censored and Non-Censored Values for &quot;</span>, input<span class="op">$</span>pollutant, <span class="st">&quot;, from &quot;</span>, input<span class="op">$</span>year),</a>
+<a class="sourceLine" id="cb51-45" title="45">            <span class="dt">subtitle =</span> <span class="st">&quot;---- Horizontal Line ----  =  Detection Limit&quot;</span>)</a>
+<a class="sourceLine" id="cb51-46" title="46">})</a>
+<a class="sourceLine" id="cb51-47" title="47"></a>
+<a class="sourceLine" id="cb51-48" title="48">})</a></code></pre></div>
+</div>
 </div>
 <div id="multiple-detection-limits" class="section level2">
 <h2><span class="header-section-number">6.7</span> Multiple detection limits</h2>
 <p>Regression on order statistics may be replaced with maximum likelyhood estimates for below detection limit data methodlogies if there are more than one detection limit per year in a data set.</p>
 </div>
+<div id="reporting-limits" class="section level2">
+<h2><span class="header-section-number">6.8</span> Reporting limits</h2>
+<p>Results below the method reporting limit are considered estimated but valid. If more than 80% of results in a year for a pollutant at a site are below the method reporting limit, the annual summary statistics should be qualified as below the reporting limit.</p>
+</div>
 <div id="references" class="section level2">
-<h2><span class="header-section-number">6.8</span> References</h2>
+<h2><span class="header-section-number">6.9</span> References</h2>
 <p><a href="https://academic.oup.com/annweh/article/54/3/257/223531/Much-Ado-About-Next-to-Nothing-Incorporating">Review article by Helsel, D about non-detects and substitution methods.</a></p>
 <p><a href="https://pdfs.semanticscholar.org/182e/9278fc36dd73d48a414b8fbc30a44ea314d3.pdf">A Chemosphere review article describing why BDL substitution should not be done.</a></p>
 <p><a href="http://www.public.iastate.edu/~pdixon/stat505/Chapter%2011.pdf">A below detection limit primer from Iowa State University</a></p>
+<p><br> <a href="detection-limits.html#detection-limits">Back to top</a></p>
 
 </div>
 </div>
@@ -444,11 +479,13 @@ output<span class="op">$</span>detlim &lt;-<span class="st"> </span><span class=
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -462,7 +499,15 @@ gitbook.start({
 "link": "https://github.com/MPCA-air/air-methods/edit/master/05-detection_limits.Rmd",
 "text": "Edit"
 },
-"download": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["air-methods.pdf", "air-methods.epub"],
 "toc": {
 "collapse": "section"
 }

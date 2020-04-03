@@ -78,15 +78,26 @@ __Recommended Steps__
 
 24-hour samples which are below the method detection limit should be noted as "<MDL" and the machine values should not be reported to the public unless explicitly requested. It is advised to replace the machine value with note, such as `MDL`, so the machine value is not used in independent analysis and to alert users of the data that censored values exist in the monitoring results. For details on how to deal with censored values in calculating annual summaries, see the summary methods section.
 
+
+<br> __Shiny tool for displaying non-detects__
+
+Open this tool to chart pollutant values and detection limits by year
+
+- https://mpca-pahs.shinyapps.io/ChartDetectionLimits/
+
+```{r out.width='100%', echo=F, fig.align="center"}
+knitr::include_graphics("images/detection_boxplot.png")
+```
+
 <br> 
 
-__Example `R` script__ 
+**Shiny code** 
 
-Click the button below to view a step by step example of counting unique detected values.
+Click below to view the R script for the Shiny App.
 
 <div class="toggle"><button class = "btn_code">Show __R__ code</button>
 
-```{r, eval=T, echo=T, message=F, warning=F}
+```{r, eval=T, echo=F, message=F, warning=F}
 library(tidyverse)
 library(stringr)
 library(lubridate)
@@ -107,16 +118,7 @@ datatable(head(data, 10), options = dt_options)
 ```
 
 
-<br> Shiny tool for displaying non-detects  
-_Open this tool to chart pollutant values and detection limits by year
-(https://mpca-pahs.shinyapps.io/ChartDetectionLimits/)
-
-```{r out.width='100%', echo=F, fig.align="center"}
-knitr::include_graphics("images/detection_boxplot.png")
-```
-
-<br> Shiny code  
-```{r, eval=FALSE, echo=T, message=F, warning=F}
+```{r, eval=F, echo=T, message=F, warning=F}
 library(shiny)
 library(rsconnect)
 library(readr)
@@ -124,8 +126,11 @@ library(ggplot2)
 library(dplyr)
 
 data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+
 colnames(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md_limit", "pollutant", "year", "cas")
+
 pollutant <- unique(data$pollutant)
+
 year <- unique(data$year)
 
 shinyApp(
@@ -134,8 +139,8 @@ shinyApp(
                      column(3,
                             style = "padding-bottom: 20px;",
                             inputPanel(
-  selectInput("pollutant", label="Choose a pollutant", choices = pollutant, selected="Benzene"),
-  selectInput("year", label="Choose a year", choices = years, selected=2009))),
+  selectInput("pollutant", label = "Choose a pollutant", choices = pollutant, selected = "Benzene"),
+  selectInput("year", label = "Choose a year", choices = years, selected = 2009))),
                     column(9,
                    plotOutput('detlim', height = "400px")))),
    
@@ -165,11 +170,16 @@ output$detlim <- renderPlot({
 
 ```
 
+</div>
 
 
 ## Multiple detection limits   
 
-Regression on order statistics may be replaced with maximum likelyhood estimates for below detection limit data methodlogies if there are more than one detection limit per year in a data set. 
+Regression on order statistics may be replaced with maximum likelyhood estimates for below detection limit data methodlogies if there are more than one detection limit per year in a data set.
+
+## Reporting limits
+
+Results below the method reporting limit are considered estimated but valid. If more than 80% of results in a year for a pollutant at a site are below the method reporting limit, the annual summary statistics should be qualified as below the reporting limit.
 
 ## References
 
@@ -178,3 +188,6 @@ Regression on order statistics may be replaced with maximum likelyhood estimates
 [A Chemosphere review article describing why BDL substitution should not be done.](https://pdfs.semanticscholar.org/182e/9278fc36dd73d48a414b8fbc30a44ea314d3.pdf)
 
 [A below detection limit primer from Iowa State University](http://www.public.iastate.edu/~pdixon/stat505/Chapter 11.pdf)
+
+
+<br> [Back to top](#detection-limits)
