@@ -69,9 +69,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -80,14 +80,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -96,9 +98,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -164,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.3" data-path="get-data.html"><a href="get-data.html#aqi-now"><i class="fa fa-check"></i><b>2.1.3</b> Current AQI observations</a></li>
 <li class="chapter" data-level="2.1.4" data-path="get-data.html"><a href="get-data.html#wairsites"><i class="fa fa-check"></i><b>2.1.4</b> WAIR Site information table</a></li>
 <li class="chapter" data-level="2.1.5" data-path="get-data.html"><a href="get-data.html#monitors"><i class="fa fa-check"></i><b>2.1.5</b> AirNow:Active AQI monitors</a></li>
-<li class="chapter" data-level="2.1.6" data-path="get-data.html"><a href="get-data.html#EPAsites"><i class="fa fa-check"></i><b>2.1.6</b> EPA Google Earth Site Maps</a></li>
+<li class="chapter" data-level="2.1.6" data-path="get-data.html"><a href="get-data.html#EPAsites"><i class="fa fa-check"></i><b>2.1.6</b> EPA Site Maps</a></li>
 <li class="chapter" data-level="2.1.7" data-path="get-data.html"><a href="get-data.html#lims"><i class="fa fa-check"></i><b>2.1.7</b> Retrieving data from LIMS via Tableau</a></li>
 <li class="chapter" data-level="2.1.8" data-path="get-data.html"><a href="get-data.html#AirVision"><i class="fa fa-check"></i><b>2.1.8</b> Retrieving continuous data from AirVision</a></li>
 <li class="chapter" data-level="2.1.9" data-path="get-data.html"><a href="get-data.html#wair"><i class="fa fa-check"></i><b>2.1.9</b> Retrieving data from MPCA WAIR database</a></li>
@@ -217,8 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-mdls"><i class="fa fa-check"></i><b>6.2</b> Calculating MDLs</a></li>
 <li class="chapter" data-level="6.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-mpca-detection-limits"><i class="fa fa-check"></i><b>6.3</b> Finding MPCA detection limits</a></li>
 <li class="chapter" data-level="6.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>6.4</b> Qualifier Codes for Detection Limits</a></li>
-<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
-<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.6</b> Below detection values</a></li>
+<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values</a></li>
+<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#recommended-steps"><i class="fa fa-check"></i><b>6.6</b> Recommended Steps</a></li>
 <li class="chapter" data-level="6.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.7</b> Multiple detection limits</a></li>
 <li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#reporting-limits"><i class="fa fa-check"></i><b>6.8</b> Reporting limits</a></li>
 <li class="chapter" data-level="6.9" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.9</b> References</a></li>
@@ -237,14 +239,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>9</b> Site comparisons</a><ul>
 <li class="chapter" data-level="9.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a></li>
-<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize data</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>9.2.1</b> Beeswarm Plots</a></li>
-<li class="chapter" data-level="9.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.2.2</b> Correlation matrices</a></li>
+<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-differences"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize differences</a><ul>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i>Beeswarm Plots</a></li>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i>Correlation matrices</a></li>
 </ul></li>
+<li><a href="site-comparisons.html#references-1"><em>References</em></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> From start to finish</a><ul>
-<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>10.1</b> Functions</a></li>
-<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>10.2</b> Analysis steps</a></li>
+<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#using-functions"><i class="fa fa-check"></i><b>10.1</b> Using functions</a></li>
+<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#a-simpler-analysis"><i class="fa fa-check"></i><b>10.2</b> A simpler analysis</a></li>
 </ul></li>
 <li><a href="visuals.html#visuals"><strong>Visuals</strong></a></li>
 <li class="chapter" data-level="11" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>11</b> Charts</a><ul>
@@ -263,17 +266,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
 <li class="chapter" data-level="14" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>14</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>14.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="14.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="14.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>14.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="14.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.1.4</b> Producing Annual Summaries</a></li>
+<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1</b> Data Cleaning</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#null-results"><i class="fa fa-check"></i>Null Results</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#duplicate-observations"><i class="fa fa-check"></i>Duplicate Observations</a></li>
 </ul></li>
+<li class="chapter" data-level="14.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.2</b> Data Validation</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i>Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-completeness"><i class="fa fa-check"></i>Data Completeness</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#below-the-detection-limit"><i class="fa fa-check"></i>Below the detection limit</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.3</b> Producing Annual Summaries</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-annual-means"><i class="fa fa-check"></i>Calculating annual means</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-upper-confidence-limits"><i class="fa fa-check"></i>Calculating upper confidence limits</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#comparing-sites"><i class="fa fa-check"></i><b>14.4</b> Comparing sites</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
 <li class="chapter" data-level="16" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>16</b> AQI explorer</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
-<li class="chapter" data-level="16.1" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.1</b> References</a></li>
+<li><a href="edit-this-book.html#references-2"><em>References</em></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -312,64 +323,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Data should be tested for normality prior to determining the type of summary statistic to report. In general environmental data are non-normal and contain with many low values and a few high values. This causes the mean of the data to be higher than the median (right skewed). Many normality tests exist and they vary in sensitivity. A good article on normality tests can be found at <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3693611/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3693611/</a>.</p>
 <p>The normality test in the example script below is a recommended test for data of sample size between 5-5000 and will allow missing values. A Shapiro-Wilk test may also be performed for the typical sample size of a year of air toxics results. The script below includes a a line to switch to a Shapiro Wilk test.</p>
 <p><br></p>
-<p>Click below to view code for a normality test.</p>
+<p><em>Click below to view code for a normality test.</em></p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
 <p><strong>Normality test</strong></p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb62-2" title="2"><span class="kw">library</span>(stats)</a>
-<a class="sourceLine" id="cb62-3" title="3"><span class="kw">library</span>(nortest)</a>
-<a class="sourceLine" id="cb62-4" title="4"></a>
-<a class="sourceLine" id="cb62-5" title="5">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</a>
-<a class="sourceLine" id="cb62-6" title="6"></a>
-<a class="sourceLine" id="cb62-7" title="7"><span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)</a>
-<a class="sourceLine" id="cb62-8" title="8"></a>
-<a class="sourceLine" id="cb62-9" title="9">data_normresults &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">site_name=</span><span class="kw">character</span>(),</a>
-<a class="sourceLine" id="cb62-10" title="10">                               <span class="dt">analyte=</span><span class="kw">character</span>(),</a>
-<a class="sourceLine" id="cb62-11" title="11">                               <span class="dt">year=</span><span class="kw">character</span>(),</a>
-<a class="sourceLine" id="cb62-12" title="12">                                 <span class="dt">w_value=</span><span class="kw">numeric</span>(), </a>
-<a class="sourceLine" id="cb62-13" title="13">                                 <span class="dt">p_value=</span><span class="kw">numeric</span>(), </a>
-<a class="sourceLine" id="cb62-14" title="14">                                 <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>) </a>
-<a class="sourceLine" id="cb62-15" title="15">sites &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>aqs_id)</a>
-<a class="sourceLine" id="cb62-16" title="16">analytes &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>pollutant)</a>
-<a class="sourceLine" id="cb62-17" title="17">years &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>year)</a>
-<a class="sourceLine" id="cb62-18" title="18"></a>
-<a class="sourceLine" id="cb62-19" title="19"><span class="cf">for</span>(i <span class="cf">in</span> sites[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]){</a>
-<a class="sourceLine" id="cb62-20" title="20">  <span class="cf">for</span>(j <span class="cf">in</span> analytes){</a>
-<a class="sourceLine" id="cb62-21" title="21">    <span class="cf">for</span>(k <span class="cf">in</span> years){</a>
-<a class="sourceLine" id="cb62-22" title="22">      </a>
-<a class="sourceLine" id="cb62-23" title="23">  data_sub &lt;-<span class="st"> </span><span class="kw">filter</span>(data , aqs_id <span class="op">==</span><span class="st"> </span>i, pollutant <span class="op">==</span><span class="st"> </span>j, year <span class="op">==</span>k)</a>
-<a class="sourceLine" id="cb62-24" title="24">  </a>
-<a class="sourceLine" id="cb62-25" title="25">  <span class="cf">if</span> (<span class="kw">length</span>(<span class="kw">unique</span>(data_sub<span class="op">$</span>conc)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>) {</a>
-<a class="sourceLine" id="cb62-26" title="26">    </a>
-<a class="sourceLine" id="cb62-27" title="27">    norm_test &lt;-<span class="st"> </span><span class="kw">sf.test</span>(data_sub<span class="op">$</span>conc)</a>
-<a class="sourceLine" id="cb62-28" title="28">    <span class="co">#norm_test &lt;- shapiro.test(data_sub$conc)</span></a>
-<a class="sourceLine" id="cb62-29" title="29">    </a>
-<a class="sourceLine" id="cb62-30" title="30">    <span class="kw">print</span>(i)</a>
-<a class="sourceLine" id="cb62-31" title="31">    </a>
-<a class="sourceLine" id="cb62-32" title="32">    <span class="kw">print</span>(norm_test)</a>
-<a class="sourceLine" id="cb62-33" title="33">    </a>
-<a class="sourceLine" id="cb62-34" title="34">    values &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">site_name =</span> i, <span class="dt">analyte=</span>j, <span class="dt">year=</span>k, <span class="dt">w_value =</span> <span class="kw">round</span>(norm_test<span class="op">$</span>statistic, <span class="dt">digits =</span> <span class="dv">2</span>), <span class="dt">p_value =</span> <span class="kw">round</span>(norm_test<span class="op">$</span>p.value, <span class="dt">digits =</span> <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb62-35" title="35">    </a>
-<a class="sourceLine" id="cb62-36" title="36">    data_normresults &lt;-<span class="st"> </span><span class="kw">rbind</span>(values, data_normresults)</a>
-<a class="sourceLine" id="cb62-37" title="37">    }</a>
-<a class="sourceLine" id="cb62-38" title="38">  }</a>
-<a class="sourceLine" id="cb62-39" title="39">  }</a>
-<a class="sourceLine" id="cb62-40" title="40">}</a></code></pre></div>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">DT<span class="op">::</span><span class="kw">datatable</span>(<span class="kw">head</span>(data_normresults), <span class="dt">options =</span> dt_options)</a></code></pre></div>
-<div id="htmlwidget-1980d8fc843da27123a8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1980d8fc843da27123a8">{"x":{"filter":"none","data":[["W","W44","W43","W42","W41","W40"],[271231003,271231003,271231003,271231003,271231003,271231003],["Selenium","Nickel","Manganese","Lead","Cobalt","Chromium"],[2009,2009,2009,2009,2009,2009],[0.93,0.52,0.98,0.86,0.38,0.85],[0,0,0.46,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>site_name<\/th>\n      <th>analyte<\/th>\n      <th>year<\/th>\n      <th>w_value<\/th>\n      <th>p_value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="summary-statistics.html#cb57-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb57-2"><a href="summary-statistics.html#cb57-2"></a><span class="kw">library</span>(stats)</span>
+<span id="cb57-3"><a href="summary-statistics.html#cb57-3"></a><span class="kw">library</span>(nortest)</span>
+<span id="cb57-4"><a href="summary-statistics.html#cb57-4"></a></span>
+<span id="cb57-5"><a href="summary-statistics.html#cb57-5"></a>data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</span>
+<span id="cb57-6"><a href="summary-statistics.html#cb57-6"></a></span>
+<span id="cb57-7"><a href="summary-statistics.html#cb57-7"></a><span class="kw">colnames</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)</span>
+<span id="cb57-8"><a href="summary-statistics.html#cb57-8"></a></span>
+<span id="cb57-9"><a href="summary-statistics.html#cb57-9"></a>data_normresults &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">site_name=</span><span class="kw">character</span>(),</span>
+<span id="cb57-10"><a href="summary-statistics.html#cb57-10"></a>                               <span class="dt">analyte=</span><span class="kw">character</span>(),</span>
+<span id="cb57-11"><a href="summary-statistics.html#cb57-11"></a>                               <span class="dt">year=</span><span class="kw">character</span>(),</span>
+<span id="cb57-12"><a href="summary-statistics.html#cb57-12"></a>                                 <span class="dt">w_value=</span><span class="kw">numeric</span>(), </span>
+<span id="cb57-13"><a href="summary-statistics.html#cb57-13"></a>                                 <span class="dt">p_value=</span><span class="kw">numeric</span>(), </span>
+<span id="cb57-14"><a href="summary-statistics.html#cb57-14"></a>                                 <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>) </span>
+<span id="cb57-15"><a href="summary-statistics.html#cb57-15"></a>sites &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>aqs_id)</span>
+<span id="cb57-16"><a href="summary-statistics.html#cb57-16"></a>analytes &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>pollutant)</span>
+<span id="cb57-17"><a href="summary-statistics.html#cb57-17"></a>years &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>year)</span>
+<span id="cb57-18"><a href="summary-statistics.html#cb57-18"></a></span>
+<span id="cb57-19"><a href="summary-statistics.html#cb57-19"></a><span class="cf">for</span>(i <span class="cf">in</span> sites[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]){</span>
+<span id="cb57-20"><a href="summary-statistics.html#cb57-20"></a>  <span class="cf">for</span>(j <span class="cf">in</span> analytes){</span>
+<span id="cb57-21"><a href="summary-statistics.html#cb57-21"></a>    <span class="cf">for</span>(k <span class="cf">in</span> years){</span>
+<span id="cb57-22"><a href="summary-statistics.html#cb57-22"></a>      </span>
+<span id="cb57-23"><a href="summary-statistics.html#cb57-23"></a>  data_sub &lt;-<span class="st"> </span><span class="kw">filter</span>(data , aqs_id <span class="op">==</span><span class="st"> </span>i, pollutant <span class="op">==</span><span class="st"> </span>j, year <span class="op">==</span>k)</span>
+<span id="cb57-24"><a href="summary-statistics.html#cb57-24"></a>  </span>
+<span id="cb57-25"><a href="summary-statistics.html#cb57-25"></a>  <span class="cf">if</span> (<span class="kw">length</span>(<span class="kw">unique</span>(data_sub<span class="op">$</span>conc)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>) {</span>
+<span id="cb57-26"><a href="summary-statistics.html#cb57-26"></a>    </span>
+<span id="cb57-27"><a href="summary-statistics.html#cb57-27"></a>    norm_test &lt;-<span class="st"> </span><span class="kw">sf.test</span>(data_sub<span class="op">$</span>conc)</span>
+<span id="cb57-28"><a href="summary-statistics.html#cb57-28"></a>    <span class="co">#norm_test &lt;- shapiro.test(data_sub$conc)</span></span>
+<span id="cb57-29"><a href="summary-statistics.html#cb57-29"></a>    </span>
+<span id="cb57-30"><a href="summary-statistics.html#cb57-30"></a>    <span class="kw">print</span>(i)</span>
+<span id="cb57-31"><a href="summary-statistics.html#cb57-31"></a>    </span>
+<span id="cb57-32"><a href="summary-statistics.html#cb57-32"></a>    <span class="kw">print</span>(norm_test)</span>
+<span id="cb57-33"><a href="summary-statistics.html#cb57-33"></a>    </span>
+<span id="cb57-34"><a href="summary-statistics.html#cb57-34"></a>    values &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">site_name =</span> i, <span class="dt">analyte=</span>j, <span class="dt">year=</span>k, <span class="dt">w_value =</span> <span class="kw">round</span>(norm_test<span class="op">$</span>statistic, <span class="dt">digits =</span> <span class="dv">2</span>), <span class="dt">p_value =</span> <span class="kw">round</span>(norm_test<span class="op">$</span>p.value, <span class="dt">digits =</span> <span class="dv">2</span>))</span>
+<span id="cb57-35"><a href="summary-statistics.html#cb57-35"></a>    </span>
+<span id="cb57-36"><a href="summary-statistics.html#cb57-36"></a>    data_normresults &lt;-<span class="st"> </span><span class="kw">rbind</span>(values, data_normresults)</span>
+<span id="cb57-37"><a href="summary-statistics.html#cb57-37"></a>    }</span>
+<span id="cb57-38"><a href="summary-statistics.html#cb57-38"></a>  }</span>
+<span id="cb57-39"><a href="summary-statistics.html#cb57-39"></a>  }</span>
+<span id="cb57-40"><a href="summary-statistics.html#cb57-40"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="summary-statistics.html#cb58-1"></a>DT<span class="op">::</span><span class="kw">datatable</span>(<span class="kw">head</span>(data_normresults), <span class="dt">options =</span> dt_options)</span></code></pre></div>
+<div id="htmlwidget-1e2957282ef368ee16d8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1e2957282ef368ee16d8">{"x":{"filter":"none","data":[["W","W44","W43","W42","W41","W40"],[271231003,271231003,271231003,271231003,271231003,271231003],["Selenium","Nickel","Manganese","Lead","Cobalt","Chromium"],[2009,2009,2009,2009,2009,2009],[0.93,0.52,0.98,0.86,0.38,0.85],[0,0,0.46,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>site_name<\/th>\n      <th>analyte<\/th>\n      <th>year<\/th>\n      <th>w_value<\/th>\n      <th>p_value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4,5]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <p><br></p>
 <p>We also suggest visualizing the data to determine if normality may be a valid assumption. The script below is an example of visual normality tests and includes an explanation of their interpretation. In the Q-Q Plot, normal data will form a straight line with the theoretical distribution quantiles with little deviation from the line. This is a visual test and somewhat subjective. Normal data form histograms that produce a bell shaped curve.</p>
-<p>Use this tool to inspect your data by year, site and pollutant:</p>
-<ul>
-<li><a href="https://mpca-pahs.shinyapps.io/NormViz/">https://mpca-pahs.shinyapps.io/NormViz/</a>.</li>
-</ul>
-<p><br></p>
-<p>Click to view the code for the shiny tool above.</p>
+<p>Here’s an example tool to inspect your data by year, site and pollutant: <a href="https://mpca-pahs.shinyapps.io/NormViz/">https://mpca-pahs.shinyapps.io/NormViz/</a></p>
+<p><em>Click to view the code for the shiny tool above.</em></p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
@@ -386,14 +393,14 @@ Show <strong>R</strong> code
 <div id="boots" class="section level2">
 <h2><span class="header-section-number">8.2</span> Bootstrapping</h2>
 <p>Bootstrapping provides methods for calculating summary statistics without making assumptions about the distribution from which the data is sampled.</p>
-<p>Click to view the bootstrapping code.</p>
+<p><em>Click to view the bootstrapping code.</em></p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
 <p><strong>Bootstrapping</strong></p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb64-2" title="2"><span class="kw">library</span>(readr)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="summary-statistics.html#cb59-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb59-2"><a href="summary-statistics.html#cb59-2"></a><span class="kw">library</span>(readr)</span></code></pre></div>
 Our data is organized by monitoring site and date. Here’s a sample.
 <table>
 <thead>
@@ -515,73 +522,73 @@ Conc
 <p><strong>Bootstrap function</strong></p>
 <p>We currently use the <code>EnvStats</code> package to generate air toxics summary values. It has built in functions to account for non-detect data and allows for different distributions. However, if you’re not dealing with non-detects you can use a simple loop to boot things yourself.</p>
 <p>Before you start you’ll want to set the random number generator to ensure you’ll be able to reproduce your results. I’ll use <code>#27</code> below.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="kw">set.seed</span>(<span class="dv">27</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="summary-statistics.html#cb60-1"></a><span class="kw">set.seed</span>(<span class="dv">27</span>)</span></code></pre></div>
 <p>The general idea is to take a random sample with replacement from the data set, generate the statistic that you’re interested in, record it, then rinse and repeat. Below is the code for how to resample a single site.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="co"># Filter data to a single site</span></a>
-<a class="sourceLine" id="cb66-2" title="2">df_site1 &lt;-<span class="st"> </span><span class="kw">filter</span>(df, AQS_ID <span class="op">==</span><span class="st"> </span>AQS_ID[<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb66-3" title="3"></a>
-<a class="sourceLine" id="cb66-4" title="4"><span class="co"># Pull random sample</span></a>
-<a class="sourceLine" id="cb66-5" title="5"><span class="co"># `replace=T` allows for the same value to be pulled multiple times</span></a>
-<a class="sourceLine" id="cb66-6" title="6"><span class="co"># `size=nrow(df)` ensures the number of observations in the new table to match the original </span></a>
-<a class="sourceLine" id="cb66-7" title="7">random_df &lt;-<span class="st"> </span><span class="kw">sample</span>(df_site1<span class="op">$</span>Conc, <span class="dt">replace =</span> T)</a>
-<a class="sourceLine" id="cb66-8" title="8"></a>
-<a class="sourceLine" id="cb66-9" title="9"><span class="co"># Generate summary statistic</span></a>
-<a class="sourceLine" id="cb66-10" title="10"><span class="kw">quantile</span>(random_df, <span class="fl">0.1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="summary-statistics.html#cb61-1"></a><span class="co"># Filter data to a single site</span></span>
+<span id="cb61-2"><a href="summary-statistics.html#cb61-2"></a>df_site1 &lt;-<span class="st"> </span><span class="kw">filter</span>(df, AQS_ID <span class="op">==</span><span class="st"> </span>AQS_ID[<span class="dv">1</span>])</span>
+<span id="cb61-3"><a href="summary-statistics.html#cb61-3"></a></span>
+<span id="cb61-4"><a href="summary-statistics.html#cb61-4"></a><span class="co"># Pull random sample</span></span>
+<span id="cb61-5"><a href="summary-statistics.html#cb61-5"></a><span class="co"># `replace=T` allows for the same value to be pulled multiple times</span></span>
+<span id="cb61-6"><a href="summary-statistics.html#cb61-6"></a><span class="co"># `size=nrow(df)` ensures the number of observations in the new table to match the original </span></span>
+<span id="cb61-7"><a href="summary-statistics.html#cb61-7"></a>random_df &lt;-<span class="st"> </span><span class="kw">sample</span>(df_site1<span class="op">$</span>Conc, <span class="dt">replace =</span> T)</span>
+<span id="cb61-8"><a href="summary-statistics.html#cb61-8"></a></span>
+<span id="cb61-9"><a href="summary-statistics.html#cb61-9"></a><span class="co"># Generate summary statistic</span></span>
+<span id="cb61-10"><a href="summary-statistics.html#cb61-10"></a><span class="kw">quantile</span>(random_df, <span class="fl">0.1</span>)</span></code></pre></div>
 <pre><code>##     10% 
 ## 0.00064</code></pre>
 <p>To repeat this 3,000 times we can wrap these steps into a <code>resample</code> function, and then use <code>sapply</code> to collect the results.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="co"># Create  resample function</span></a>
-<a class="sourceLine" id="cb68-2" title="2">resample_Conc &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">data =</span> df_site1<span class="op">$</span>Conc, <span class="dt">Conc_pct =</span> <span class="fl">0.10</span>){</a>
-<a class="sourceLine" id="cb68-3" title="3"></a>
-<a class="sourceLine" id="cb68-4" title="4">random_df &lt;-<span class="st"> </span><span class="kw">sample</span>(data, <span class="dt">replace =</span> T)</a>
-<a class="sourceLine" id="cb68-5" title="5"></a>
-<a class="sourceLine" id="cb68-6" title="6"><span class="kw">quantile</span>(random_df, Conc_pct, <span class="dt">na.rm=</span>T)[[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb68-7" title="7"></a>
-<a class="sourceLine" id="cb68-8" title="8">}</a>
-<a class="sourceLine" id="cb68-9" title="9"></a>
-<a class="sourceLine" id="cb68-10" title="10"><span class="co"># Repeat using `sapply`</span></a>
-<a class="sourceLine" id="cb68-11" title="11">repeats &lt;-<span class="st"> </span><span class="dv">3000</span></a>
-<a class="sourceLine" id="cb68-12" title="12"></a>
-<a class="sourceLine" id="cb68-13" title="13">booted_10pct &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span>repeats, <span class="dt">FUN =</span> <span class="cf">function</span>(x)</a>
-<a class="sourceLine" id="cb68-14" title="14">  <span class="kw">resample_Conc</span>(df_site1<span class="op">$</span>Conc))</a>
-<a class="sourceLine" id="cb68-15" title="15"></a>
-<a class="sourceLine" id="cb68-16" title="16"><span class="co"># The 50th percentile or median Conc</span></a>
-<a class="sourceLine" id="cb68-17" title="17"><span class="kw">median</span>(booted_10pct, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="summary-statistics.html#cb63-1"></a><span class="co"># Create  resample function</span></span>
+<span id="cb63-2"><a href="summary-statistics.html#cb63-2"></a>resample_Conc &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">data =</span> df_site1<span class="op">$</span>Conc, <span class="dt">Conc_pct =</span> <span class="fl">0.10</span>){</span>
+<span id="cb63-3"><a href="summary-statistics.html#cb63-3"></a></span>
+<span id="cb63-4"><a href="summary-statistics.html#cb63-4"></a>random_df &lt;-<span class="st"> </span><span class="kw">sample</span>(data, <span class="dt">replace =</span> T)</span>
+<span id="cb63-5"><a href="summary-statistics.html#cb63-5"></a></span>
+<span id="cb63-6"><a href="summary-statistics.html#cb63-6"></a><span class="kw">quantile</span>(random_df, Conc_pct, <span class="dt">na.rm=</span>T)[[<span class="dv">1</span>]]</span>
+<span id="cb63-7"><a href="summary-statistics.html#cb63-7"></a></span>
+<span id="cb63-8"><a href="summary-statistics.html#cb63-8"></a>}</span>
+<span id="cb63-9"><a href="summary-statistics.html#cb63-9"></a></span>
+<span id="cb63-10"><a href="summary-statistics.html#cb63-10"></a><span class="co"># Repeat using `sapply`</span></span>
+<span id="cb63-11"><a href="summary-statistics.html#cb63-11"></a>repeats &lt;-<span class="st"> </span><span class="dv">3000</span></span>
+<span id="cb63-12"><a href="summary-statistics.html#cb63-12"></a></span>
+<span id="cb63-13"><a href="summary-statistics.html#cb63-13"></a>booted_10pct &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span>repeats, <span class="dt">FUN =</span> <span class="cf">function</span>(x)</span>
+<span id="cb63-14"><a href="summary-statistics.html#cb63-14"></a>  <span class="kw">resample_Conc</span>(df_site1<span class="op">$</span>Conc))</span>
+<span id="cb63-15"><a href="summary-statistics.html#cb63-15"></a></span>
+<span id="cb63-16"><a href="summary-statistics.html#cb63-16"></a><span class="co"># The 50th percentile or median Conc</span></span>
+<span id="cb63-17"><a href="summary-statistics.html#cb63-17"></a><span class="kw">median</span>(booted_10pct, <span class="dt">na.rm=</span>T)</span></code></pre></div>
 <pre><code>## [1] 0.00064</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="co"># Return the 95th percentile of the booted concentrations</span></a>
-<a class="sourceLine" id="cb70-2" title="2"><span class="kw">quantile</span>(booted_10pct, <span class="fl">0.95</span>, <span class="dt">na.rm =</span> T)[[<span class="dv">1</span>]]</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="summary-statistics.html#cb65-1"></a><span class="co"># Return the 95th percentile of the booted concentrations</span></span>
+<span id="cb65-2"><a href="summary-statistics.html#cb65-2"></a><span class="kw">quantile</span>(booted_10pct, <span class="fl">0.95</span>, <span class="dt">na.rm =</span> T)[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] 0.00148</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="co"># Force the 95th percentile to be a recorded value</span></a>
-<a class="sourceLine" id="cb72-2" title="2"><span class="kw">sort</span>(booted_10pct)[repeats<span class="op">*</span>.<span class="dv">95</span> <span class="op">+</span><span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="summary-statistics.html#cb67-1"></a><span class="co"># Force the 95th percentile to be a recorded value</span></span>
+<span id="cb67-2"><a href="summary-statistics.html#cb67-2"></a><span class="kw">sort</span>(booted_10pct)[repeats<span class="op">*</span>.<span class="dv">95</span> <span class="op">+</span><span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] 0.00148</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="co"># Upper and lower confidence interval around the median</span></a>
-<a class="sourceLine" id="cb74-2" title="2"><span class="kw">quantile</span>(booted_10pct, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="dt">na.rm =</span> T)</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="summary-statistics.html#cb69-1"></a><span class="co"># Upper and lower confidence interval around the median</span></span>
+<span id="cb69-2"><a href="summary-statistics.html#cb69-2"></a><span class="kw">quantile</span>(booted_10pct, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="dt">na.rm =</span> T)</span></code></pre></div>
 <pre><code>##     2.5%      50%    97.5% 
 ## 0.000640 0.000640 0.103216</code></pre>
 <p><strong>Automate</strong></p>
 <p>To finish, put these steps into a <code>boot</code> function and run it on each site by using <code>group_by</code>.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="co"># Create boot function</span></a>
-<a class="sourceLine" id="cb76-2" title="2">boot_low_Conc &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">data     =</span> df<span class="op">$</span>Conc, </a>
-<a class="sourceLine" id="cb76-3" title="3">                          <span class="dt">Conc_pct =</span> <span class="fl">0.10</span>, </a>
-<a class="sourceLine" id="cb76-4" title="4">                          <span class="dt">conf_int =</span> <span class="fl">0.95</span>, </a>
-<a class="sourceLine" id="cb76-5" title="5">                          <span class="dt">repeats  =</span> <span class="dv">3000</span>){</a>
-<a class="sourceLine" id="cb76-6" title="6"></a>
-<a class="sourceLine" id="cb76-7" title="7">alpha &lt;-<span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>conf_int)<span class="op">/</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb76-8" title="8"></a>
-<a class="sourceLine" id="cb76-9" title="9">booted_10pct &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span>repeats, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">resample_Conc</span>(data, Conc_pct))</a>
-<a class="sourceLine" id="cb76-10" title="10"></a>
-<a class="sourceLine" id="cb76-11" title="11"><span class="co"># Upper and lower confidence interval around the median</span></a>
-<a class="sourceLine" id="cb76-12" title="12"><span class="kw">list</span>(<span class="kw">quantile</span>(booted_10pct, <span class="kw">c</span>(alpha, <span class="fl">0.5</span>, <span class="dv">1</span><span class="op">-</span>alpha), <span class="dt">na.rm =</span> T))</a>
-<a class="sourceLine" id="cb76-13" title="13"></a>
-<a class="sourceLine" id="cb76-14" title="14">}</a>
-<a class="sourceLine" id="cb76-15" title="15"></a>
-<a class="sourceLine" id="cb76-16" title="16"><span class="co"># Use `group_by` to send data for each site to your boot function</span></a>
-<a class="sourceLine" id="cb76-17" title="17">conc_summary &lt;-<span class="st"> </span><span class="kw">group_by</span>(df, AQS_ID) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb76-18" title="18"><span class="st">                </span><span class="kw">mutate</span>(<span class="dt">boot_results   =</span> <span class="kw">boot_low_Conc</span>(Conc, <span class="dt">Conc_pct=</span><span class="fl">0.10</span>, <span class="dt">conf_int=</span><span class="fl">0.95</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb76-19" title="19"><span class="st">                </span><span class="kw">summarize</span>(<span class="dt">Conc_10pct  =</span>  <span class="kw">quantile</span>(Conc, <span class="fl">0.10</span>, <span class="dt">na.rm=</span>T)[[<span class="dv">1</span>]],</a>
-<a class="sourceLine" id="cb76-20" title="20">                <span class="dt">Low_CL95_conc         =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">1</span>]], </a>
-<a class="sourceLine" id="cb76-21" title="21">                <span class="dt">Boot_conc             =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">2</span>]], </a>
-<a class="sourceLine" id="cb76-22" title="22">                <span class="dt">Upper_CL95_conc       =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">3</span>]])  </a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="summary-statistics.html#cb71-1"></a><span class="co"># Create boot function</span></span>
+<span id="cb71-2"><a href="summary-statistics.html#cb71-2"></a>boot_low_Conc &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">data     =</span> df<span class="op">$</span>Conc, </span>
+<span id="cb71-3"><a href="summary-statistics.html#cb71-3"></a>                          <span class="dt">Conc_pct =</span> <span class="fl">0.10</span>, </span>
+<span id="cb71-4"><a href="summary-statistics.html#cb71-4"></a>                          <span class="dt">conf_int =</span> <span class="fl">0.95</span>, </span>
+<span id="cb71-5"><a href="summary-statistics.html#cb71-5"></a>                          <span class="dt">repeats  =</span> <span class="dv">3000</span>){</span>
+<span id="cb71-6"><a href="summary-statistics.html#cb71-6"></a></span>
+<span id="cb71-7"><a href="summary-statistics.html#cb71-7"></a>alpha &lt;-<span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>conf_int)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb71-8"><a href="summary-statistics.html#cb71-8"></a></span>
+<span id="cb71-9"><a href="summary-statistics.html#cb71-9"></a>booted_10pct &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span>repeats, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">resample_Conc</span>(data, Conc_pct))</span>
+<span id="cb71-10"><a href="summary-statistics.html#cb71-10"></a></span>
+<span id="cb71-11"><a href="summary-statistics.html#cb71-11"></a><span class="co"># Upper and lower confidence interval around the median</span></span>
+<span id="cb71-12"><a href="summary-statistics.html#cb71-12"></a><span class="kw">list</span>(<span class="kw">quantile</span>(booted_10pct, <span class="kw">c</span>(alpha, <span class="fl">0.5</span>, <span class="dv">1</span><span class="op">-</span>alpha), <span class="dt">na.rm =</span> T))</span>
+<span id="cb71-13"><a href="summary-statistics.html#cb71-13"></a></span>
+<span id="cb71-14"><a href="summary-statistics.html#cb71-14"></a>}</span>
+<span id="cb71-15"><a href="summary-statistics.html#cb71-15"></a></span>
+<span id="cb71-16"><a href="summary-statistics.html#cb71-16"></a><span class="co"># Use `group_by` to send data for each site to your boot function</span></span>
+<span id="cb71-17"><a href="summary-statistics.html#cb71-17"></a>conc_summary &lt;-<span class="st"> </span><span class="kw">group_by</span>(df, AQS_ID) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb71-18"><a href="summary-statistics.html#cb71-18"></a><span class="st">                </span><span class="kw">mutate</span>(<span class="dt">boot_results   =</span> <span class="kw">boot_low_Conc</span>(Conc, <span class="dt">Conc_pct=</span><span class="fl">0.10</span>, <span class="dt">conf_int=</span><span class="fl">0.95</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb71-19"><a href="summary-statistics.html#cb71-19"></a><span class="st">                </span><span class="kw">summarize</span>(<span class="dt">Conc_10pct  =</span>  <span class="kw">quantile</span>(Conc, <span class="fl">0.10</span>, <span class="dt">na.rm=</span>T)[[<span class="dv">1</span>]],</span>
+<span id="cb71-20"><a href="summary-statistics.html#cb71-20"></a>                <span class="dt">Low_CL95_conc         =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">1</span>]], </span>
+<span id="cb71-21"><a href="summary-statistics.html#cb71-21"></a>                <span class="dt">Boot_conc             =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">2</span>]], </span>
+<span id="cb71-22"><a href="summary-statistics.html#cb71-22"></a>                <span class="dt">Upper_CL95_conc       =</span> <span class="kw">unlist</span>(boot_results[<span class="dv">1</span>])[[<span class="dv">3</span>]])  </span></code></pre></div>
 <p><strong>Results</strong></p>
 <p>The booted confidence limits:</p>
 <table>
@@ -658,115 +665,115 @@ Upper_CL95_conc
 <h2><span class="header-section-number">8.4</span> Upper confidence limits (UCLs)</h2>
 <p>If data is not normal, use bootstraping to generate means for each site. The 95% upper confidence limit is the 95th percentile of means generated using bootstrap sampling.</p>
 <p>The script below uses bootstrap sampling to generate 1000 means for each site, pollutant, and year and then calculates the 95% UCL by taking the 95th percentile of those means. Values below the MDL are estimated using lognormal MLE estimation for each bootstrap sample. The 95% UCL is not calculated for any site, pollutant, and year which fails to meet completeness requirements and/or minimum detection requirements.</p>
-<p>Click to view the code for calculating <em>UCLs</em>.</p>
+<p><em>Click to view code for calculating UCLs.</em></p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
 <p><strong>Upper Confidence Limits</strong></p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="co"># DATA prep:</span></a>
-<a class="sourceLine" id="cb77-2" title="2"><span class="co">## For this function data must have names: </span></a>
-<a class="sourceLine" id="cb77-3" title="3"><span class="co">## &quot;AQSID&quot;, &quot;POC&quot;, &quot;Parameter&quot;, &quot;Date&quot;, &quot;Result&quot;, &quot;MDL&quot;, &quot;Pollutant&quot;</span></a>
-<a class="sourceLine" id="cb77-4" title="4"></a>
-<a class="sourceLine" id="cb77-5" title="5"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb77-6" title="6"><span class="kw">library</span>(EnvStats)</a>
-<a class="sourceLine" id="cb77-7" title="7"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb77-8" title="8"></a>
-<a class="sourceLine" id="cb77-9" title="9">seed &lt;-<span class="st"> </span><span class="dv">2017</span></a>
-<a class="sourceLine" id="cb77-10" title="10"></a>
-<a class="sourceLine" id="cb77-11" title="11">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</a>
-<a class="sourceLine" id="cb77-12" title="12"></a>
-<a class="sourceLine" id="cb77-13" title="13"></a>
-<a class="sourceLine" id="cb77-14" title="14"><span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Parameter&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,</a>
-<a class="sourceLine" id="cb77-15" title="15">                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)</a>
-<a class="sourceLine" id="cb77-16" title="16"></a>
-<a class="sourceLine" id="cb77-17" title="17">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb77-18" title="18"><span class="st">        </span><span class="kw">filter</span>(AQSID <span class="op">==</span><span class="st"> </span><span class="dv">270370020</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb77-19" title="19"><span class="st">        </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">Monitoring Site</span><span class="st">`</span> =<span class="st"> </span>AQSID, </a>
-<a class="sourceLine" id="cb77-20" title="20">               <span class="dt">PollutantGroup    =</span> Pollutant, </a>
-<a class="sourceLine" id="cb77-21" title="21">               <span class="dt">Censored          =</span> Result <span class="op">&lt;</span><span class="st"> </span>MDL, </a>
-<a class="sourceLine" id="cb77-22" title="22">               <span class="dt">Result            =</span> <span class="kw">ifelse</span>(Censored, MDL, Result))</a>
-<a class="sourceLine" id="cb77-23" title="23"></a>
-<a class="sourceLine" id="cb77-24" title="24"></a>
-<a class="sourceLine" id="cb77-25" title="25">UCL_<span class="dv">95</span> =<span class="st"> </span><span class="cf">function</span>(data, <span class="dt">Boot_Repeats =</span> <span class="dv">1000</span>) {</a>
-<a class="sourceLine" id="cb77-26" title="26">  </a>
-<a class="sourceLine" id="cb77-27" title="27">  <span class="kw">library</span>(EnvStats)</a>
-<a class="sourceLine" id="cb77-28" title="28">  </a>
-<a class="sourceLine" id="cb77-29" title="29">  <span class="kw">set.seed</span>(<span class="dv">2017</span>)</a>
-<a class="sourceLine" id="cb77-30" title="30">  </a>
-<a class="sourceLine" id="cb77-31" title="31">  annual_AT_means &lt;-<span class="st"> </span><span class="cf">function</span>(air_toxics) {</a>
-<a class="sourceLine" id="cb77-32" title="32">  </a>
-<a class="sourceLine" id="cb77-33" title="33">  air_toxics &lt;-<span class="st"> </span><span class="kw">mutate</span>(air_toxics, </a>
-<a class="sourceLine" id="cb77-34" title="34">                       <span class="dt">Year =</span> <span class="kw">year</span>(<span class="kw">ymd</span>(Date)), </a>
-<a class="sourceLine" id="cb77-35" title="35">                       <span class="dt">Quarter =</span> <span class="kw">quarter</span>(<span class="kw">ymd</span>(Date)))</a>
-<a class="sourceLine" id="cb77-36" title="36">  </a>
-<a class="sourceLine" id="cb77-37" title="37">  sample_complete &lt;-<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb77-38" title="38"><span class="st">                     </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, Quarter, MDL) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb77-39" title="39"><span class="st">                     </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> ( (<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(Result) ) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(Result) ) <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span> ) ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb77-40" title="40"><span class="st">                     </span><span class="kw">mutate</span>(<span class="dt">Complete =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(Complete), F, Complete) ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb77-41" title="41"><span class="st">                     </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb77-42" title="42"><span class="st">                     </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> <span class="kw">all</span>(Complete) )</a>
-<a class="sourceLine" id="cb77-43" title="43">  </a>
-<a class="sourceLine" id="cb77-44" title="44">  enough_detects &lt;-<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb77-45" title="45"><span class="st">                    </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb77-46" title="46"><span class="st">                    </span><span class="kw">summarise</span>(<span class="dt">Detected =</span> <span class="kw">mean</span>(Censored, <span class="dt">na.rm =</span> T) <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.8</span> )</a>
-<a class="sourceLine" id="cb77-47" title="47">  </a>
-<a class="sourceLine" id="cb77-48" title="48">  site_means &lt;-<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb77-49" title="49"><span class="st">    </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb77-50" title="50"><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(<span class="kw">length</span>(<span class="kw">unique</span>(Result[<span class="op">!</span><span class="kw">is.na</span>(Result) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>Censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="ot">NA</span>,</a>
-<a class="sourceLine" id="cb77-51" title="51">     <span class="kw">ifelse</span> (<span class="kw">any</span>(Censored, <span class="dt">na.rm =</span> T), <span class="kw">elnormAltCensored</span>(Result, Censored, <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]], <span class="kw">mean</span>(Result, <span class="dt">na.rm =</span> T) ) ) )</a>
-<a class="sourceLine" id="cb77-52" title="52">  </a>
-<a class="sourceLine" id="cb77-53" title="53">  site_means &lt;-<span class="st"> </span><span class="kw">left_join</span>(site_means, sample_complete, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb77-54" title="54"><span class="st">    </span><span class="kw">left_join</span>(enough_detects, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb77-55" title="55"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Mean, <span class="ot">NA</span>), <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year) )</a>
-<a class="sourceLine" id="cb77-56" title="56"></a>
-<a class="sourceLine" id="cb77-57" title="57">  <span class="kw">return</span>(site_means)</a>
-<a class="sourceLine" id="cb77-58" title="58">  </a>
-<a class="sourceLine" id="cb77-59" title="59">}</a>
-<a class="sourceLine" id="cb77-60" title="60">  </a>
-<a class="sourceLine" id="cb77-61" title="61">  MLE_est &lt;-<span class="st"> </span><span class="cf">function</span>(data){</a>
-<a class="sourceLine" id="cb77-62" title="62">    </a>
-<a class="sourceLine" id="cb77-63" title="63">    results =<span class="st"> </span>data<span class="op">$</span>Result</a>
-<a class="sourceLine" id="cb77-64" title="64">    </a>
-<a class="sourceLine" id="cb77-65" title="65">    censored =<span class="st"> </span>data<span class="op">$</span>Censored</a>
-<a class="sourceLine" id="cb77-66" title="66">    </a>
-<a class="sourceLine" id="cb77-67" title="67">    n =<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(results))</a>
-<a class="sourceLine" id="cb77-68" title="68">    </a>
-<a class="sourceLine" id="cb77-69" title="69">    <span class="cf">if</span> (<span class="kw">length</span>(<span class="kw">unique</span>(results[<span class="op">!</span><span class="kw">is.na</span>(results) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span> ) {</a>
-<a class="sourceLine" id="cb77-70" title="70">      MLE_means =<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb77-71" title="71">    }</a>
-<a class="sourceLine" id="cb77-72" title="72">    </a>
-<a class="sourceLine" id="cb77-73" title="73">    <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb77-74" title="74">      random.rows =<span class="st"> </span><span class="ot">NULL</span>  </a>
-<a class="sourceLine" id="cb77-75" title="75">      </a>
-<a class="sourceLine" id="cb77-76" title="76">      random.rows =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored) <span class="op">&amp;</span><span class="st"> </span>(<span class="op">!</span>censored) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">duplicated</span>(results) ), <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb77-77" title="77">      </a>
-<a class="sourceLine" id="cb77-78" title="78">      random.rows =<span class="st"> </span><span class="kw">c</span>(random.rows, <span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored)), n<span class="dv">-2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb77-79" title="79">      </a>
-<a class="sourceLine" id="cb77-80" title="80">      MLE_means =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">sum</span>(censored[random.rows], <span class="dt">na.rm =</span> T) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">mean</span>(results[random.rows]), <span class="kw">elnormAltCensored</span>(results[random.rows], censored[random.rows], <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]] )</a>
-<a class="sourceLine" id="cb77-81" title="81">      </a>
-<a class="sourceLine" id="cb77-82" title="82">    }</a>
-<a class="sourceLine" id="cb77-83" title="83">    </a>
-<a class="sourceLine" id="cb77-84" title="84">    <span class="kw">return</span>(MLE_means)</a>
-<a class="sourceLine" id="cb77-85" title="85">  }</a>
-<a class="sourceLine" id="cb77-86" title="86">  </a>
-<a class="sourceLine" id="cb77-87" title="87">  data &lt;-<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year))</a>
-<a class="sourceLine" id="cb77-88" title="88">  </a>
-<a class="sourceLine" id="cb77-89" title="89">  Bootstrap_means &lt;-<span class="st"> </span><span class="kw">replicate</span>(Boot_Repeats, (<span class="kw">by</span>(data, data<span class="op">$</span>ID, MLE_est) ) )</a>
-<a class="sourceLine" id="cb77-90" title="90">  </a>
-<a class="sourceLine" id="cb77-91" title="91">  CL &lt;-<span class="st"> </span><span class="kw">apply</span>(Bootstrap_means, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(x)[<span class="kw">ceiling</span>(<span class="fl">0.95</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)] )</a>
-<a class="sourceLine" id="cb77-92" title="92">  </a>
-<a class="sourceLine" id="cb77-93" title="93">  CL &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">names</span>(CL), <span class="dt">UCL95 =</span> <span class="kw">unname</span>(CL))</a>
-<a class="sourceLine" id="cb77-94" title="94">  </a>
-<a class="sourceLine" id="cb77-95" title="95">  annual_summary =<span class="st"> </span><span class="kw">left_join</span>(<span class="kw">annual_AT_means</span>(data), CL, <span class="dt">by =</span> <span class="st">&quot;ID&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">UCL95 =</span> <span class="kw">ifelse</span>(Complete <span class="op">&amp;</span><span class="st"> </span>Detected, UCL95, <span class="ot">NA</span>) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>ID)</a>
-<a class="sourceLine" id="cb77-96" title="96">  </a>
-<a class="sourceLine" id="cb77-97" title="97">  <span class="kw">return</span>(annual_summary)</a>
-<a class="sourceLine" id="cb77-98" title="98">  </a>
-<a class="sourceLine" id="cb77-99" title="99">}</a>
-<a class="sourceLine" id="cb77-100" title="100"></a>
-<a class="sourceLine" id="cb77-101" title="101"><span class="kw">set.seed</span>(seed)</a>
-<a class="sourceLine" id="cb77-102" title="102"></a>
-<a class="sourceLine" id="cb77-103" title="103">annual_summary =<span class="st"> </span><span class="kw">UCL_95</span>(data, <span class="dv">100</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="summary-statistics.html#cb72-1"></a><span class="co"># DATA prep:</span></span>
+<span id="cb72-2"><a href="summary-statistics.html#cb72-2"></a><span class="co">## For this function data must have names: </span></span>
+<span id="cb72-3"><a href="summary-statistics.html#cb72-3"></a><span class="co">## &quot;AQSID&quot;, &quot;POC&quot;, &quot;Parameter&quot;, &quot;Date&quot;, &quot;Result&quot;, &quot;MDL&quot;, &quot;Pollutant&quot;</span></span>
+<span id="cb72-4"><a href="summary-statistics.html#cb72-4"></a></span>
+<span id="cb72-5"><a href="summary-statistics.html#cb72-5"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb72-6"><a href="summary-statistics.html#cb72-6"></a><span class="kw">library</span>(EnvStats)</span>
+<span id="cb72-7"><a href="summary-statistics.html#cb72-7"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb72-8"><a href="summary-statistics.html#cb72-8"></a></span>
+<span id="cb72-9"><a href="summary-statistics.html#cb72-9"></a>seed &lt;-<span class="st"> </span><span class="dv">2017</span></span>
+<span id="cb72-10"><a href="summary-statistics.html#cb72-10"></a></span>
+<span id="cb72-11"><a href="summary-statistics.html#cb72-11"></a>data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</span>
+<span id="cb72-12"><a href="summary-statistics.html#cb72-12"></a></span>
+<span id="cb72-13"><a href="summary-statistics.html#cb72-13"></a></span>
+<span id="cb72-14"><a href="summary-statistics.html#cb72-14"></a><span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Parameter&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,</span>
+<span id="cb72-15"><a href="summary-statistics.html#cb72-15"></a>                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)</span>
+<span id="cb72-16"><a href="summary-statistics.html#cb72-16"></a></span>
+<span id="cb72-17"><a href="summary-statistics.html#cb72-17"></a>data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-18"><a href="summary-statistics.html#cb72-18"></a><span class="st">        </span><span class="kw">filter</span>(AQSID <span class="op">==</span><span class="st"> </span><span class="dv">270370020</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-19"><a href="summary-statistics.html#cb72-19"></a><span class="st">        </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">Monitoring Site</span><span class="st">`</span> =<span class="st"> </span>AQSID, </span>
+<span id="cb72-20"><a href="summary-statistics.html#cb72-20"></a>               <span class="dt">PollutantGroup    =</span> Pollutant, </span>
+<span id="cb72-21"><a href="summary-statistics.html#cb72-21"></a>               <span class="dt">Censored          =</span> Result <span class="op">&lt;</span><span class="st"> </span>MDL, </span>
+<span id="cb72-22"><a href="summary-statistics.html#cb72-22"></a>               <span class="dt">Result            =</span> <span class="kw">ifelse</span>(Censored, MDL, Result))</span>
+<span id="cb72-23"><a href="summary-statistics.html#cb72-23"></a></span>
+<span id="cb72-24"><a href="summary-statistics.html#cb72-24"></a></span>
+<span id="cb72-25"><a href="summary-statistics.html#cb72-25"></a>UCL_<span class="dv">95</span> =<span class="st"> </span><span class="cf">function</span>(data, <span class="dt">Boot_Repeats =</span> <span class="dv">1000</span>) {</span>
+<span id="cb72-26"><a href="summary-statistics.html#cb72-26"></a>  </span>
+<span id="cb72-27"><a href="summary-statistics.html#cb72-27"></a>  <span class="kw">library</span>(EnvStats)</span>
+<span id="cb72-28"><a href="summary-statistics.html#cb72-28"></a>  </span>
+<span id="cb72-29"><a href="summary-statistics.html#cb72-29"></a>  <span class="kw">set.seed</span>(<span class="dv">2017</span>)</span>
+<span id="cb72-30"><a href="summary-statistics.html#cb72-30"></a>  </span>
+<span id="cb72-31"><a href="summary-statistics.html#cb72-31"></a>  annual_AT_means &lt;-<span class="st"> </span><span class="cf">function</span>(air_toxics) {</span>
+<span id="cb72-32"><a href="summary-statistics.html#cb72-32"></a>  </span>
+<span id="cb72-33"><a href="summary-statistics.html#cb72-33"></a>  air_toxics &lt;-<span class="st"> </span><span class="kw">mutate</span>(air_toxics, </span>
+<span id="cb72-34"><a href="summary-statistics.html#cb72-34"></a>                       <span class="dt">Year =</span> <span class="kw">year</span>(<span class="kw">ymd</span>(Date)), </span>
+<span id="cb72-35"><a href="summary-statistics.html#cb72-35"></a>                       <span class="dt">Quarter =</span> <span class="kw">quarter</span>(<span class="kw">ymd</span>(Date)))</span>
+<span id="cb72-36"><a href="summary-statistics.html#cb72-36"></a>  </span>
+<span id="cb72-37"><a href="summary-statistics.html#cb72-37"></a>  sample_complete &lt;-<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-38"><a href="summary-statistics.html#cb72-38"></a><span class="st">                     </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, Quarter, MDL) <span class="op">%&gt;%</span></span>
+<span id="cb72-39"><a href="summary-statistics.html#cb72-39"></a><span class="st">                     </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> ( (<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(Result) ) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(Result) ) <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span> ) ) <span class="op">%&gt;%</span></span>
+<span id="cb72-40"><a href="summary-statistics.html#cb72-40"></a><span class="st">                     </span><span class="kw">mutate</span>(<span class="dt">Complete =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(Complete), F, Complete) ) <span class="op">%&gt;%</span></span>
+<span id="cb72-41"><a href="summary-statistics.html#cb72-41"></a><span class="st">                     </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span></span>
+<span id="cb72-42"><a href="summary-statistics.html#cb72-42"></a><span class="st">                     </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> <span class="kw">all</span>(Complete) )</span>
+<span id="cb72-43"><a href="summary-statistics.html#cb72-43"></a>  </span>
+<span id="cb72-44"><a href="summary-statistics.html#cb72-44"></a>  enough_detects &lt;-<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-45"><a href="summary-statistics.html#cb72-45"></a><span class="st">                    </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span></span>
+<span id="cb72-46"><a href="summary-statistics.html#cb72-46"></a><span class="st">                    </span><span class="kw">summarise</span>(<span class="dt">Detected =</span> <span class="kw">mean</span>(Censored, <span class="dt">na.rm =</span> T) <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.8</span> )</span>
+<span id="cb72-47"><a href="summary-statistics.html#cb72-47"></a>  </span>
+<span id="cb72-48"><a href="summary-statistics.html#cb72-48"></a>  site_means &lt;-<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-49"><a href="summary-statistics.html#cb72-49"></a><span class="st">    </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-50"><a href="summary-statistics.html#cb72-50"></a><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(<span class="kw">length</span>(<span class="kw">unique</span>(Result[<span class="op">!</span><span class="kw">is.na</span>(Result) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>Censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="ot">NA</span>,</span>
+<span id="cb72-51"><a href="summary-statistics.html#cb72-51"></a>     <span class="kw">ifelse</span> (<span class="kw">any</span>(Censored, <span class="dt">na.rm =</span> T), <span class="kw">elnormAltCensored</span>(Result, Censored, <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]], <span class="kw">mean</span>(Result, <span class="dt">na.rm =</span> T) ) ) )</span>
+<span id="cb72-52"><a href="summary-statistics.html#cb72-52"></a>  </span>
+<span id="cb72-53"><a href="summary-statistics.html#cb72-53"></a>  site_means &lt;-<span class="st"> </span><span class="kw">left_join</span>(site_means, sample_complete, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span></span>
+<span id="cb72-54"><a href="summary-statistics.html#cb72-54"></a><span class="st">    </span><span class="kw">left_join</span>(enough_detects, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb72-55"><a href="summary-statistics.html#cb72-55"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Mean, <span class="ot">NA</span>), <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year) )</span>
+<span id="cb72-56"><a href="summary-statistics.html#cb72-56"></a></span>
+<span id="cb72-57"><a href="summary-statistics.html#cb72-57"></a>  <span class="kw">return</span>(site_means)</span>
+<span id="cb72-58"><a href="summary-statistics.html#cb72-58"></a>  </span>
+<span id="cb72-59"><a href="summary-statistics.html#cb72-59"></a>}</span>
+<span id="cb72-60"><a href="summary-statistics.html#cb72-60"></a>  </span>
+<span id="cb72-61"><a href="summary-statistics.html#cb72-61"></a>  MLE_est &lt;-<span class="st"> </span><span class="cf">function</span>(data){</span>
+<span id="cb72-62"><a href="summary-statistics.html#cb72-62"></a>    </span>
+<span id="cb72-63"><a href="summary-statistics.html#cb72-63"></a>    results =<span class="st"> </span>data<span class="op">$</span>Result</span>
+<span id="cb72-64"><a href="summary-statistics.html#cb72-64"></a>    </span>
+<span id="cb72-65"><a href="summary-statistics.html#cb72-65"></a>    censored =<span class="st"> </span>data<span class="op">$</span>Censored</span>
+<span id="cb72-66"><a href="summary-statistics.html#cb72-66"></a>    </span>
+<span id="cb72-67"><a href="summary-statistics.html#cb72-67"></a>    n =<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(results))</span>
+<span id="cb72-68"><a href="summary-statistics.html#cb72-68"></a>    </span>
+<span id="cb72-69"><a href="summary-statistics.html#cb72-69"></a>    <span class="cf">if</span> (<span class="kw">length</span>(<span class="kw">unique</span>(results[<span class="op">!</span><span class="kw">is.na</span>(results) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span> ) {</span>
+<span id="cb72-70"><a href="summary-statistics.html#cb72-70"></a>      MLE_means =<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb72-71"><a href="summary-statistics.html#cb72-71"></a>    }</span>
+<span id="cb72-72"><a href="summary-statistics.html#cb72-72"></a>    </span>
+<span id="cb72-73"><a href="summary-statistics.html#cb72-73"></a>    <span class="cf">else</span> {</span>
+<span id="cb72-74"><a href="summary-statistics.html#cb72-74"></a>      random.rows =<span class="st"> </span><span class="ot">NULL</span>  </span>
+<span id="cb72-75"><a href="summary-statistics.html#cb72-75"></a>      </span>
+<span id="cb72-76"><a href="summary-statistics.html#cb72-76"></a>      random.rows =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored) <span class="op">&amp;</span><span class="st"> </span>(<span class="op">!</span>censored) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">duplicated</span>(results) ), <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb72-77"><a href="summary-statistics.html#cb72-77"></a>      </span>
+<span id="cb72-78"><a href="summary-statistics.html#cb72-78"></a>      random.rows =<span class="st"> </span><span class="kw">c</span>(random.rows, <span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored)), n<span class="dv">-2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb72-79"><a href="summary-statistics.html#cb72-79"></a>      </span>
+<span id="cb72-80"><a href="summary-statistics.html#cb72-80"></a>      MLE_means =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">sum</span>(censored[random.rows], <span class="dt">na.rm =</span> T) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">mean</span>(results[random.rows]), <span class="kw">elnormAltCensored</span>(results[random.rows], censored[random.rows], <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]] )</span>
+<span id="cb72-81"><a href="summary-statistics.html#cb72-81"></a>      </span>
+<span id="cb72-82"><a href="summary-statistics.html#cb72-82"></a>    }</span>
+<span id="cb72-83"><a href="summary-statistics.html#cb72-83"></a>    </span>
+<span id="cb72-84"><a href="summary-statistics.html#cb72-84"></a>    <span class="kw">return</span>(MLE_means)</span>
+<span id="cb72-85"><a href="summary-statistics.html#cb72-85"></a>  }</span>
+<span id="cb72-86"><a href="summary-statistics.html#cb72-86"></a>  </span>
+<span id="cb72-87"><a href="summary-statistics.html#cb72-87"></a>  data &lt;-<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year))</span>
+<span id="cb72-88"><a href="summary-statistics.html#cb72-88"></a>  </span>
+<span id="cb72-89"><a href="summary-statistics.html#cb72-89"></a>  Bootstrap_means &lt;-<span class="st"> </span><span class="kw">replicate</span>(Boot_Repeats, (<span class="kw">by</span>(data, data<span class="op">$</span>ID, MLE_est) ) )</span>
+<span id="cb72-90"><a href="summary-statistics.html#cb72-90"></a>  </span>
+<span id="cb72-91"><a href="summary-statistics.html#cb72-91"></a>  CL &lt;-<span class="st"> </span><span class="kw">apply</span>(Bootstrap_means, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(x)[<span class="kw">ceiling</span>(<span class="fl">0.95</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)] )</span>
+<span id="cb72-92"><a href="summary-statistics.html#cb72-92"></a>  </span>
+<span id="cb72-93"><a href="summary-statistics.html#cb72-93"></a>  CL &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">names</span>(CL), <span class="dt">UCL95 =</span> <span class="kw">unname</span>(CL))</span>
+<span id="cb72-94"><a href="summary-statistics.html#cb72-94"></a>  </span>
+<span id="cb72-95"><a href="summary-statistics.html#cb72-95"></a>  annual_summary =<span class="st"> </span><span class="kw">left_join</span>(<span class="kw">annual_AT_means</span>(data), CL, <span class="dt">by =</span> <span class="st">&quot;ID&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">UCL95 =</span> <span class="kw">ifelse</span>(Complete <span class="op">&amp;</span><span class="st"> </span>Detected, UCL95, <span class="ot">NA</span>) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>ID)</span>
+<span id="cb72-96"><a href="summary-statistics.html#cb72-96"></a>  </span>
+<span id="cb72-97"><a href="summary-statistics.html#cb72-97"></a>  <span class="kw">return</span>(annual_summary)</span>
+<span id="cb72-98"><a href="summary-statistics.html#cb72-98"></a>  </span>
+<span id="cb72-99"><a href="summary-statistics.html#cb72-99"></a>}</span>
+<span id="cb72-100"><a href="summary-statistics.html#cb72-100"></a></span>
+<span id="cb72-101"><a href="summary-statistics.html#cb72-101"></a><span class="kw">set.seed</span>(seed)</span>
+<span id="cb72-102"><a href="summary-statistics.html#cb72-102"></a></span>
+<span id="cb72-103"><a href="summary-statistics.html#cb72-103"></a>annual_summary =<span class="st"> </span><span class="kw">UCL_95</span>(data, <span class="dv">100</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="incomplete" class="section level2">

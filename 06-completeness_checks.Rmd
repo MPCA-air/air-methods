@@ -60,7 +60,7 @@ In general, these rules apply:
 
 <br> __Example `R` script__ 
 
-Click below to view an example.
+__Click below to view an example.__
 
 <div class="toggle"><button class="btn_code">Show __R__ code</button>
 

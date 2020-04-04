@@ -11,7 +11,7 @@ This guide is an online project that lives on GitHub.
 
 
 
-## References
+## _References_ {-}
 
 We are using the R **bookdown** package to make this book.
 

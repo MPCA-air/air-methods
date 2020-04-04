@@ -1,8 +1,7 @@
 # Data cleaning
 
 ```{r out.width='75%', echo=F}
-
-knitr::opts_chunk$set(echo = T, warning = F, message = F)
+knitr::opts_chunk$set(echo = T, eval = T, warning = F, message = F)
 
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 
@@ -217,7 +216,7 @@ Click the button below to view a step by step example of the methods above.
 <div class="toggle">
 <button class="btn_code">Show __R__ code</button>
 
-```{r echo=T, message=F, warning=F}  
+```{r, eval=F}  
 library(readr)
 
 qualifier_data <- read_csv("X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods/qualifier_date.csv")
@@ -260,8 +259,8 @@ view_qualifiers <- function(qualifier_data,
 view_qualifiers(qualifier_data)
 
 ```
-
 </div>
+
 
 <br> 
 
@@ -292,7 +291,7 @@ Leaving multiple observations for some dates in the data set is likely to bias c
 
 <br> __Sample `R` script__  
   
-Click the button below to view a step by step example of the methods above.
+Click below to view an example of the methods above.
 
 <div class="toggle">
 <button class="btn_code">Show __R__ code</button>
@@ -306,7 +305,7 @@ library(DT)
 
 Load the sample monitoring data.
 
-```{r eval=T, message=F, warning=F}
+```{r}
 
 data <- read.csv(text = '
 aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas
@@ -347,7 +346,7 @@ data    <- data[!duplicated(data), ]
   
   
 <br> Add a unique column ID to each `site/poc/param-code/date` combination.
-```{r, eval=T, message=F, warning=F}
+```{r, eval=T}
 
 # Add unique key to each row
 data$key <- 1:nrow(data)
@@ -357,13 +356,13 @@ data$unique_sample_id <- paste(data$aqs_id, data$poc, data$param_code, data$date
 ```
   
   
-```{r, eval=T, echo=F, message=F, warning=F, fig.cap ="Unique ID column added."}
+```{r, echo=F, fig.cap ="Unique ID column added."}
 datatable(head(data[, c(10:11,1:9)]), options = dt_options, rownames = FALSE)
 ```
 
    
 <br> Test for duplicate observations. 
-```{r, eval=T, message=F, warning=F}
+```{r}
 # Label duplicate samples
 data <- group_by(data, unique_sample_id) %>% mutate(duplicate = n() > 1)
 
@@ -373,7 +372,7 @@ dupes <- filter(data, duplicate == T)
   
   
 <br> _Duplicate observations_ 
-```{r, eval=T, echo=F, message=F, warning=F}
+```{r, echo=F}
 datatable(head(dupes), options = dt_options, rownames = FALSE)
 ```
   
@@ -384,7 +383,7 @@ datatable(head(dupes), options = dt_options, rownames = FALSE)
 1. If all observations are censored, select the observation with the lowest detection limit.
 1. If all observations are censored and the detection limits are equal, select a single observation.
     
-```{r, eval=T, message=F, warning=F}
+```{r}
 # Replace censored observations with NA
 dupes <- dupes %>% mutate(conc = ifelse(conc >= md_limit, conc, NA))
 
@@ -406,11 +405,11 @@ data <- rbind(data, dupes)
 
 
 <br> _The new cleaner data_  
-```{r, eval=T, echo=F, message=F, warning=F, fig.cap ="Final data set with 1 duplicate removed."}
+```{r cleaner-data, echo=F, fig.cap =' Final data set with 1 duplicate removed.'}
 
 datatable(select(data, -key, -duplicate), 
-          options = list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F), 
-          rownames = FALSE)
+          options = dt_options, 
+          rownames = F)
 
 # Code folding reference: https://stackoverflow.com/questions/37755037/how-to-add-code-folding-to-output-chunks-in-rmarkdown-html-documents/37839683#37839683
 
@@ -419,6 +418,8 @@ datatable(select(data, -key, -duplicate),
 </div>
 
 
-<br> [Back to top](#missing)
+<br> 
+
+> [Back to top](#missing)
 
   

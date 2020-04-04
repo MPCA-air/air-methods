@@ -69,9 +69,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -80,14 +80,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -96,9 +98,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -164,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.3" data-path="get-data.html"><a href="get-data.html#aqi-now"><i class="fa fa-check"></i><b>2.1.3</b> Current AQI observations</a></li>
 <li class="chapter" data-level="2.1.4" data-path="get-data.html"><a href="get-data.html#wairsites"><i class="fa fa-check"></i><b>2.1.4</b> WAIR Site information table</a></li>
 <li class="chapter" data-level="2.1.5" data-path="get-data.html"><a href="get-data.html#monitors"><i class="fa fa-check"></i><b>2.1.5</b> AirNow:Active AQI monitors</a></li>
-<li class="chapter" data-level="2.1.6" data-path="get-data.html"><a href="get-data.html#EPAsites"><i class="fa fa-check"></i><b>2.1.6</b> EPA Google Earth Site Maps</a></li>
+<li class="chapter" data-level="2.1.6" data-path="get-data.html"><a href="get-data.html#EPAsites"><i class="fa fa-check"></i><b>2.1.6</b> EPA Site Maps</a></li>
 <li class="chapter" data-level="2.1.7" data-path="get-data.html"><a href="get-data.html#lims"><i class="fa fa-check"></i><b>2.1.7</b> Retrieving data from LIMS via Tableau</a></li>
 <li class="chapter" data-level="2.1.8" data-path="get-data.html"><a href="get-data.html#AirVision"><i class="fa fa-check"></i><b>2.1.8</b> Retrieving continuous data from AirVision</a></li>
 <li class="chapter" data-level="2.1.9" data-path="get-data.html"><a href="get-data.html#wair"><i class="fa fa-check"></i><b>2.1.9</b> Retrieving data from MPCA WAIR database</a></li>
@@ -217,8 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-mdls"><i class="fa fa-check"></i><b>6.2</b> Calculating MDLs</a></li>
 <li class="chapter" data-level="6.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-mpca-detection-limits"><i class="fa fa-check"></i><b>6.3</b> Finding MPCA detection limits</a></li>
 <li class="chapter" data-level="6.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>6.4</b> Qualifier Codes for Detection Limits</a></li>
-<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
-<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.6</b> Below detection values</a></li>
+<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values</a></li>
+<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#recommended-steps"><i class="fa fa-check"></i><b>6.6</b> Recommended Steps</a></li>
 <li class="chapter" data-level="6.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.7</b> Multiple detection limits</a></li>
 <li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#reporting-limits"><i class="fa fa-check"></i><b>6.8</b> Reporting limits</a></li>
 <li class="chapter" data-level="6.9" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.9</b> References</a></li>
@@ -237,14 +239,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>9</b> Site comparisons</a><ul>
 <li class="chapter" data-level="9.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a></li>
-<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize data</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>9.2.1</b> Beeswarm Plots</a></li>
-<li class="chapter" data-level="9.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.2.2</b> Correlation matrices</a></li>
+<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-differences"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize differences</a><ul>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i>Beeswarm Plots</a></li>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i>Correlation matrices</a></li>
 </ul></li>
+<li><a href="site-comparisons.html#references-1"><em>References</em></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> From start to finish</a><ul>
-<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>10.1</b> Functions</a></li>
-<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>10.2</b> Analysis steps</a></li>
+<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#using-functions"><i class="fa fa-check"></i><b>10.1</b> Using functions</a></li>
+<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#a-simpler-analysis"><i class="fa fa-check"></i><b>10.2</b> A simpler analysis</a></li>
 </ul></li>
 <li><a href="visuals.html#visuals"><strong>Visuals</strong></a></li>
 <li class="chapter" data-level="11" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>11</b> Charts</a><ul>
@@ -263,17 +266,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
 <li class="chapter" data-level="14" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>14</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>14.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="14.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="14.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>14.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="14.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.1.4</b> Producing Annual Summaries</a></li>
+<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1</b> Data Cleaning</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#null-results"><i class="fa fa-check"></i>Null Results</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#duplicate-observations"><i class="fa fa-check"></i>Duplicate Observations</a></li>
 </ul></li>
+<li class="chapter" data-level="14.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.2</b> Data Validation</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i>Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-completeness"><i class="fa fa-check"></i>Data Completeness</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#below-the-detection-limit"><i class="fa fa-check"></i>Below the detection limit</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.3</b> Producing Annual Summaries</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-annual-means"><i class="fa fa-check"></i>Calculating annual means</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-upper-confidence-limits"><i class="fa fa-check"></i>Calculating upper confidence limits</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#comparing-sites"><i class="fa fa-check"></i><b>14.4</b> Comparing sites</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
 <li class="chapter" data-level="16" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>16</b> AQI explorer</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
-<li class="chapter" data-level="16.1" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.1</b> References</a></li>
+<li><a href="edit-this-book.html#references-2"><em>References</em></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -297,102 +308,114 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="air-toxics-explorer" class="section level1">
 <h1><span class="header-section-number"></span> Air toxics explorer</h1>
+<blockquote>
 <p>This section describes the methods used to summarize the data shown in MPCA’s Air toxics data explorer.</p>
-<div id="mpca-air-toxics-methods" class="section level2">
-<h2><span class="header-section-number">14.1</span> MPCA Air Toxics Methods</h2>
-<p>The MPCA conducts ambient air monitoring at many sites across the state in order to help assess air quality and health risks caused by pollutants in the air. Pollutant concentrations measured by air monitors help to quantify air quality and health risks. However, the results obtained from air monitors, also known as ambient air monitoring data, are not perfect. Air monitoring data often contains missing results for various reasons, erroneous values that may not reflect actual ambient air concentrations, and small values that cannot be reliably measured using current methods (non-detected values). Since monitoring data often has these irregularities, the MPCA has specific methods in place for analyzing air toxics data to account for irregularities (EPA has specific mandated practices for assessing criteria pollutants that are not covered in this document). This document explains the methods MPCA uses to analyze air toxics data.</p>
-<div id="data-cleaning-1" class="section level3">
-<h3><span class="header-section-number">14.1.1</span> Data Cleaning</h3>
-<ol style="list-style-type: lower-alpha">
-<li>Null Results</li>
-</ol>
+</blockquote>
+<p>The MPCA conducts ambient air monitoring at many sites across the state in order to help assess air quality and health risks caused by pollutants in the air. Pollutant concentrations measured by air monitors help to quantify air quality and health risks. However, the results obtained from air monitors, also known as ambient air monitoring data, are not perfect. Air monitoring data often contains missing results for various reasons, erroneous values that may not reflect actual ambient air concentrations, and small values that cannot be reliably measured using current methods (non-detected values).</p>
+<p>Since monitoring data often have these irregularities, the MPCA has specific methods in place for analyzing air toxics data to account for irregularities. The EPA has specific mandated practices for assessing criteria pollutants that are not covered in this document.</p>
+<div id="data-cleaning-1" class="section level2">
+<h2><span class="header-section-number">14.1</span> Data Cleaning</h2>
+<div id="null-results" class="section level3 unnumbered">
+<h3>Null Results</h3>
 <p>Any text values in the results column, such as null codes, are changed to blank cells. Any numeric results that appear to be placeholders for null values, such as 985 or -999, are changed to blank cells to reflect that they are null values. All values below the detection limit are left as-is during data cleaning, but are replaced with estimates later during analysis.</p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Duplicate Observations</li>
-</ol>
+</div>
+<div id="duplicate-observations" class="section level3 unnumbered">
+<h3>Duplicate Observations</h3>
 <p>If there are multiple results for a pollutant at the same site, time, and POC, then a single result must be selected for that site, time, and POC to avoid affecting summary statistics with extra samples which should not exist. The first step should be to consult the lab to determine why there is a duplicate observation and attempt to determine which one best reflects the conditions at the site and time. If consulting with the lab does not lead to a definitive conclusion for which result to keep, or if consulting with the lab is not a possibility, there these steps are recommended:</p>
 <ol style="list-style-type: lower-roman">
-<li><p>If there is only one result greater than or equal to the detection limit (see information about method detection limits below), use that result.</p></li>
-<li><p>If there are multiple results greater than or equal to the detection limit, use the average of those results.</p></li>
-<li><p>If there are no results greater than or equal to the detection limit, use the result with the lowest detection limit. If all results have the same detection limit, then select any one of the results since it does not matter which one is selected.</p></li>
+<li>If there is only one result greater than or equal to the detection limit (see information about method detection limits below), use that result.<br />
+</li>
+<li>If there are multiple results greater than or equal to the detection limit, use the average of those results.</li>
+<li>If there are no results greater than or equal to the detection limit, use the result with the lowest detection limit. If all results have the same detection limit, then select any one of the results since it does not matter which one is selected.</li>
 </ol>
 </div>
-<div id="data-validation-1" class="section level3">
-<h3><span class="header-section-number">14.1.2</span> Data Validation</h3>
-<p>Monitoring results may be flagged for further review if there is a possibility that those values do not reflect actual ambient air concentrations. A flagged value is not immediately changed to null. Flagged values should be kept for all analysis until involved parties agree that they should be changed to null. Flagged values should only be removed without consultation if they significantly affect analysis results and there is a strong likelihood that those values do not accurately reflect actual ambient air concentrations at the site. When in doubt, keep flagged values as-is in all analysis. It is often a good idea to view a time series on monitoring results using software such as Tableau or R to spot irregularities in monitoring results that may be flagged immediately or after further review.</p>
-<p>Any values that appear extreme either on the high or low end are flagged for further investigation. Depending on feedback from the lab, QA, and/or air monitoring unit, flagged values may either be kept as-is or changed to blank if it is determined that those values are not appropriate to be included for the purpose of the analysis. Values which are equal in consecutive samples may be flagged depending on precision of the value and the number of consecutive samples with that value. For example, a value of 0.1234 in consecutive samples may be flagged for further review, but a value of 5 in consecutive samples for a method which produces values rounded to the nearest whole number may not be flagged unless that value is repeated in enough consecutive samples to be considered suspect. Flagging consecutive repeated values is a judgement call as to whether those values reflect no change in ambient air concentrations at a site, or whether those values likely represent the machine “sticking”. Other results which appear to not reflect ambient air concentrations may also be flagged. For example, a decreasing trend in results which may indicate a sample leak or calibration issue may also be flagged.</p>
 </div>
-<div id="parameter-occurrence-codes-pocs" class="section level3">
-<h3><span class="header-section-number">14.1.3</span> Parameter Occurrence Codes (POCs)</h3>
+<div id="data-validation-1" class="section level2">
+<h2><span class="header-section-number">14.2</span> Data Validation</h2>
+<p>Monitoring results that appear extreme -on the high or low end- are flagged for further investigation. A flagged value is not immediately changed to null. Flagged values should be kept for all analysis until involved parties agree that they should be changed. Depending on feedback from the lab, QA, and/or air monitoring unit, flagged values may either be kept as-is or changed to blank if it is determined that those values are not appropriate to be included for the purpose of the analysis. When in doubt, keep flagged values as-is in all analysis.</p>
+<p>Values which are equal in consecutive samples may be flagged depending on precision of the value and the number of repeating samples. For example, a value of 0.1234 in consecutive samples may be flagged for further review, but a value of 5 in consecutive samples for a method which produces values rounded to the nearest whole number, may not be suspect. Flagging consecutive repeated values is a judgement call as to whether those values reflect no change in ambient air concentrations at a site, or whether those values likely represent the machine “sticking”.</p>
+<p>Other results which appear to not reflect ambient air concentrations may also be flagged. For example, a decreasing trend in results that may indicate a sample leak or calibration issue.</p>
+<div id="parameter-occurrence-codes-pocs" class="section level3 unnumbered">
+<h3>Parameter Occurrence Codes (POCs)</h3>
 <p>Sometimes, there are multiple monitors at a site collecting samples for a pollutant. Each one of these monitors is assigned a POC. If there are multiple POCs at a site collecting samples at the same time, then a single result must be selected from those samples to avoid affecting summary statistics with extra samples caused by having multiple monitors at a site. The EPA recommends these steps for handling results from multiple POCs:</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>If no results are valid, then the result for that time should be null.</p></li>
-<li><p>If there is only one valid result, use that result.</p></li>
-<li><p>If there is only one valid result greater than or equal to the detection limit, use that result.</p></li>
-<li><p>If there are multiple valid results greater than or equal to the detection limit, use the average of those results.</p></li>
-<li><p>If there are valid results, but none greater than or equal to the detection limit, then select the one with the lowest detection limit. If all results have the same detection limit, then use any result.</p></li>
+<li>If no results are valid, then the result for that time should be null.</li>
+<li>If there is only one valid result, use that result.</li>
+<li>If there is only one valid result greater than or equal to the detection limit, use that result.</li>
+<li>If there are multiple valid results greater than or equal to the detection limit, use the average of those results.</li>
+<li>If there are valid results, but none greater than or equal to the detection limit, then select the one with the lowest detection limit. If all results have the same detection limit, then use any result.</li>
 </ol>
 </div>
-<div id="producing-annual-summaries" class="section level3">
-<h3><span class="header-section-number">14.1.4</span> Producing Annual Summaries</h3>
-<p>It is useful to calculate and report summary statistics for a calendar year such as a mean concentration or confidence interval for the mean concentration. Compilations of these summary statistics for reporting are referred to as “annual summaries”. Since ambient air monitoring data has results below detection limits, null results, and results that are flagged and removed, the reliability of annual summary statistics as a measure of true ambient air conditions can vary. Therefore, the MPCA has rules for analysis and reporting of air toxics for annual summaries that attempt to ensure all reported annual summary statistics approximately reflect true ambient air conditions at a site.</p>
-<ol style="list-style-type: lower-alpha">
-<li>Data Completeness</li>
-</ol>
+<div id="data-completeness" class="section level3 unnumbered">
+<h3>Data Completeness</h3>
 <p>For any summary statistic calculated from a sample, the reliability of that statistic improves as the sample size increases. Summary statistics calculated from small samples are not considered very reliable while summary statistics calculated from large samples are considered reliable. The MPCA has data completeness requirements so unreliable summary statistics are not reported.</p>
 <ol style="list-style-type: lower-roman">
-<li><p>The EPA recommends that at least 75 percent of scheduled samples in a calendar year for a pollutant at a site produce a valid measurement (non-null result) in order to report summary statistics for the pollutant at that site. If fewer than 75 percent of scheduled samples in a calendar year produce a valid measurement, then annual summary statistics should not be reported for the pollutant at that site for that year. It may be reported that the summary statistic could not be calculated because this requirement was not met.</p></li>
-<li><p>EPA recommends that every 3-month quarter of a calendar year also have at least 75 percent of scheduled samples in that quarter produce a valid measurement.</p></li>
-<li><p>MPCA reports annual summary statistics as valid if at least 75% percent of scheduled samples in the warm (May - October) and cold (January - April, November - December) seasons produce a valid measurement. If either season of the year does not meet this requirement, then annual summary statistics should not be reported for the pollutant at that site for that year. It may be reported that the summary statistic could not be calculated because this requirement was not met. MPCA uses a less stringent seasonal completeness requirement instead of the quarter completeness requirement due to the difficulties of achieving 75% completeness for all four quarters in a year.</p></li>
+<li>The EPA recommends that at least 75% of scheduled samples in a calendar year for a pollutant at a site produce a valid measurement (non-null result) in order to report summary statistics for the pollutant at that site. If fewer than 75% of scheduled samples in a calendar year produce a valid measurement, then annual summary statistics should not be reported for the pollutant at that site for that year. It may be reported that the summary statistic could not be calculated because this requirement was not met.<br />
+</li>
+<li>EPA recommends that every 3-month quarter of a calendar year also have at least 75% of scheduled samples in that quarter produce a valid measurement.<br />
+</li>
+<li>MPCA reports annual summary statistics as valid if at least 75% of scheduled samples in the warm (May - October) and cold (January - April, November - December) seasons produce a valid measurement. If either season of the year does not meet this requirement, then annual summary statistics should not be reported for the pollutant at that site for that year. It may be reported that the summary statistic could not be calculated because this requirement was not met. MPCA uses a less stringent seasonal completeness requirement instead of the quarter completeness requirement due to the difficulties of achieving 75% completeness for all four quarters in a year.</li>
 </ol>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>Results below the detection limit</li>
-</ol>
+</div>
+<div id="below-the-detection-limit" class="section level3 unnumbered">
+<h3>Below the detection limit</h3>
 <p>The precision of results below the detection limit is lower than the precision of results above the detection limit. However, there is strong confidence that monitor results below the detection limit indicate that the true ambient air concentration of a pollutant at the site is between zero and the method detection limit. The goal for values below the detection limit is to avoid making erroneous assumptions about values below the detection limit while still taking advantage of the information that they provide about ambient air concentrations.</p>
 <ol style="list-style-type: lower-roman">
-<li>These are not recommended procedures for handling results below the detection limit</li>
+<li>These are not recommended procedures for handling results below the detection limit.<br />
+</li>
+<li>Replace with blank cell. This treats results below the detection limit the same as null values and eliminates the useful information they provide. It generally biases annual summaries high.<br />
+</li>
+<li>Replace with zero. While it is possible that the true ambient air concentration is zero, it is usually greater than zero. Replacing with zero biases summary statistics low.<br />
+</li>
+<li>Replace with the detection limit. While it is possible that the true ambient air concentration is very close to the detection limit, it is often lower than the detection limit. Replacing with zero biases summary statistics low.<br />
+</li>
+<li>Replace with half of the detection limit. This is considered a compromise between the two options above. It doesn’t bias summary statistics as much as the previous two options, but there are more sophisticated estimates for results below the detection limit which utilize results above the detection limit to help estimate results below the detection limit.</li>
 </ol>
-<ol style="list-style-type: decimal">
-<li><p>Replace with blank cell. This treats results below the detection limit the same as null values and eliminates the useful information they provide. It generally biases annual summaries high.</p></li>
-<li><p>Replace with zero. While it is possible that the true ambient air concentration is zero, it is usually greater than zero. Replacing with zero biases summary statistics low.</p></li>
-<li><p>Replace with the detection limit. While it is possible that the true ambient air concentration is very close to the detection limit, it is often lower than the detection limit. Replacing with zero biases summary statistics low.</p></li>
-<li><p>Replace with half of the detection limit. This is considered a compromise between the two options above. It doesn’t bias summary statistics as much as the previous two options, but there are more sophisticated estimates for results below the detection limit which utilize results above the detection limit to help estimate results below the detection limit.</p></li>
-</ol>
-<ol start="2" style="list-style-type: lower-roman">
-<li>The MPCA has elected to use maximum likelihood estimation to approximate values below the detection limit. The MPCA currently uses maximum likelihood estimation assuming a normal distribution for pollutant concentrations. For information about maximum likelihood estimation, visit <link>. For information about why the MPCA uses maximum likelihood estimation instead of other non-detect estimation methods such as Kaplan Meier, visit <link>.</li>
-</ol>
-<p>Maximum likelihood estimation requires a sufficient number of results above the detection limit in order to reliably estimate summary statistics. If more than 80 percent of results are below the detection limit, the estimates are unreliable. In that case, reliable annual summary statistics cannot be calculated and should not be reported. It may be reported that the summary statistic could not be calculated because there were not enough results above the detection limit. Maximum likelihood estimation also requires at least two results above the detection limit that are not equal. If there is one or no unique results above the detection limit, then maximum likelihood estimation cannot be used and annual summary statistics should not be reported.</p>
-<ol start="3" style="list-style-type: lower-alpha">
-<li>Calculating annual means</li>
-</ol>
+<p>The MPCA has elected to use maximum likelihood estimation (MLE) method to approximate values below the detection limit. The MPCA currently uses maximum likelihood estimation assuming a normal distribution for pollutant concentrations. For more information about the maximum likelihood estimation, visit <link>. For an explanation on why the MPCA uses maximum likelihood estimation instead of other non-detect estimation methods, such as Kaplan Meier, visit <link>.</p>
+<p>Maximum likelihood estimation requires a sufficient number of results above the detection limit in order to reliably estimate summary statistics. When more than 80% of results are below the detection limit, the estimates can become unreliable. In those situations, reliable annual summary statistics cannot be calculated and are not usually reported.</p>
+<p>Maximum likelihood estimation also requires at least two results above the detection limit that are not identical. If there is only one unique value above the detection limit, then maximum likelihood estimation cannot be used and annual summary statistics are not reported.</p>
+</div>
+</div>
+<div id="producing-annual-summaries" class="section level2">
+<h2><span class="header-section-number">14.3</span> Producing Annual Summaries</h2>
+<p>It is useful to calculate and report summary statistics for a calendar year such as a mean concentration or confidence interval for the mean concentration. Compilations of these summary statistics for reporting are referred to as “annual summaries”. Since ambient air monitoring data has results below detection limits, null results, and results that are flagged and removed, the reliability of annual summary statistics as a measure of true ambient air conditions can vary. Therefore, the MPCA has rules for analysis and reporting of air toxics for annual summaries that strive to ensure reported annual summary statistics capture the potential true ambient air conditions at a site.</p>
+<div id="calculating-annual-means" class="section level3 unnumbered">
+<h3>Calculating annual means</h3>
 <p>In order to calculate an annual mean of an air toxic concentration, these criteria must be met as described above in data completeness and results below the detection limit:</p>
-<ol style="list-style-type: lower-roman">
-<li><p>At least 75 percent of scheduled samples in the calendar year must produce a valid measurement. In addition, at least 75 percent of scheduled samples in each quarter must produce a valid measurement.</p></li>
-<li><p>At least 20 percent of valid samples must have a result equal to or greater than the detection limit.</p></li>
-<li><p>There must be at least two unique results above the detection limit.</p></li>
+<ol style="list-style-type: lower-alpha">
+<li>At least 75% of scheduled samples in the calendar year must produce a valid measurement. In addition, at least 75% of scheduled samples in each quarter must produce a valid measurement.<br />
+</li>
+<li>At least 20% of valid samples must have a result equal to or greater than the detection limit.</li>
+<li>There must be at least two unique results above the detection limit.</li>
 </ol>
 <p>If any of these criteria are not met for a pollutant, then it is not recommended to report an annual mean for that pollutant.</p>
 <p>The annual mean for the concentration of a pollutant is the arithmetic mean of all samples in a calendar year after all null values are excluded and results below the detection limit are replaced with estimates using maximum likelihood estimation.</p>
-<ol start="4" style="list-style-type: lower-alpha">
-<li><p>Calculating upper confidence limits</p></li>
-<li><p>In order to calculate an upper confidence limit for the annual mean concentration of an air toxic, the same criteria required to calculate an annual mean for the concentration are also required to calculate an upper confidence limit.</p></li>
-</ol>
-<ol start="2" style="list-style-type: lower-roman">
-<li><p>Nonparametric bootstrap sampling is used for calculating upper confidence limits since most air toxics data is not normally distributed. Information about bootstrapping can be found here: <a href="https://web.stanford.edu/class/psych252/tutorials/doBootstrapPrimer.pdf" class="uri">https://web.stanford.edu/class/psych252/tutorials/doBootstrapPrimer.pdf</a>. At least 1,000 bootstrap samples should be taken, and a larger number of samples is better depending on the computation times.</p></li>
-<li><p>MPCA uses 95 percent upper confidence limits for comparisons to inhalation health benchmarks.</p></li>
-</ol>
-<ol start="5" style="list-style-type: lower-alpha">
-<li>Comparing site annual means</li>
-</ol>
-<p>There may be interest in comparing the annual means of a site over multiple years to determine if there is significant change over time or to compare the annuals means of multiple sites in a single year to determine if some sites have significantly higher concentrations of pollutants than others. MPCA uses this methodology to compare site means:</p>
-<ol style="list-style-type: lower-roman">
-<li><p>MPCA does not use parametric methods for normally distrusted data such as t-tests since most air toxics data is not normally distributed.</p></li>
-<li><p>Pairwise comparisons of samples taken at different sites at the same time are not used since null values and values below the method detection limit make it difficult to perform pairwise comparisons across sites while still utilizing most of the samples collected.</p></li>
-<li><p>Bootstrap sampling is used to generate a confidence interval for the difference in annual means between years / sites. A confidence interval for the difference in annual means is generated instead of confidence intervals for each individual annual mean since the joint probability of two means being approximately the same is lower than the marginal probabilities of each mean existing in the other’s mean’s confidence interval.</p></li>
-<li><p>MPCA uses 95 percent two-sided confidence intervals for the difference in annual means. If the lower bound of the interval is greater than zero or the upper bound is less than zero, then there is a significant difference between the annual means. If the confidence interval includes zero, then there is no significant difference.</p></li>
-</ol>
-
 </div>
+<div id="calculating-upper-confidence-limits" class="section level3 unnumbered">
+<h3>Calculating upper confidence limits</h3>
+<ol style="list-style-type: lower-alpha">
+<li>In order to calculate an upper confidence limit for the annual mean concentration of an air toxic, the same criteria required to calculate an annual mean for the concentration are also required to calculate an upper confidence limit.<br />
+</li>
+<li>Nonparametric bootstrap sampling is used for calculating upper confidence limits since most air toxics data is not normally distributed. Information about bootstrapping is online at: <a href="https://web.stanford.edu/class/psych252/tutorials/doBootstrapPrimer.pdf" class="uri">https://web.stanford.edu/class/psych252/tutorials/doBootstrapPrimer.pdf</a>. At least 1,000 bootstrap samples should be taken, and a larger number of samples is better depending on the computation times.<br />
+</li>
+<li>MPCA uses 95 upper confidence limits for comparisons to inhalation health benchmarks.</li>
+</ol>
+</div>
+</div>
+<div id="comparing-sites" class="section level2">
+<h2><span class="header-section-number">14.4</span> Comparing sites</h2>
+<p>There may be interest in comparing the annual means of a site over multiple years to determine if there is significant change over time or to compare the annuals means of multiple sites in a single year to determine if some sites have significantly higher concentrations of pollutants than others. MPCA uses this methodology to compare site means:</p>
+<ol style="list-style-type: lower-alpha">
+<li>MPCA does not use parametric methods for normally distrusted data such as t-tests since most air toxics data is not normally distributed.<br />
+</li>
+<li>Pairwise comparisons of samples taken at different sites at the same time are not used since null values and values below the method detection limit make it difficult to perform pairwise comparisons across sites while still utilizing most of the samples collected.<br />
+</li>
+<li>Bootstrap sampling is used to generate a confidence interval for the difference in annual means between years or sites. A confidence interval for the difference in annual means is generated instead of confidence intervals for each individual annual mean since the joint probability of two means being approximately the same is lower than the marginal probabilities of each mean existing in the other’s mean’s confidence interval.<br />
+</li>
+<li>MPCA uses 95% two-sided confidence intervals for the difference in annual means. If the lower bound of the interval is greater than zero or the upper bound is less than zero, then there is a significant difference between the annual means. If the confidence interval includes zero, then there is no significant difference.</li>
+</ol>
+<p><br><a href="air-toxics-explorer.html#air-toxics-explorer">Back to top</a></p>
+
 </div>
 </div>
 <script>

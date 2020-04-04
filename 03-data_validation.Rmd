@@ -2,10 +2,11 @@
 
 ```{r, include=F}
 knitr::opts_chunk$set(echo = T, warning = F, message = F)
+
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
 ```
 
-```{r out.width='62%', echo=F}
+```{r, out.width='62%', echo=F}
 knitr::include_graphics("https://i0.wp.com/catscradleshelter.org/wp-content/uploads/2015/10/8-quality-control.jpg?fit=1200%2C800")
 ```
 
@@ -46,7 +47,7 @@ The following sections show examples of data validation steps.
 
 __Load example data__
 
-```{r validation, eval=T, message=F, warning=F}
+```{r validation}
 library(tidyverse)
 library(stringr)
 library(RcppRoll)
@@ -61,7 +62,7 @@ names(data) <- c("aqs_id", "poc", "param_code", "date", "conc", "null_code", "md
 
 
 <br> __Sample monitoring data__   
-```{r, eval=T, echo=F, message=F, warning=F}
+```{r, echo=F}
 library(knitr)
 library(DT)
 
@@ -88,7 +89,7 @@ knitr::include_graphics("images/data-detectionlimits.jpg")
 ```
 </a>
 
-```{r, eval=F, echo=F, message=F, warning=F}
+```{r, eval=F, echo=F}
 library(shiny)
 library(readr)
 library(ggplot2)
@@ -159,7 +160,7 @@ Click below to view an example of checking for instrument drift.
 
 <div class="toggle"><button class="btn_code">Show __R__ code</button>
 
-```{r echo=T, message=F, warning=F}  
+```{r echo=T}  
 
 library(car)
 
@@ -225,7 +226,7 @@ Click the button to view an example.
 
 <div class="toggle"><button class="btn_code">Show __R__ code</button>
 
-```{r, eval=T, message=F, warning=F}
+```{r}
 
 # Test for exceptionally high values [above 75th percentile X 3] This can be modified to 95% for continous or other short duration data.
 high_data <- group_by(data, year, aqs_id, pollutant) %>% mutate(AR_Mean = mean(conc, na.rm=T), Percentile_75 = quantile(conc, 0.75, na.rm = T), Percentile_75_X3 = Percentile_75*3) %>% ungroup()
@@ -249,7 +250,7 @@ high_data <- high_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
  
 Three or more sequential replicate values may be a result of a machine error.
 
-```{r eval=T, message=F, warning=F}
+```{r}
 ##Search for three repeating identical values.
 repeat_data <- group_by(data, poc, year, aqs_id, pollutant) %>% 
   arrange(year, aqs_id, poc, pollutant, date) %>% 
@@ -270,7 +271,7 @@ repeat_data <- repeat_data[, c("date", "pollutant", "aqs_id", "Warning_Type")]
 
 
 <br> _Table: Dates and pollutants to check including the potential issue_   
-```{r, eval=T, echo=F, message=F, warning=F}
+```{r, echo=F}
 warnings_table <- rbind(repeat_data, high_data)
 
 datatable(head(warnings_table, 10), options = dt_options, rownames = FALSE)
@@ -287,7 +288,7 @@ Click below to view an example of counting unqiue detected values.
 
 <div class="toggle"><button class="btn_code">Show __R__ code</button>
 
-```{r eval=T, message=F, warning=F, echo=F}
+```{r, echo=F}
 library(knitr)
 library(DT)
 ```
@@ -364,4 +365,6 @@ DT::datatable(sample_n(data, size = 10, replace = F), options = list(scrollX = 0
 [Spatial and temporal analysis of national air toxics data](http://www.tandfonline.com/doi/pdf/10.1080/10473289.2006.10464576)
 
 
-<br> [Back to top](#data-validation)
+<br> 
+
+> [Back to top](#data-validation)

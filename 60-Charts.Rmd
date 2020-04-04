@@ -19,7 +19,7 @@ The R package _openair_ provides a convenient function for presenting data in a 
 
 <br>
 
-```{r, echo=FALSE}
+```{r, echo=F}
 library(openair)
 library(tidyverse)
 
@@ -59,7 +59,9 @@ Some __chart themes__ include:
 - [lato](https://github.com/briandconnelly/lato)
 
 
-The example below shows charts with the `ggpomological` theme.
+_The example below shows charts with the `ggpomological` theme._
+
+![](https://mpca-air.github.io/air-methods/air-methods_files/figure-html/unnamed-chunk-103-1.png)
 
 <div class="toggle"><button class="btn_code">Show __R__ code</button>
 
@@ -86,14 +88,12 @@ ggplot(data, aes(x = pollutant, y = conc, color = pollutant, fill = pollutant)) 
      scale_color_pomological() + 
      scale_fill_pomological() + 
      labs(title = "Air monitoring results")
-
-
 ```
 
 <br>
 
-You can even add a calm cream paper background.
-```{r, warning = F}
+You add a calm cream paper background.
+```{r}
 
 # Make scatterplot w/ pomo colors and cream background
 ggplot(data, aes(x = year, y = conc, color = pollutant)) +
@@ -108,25 +108,24 @@ ggplot(data, aes(x = year, y = conc, color = pollutant)) +
 <br>
 
 Or create a fancy chart in the style of an old fashioned nature journal.
-```{r, results=F, warning=F, message = F}
+```{r, results=F}
 library(extrafont)
-
 
 ## Download fancyfont here - https://fonts.google.com/specimen/Homemade+Apple/
 ## Add to this folder - "Control Panel\All Control Panel Items\Fonts"
 
 # Check loaded fonts
-loadfonts(device = "win")
-
 #windowsFonts()
+#loadfonts(device = "win")
 
 fonts_df <- fonttable()
 
-font_import(pattern = "HomemadeApple-Regular")
+# Load new font
+#font_import(pattern = "HomemadeApple-Regular")
 ```
 
 
-```{r, cache = T, warning=F, message = F, out.width = "100%"}
+```{r, cache=T, out.width="100%"}
 
 # Make fancy scatterplot w/ pomo colors, paper background and cursive fonts
 fancy_plot <- ggplot(data, aes(x = year, y = conc, color = pollutant)) +
@@ -145,7 +144,7 @@ paint_pomological(fancy_plot, res = 120)
 <br>
 
 Or create a density plot.
-```{r, cache = T, warning=F}
+```{r, cache=T}
 #devtools::install_github("yixuan/showtext")
 library(showtext)
 
@@ -153,7 +152,6 @@ library(showtext)
 font_add_google(name = "Homemade Apple", family = "Homemade Apple")
 
 #font_add_google(name = "Indie Flower", family = "Indie Flower")
-
 
 # Create density plot
 #showtext_begin()
@@ -175,8 +173,8 @@ ggplot(data, aes(x = sqrt(conc), fill = pollutant, color = pollutant)) +
 <br>
 
 
-Or split up the density plot into separate rows.
-```{r, cache = T, warning=F, out.width = "100%", fig.asp = .62}
+Or split the density plot into separate rows.
+```{r, cache=T, out.width = "100%", fig.asp = .62}
 
 library(ggridges)
 
@@ -244,21 +242,30 @@ pollution_roses = function(data, met_data_filepath, num_breaks = 5) { #Met data 
   
   data$Date <- ymd(data$Date)
   
-  met_data = read.csv(met_data_filepath)
-  names(met_data)[c(1,8,9)] = c("Day","wd","ws")
-  met_data = mutate(met_data, date = paste0(Year,"/",Month,"/",Day," ",Hour,":00"))
-  met_data$date = ymd_hm(met_data$date)
-  met_data = met_data[,-c(1:3,10)]
-  met_data = timeAverage(met_data, avg.time = "day")
-  met_data$date = ymd(met_data$date)
+  met_data <- read_csv(met_data_filepath)
+  
+  names(met_data)[c(1,8,9)] <- c("Day","wd","ws")
+  
+  met_data <- mutate(met_data, date = paste0(Year, "/", Month, "/", Day, " ", Hour, ":00"))
+  
+  met_data$date <- ymd_hm(met_data$date)
+  
+  met_data <- met_data[ , -c(1:3,10)]
+  
+  met_data <- timeAverage(met_data, avg.time = "day")
+  
+  met_data$date <- ymd(met_data$date)
   
   data <- left_join(data, met_data, by = c("Date" = "date"))
   
   Pollutant <- unique(data$Pollutant)
+  
   Site <- unique(data$AQSID)
+  
   Year <- unique(data$Year)
 
   shinyApp(
+    
   ui = fluidPage(responsive = FALSE,
                  fluidRow(
                    column(3,
@@ -273,31 +280,52 @@ pollution_roses = function(data, met_data_filepath, num_breaks = 5) { #Met data 
   
   server = function(input, output) {
     
-    
-    
-    
-    output$normviz <- renderPlot({
+    output$normviz = renderPlot({
+      
       print(input$Pollutant)
+      
       print(input$Site)
+      
       print(input$Year)
-      data_sub = filter(data, Pollutant==input$Pollutant, AQSID == input$Site, Year == input$Year, !is.na(Result))
-      data_sub = data_sub %>% mutate(MDL = max(MDL), minimum = min(Result), maximum = max(Result), Result = ifelse(Censored, 1e-16, Result))
-      breaks_site = NULL
+      
+      data_sub <- filter(data, 
+                         Pollutant == input$Pollutant, 
+                         AQSID == input$Site, 
+                         Year == input$Year, 
+                         !is.na(Result))
+      
+      data_sub <- data_sub %>% 
+                  mutate(MDL     = max(MDL), 
+                         minimum = min(Result), 
+                         maximum = max(Result), 
+                         Result  = ifelse(Censored, 1e-16, Result))
+      
+      breaks_site <- NULL
+      
       if(!all(data_sub$Censored)){
         
-        breaks_site = c(breaks_site, 0, #c(round_any(data_sub$minimum[1], 0.001, floor),
-                      round_any( c(data_sub$MDL[1], data_sub$MDL[1] + (data_sub$maximum[1] - data_sub$MDL[1]) * 
+        breaks_site <- c(breaks_site, 0, #c(round_any(data_sub$minimum[1], 0.001, floor),
+                         round_any( c(data_sub$MDL[1], data_sub$MDL[1] + (data_sub$maximum[1] - data_sub$MDL[1]) * 
                                      (1:(num_breaks-1) / (num_breaks-1) ) ), 0.0001, ceiling ) )
-        pollutionRose(data_sub, statistic = "abs.count", pollutant = "Result", breaks = breaks_site, 
-                  key.footer="ug/m3", main=paste("Daily Average Pollution Rose for",
-                  data_sub$Pollutant[1],"\n", data_sub$AQSID[1]) )
-      }
-      else {
-        breaks_site = c(breaks_site, c(round_any(0, 0.0001, floor),
-                      round_any( c(data_sub$MDL[1], 2*data_sub$MDL[1] ), 0.0001, ceiling ) ) )
-        pollutionRose(data_sub, statistic = "abs.count", pollutant = "Result", breaks = breaks_site, 
-                  key.footer="ug/m3", main=paste("Daily Average Pollution Rose for",
-                  data_sub$Pollutant[1],"\n", data_sub$AQSID[1]) )
+        
+        pollutionRose(data_sub, 
+                      statistic  = "abs.count", 
+                      pollutant  = "Result", 
+                      breaks     = breaks_site, 
+                      key.footer = "ug/m3", 
+                      main       = paste("Daily Average Pollution Rose for", data_sub$Pollutant[1],"\n", data_sub$AQSID[1]) )
+      } else {
+        
+        breaks_site <- c(breaks_site, 
+                         c(round_any(0, 0.0001, floor),
+                         round_any(c(data_sub$MDL[1], 2*data_sub$MDL[1] ), 0.0001, ceiling) ) )
+        
+        pollutionRose(data_sub, 
+                      statistic  = "abs.count", 
+                      pollutant  = "Result", 
+                      breaks     = breaks_site, 
+                      key.footer = "ug/m3", 
+                      main       = paste("Daily Average Pollution Rose for", data_sub$Pollutant[1],"\n", data_sub$AQSID[1]) )
         
       }
       
@@ -312,3 +340,4 @@ pollution_roses = function(data, met_data_filepath, num_breaks = 5) { #Met data 
 </div>
 
 <br>[Back to top](#charts)
+

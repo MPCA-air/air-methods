@@ -367,3 +367,7 @@ tailnum_delay_db <- flights_db %>%
 tailnum_delay_db %>% show_query()
 
 ```
+
+<br>
+
+> [Back to top](#best-practices)

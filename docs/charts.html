@@ -69,9 +69,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -80,14 +80,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -96,9 +98,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -164,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.3" data-path="get-data.html"><a href="get-data.html#aqi-now"><i class="fa fa-check"></i><b>2.1.3</b> Current AQI observations</a></li>
 <li class="chapter" data-level="2.1.4" data-path="get-data.html"><a href="get-data.html#wairsites"><i class="fa fa-check"></i><b>2.1.4</b> WAIR Site information table</a></li>
 <li class="chapter" data-level="2.1.5" data-path="get-data.html"><a href="get-data.html#monitors"><i class="fa fa-check"></i><b>2.1.5</b> AirNow:Active AQI monitors</a></li>
-<li class="chapter" data-level="2.1.6" data-path="get-data.html"><a href="get-data.html#EPAsites"><i class="fa fa-check"></i><b>2.1.6</b> EPA Google Earth Site Maps</a></li>
+<li class="chapter" data-level="2.1.6" data-path="get-data.html"><a href="get-data.html#EPAsites"><i class="fa fa-check"></i><b>2.1.6</b> EPA Site Maps</a></li>
 <li class="chapter" data-level="2.1.7" data-path="get-data.html"><a href="get-data.html#lims"><i class="fa fa-check"></i><b>2.1.7</b> Retrieving data from LIMS via Tableau</a></li>
 <li class="chapter" data-level="2.1.8" data-path="get-data.html"><a href="get-data.html#AirVision"><i class="fa fa-check"></i><b>2.1.8</b> Retrieving continuous data from AirVision</a></li>
 <li class="chapter" data-level="2.1.9" data-path="get-data.html"><a href="get-data.html#wair"><i class="fa fa-check"></i><b>2.1.9</b> Retrieving data from MPCA WAIR database</a></li>
@@ -217,8 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-mdls"><i class="fa fa-check"></i><b>6.2</b> Calculating MDLs</a></li>
 <li class="chapter" data-level="6.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-mpca-detection-limits"><i class="fa fa-check"></i><b>6.3</b> Finding MPCA detection limits</a></li>
 <li class="chapter" data-level="6.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>6.4</b> Qualifier Codes for Detection Limits</a></li>
-<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
-<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.6</b> Below detection values</a></li>
+<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values</a></li>
+<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#recommended-steps"><i class="fa fa-check"></i><b>6.6</b> Recommended Steps</a></li>
 <li class="chapter" data-level="6.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.7</b> Multiple detection limits</a></li>
 <li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#reporting-limits"><i class="fa fa-check"></i><b>6.8</b> Reporting limits</a></li>
 <li class="chapter" data-level="6.9" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.9</b> References</a></li>
@@ -237,14 +239,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>9</b> Site comparisons</a><ul>
 <li class="chapter" data-level="9.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a></li>
-<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize data</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>9.2.1</b> Beeswarm Plots</a></li>
-<li class="chapter" data-level="9.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.2.2</b> Correlation matrices</a></li>
+<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-differences"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize differences</a><ul>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i>Beeswarm Plots</a></li>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i>Correlation matrices</a></li>
 </ul></li>
+<li><a href="site-comparisons.html#references-1"><em>References</em></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> From start to finish</a><ul>
-<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>10.1</b> Functions</a></li>
-<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>10.2</b> Analysis steps</a></li>
+<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#using-functions"><i class="fa fa-check"></i><b>10.1</b> Using functions</a></li>
+<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#a-simpler-analysis"><i class="fa fa-check"></i><b>10.2</b> A simpler analysis</a></li>
 </ul></li>
 <li><a href="visuals.html#visuals"><strong>Visuals</strong></a></li>
 <li class="chapter" data-level="11" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>11</b> Charts</a><ul>
@@ -263,17 +266,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
 <li class="chapter" data-level="14" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>14</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>14.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="14.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="14.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>14.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="14.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.1.4</b> Producing Annual Summaries</a></li>
+<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1</b> Data Cleaning</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#null-results"><i class="fa fa-check"></i>Null Results</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#duplicate-observations"><i class="fa fa-check"></i>Duplicate Observations</a></li>
 </ul></li>
+<li class="chapter" data-level="14.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.2</b> Data Validation</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i>Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-completeness"><i class="fa fa-check"></i>Data Completeness</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#below-the-detection-limit"><i class="fa fa-check"></i>Below the detection limit</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.3</b> Producing Annual Summaries</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-annual-means"><i class="fa fa-check"></i>Calculating annual means</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-upper-confidence-limits"><i class="fa fa-check"></i>Calculating upper confidence limits</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#comparing-sites"><i class="fa fa-check"></i><b>14.4</b> Comparing sites</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
 <li class="chapter" data-level="16" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>16</b> AQI explorer</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
-<li class="chapter" data-level="16.1" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.1</b> References</a></li>
+<li><a href="edit-this-book.html#references-2"><em>References</em></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -304,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">11.1</span> Calendar plots</h2>
 <p>The R package <em>openair</em> provides a convenient function for presenting data in a calendar format. The code below shows an example of using the <code>calendarPlot()</code> function to display monitoring results for formaldehyde.</p>
 <p><br></p>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
 <p><br></p>
 </div>
 <div id="colors-and-themes" class="section level2">
@@ -326,115 +337,114 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://github.com/cttobin/ggthemr">ggthemr</a></li>
 <li><a href="https://github.com/briandconnelly/lato">lato</a></li>
 </ul>
-<p>The example below shows charts with the <code>ggpomological</code> theme.</p>
+<p><em>The example below shows charts with the <code>ggpomological</code> theme.</em></p>
+<p><img src="https://mpca-air.github.io/air-methods/air-methods_files/figure-html/unnamed-chunk-103-1.png" /></p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
 <p>A pollutant scatterplot with <em>pomological</em> colors.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="co">#devtools::install_github(&quot;gadenbuie/ggpomological&quot;)</span></a>
-<a class="sourceLine" id="cb85-2" title="2"><span class="kw">library</span>(ggpomological)</a>
-<a class="sourceLine" id="cb85-3" title="3"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb85-4" title="4"></a>
-<a class="sourceLine" id="cb85-5" title="5"><span class="co"># Load air pollution data</span></a>
-<a class="sourceLine" id="cb85-6" title="6">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</a>
-<a class="sourceLine" id="cb85-7" title="7"></a>
-<a class="sourceLine" id="cb85-8" title="8"><span class="kw">names</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)</a>
-<a class="sourceLine" id="cb85-9" title="9"></a>
-<a class="sourceLine" id="cb85-10" title="10">data &lt;-<span class="st"> </span><span class="kw">filter</span>(data, pollutant <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Formaldehyde&quot;</span>, <span class="st">&quot;Benzene&quot;</span>, <span class="st">&quot;1,3-Butadiene&quot;</span>))</a>
-<a class="sourceLine" id="cb85-11" title="11"></a>
-<a class="sourceLine" id="cb85-12" title="12">data<span class="op">$</span>pollutant &lt;-<span class="st"> </span><span class="kw">factor</span>(data<span class="op">$</span>pollutant, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Formaldehyde&quot;</span>, <span class="st">&quot;Benzene&quot;</span>, <span class="st">&quot;1,3-Butadiene&quot;</span>))</a>
-<a class="sourceLine" id="cb85-13" title="13"></a>
-<a class="sourceLine" id="cb85-14" title="14"><span class="co"># Make scatterplot w/ pomo colors</span></a>
-<a class="sourceLine" id="cb85-15" title="15"><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> pollutant, <span class="dt">y =</span> conc, <span class="dt">color =</span> pollutant, <span class="dt">fill =</span> pollutant)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb85-16" title="16"><span class="st">     </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb85-17" title="17"><span class="st">     </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> <span class="kw">factor</span>(pollutant)), <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-18" title="18"><span class="st">     </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-19" title="19"><span class="st">     </span><span class="kw">scale_fill_pomological</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-20" title="20"><span class="st">     </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Air monitoring results&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="charts.html#cb80-1"></a><span class="co">#devtools::install_github(&quot;gadenbuie/ggpomological&quot;)</span></span>
+<span id="cb80-2"><a href="charts.html#cb80-2"></a><span class="kw">library</span>(ggpomological)</span>
+<span id="cb80-3"><a href="charts.html#cb80-3"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb80-4"><a href="charts.html#cb80-4"></a></span>
+<span id="cb80-5"><a href="charts.html#cb80-5"></a><span class="co"># Load air pollution data</span></span>
+<span id="cb80-6"><a href="charts.html#cb80-6"></a>data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</span>
+<span id="cb80-7"><a href="charts.html#cb80-7"></a></span>
+<span id="cb80-8"><a href="charts.html#cb80-8"></a><span class="kw">names</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)</span>
+<span id="cb80-9"><a href="charts.html#cb80-9"></a></span>
+<span id="cb80-10"><a href="charts.html#cb80-10"></a>data &lt;-<span class="st"> </span><span class="kw">filter</span>(data, pollutant <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Formaldehyde&quot;</span>, <span class="st">&quot;Benzene&quot;</span>, <span class="st">&quot;1,3-Butadiene&quot;</span>))</span>
+<span id="cb80-11"><a href="charts.html#cb80-11"></a></span>
+<span id="cb80-12"><a href="charts.html#cb80-12"></a>data<span class="op">$</span>pollutant &lt;-<span class="st"> </span><span class="kw">factor</span>(data<span class="op">$</span>pollutant, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Formaldehyde&quot;</span>, <span class="st">&quot;Benzene&quot;</span>, <span class="st">&quot;1,3-Butadiene&quot;</span>))</span>
+<span id="cb80-13"><a href="charts.html#cb80-13"></a></span>
+<span id="cb80-14"><a href="charts.html#cb80-14"></a><span class="co"># Make scatterplot w/ pomo colors</span></span>
+<span id="cb80-15"><a href="charts.html#cb80-15"></a><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> pollutant, <span class="dt">y =</span> conc, <span class="dt">color =</span> pollutant, <span class="dt">fill =</span> pollutant)) <span class="op">+</span></span>
+<span id="cb80-16"><a href="charts.html#cb80-16"></a><span class="st">     </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></span>
+<span id="cb80-17"><a href="charts.html#cb80-17"></a><span class="st">     </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> <span class="kw">factor</span>(pollutant)), <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb80-18"><a href="charts.html#cb80-18"></a><span class="st">     </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb80-19"><a href="charts.html#cb80-19"></a><span class="st">     </span><span class="kw">scale_fill_pomological</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb80-20"><a href="charts.html#cb80-20"></a><span class="st">     </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Air monitoring results&quot;</span>)</span></code></pre></div>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<p><br></p>
+<p>You add a calm cream paper background.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="charts.html#cb81-1"></a><span class="co"># Make scatterplot w/ pomo colors and cream background</span></span>
+<span id="cb81-2"><a href="charts.html#cb81-2"></a><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> conc, <span class="dt">color =</span> pollutant)) <span class="op">+</span></span>
+<span id="cb81-3"><a href="charts.html#cb81-3"></a><span class="st">     </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></span>
+<span id="cb81-4"><a href="charts.html#cb81-4"></a><span class="st">     </span><span class="kw">geom_jitter</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.6</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb81-5"><a href="charts.html#cb81-5"></a><span class="st">     </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb81-6"><a href="charts.html#cb81-6"></a><span class="st">     </span><span class="kw">theme_pomological</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb81-7"><a href="charts.html#cb81-7"></a><span class="st">     </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Air monitoring results&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>)</span></code></pre></div>
 <p><img src="air-methods_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
 <p><br></p>
-<p>You can even add a calm cream paper background.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="co"># Make scatterplot w/ pomo colors and cream background</span></a>
-<a class="sourceLine" id="cb86-2" title="2"><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> conc, <span class="dt">color =</span> pollutant)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb86-3" title="3"><span class="st">     </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb86-4" title="4"><span class="st">     </span><span class="kw">geom_jitter</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.6</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb86-5" title="5"><span class="st">     </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb86-6" title="6"><span class="st">     </span><span class="kw">theme_pomological</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb86-7" title="7"><span class="st">     </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Air monitoring results&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>)</a></code></pre></div>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
-<p><br></p>
 <p>Or create a fancy chart in the style of an old fashioned nature journal.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">library</span>(extrafont)</a>
-<a class="sourceLine" id="cb87-2" title="2"></a>
-<a class="sourceLine" id="cb87-3" title="3"></a>
-<a class="sourceLine" id="cb87-4" title="4"><span class="co">## Download fancyfont here - https://fonts.google.com/specimen/Homemade+Apple/</span></a>
-<a class="sourceLine" id="cb87-5" title="5"><span class="co">## Add to this folder - &quot;Control Panel\All Control Panel Items\Fonts&quot;</span></a>
-<a class="sourceLine" id="cb87-6" title="6"></a>
-<a class="sourceLine" id="cb87-7" title="7"><span class="co"># Check loaded fonts</span></a>
-<a class="sourceLine" id="cb87-8" title="8"><span class="kw">loadfonts</span>(<span class="dt">device =</span> <span class="st">&quot;win&quot;</span>)</a>
-<a class="sourceLine" id="cb87-9" title="9"></a>
-<a class="sourceLine" id="cb87-10" title="10"><span class="co">#windowsFonts()</span></a>
-<a class="sourceLine" id="cb87-11" title="11"></a>
-<a class="sourceLine" id="cb87-12" title="12">fonts_df &lt;-<span class="st"> </span><span class="kw">fonttable</span>()</a>
-<a class="sourceLine" id="cb87-13" title="13"></a>
-<a class="sourceLine" id="cb87-14" title="14"><span class="kw">font_import</span>(<span class="dt">pattern =</span> <span class="st">&quot;HomemadeApple-Regular&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1"><span class="co"># Make fancy scatterplot w/ pomo colors, paper background and cursive fonts</span></a>
-<a class="sourceLine" id="cb88-2" title="2">fancy_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> conc, <span class="dt">color =</span> pollutant)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb88-3" title="3"><span class="st">                   </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb88-4" title="4"><span class="st">                   </span><span class="kw">geom_jitter</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb88-5" title="5"><span class="st">                   </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb88-6" title="6"><span class="st">                   </span><span class="kw">theme_pomological_fancy</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb88-7" title="7"><span class="st">                   </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Air monitoring data&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>)</a>
-<a class="sourceLine" id="cb88-8" title="8"></a>
-<a class="sourceLine" id="cb88-9" title="9"><span class="co"># Create web image</span></a>
-<a class="sourceLine" id="cb88-10" title="10"><span class="kw">paint_pomological</span>(fancy_plot, <span class="dt">res =</span> <span class="dv">120</span>)</a></code></pre></div>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-103-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="charts.html#cb82-1"></a><span class="kw">library</span>(extrafont)</span>
+<span id="cb82-2"><a href="charts.html#cb82-2"></a></span>
+<span id="cb82-3"><a href="charts.html#cb82-3"></a><span class="co">## Download fancyfont here - https://fonts.google.com/specimen/Homemade+Apple/</span></span>
+<span id="cb82-4"><a href="charts.html#cb82-4"></a><span class="co">## Add to this folder - &quot;Control Panel\All Control Panel Items\Fonts&quot;</span></span>
+<span id="cb82-5"><a href="charts.html#cb82-5"></a></span>
+<span id="cb82-6"><a href="charts.html#cb82-6"></a><span class="co"># Check loaded fonts</span></span>
+<span id="cb82-7"><a href="charts.html#cb82-7"></a><span class="co">#windowsFonts()</span></span>
+<span id="cb82-8"><a href="charts.html#cb82-8"></a><span class="co">#loadfonts(device = &quot;win&quot;)</span></span>
+<span id="cb82-9"><a href="charts.html#cb82-9"></a></span>
+<span id="cb82-10"><a href="charts.html#cb82-10"></a>fonts_df &lt;-<span class="st"> </span><span class="kw">fonttable</span>()</span>
+<span id="cb82-11"><a href="charts.html#cb82-11"></a></span>
+<span id="cb82-12"><a href="charts.html#cb82-12"></a><span class="co"># Load new font</span></span>
+<span id="cb82-13"><a href="charts.html#cb82-13"></a><span class="co">#font_import(pattern = &quot;HomemadeApple-Regular&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="charts.html#cb83-1"></a><span class="co"># Make fancy scatterplot w/ pomo colors, paper background and cursive fonts</span></span>
+<span id="cb83-2"><a href="charts.html#cb83-2"></a>fancy_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> conc, <span class="dt">color =</span> pollutant)) <span class="op">+</span></span>
+<span id="cb83-3"><a href="charts.html#cb83-3"></a><span class="st">                   </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></span>
+<span id="cb83-4"><a href="charts.html#cb83-4"></a><span class="st">                   </span><span class="kw">geom_jitter</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb83-5"><a href="charts.html#cb83-5"></a><span class="st">                   </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span></span>
+<span id="cb83-6"><a href="charts.html#cb83-6"></a><span class="st">                   </span><span class="kw">theme_pomological_fancy</span>() <span class="op">+</span></span>
+<span id="cb83-7"><a href="charts.html#cb83-7"></a><span class="st">                   </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Air monitoring data&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>)</span>
+<span id="cb83-8"><a href="charts.html#cb83-8"></a></span>
+<span id="cb83-9"><a href="charts.html#cb83-9"></a><span class="co"># Create web image</span></span>
+<span id="cb83-10"><a href="charts.html#cb83-10"></a><span class="kw">paint_pomological</span>(fancy_plot, <span class="dt">res =</span> <span class="dv">120</span>)</span></code></pre></div>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-102-1.png" width="100%" /></p>
 <p><br></p>
 <p>Or create a density plot.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="co">#devtools::install_github(&quot;yixuan/showtext&quot;)</span></a>
-<a class="sourceLine" id="cb89-2" title="2"><span class="kw">library</span>(showtext)</a>
-<a class="sourceLine" id="cb89-3" title="3"></a>
-<a class="sourceLine" id="cb89-4" title="4"><span class="co"># Get fancy font</span></a>
-<a class="sourceLine" id="cb89-5" title="5"><span class="kw">font_add_google</span>(<span class="dt">name =</span> <span class="st">&quot;Homemade Apple&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;Homemade Apple&quot;</span>)</a>
-<a class="sourceLine" id="cb89-6" title="6"></a>
-<a class="sourceLine" id="cb89-7" title="7"><span class="co">#font_add_google(name = &quot;Indie Flower&quot;, family = &quot;Indie Flower&quot;)</span></a>
-<a class="sourceLine" id="cb89-8" title="8"></a>
-<a class="sourceLine" id="cb89-9" title="9"></a>
-<a class="sourceLine" id="cb89-10" title="10"><span class="co"># Create density plot</span></a>
-<a class="sourceLine" id="cb89-11" title="11"><span class="co">#showtext_begin()</span></a>
-<a class="sourceLine" id="cb89-12" title="12"><span class="co">#showtext_end()</span></a>
-<a class="sourceLine" id="cb89-13" title="13"></a>
-<a class="sourceLine" id="cb89-14" title="14"><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">sqrt</span>(conc), <span class="dt">fill =</span> pollutant, <span class="dt">color =</span> pollutant)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb89-15" title="15"><span class="st">                   </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb89-16" title="16"><span class="st">                   </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb89-17" title="17"><span class="st">                   </span><span class="kw">scale_fill_pomological</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb89-18" title="18"><span class="st">                   </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb89-19" title="19"><span class="st">                   </span><span class="kw">labs</span>(<span class="dt">title    =</span> <span class="st">&quot;Air monitoring data&quot;</span>, </a>
-<a class="sourceLine" id="cb89-20" title="20">                        <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>, </a>
-<a class="sourceLine" id="cb89-21" title="21">                        <span class="dt">x        =</span> <span class="st">&quot;concentration&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb89-22" title="22"><span class="st">                   </span><span class="kw">theme_pomological</span>(<span class="st">&quot;Homemade Apple&quot;</span>)  <span class="co">#theme(text = element_text(family = &quot;Homemade Apple&quot;))</span></a></code></pre></div>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="charts.html#cb84-1"></a><span class="co">#devtools::install_github(&quot;yixuan/showtext&quot;)</span></span>
+<span id="cb84-2"><a href="charts.html#cb84-2"></a><span class="kw">library</span>(showtext)</span>
+<span id="cb84-3"><a href="charts.html#cb84-3"></a></span>
+<span id="cb84-4"><a href="charts.html#cb84-4"></a><span class="co"># Get fancy font</span></span>
+<span id="cb84-5"><a href="charts.html#cb84-5"></a><span class="kw">font_add_google</span>(<span class="dt">name =</span> <span class="st">&quot;Homemade Apple&quot;</span>, <span class="dt">family =</span> <span class="st">&quot;Homemade Apple&quot;</span>)</span>
+<span id="cb84-6"><a href="charts.html#cb84-6"></a></span>
+<span id="cb84-7"><a href="charts.html#cb84-7"></a><span class="co">#font_add_google(name = &quot;Indie Flower&quot;, family = &quot;Indie Flower&quot;)</span></span>
+<span id="cb84-8"><a href="charts.html#cb84-8"></a></span>
+<span id="cb84-9"><a href="charts.html#cb84-9"></a><span class="co"># Create density plot</span></span>
+<span id="cb84-10"><a href="charts.html#cb84-10"></a><span class="co">#showtext_begin()</span></span>
+<span id="cb84-11"><a href="charts.html#cb84-11"></a><span class="co">#showtext_end()</span></span>
+<span id="cb84-12"><a href="charts.html#cb84-12"></a></span>
+<span id="cb84-13"><a href="charts.html#cb84-13"></a><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">sqrt</span>(conc), <span class="dt">fill =</span> pollutant, <span class="dt">color =</span> pollutant)) <span class="op">+</span></span>
+<span id="cb84-14"><a href="charts.html#cb84-14"></a><span class="st">                   </span><span class="kw">scale_x_log10</span>() <span class="op">+</span></span>
+<span id="cb84-15"><a href="charts.html#cb84-15"></a><span class="st">                   </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb84-16"><a href="charts.html#cb84-16"></a><span class="st">                   </span><span class="kw">scale_fill_pomological</span>() <span class="op">+</span></span>
+<span id="cb84-17"><a href="charts.html#cb84-17"></a><span class="st">                   </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span></span>
+<span id="cb84-18"><a href="charts.html#cb84-18"></a><span class="st">                   </span><span class="kw">labs</span>(<span class="dt">title    =</span> <span class="st">&quot;Air monitoring data&quot;</span>, </span>
+<span id="cb84-19"><a href="charts.html#cb84-19"></a>                        <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>, </span>
+<span id="cb84-20"><a href="charts.html#cb84-20"></a>                        <span class="dt">x        =</span> <span class="st">&quot;concentration&quot;</span>) <span class="op">+</span></span>
+<span id="cb84-21"><a href="charts.html#cb84-21"></a><span class="st">                   </span><span class="kw">theme_pomological</span>(<span class="st">&quot;Homemade Apple&quot;</span>)  <span class="co">#theme(text = element_text(family = &quot;Homemade Apple&quot;))</span></span></code></pre></div>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
 <p><br></p>
-<p>Or split up the density plot into separate rows.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1"><span class="kw">library</span>(ggridges)</a>
-<a class="sourceLine" id="cb90-2" title="2"></a>
-<a class="sourceLine" id="cb90-3" title="3"><span class="co"># Create fancy_plot</span></a>
-<a class="sourceLine" id="cb90-4" title="4">fancy_plot &lt;-<span class="st">  </span><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">sqrt</span>(conc), <span class="dt">y =</span> forcats<span class="op">::</span><span class="kw">fct_rev</span>(pollutant), <span class="dt">fill =</span> pollutant, <span class="dt">color =</span> pollutant)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb90-5" title="5"><span class="st">                   </span><span class="kw">geom_density_ridges</span>(<span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb90-6" title="6"><span class="st">                   </span><span class="kw">theme_pomological</span>(<span class="dt">base_family =</span> <span class="st">&#39;Homemade Apple&#39;</span>,</a>
-<a class="sourceLine" id="cb90-7" title="7">                                     <span class="dt">base_size   =</span> <span class="dv">16</span>,</a>
-<a class="sourceLine" id="cb90-8" title="8">                                     <span class="dt">base_theme  =</span> ggridges<span class="op">::</span><span class="kw">theme_ridges</span>()) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb90-9" title="9"><span class="st">                   </span><span class="kw">scale_fill_pomological</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb90-10" title="10"><span class="st">                   </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb90-11" title="11"><span class="st">                   </span><span class="kw">labs</span>(<span class="dt">title    =</span> <span class="st">&quot;Air monitoring data&quot;</span>, </a>
-<a class="sourceLine" id="cb90-12" title="12">                        <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>, </a>
-<a class="sourceLine" id="cb90-13" title="13">                        <span class="dt">x        =</span> <span class="st">&quot;concentration&quot;</span>, </a>
-<a class="sourceLine" id="cb90-14" title="14">                        <span class="dt">y        =</span> <span class="st">&quot;pollutant&quot;</span>)</a>
-<a class="sourceLine" id="cb90-15" title="15"></a>
-<a class="sourceLine" id="cb90-16" title="16"><span class="co"># Create web image</span></a>
-<a class="sourceLine" id="cb90-17" title="17"><span class="kw">paint_pomological</span>(fancy_plot, <span class="dt">res =</span> <span class="dv">120</span>)</a></code></pre></div>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-105-1.png" width="100%" /></p>
+<p>Or split the density plot into separate rows.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="charts.html#cb85-1"></a><span class="kw">library</span>(ggridges)</span>
+<span id="cb85-2"><a href="charts.html#cb85-2"></a></span>
+<span id="cb85-3"><a href="charts.html#cb85-3"></a><span class="co"># Create fancy_plot</span></span>
+<span id="cb85-4"><a href="charts.html#cb85-4"></a>fancy_plot &lt;-<span class="st">  </span><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">sqrt</span>(conc), <span class="dt">y =</span> forcats<span class="op">::</span><span class="kw">fct_rev</span>(pollutant), <span class="dt">fill =</span> pollutant, <span class="dt">color =</span> pollutant)) <span class="op">+</span></span>
+<span id="cb85-5"><a href="charts.html#cb85-5"></a><span class="st">                   </span><span class="kw">geom_density_ridges</span>(<span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb85-6"><a href="charts.html#cb85-6"></a><span class="st">                   </span><span class="kw">theme_pomological</span>(<span class="dt">base_family =</span> <span class="st">&#39;Homemade Apple&#39;</span>,</span>
+<span id="cb85-7"><a href="charts.html#cb85-7"></a>                                     <span class="dt">base_size   =</span> <span class="dv">16</span>,</span>
+<span id="cb85-8"><a href="charts.html#cb85-8"></a>                                     <span class="dt">base_theme  =</span> ggridges<span class="op">::</span><span class="kw">theme_ridges</span>()) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb85-9"><a href="charts.html#cb85-9"></a><span class="st">                   </span><span class="kw">scale_fill_pomological</span>() <span class="op">+</span></span>
+<span id="cb85-10"><a href="charts.html#cb85-10"></a><span class="st">                   </span><span class="kw">scale_color_pomological</span>() <span class="op">+</span></span>
+<span id="cb85-11"><a href="charts.html#cb85-11"></a><span class="st">                   </span><span class="kw">labs</span>(<span class="dt">title    =</span> <span class="st">&quot;Air monitoring data&quot;</span>, </span>
+<span id="cb85-12"><a href="charts.html#cb85-12"></a>                        <span class="dt">subtitle =</span> <span class="st">&quot;2009 - 2013&quot;</span>, </span>
+<span id="cb85-13"><a href="charts.html#cb85-13"></a>                        <span class="dt">x        =</span> <span class="st">&quot;concentration&quot;</span>, </span>
+<span id="cb85-14"><a href="charts.html#cb85-14"></a>                        <span class="dt">y        =</span> <span class="st">&quot;pollutant&quot;</span>)</span>
+<span id="cb85-15"><a href="charts.html#cb85-15"></a></span>
+<span id="cb85-16"><a href="charts.html#cb85-16"></a><span class="co"># Create web image</span></span>
+<span id="cb85-17"><a href="charts.html#cb85-17"></a><span class="kw">paint_pomological</span>(fancy_plot, <span class="dt">res =</span> <span class="dv">120</span>)</span></code></pre></div>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-104-1.png" width="100%" /></p>
 </div>
 </div>
 <div id="pollution-roses" class="section level2">
@@ -454,78 +464,108 @@ Show <strong>R</strong> code
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">pollution_roses =<span class="st"> </span><span class="cf">function</span>(data, met_data_filepath, <span class="dt">num_breaks =</span> <span class="dv">5</span>) { <span class="co">#Met data must be in Tableau format</span></a>
-<a class="sourceLine" id="cb91-2" title="2">  </a>
-<a class="sourceLine" id="cb91-3" title="3">  <span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb91-4" title="4">  <span class="kw">library</span>(openair)</a>
-<a class="sourceLine" id="cb91-5" title="5">  <span class="kw">library</span>(reshape)</a>
-<a class="sourceLine" id="cb91-6" title="6">  <span class="kw">library</span>(shiny)</a>
-<a class="sourceLine" id="cb91-7" title="7">  <span class="kw">library</span>(rsconnect)</a>
-<a class="sourceLine" id="cb91-8" title="8">  </a>
-<a class="sourceLine" id="cb91-9" title="9">  data<span class="op">$</span>Date &lt;-<span class="st"> </span><span class="kw">ymd</span>(data<span class="op">$</span>Date)</a>
-<a class="sourceLine" id="cb91-10" title="10">  </a>
-<a class="sourceLine" id="cb91-11" title="11">  met_data =<span class="st"> </span><span class="kw">read.csv</span>(met_data_filepath)</a>
-<a class="sourceLine" id="cb91-12" title="12">  <span class="kw">names</span>(met_data)[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">9</span>)] =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Day&quot;</span>,<span class="st">&quot;wd&quot;</span>,<span class="st">&quot;ws&quot;</span>)</a>
-<a class="sourceLine" id="cb91-13" title="13">  met_data =<span class="st"> </span><span class="kw">mutate</span>(met_data, <span class="dt">date =</span> <span class="kw">paste0</span>(Year,<span class="st">&quot;/&quot;</span>,Month,<span class="st">&quot;/&quot;</span>,Day,<span class="st">&quot; &quot;</span>,Hour,<span class="st">&quot;:00&quot;</span>))</a>
-<a class="sourceLine" id="cb91-14" title="14">  met_data<span class="op">$</span>date =<span class="st"> </span><span class="kw">ymd_hm</span>(met_data<span class="op">$</span>date)</a>
-<a class="sourceLine" id="cb91-15" title="15">  met_data =<span class="st"> </span>met_data[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">10</span>)]</a>
-<a class="sourceLine" id="cb91-16" title="16">  met_data =<span class="st"> </span><span class="kw">timeAverage</span>(met_data, <span class="dt">avg.time =</span> <span class="st">&quot;day&quot;</span>)</a>
-<a class="sourceLine" id="cb91-17" title="17">  met_data<span class="op">$</span>date =<span class="st"> </span><span class="kw">ymd</span>(met_data<span class="op">$</span>date)</a>
-<a class="sourceLine" id="cb91-18" title="18">  </a>
-<a class="sourceLine" id="cb91-19" title="19">  data &lt;-<span class="st"> </span><span class="kw">left_join</span>(data, met_data, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;Date&quot;</span> =<span class="st"> &quot;date&quot;</span>))</a>
-<a class="sourceLine" id="cb91-20" title="20">  </a>
-<a class="sourceLine" id="cb91-21" title="21">  Pollutant &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>Pollutant)</a>
-<a class="sourceLine" id="cb91-22" title="22">  Site &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>AQSID)</a>
-<a class="sourceLine" id="cb91-23" title="23">  Year &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>Year)</a>
-<a class="sourceLine" id="cb91-24" title="24"></a>
-<a class="sourceLine" id="cb91-25" title="25">  <span class="kw">shinyApp</span>(</a>
-<a class="sourceLine" id="cb91-26" title="26">  <span class="dt">ui =</span> <span class="kw">fluidPage</span>(<span class="dt">responsive =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb91-27" title="27">                 <span class="kw">fluidRow</span>(</a>
-<a class="sourceLine" id="cb91-28" title="28">                   <span class="kw">column</span>(<span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb91-29" title="29">                          <span class="dt">style =</span> <span class="st">&quot;padding-bottom: 20px;&quot;</span>,</a>
-<a class="sourceLine" id="cb91-30" title="30">                          <span class="kw">inputPanel</span>(</a>
-<a class="sourceLine" id="cb91-31" title="31">                            <span class="kw">selectInput</span>(<span class="st">&quot;Pollutant&quot;</span>, <span class="dt">label=</span><span class="st">&quot;Choose a pollutant&quot;</span>, <span class="dt">choices =</span> Pollutant),</a>
-<a class="sourceLine" id="cb91-32" title="32">                            <span class="kw">selectInput</span>(<span class="st">&quot;Year&quot;</span>, <span class="dt">label=</span><span class="st">&quot;Choose a year&quot;</span>, <span class="dt">choices =</span> Year),</a>
-<a class="sourceLine" id="cb91-33" title="33">                            <span class="kw">selectInput</span>(<span class="st">&quot;Site&quot;</span>, <span class="dt">label=</span><span class="st">&quot;Choose a site&quot;</span>, <span class="dt">choices =</span> Site))),</a>
-<a class="sourceLine" id="cb91-34" title="34">                   <span class="kw">column</span>(<span class="dv">9</span>,</a>
-<a class="sourceLine" id="cb91-35" title="35">                          <span class="kw">plotOutput</span>(<span class="st">&#39;normviz&#39;</span>, <span class="dt">height =</span> <span class="st">&quot;500px&quot;</span>)))),</a>
-<a class="sourceLine" id="cb91-36" title="36">  </a>
-<a class="sourceLine" id="cb91-37" title="37">  </a>
-<a class="sourceLine" id="cb91-38" title="38">  <span class="dt">server =</span> <span class="cf">function</span>(input, output) {</a>
-<a class="sourceLine" id="cb91-39" title="39">    </a>
-<a class="sourceLine" id="cb91-40" title="40">    </a>
-<a class="sourceLine" id="cb91-41" title="41">    </a>
-<a class="sourceLine" id="cb91-42" title="42">    </a>
-<a class="sourceLine" id="cb91-43" title="43">    output<span class="op">$</span>normviz &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({</a>
-<a class="sourceLine" id="cb91-44" title="44">      <span class="kw">print</span>(input<span class="op">$</span>Pollutant)</a>
-<a class="sourceLine" id="cb91-45" title="45">      <span class="kw">print</span>(input<span class="op">$</span>Site)</a>
-<a class="sourceLine" id="cb91-46" title="46">      <span class="kw">print</span>(input<span class="op">$</span>Year)</a>
-<a class="sourceLine" id="cb91-47" title="47">      data_sub =<span class="st"> </span><span class="kw">filter</span>(data, Pollutant<span class="op">==</span>input<span class="op">$</span>Pollutant, AQSID <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>Site, Year <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>Year, <span class="op">!</span><span class="kw">is.na</span>(Result))</a>
-<a class="sourceLine" id="cb91-48" title="48">      data_sub =<span class="st"> </span>data_sub <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">MDL =</span> <span class="kw">max</span>(MDL), <span class="dt">minimum =</span> <span class="kw">min</span>(Result), <span class="dt">maximum =</span> <span class="kw">max</span>(Result), <span class="dt">Result =</span> <span class="kw">ifelse</span>(Censored, <span class="fl">1e-16</span>, Result))</a>
-<a class="sourceLine" id="cb91-49" title="49">      breaks_site =<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb91-50" title="50">      <span class="cf">if</span>(<span class="op">!</span><span class="kw">all</span>(data_sub<span class="op">$</span>Censored)){</a>
-<a class="sourceLine" id="cb91-51" title="51">        </a>
-<a class="sourceLine" id="cb91-52" title="52">        breaks_site =<span class="st"> </span><span class="kw">c</span>(breaks_site, <span class="dv">0</span>, <span class="co">#c(round_any(data_sub$minimum[1], 0.001, floor),</span></a>
-<a class="sourceLine" id="cb91-53" title="53">                      <span class="kw">round_any</span>( <span class="kw">c</span>(data_sub<span class="op">$</span>MDL[<span class="dv">1</span>], data_sub<span class="op">$</span>MDL[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(data_sub<span class="op">$</span>maximum[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>data_sub<span class="op">$</span>MDL[<span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb91-54" title="54"><span class="st">                                     </span>(<span class="dv">1</span><span class="op">:</span>(num_breaks<span class="dv">-1</span>) <span class="op">/</span><span class="st"> </span>(num_breaks<span class="dv">-1</span>) ) ), <span class="fl">0.0001</span>, ceiling ) )</a>
-<a class="sourceLine" id="cb91-55" title="55">        <span class="kw">pollutionRose</span>(data_sub, <span class="dt">statistic =</span> <span class="st">&quot;abs.count&quot;</span>, <span class="dt">pollutant =</span> <span class="st">&quot;Result&quot;</span>, <span class="dt">breaks =</span> breaks_site, </a>
-<a class="sourceLine" id="cb91-56" title="56">                  <span class="dt">key.footer=</span><span class="st">&quot;ug/m3&quot;</span>, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Daily Average Pollution Rose for&quot;</span>,</a>
-<a class="sourceLine" id="cb91-57" title="57">                  data_sub<span class="op">$</span>Pollutant[<span class="dv">1</span>],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, data_sub<span class="op">$</span>AQSID[<span class="dv">1</span>]) )</a>
-<a class="sourceLine" id="cb91-58" title="58">      }</a>
-<a class="sourceLine" id="cb91-59" title="59">      <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb91-60" title="60">        breaks_site =<span class="st"> </span><span class="kw">c</span>(breaks_site, <span class="kw">c</span>(<span class="kw">round_any</span>(<span class="dv">0</span>, <span class="fl">0.0001</span>, floor),</a>
-<a class="sourceLine" id="cb91-61" title="61">                      <span class="kw">round_any</span>( <span class="kw">c</span>(data_sub<span class="op">$</span>MDL[<span class="dv">1</span>], <span class="dv">2</span><span class="op">*</span>data_sub<span class="op">$</span>MDL[<span class="dv">1</span>] ), <span class="fl">0.0001</span>, ceiling ) ) )</a>
-<a class="sourceLine" id="cb91-62" title="62">        <span class="kw">pollutionRose</span>(data_sub, <span class="dt">statistic =</span> <span class="st">&quot;abs.count&quot;</span>, <span class="dt">pollutant =</span> <span class="st">&quot;Result&quot;</span>, <span class="dt">breaks =</span> breaks_site, </a>
-<a class="sourceLine" id="cb91-63" title="63">                  <span class="dt">key.footer=</span><span class="st">&quot;ug/m3&quot;</span>, <span class="dt">main=</span><span class="kw">paste</span>(<span class="st">&quot;Daily Average Pollution Rose for&quot;</span>,</a>
-<a class="sourceLine" id="cb91-64" title="64">                  data_sub<span class="op">$</span>Pollutant[<span class="dv">1</span>],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, data_sub<span class="op">$</span>AQSID[<span class="dv">1</span>]) )</a>
-<a class="sourceLine" id="cb91-65" title="65">        </a>
-<a class="sourceLine" id="cb91-66" title="66">      }</a>
-<a class="sourceLine" id="cb91-67" title="67">      </a>
-<a class="sourceLine" id="cb91-68" title="68">    })</a>
-<a class="sourceLine" id="cb91-69" title="69">    </a>
-<a class="sourceLine" id="cb91-70" title="70">  })</a>
-<a class="sourceLine" id="cb91-71" title="71"></a>
-<a class="sourceLine" id="cb91-72" title="72">}</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="charts.html#cb86-1"></a>pollution_roses =<span class="st"> </span><span class="cf">function</span>(data, met_data_filepath, <span class="dt">num_breaks =</span> <span class="dv">5</span>) { <span class="co">#Met data must be in Tableau format</span></span>
+<span id="cb86-2"><a href="charts.html#cb86-2"></a>  </span>
+<span id="cb86-3"><a href="charts.html#cb86-3"></a>  <span class="kw">library</span>(tidyverse)</span>
+<span id="cb86-4"><a href="charts.html#cb86-4"></a>  <span class="kw">library</span>(openair)</span>
+<span id="cb86-5"><a href="charts.html#cb86-5"></a>  <span class="kw">library</span>(reshape)</span>
+<span id="cb86-6"><a href="charts.html#cb86-6"></a>  <span class="kw">library</span>(shiny)</span>
+<span id="cb86-7"><a href="charts.html#cb86-7"></a>  <span class="kw">library</span>(rsconnect)</span>
+<span id="cb86-8"><a href="charts.html#cb86-8"></a>  </span>
+<span id="cb86-9"><a href="charts.html#cb86-9"></a>  data<span class="op">$</span>Date &lt;-<span class="st"> </span><span class="kw">ymd</span>(data<span class="op">$</span>Date)</span>
+<span id="cb86-10"><a href="charts.html#cb86-10"></a>  </span>
+<span id="cb86-11"><a href="charts.html#cb86-11"></a>  met_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(met_data_filepath)</span>
+<span id="cb86-12"><a href="charts.html#cb86-12"></a>  </span>
+<span id="cb86-13"><a href="charts.html#cb86-13"></a>  <span class="kw">names</span>(met_data)[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">9</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Day&quot;</span>,<span class="st">&quot;wd&quot;</span>,<span class="st">&quot;ws&quot;</span>)</span>
+<span id="cb86-14"><a href="charts.html#cb86-14"></a>  </span>
+<span id="cb86-15"><a href="charts.html#cb86-15"></a>  met_data &lt;-<span class="st"> </span><span class="kw">mutate</span>(met_data, <span class="dt">date =</span> <span class="kw">paste0</span>(Year, <span class="st">&quot;/&quot;</span>, Month, <span class="st">&quot;/&quot;</span>, Day, <span class="st">&quot; &quot;</span>, Hour, <span class="st">&quot;:00&quot;</span>))</span>
+<span id="cb86-16"><a href="charts.html#cb86-16"></a>  </span>
+<span id="cb86-17"><a href="charts.html#cb86-17"></a>  met_data<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">ymd_hm</span>(met_data<span class="op">$</span>date)</span>
+<span id="cb86-18"><a href="charts.html#cb86-18"></a>  </span>
+<span id="cb86-19"><a href="charts.html#cb86-19"></a>  met_data &lt;-<span class="st"> </span>met_data[ , <span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">10</span>)]</span>
+<span id="cb86-20"><a href="charts.html#cb86-20"></a>  </span>
+<span id="cb86-21"><a href="charts.html#cb86-21"></a>  met_data &lt;-<span class="st"> </span><span class="kw">timeAverage</span>(met_data, <span class="dt">avg.time =</span> <span class="st">&quot;day&quot;</span>)</span>
+<span id="cb86-22"><a href="charts.html#cb86-22"></a>  </span>
+<span id="cb86-23"><a href="charts.html#cb86-23"></a>  met_data<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">ymd</span>(met_data<span class="op">$</span>date)</span>
+<span id="cb86-24"><a href="charts.html#cb86-24"></a>  </span>
+<span id="cb86-25"><a href="charts.html#cb86-25"></a>  data &lt;-<span class="st"> </span><span class="kw">left_join</span>(data, met_data, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;Date&quot;</span> =<span class="st"> &quot;date&quot;</span>))</span>
+<span id="cb86-26"><a href="charts.html#cb86-26"></a>  </span>
+<span id="cb86-27"><a href="charts.html#cb86-27"></a>  Pollutant &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>Pollutant)</span>
+<span id="cb86-28"><a href="charts.html#cb86-28"></a>  </span>
+<span id="cb86-29"><a href="charts.html#cb86-29"></a>  Site &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>AQSID)</span>
+<span id="cb86-30"><a href="charts.html#cb86-30"></a>  </span>
+<span id="cb86-31"><a href="charts.html#cb86-31"></a>  Year &lt;-<span class="st"> </span><span class="kw">unique</span>(data<span class="op">$</span>Year)</span>
+<span id="cb86-32"><a href="charts.html#cb86-32"></a></span>
+<span id="cb86-33"><a href="charts.html#cb86-33"></a>  <span class="kw">shinyApp</span>(</span>
+<span id="cb86-34"><a href="charts.html#cb86-34"></a>    </span>
+<span id="cb86-35"><a href="charts.html#cb86-35"></a>  <span class="dt">ui =</span> <span class="kw">fluidPage</span>(<span class="dt">responsive =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb86-36"><a href="charts.html#cb86-36"></a>                 <span class="kw">fluidRow</span>(</span>
+<span id="cb86-37"><a href="charts.html#cb86-37"></a>                   <span class="kw">column</span>(<span class="dv">3</span>,</span>
+<span id="cb86-38"><a href="charts.html#cb86-38"></a>                          <span class="dt">style =</span> <span class="st">&quot;padding-bottom: 20px;&quot;</span>,</span>
+<span id="cb86-39"><a href="charts.html#cb86-39"></a>                          <span class="kw">inputPanel</span>(</span>
+<span id="cb86-40"><a href="charts.html#cb86-40"></a>                            <span class="kw">selectInput</span>(<span class="st">&quot;Pollutant&quot;</span>, <span class="dt">label=</span><span class="st">&quot;Choose a pollutant&quot;</span>, <span class="dt">choices =</span> Pollutant),</span>
+<span id="cb86-41"><a href="charts.html#cb86-41"></a>                            <span class="kw">selectInput</span>(<span class="st">&quot;Year&quot;</span>, <span class="dt">label=</span><span class="st">&quot;Choose a year&quot;</span>, <span class="dt">choices =</span> Year),</span>
+<span id="cb86-42"><a href="charts.html#cb86-42"></a>                            <span class="kw">selectInput</span>(<span class="st">&quot;Site&quot;</span>, <span class="dt">label=</span><span class="st">&quot;Choose a site&quot;</span>, <span class="dt">choices =</span> Site))),</span>
+<span id="cb86-43"><a href="charts.html#cb86-43"></a>                   <span class="kw">column</span>(<span class="dv">9</span>,</span>
+<span id="cb86-44"><a href="charts.html#cb86-44"></a>                          <span class="kw">plotOutput</span>(<span class="st">&#39;normviz&#39;</span>, <span class="dt">height =</span> <span class="st">&quot;500px&quot;</span>)))),</span>
+<span id="cb86-45"><a href="charts.html#cb86-45"></a>  </span>
+<span id="cb86-46"><a href="charts.html#cb86-46"></a>  </span>
+<span id="cb86-47"><a href="charts.html#cb86-47"></a>  <span class="dt">server =</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb86-48"><a href="charts.html#cb86-48"></a>    </span>
+<span id="cb86-49"><a href="charts.html#cb86-49"></a>    output<span class="op">$</span>normviz =<span class="st"> </span><span class="kw">renderPlot</span>({</span>
+<span id="cb86-50"><a href="charts.html#cb86-50"></a>      </span>
+<span id="cb86-51"><a href="charts.html#cb86-51"></a>      <span class="kw">print</span>(input<span class="op">$</span>Pollutant)</span>
+<span id="cb86-52"><a href="charts.html#cb86-52"></a>      </span>
+<span id="cb86-53"><a href="charts.html#cb86-53"></a>      <span class="kw">print</span>(input<span class="op">$</span>Site)</span>
+<span id="cb86-54"><a href="charts.html#cb86-54"></a>      </span>
+<span id="cb86-55"><a href="charts.html#cb86-55"></a>      <span class="kw">print</span>(input<span class="op">$</span>Year)</span>
+<span id="cb86-56"><a href="charts.html#cb86-56"></a>      </span>
+<span id="cb86-57"><a href="charts.html#cb86-57"></a>      data_sub &lt;-<span class="st"> </span><span class="kw">filter</span>(data, </span>
+<span id="cb86-58"><a href="charts.html#cb86-58"></a>                         Pollutant <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>Pollutant, </span>
+<span id="cb86-59"><a href="charts.html#cb86-59"></a>                         AQSID <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>Site, </span>
+<span id="cb86-60"><a href="charts.html#cb86-60"></a>                         Year <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>Year, </span>
+<span id="cb86-61"><a href="charts.html#cb86-61"></a>                         <span class="op">!</span><span class="kw">is.na</span>(Result))</span>
+<span id="cb86-62"><a href="charts.html#cb86-62"></a>      </span>
+<span id="cb86-63"><a href="charts.html#cb86-63"></a>      data_sub &lt;-<span class="st"> </span>data_sub <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb86-64"><a href="charts.html#cb86-64"></a><span class="st">                  </span><span class="kw">mutate</span>(<span class="dt">MDL     =</span> <span class="kw">max</span>(MDL), </span>
+<span id="cb86-65"><a href="charts.html#cb86-65"></a>                         <span class="dt">minimum =</span> <span class="kw">min</span>(Result), </span>
+<span id="cb86-66"><a href="charts.html#cb86-66"></a>                         <span class="dt">maximum =</span> <span class="kw">max</span>(Result), </span>
+<span id="cb86-67"><a href="charts.html#cb86-67"></a>                         <span class="dt">Result  =</span> <span class="kw">ifelse</span>(Censored, <span class="fl">1e-16</span>, Result))</span>
+<span id="cb86-68"><a href="charts.html#cb86-68"></a>      </span>
+<span id="cb86-69"><a href="charts.html#cb86-69"></a>      breaks_site &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb86-70"><a href="charts.html#cb86-70"></a>      </span>
+<span id="cb86-71"><a href="charts.html#cb86-71"></a>      <span class="cf">if</span>(<span class="op">!</span><span class="kw">all</span>(data_sub<span class="op">$</span>Censored)){</span>
+<span id="cb86-72"><a href="charts.html#cb86-72"></a>        </span>
+<span id="cb86-73"><a href="charts.html#cb86-73"></a>        breaks_site &lt;-<span class="st"> </span><span class="kw">c</span>(breaks_site, <span class="dv">0</span>, <span class="co">#c(round_any(data_sub$minimum[1], 0.001, floor),</span></span>
+<span id="cb86-74"><a href="charts.html#cb86-74"></a>                         <span class="kw">round_any</span>( <span class="kw">c</span>(data_sub<span class="op">$</span>MDL[<span class="dv">1</span>], data_sub<span class="op">$</span>MDL[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>(data_sub<span class="op">$</span>maximum[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>data_sub<span class="op">$</span>MDL[<span class="dv">1</span>]) <span class="op">*</span><span class="st"> </span></span>
+<span id="cb86-75"><a href="charts.html#cb86-75"></a><span class="st">                                     </span>(<span class="dv">1</span><span class="op">:</span>(num_breaks<span class="dv">-1</span>) <span class="op">/</span><span class="st"> </span>(num_breaks<span class="dv">-1</span>) ) ), <span class="fl">0.0001</span>, ceiling ) )</span>
+<span id="cb86-76"><a href="charts.html#cb86-76"></a>        </span>
+<span id="cb86-77"><a href="charts.html#cb86-77"></a>        <span class="kw">pollutionRose</span>(data_sub, </span>
+<span id="cb86-78"><a href="charts.html#cb86-78"></a>                      <span class="dt">statistic  =</span> <span class="st">&quot;abs.count&quot;</span>, </span>
+<span id="cb86-79"><a href="charts.html#cb86-79"></a>                      <span class="dt">pollutant  =</span> <span class="st">&quot;Result&quot;</span>, </span>
+<span id="cb86-80"><a href="charts.html#cb86-80"></a>                      <span class="dt">breaks     =</span> breaks_site, </span>
+<span id="cb86-81"><a href="charts.html#cb86-81"></a>                      <span class="dt">key.footer =</span> <span class="st">&quot;ug/m3&quot;</span>, </span>
+<span id="cb86-82"><a href="charts.html#cb86-82"></a>                      <span class="dt">main       =</span> <span class="kw">paste</span>(<span class="st">&quot;Daily Average Pollution Rose for&quot;</span>, data_sub<span class="op">$</span>Pollutant[<span class="dv">1</span>],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, data_sub<span class="op">$</span>AQSID[<span class="dv">1</span>]) )</span>
+<span id="cb86-83"><a href="charts.html#cb86-83"></a>      } <span class="cf">else</span> {</span>
+<span id="cb86-84"><a href="charts.html#cb86-84"></a>        </span>
+<span id="cb86-85"><a href="charts.html#cb86-85"></a>        breaks_site &lt;-<span class="st"> </span><span class="kw">c</span>(breaks_site, </span>
+<span id="cb86-86"><a href="charts.html#cb86-86"></a>                         <span class="kw">c</span>(<span class="kw">round_any</span>(<span class="dv">0</span>, <span class="fl">0.0001</span>, floor),</span>
+<span id="cb86-87"><a href="charts.html#cb86-87"></a>                         <span class="kw">round_any</span>(<span class="kw">c</span>(data_sub<span class="op">$</span>MDL[<span class="dv">1</span>], <span class="dv">2</span><span class="op">*</span>data_sub<span class="op">$</span>MDL[<span class="dv">1</span>] ), <span class="fl">0.0001</span>, ceiling) ) )</span>
+<span id="cb86-88"><a href="charts.html#cb86-88"></a>        </span>
+<span id="cb86-89"><a href="charts.html#cb86-89"></a>        <span class="kw">pollutionRose</span>(data_sub, </span>
+<span id="cb86-90"><a href="charts.html#cb86-90"></a>                      <span class="dt">statistic  =</span> <span class="st">&quot;abs.count&quot;</span>, </span>
+<span id="cb86-91"><a href="charts.html#cb86-91"></a>                      <span class="dt">pollutant  =</span> <span class="st">&quot;Result&quot;</span>, </span>
+<span id="cb86-92"><a href="charts.html#cb86-92"></a>                      <span class="dt">breaks     =</span> breaks_site, </span>
+<span id="cb86-93"><a href="charts.html#cb86-93"></a>                      <span class="dt">key.footer =</span> <span class="st">&quot;ug/m3&quot;</span>, </span>
+<span id="cb86-94"><a href="charts.html#cb86-94"></a>                      <span class="dt">main       =</span> <span class="kw">paste</span>(<span class="st">&quot;Daily Average Pollution Rose for&quot;</span>, data_sub<span class="op">$</span>Pollutant[<span class="dv">1</span>],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, data_sub<span class="op">$</span>AQSID[<span class="dv">1</span>]) )</span>
+<span id="cb86-95"><a href="charts.html#cb86-95"></a>        </span>
+<span id="cb86-96"><a href="charts.html#cb86-96"></a>      }</span>
+<span id="cb86-97"><a href="charts.html#cb86-97"></a>      </span>
+<span id="cb86-98"><a href="charts.html#cb86-98"></a>    })</span>
+<span id="cb86-99"><a href="charts.html#cb86-99"></a>    </span>
+<span id="cb86-100"><a href="charts.html#cb86-100"></a>  })</span>
+<span id="cb86-101"><a href="charts.html#cb86-101"></a></span>
+<span id="cb86-102"><a href="charts.html#cb86-102"></a>}</span></code></pre></div>
 </div>
 <p><br><a href="charts.html#charts">Back to top</a></p>
 
@@ -564,7 +604,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/MPCA-air/air-methods/edit/master/60-charts.Rmd",
+"link": "https://github.com/MPCA-air/air-methods/edit/master/60-Charts.Rmd",
 "text": "Edit"
 },
 "history": {

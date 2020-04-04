@@ -1,7 +1,6 @@
 # Get data
 
 ```{r, echo=F}
-
 knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 
 dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, lengthChange = F, paginate = F, info = F)
@@ -27,7 +26,7 @@ __Air monitoring data__
  - Air Monitoring Site Information 
     - \@ref(wairsites) WAIR Site Table
     - \@ref(monitors) AirNow: Active AQI monitors 
-    - \@ref(EPAsites) EPA Google Earth Site Explorer
+    - \@ref(EPAsites) EPA Site Explorer
     
 
 
@@ -100,9 +99,9 @@ Click the button below to view a step by step example.
 <div class="toggle">
 <button class = "btn_code">Show __R__ code</button>
 
-```{r, eval=FALSE }
+```{r, eval=F}
 
-##install raqdm package
+## install raqdm package
 library(devtools)
 devtools::install_github("ebailey78/raqdm")
 library(raqdm)
@@ -284,9 +283,9 @@ aqi_sites  <- filter(aqi_sites, state_fips %in% c(27))
 <br>
 
 
-### EPA Google Earth Site Maps {#EPAsites}
+### EPA Site Maps {#EPAsites}
 
-The AirData Air Quality Monitors app is a mapping application available on the web and on mobile devices that displays monitor locations and monitor-specific information. It also allows the querying and downloading of data daily and annual summary data.  Static KMZ files are also available to download.
+The _Air Quality Monitors_ app is a mapping application available online that displays monitor locations and site information. It also allows the querying and downloading of daily data and an annual summary. Static KMZ files are also available to download.
 
 https://www.epa.gov/outdoor-air-quality-data/interactive-map-air-quality-monitors
 
@@ -698,7 +697,7 @@ odbcDataSources()
 
 To connect to `deltaw`, use the function `odbcConnect()`.
 
-```{r, warning = F}
+```{r, eval=F}
 
 # Load credentials
 credentials <- read_csv("X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Student Folder/credentials.csv")
@@ -897,5 +896,7 @@ med_inc_2015 <- get_acs(geography = "tract",
 
 
 
-<br> [Back to top](#get-data)
+<br> 
+
+> [Back to top](#get-data)
 

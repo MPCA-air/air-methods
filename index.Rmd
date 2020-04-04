@@ -29,14 +29,31 @@ knitr::include_graphics('images/cover.jpeg', dpi = NA)
 ```
 
 
-This guide describes the methods used at the MPCA to analyze air monitoring data. The charts and code found in this guide were produced using the free statistical software R. To follow along with the examples download a copy of R to your computer from the [r-project](https://cran.r-project.org/) or use [R-Fiddle](http://www.r-fiddle.org/#/) in your browser. You can also download the free [R Studio](https://www.rstudio.com/products/rstudio/download/) software, which helps make R easier to use and keeps your data analysis projects organized.  
+Welcome! This guide describes the methods used at the MPCA to analyze air monitoring data. The charts and code found in this guide were produced using the free statistical software R.   
 
-This web book is a working body of data analysis methods and code examples. The current contributors are listed below. You are invited to contribute content and add your name to the list.
+To follow along with the examples download a copy of R to your computer from the [r-project](https://cran.r-project.org/) or use [Rstudio Cloud](https://rstudio.cloud/) in your browser. You can also download the free [R Studio](https://www.rstudio.com/products/rstudio/download/) software, which makes R easier to use and helps keep your analysis projects organized.  
 
-<br> __Contributors__   
+<br>
 
-> Dorian Kvale  
-> Cassie McMahon  
-> Derek Nagel  
-> Kristie Ellickson  
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 25px;}
+</style>
 
+<div class="blue">
+
+<p style="text-align: center;"> _This web book is a working body of air data analysis methods and code examples. You are invited to contribute and add your name to the list below._
+</p>
+
+<p style="text-align: center;">
+
+**Contributors**
+
+- Dorian Kvale   
+- Cassie McMahon 
+- Derek Nagel  
+- Kristie Ellickson 
+
+</p>
+  
+
+</div>
