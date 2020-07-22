@@ -565,7 +565,7 @@ Not all data analysis projects are ready or intended for external audiences. You
 
 The inhalation health benchmarks used by MPCA are available on the web in these formats:
 
-- __PDF:__ https://www.pca.state.mn.us/sites/default/files/aq9-28.pdf 
+- __Web table:__ https://public.tableau.com/profile/mpca.data.services#!/vizhome/Airtoxicityvalues/Airtoxicityvalues 
 - __Excel:__ https://www.pca.state.mn.us/sites/default/files/aq9-22.xlsm
 - __CSV:__ https://raw.githubusercontent.com/MPCA-air/health-values/master/Inhalation_Health_Benchmarks(IHBs).csv
 

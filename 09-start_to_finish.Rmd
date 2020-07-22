@@ -17,7 +17,6 @@ Click below to view the example R script.
 <br>
 
 ```{r, eval=F}
-
 # Functions
 
 install.MPCAair.packages = function() {
