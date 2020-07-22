@@ -36,7 +36,8 @@ The normality test in the example script below is a recommended test for data of
 
 <br>
 
-Click below to view code for a normality test.
+
+_Click below to view code for a normality test._
 
 <div class="toggle"><button class="btn_code">Show __R__ code</button>
 
@@ -96,13 +97,10 @@ DT::datatable(head(data_normresults), options = dt_options)
 We also suggest visualizing the data to determine if normality may be a valid assumption. The script below is an example of visual normality tests and includes an explanation of their interpretation. In the Q-Q Plot, normal data will form a straight line with the theoretical distribution quantiles with little deviation from the line. This is a visual test and somewhat subjective. Normal data form histograms that produce a bell shaped curve.  
 
 
-Use this tool to inspect your data by year, site and pollutant:
+Here's an example tool to inspect your data by year, site and pollutant: [https://mpca-pahs.shinyapps.io/NormViz/](https://mpca-pahs.shinyapps.io/NormViz/)
 
-- [https://mpca-pahs.shinyapps.io/NormViz/](https://mpca-pahs.shinyapps.io/NormViz/).
 
-<br>
-
-Click to view the code for the shiny tool above.
+_Click to view the code for the shiny tool above._
 
 <div class="toggle"><button class="btn_code">Show __R__ code</button>
 
@@ -180,7 +178,7 @@ When to use a arithmetic or geometric mean:
 Bootstrapping provides methods for calculating summary statistics without making assumptions about the distribution from which the data is sampled.
 
 
-Click to view the bootstrapping code.
+_Click to view the bootstrapping code._
 
 <div class="toggle"><button class="btn_code">Show __R__ code</button>
 
@@ -334,7 +332,7 @@ If data is not normal, use bootstraping to generate means for each site. The 95%
 The script below uses bootstrap sampling to generate 1000 means for each site, pollutant, and year and then calculates the 95% UCL by taking the 95th percentile of those means. Values below the MDL are estimated using lognormal MLE estimation for each bootstrap sample. The 95% UCL is not calculated for any site, pollutant, and year which fails to meet completeness requirements and/or minimum detection requirements.
 
 
-Click to view the code for calculating _UCLs_.
+_Click to view code for calculating UCLs._
 
 <div class="toggle"><button class="btn_code">Show __R__ code</button>
 

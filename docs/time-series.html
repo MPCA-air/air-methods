@@ -69,9 +69,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -80,14 +80,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -96,9 +98,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -217,8 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-mdls"><i class="fa fa-check"></i><b>6.2</b> Calculating MDLs</a></li>
 <li class="chapter" data-level="6.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-mpca-detection-limits"><i class="fa fa-check"></i><b>6.3</b> Finding MPCA detection limits</a></li>
 <li class="chapter" data-level="6.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>6.4</b> Qualifier Codes for Detection Limits</a></li>
-<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
-<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.6</b> Below detection values</a></li>
+<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values</a></li>
+<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#recommended-steps"><i class="fa fa-check"></i><b>6.6</b> Recommended Steps</a></li>
 <li class="chapter" data-level="6.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.7</b> Multiple detection limits</a></li>
 <li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#reporting-limits"><i class="fa fa-check"></i><b>6.8</b> Reporting limits</a></li>
 <li class="chapter" data-level="6.9" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.9</b> References</a></li>
@@ -237,14 +239,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>9</b> Site comparisons</a><ul>
 <li class="chapter" data-level="9.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a></li>
-<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize data</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>9.2.1</b> Beeswarm Plots</a></li>
-<li class="chapter" data-level="9.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.2.2</b> Correlation matrices</a></li>
+<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-differences"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize differences</a><ul>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i>Beeswarm Plots</a></li>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i>Correlation matrices</a></li>
 </ul></li>
+<li><a href="site-comparisons.html#references-1"><em>References</em></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> From start to finish</a><ul>
-<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>10.1</b> Functions</a></li>
-<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>10.2</b> Analysis steps</a></li>
+<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#using-functions"><i class="fa fa-check"></i><b>10.1</b> Using functions</a></li>
+<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#a-simpler-analysis"><i class="fa fa-check"></i><b>10.2</b> A simpler analysis</a></li>
 </ul></li>
 <li><a href="visuals.html#visuals"><strong>Visuals</strong></a></li>
 <li class="chapter" data-level="11" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>11</b> Charts</a><ul>
@@ -263,17 +266,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
 <li class="chapter" data-level="14" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>14</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>14.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="14.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="14.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>14.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="14.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.1.4</b> Producing Annual Summaries</a></li>
+<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1</b> Data Cleaning</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#null-results"><i class="fa fa-check"></i>Null Results</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#duplicate-observations"><i class="fa fa-check"></i>Duplicate Observations</a></li>
 </ul></li>
+<li class="chapter" data-level="14.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.2</b> Data Validation</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i>Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-completeness"><i class="fa fa-check"></i>Data Completeness</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#below-the-detection-limit"><i class="fa fa-check"></i>Below the detection limit</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.3</b> Producing Annual Summaries</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-annual-means"><i class="fa fa-check"></i>Calculating annual means</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-upper-confidence-limits"><i class="fa fa-check"></i>Calculating upper confidence limits</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#comparing-sites"><i class="fa fa-check"></i><b>14.4</b> Comparing sites</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
 <li class="chapter" data-level="16" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>16</b> AQI explorer</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
-<li class="chapter" data-level="16.1" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.1</b> References</a></li>
+<li><a href="edit-this-book.html#references-2"><em>References</em></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -309,25 +320,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="kw">library</span>(ggridges)</a>
-<a class="sourceLine" id="cb92-2" title="2"></a>
-<a class="sourceLine" id="cb92-3" title="3"><span class="co"># Sample data</span></a>
-<a class="sourceLine" id="cb92-4" title="4">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">seq</span>(<span class="kw">ymd_hm</span>(<span class="st">&quot;2017-06-01 12:00&quot;</span>), <span class="kw">ymd_hm</span>(<span class="st">&quot;2018-02-01 12:00&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;hour&quot;</span>), </a>
-<a class="sourceLine" id="cb92-5" title="5">             <span class="dt">obs  =</span> <span class="kw">rnorm</span>(<span class="kw">length</span>(time), <span class="dv">55</span>, <span class="dv">12</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb92-6" title="6"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">n    =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb92-7" title="7">             <span class="dt">hour =</span> <span class="kw">hour</span>(time) <span class="op">%&gt;%</span><span class="st"> </span>as.factor,</a>
-<a class="sourceLine" id="cb92-8" title="8">             <span class="dt">obs =</span> <span class="kw">ifelse</span>(hour <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">16</span><span class="op">:</span><span class="dv">18</span>), obs<span class="op">+</span><span class="dv">29</span>, obs))</a>
-<a class="sourceLine" id="cb92-9" title="9"></a>
-<a class="sourceLine" id="cb92-10" title="10"></a>
-<a class="sourceLine" id="cb92-11" title="11"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(obs, <span class="dt">y =</span> hour)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb92-12" title="12"><span class="st">  </span><span class="kw">geom_density_ridges</span>(<span class="kw">aes</span>(<span class="dt">fill=</span>obs))</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="time-series.html#cb92-1"></a><span class="kw">library</span>(ggridges)</span>
+<span id="cb92-2"><a href="time-series.html#cb92-2"></a></span>
+<span id="cb92-3"><a href="time-series.html#cb92-3"></a><span class="co"># Sample data</span></span>
+<span id="cb92-4"><a href="time-series.html#cb92-4"></a>df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">seq</span>(<span class="kw">ymd_hm</span>(<span class="st">&quot;2017-06-01 12:00&quot;</span>), <span class="kw">ymd_hm</span>(<span class="st">&quot;2018-02-01 12:00&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;hour&quot;</span>), </span>
+<span id="cb92-5"><a href="time-series.html#cb92-5"></a>             <span class="dt">obs  =</span> <span class="kw">rnorm</span>(<span class="kw">length</span>(time), <span class="dv">55</span>, <span class="dv">12</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb92-6"><a href="time-series.html#cb92-6"></a><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">n    =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>(),</span>
+<span id="cb92-7"><a href="time-series.html#cb92-7"></a>             <span class="dt">hour =</span> <span class="kw">hour</span>(time) <span class="op">%&gt;%</span><span class="st"> </span>as.factor,</span>
+<span id="cb92-8"><a href="time-series.html#cb92-8"></a>             <span class="dt">obs =</span> <span class="kw">ifelse</span>(hour <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">16</span><span class="op">:</span><span class="dv">18</span>), obs<span class="op">+</span><span class="dv">29</span>, obs))</span>
+<span id="cb92-9"><a href="time-series.html#cb92-9"></a></span>
+<span id="cb92-10"><a href="time-series.html#cb92-10"></a></span>
+<span id="cb92-11"><a href="time-series.html#cb92-11"></a><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(obs, <span class="dt">y =</span> hour)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb92-12"><a href="time-series.html#cb92-12"></a><span class="st">  </span><span class="kw">geom_density_ridges</span>(<span class="kw">aes</span>(<span class="dt">fill=</span>obs))</span></code></pre></div>
 <p><img src="air-methods_files/figure-html/hour_day_chart-1.png" width="672" /></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" title="1"><span class="co"># Add color gradient + title</span></a>
-<a class="sourceLine" id="cb93-2" title="2"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(obs, <span class="dt">y =</span> hour, <span class="dt">fill =</span> <span class="kw">stat</span>(x))) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb93-3" title="3"><span class="st">  </span><span class="kw">geom_density_ridges_gradient</span>(<span class="dt">scale =</span> <span class="dv">2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb93-4" title="4"><span class="st">  </span><span class="kw">scale_fill_viridis_c</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb93-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title    =</span> <span class="st">&quot;Ozone concentration by hour&quot;</span>,</a>
-<a class="sourceLine" id="cb93-6" title="6">       <span class="dt">subtitle =</span> <span class="st">&quot;Evening rush hour?&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="time-series.html#cb93-1"></a><span class="co"># Add color gradient + title</span></span>
+<span id="cb93-2"><a href="time-series.html#cb93-2"></a><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(obs, <span class="dt">y =</span> hour, <span class="dt">fill =</span> <span class="kw">stat</span>(x))) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb93-3"><a href="time-series.html#cb93-3"></a><span class="st">  </span><span class="kw">geom_density_ridges_gradient</span>(<span class="dt">scale =</span> <span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb93-4"><a href="time-series.html#cb93-4"></a><span class="st">  </span><span class="kw">scale_fill_viridis_c</span>() <span class="op">+</span></span>
+<span id="cb93-5"><a href="time-series.html#cb93-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title    =</span> <span class="st">&quot;Ozone concentration by hour&quot;</span>,</span>
+<span id="cb93-6"><a href="time-series.html#cb93-6"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;Evening rush hour?&quot;</span>)</span></code></pre></div>
 <p><img src="air-methods_files/figure-html/hour_day_chart-2.png" width="672" /></p>
 </div>
 </div>
@@ -341,21 +352,21 @@ Show <strong>R</strong> code
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="co"># Generate sample data</span></a>
-<a class="sourceLine" id="cb94-2" title="2">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2017-04-01&quot;</span>), <span class="kw">as.Date</span>(<span class="st">&quot;2018-02-01&quot;</span>), <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb94-3" title="3">             <span class="dt">obs  =</span> <span class="kw">rnorm</span>(<span class="kw">length</span>(time), <span class="dv">55</span>, <span class="dv">12</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb94-4" title="4"><span class="st">       </span><span class="kw">mutate</span>(<span class="dt">n       =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb94-5" title="5">              <span class="dt">weekday =</span> <span class="kw">wday</span>(time, <span class="dt">label =</span> T))</a>
-<a class="sourceLine" id="cb94-6" title="6"></a>
-<a class="sourceLine" id="cb94-7" title="7">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb94-8" title="8"><span class="st">      </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-9" title="9"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">obs =</span> <span class="kw">mean</span>(df<span class="op">$</span>obs[<span class="kw">max</span>(<span class="dv">0</span>, n <span class="op">-</span><span class="st"> </span><span class="dv">5</span>)<span class="op">:</span>(n <span class="op">+</span><span class="st"> </span><span class="dv">3</span>)], <span class="dt">na.rm =</span> T),</a>
-<a class="sourceLine" id="cb94-10" title="10">             <span class="dt">obs =</span> <span class="kw">ifelse</span>(weekday <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>), obs<span class="op">+</span><span class="dv">3</span>, obs))   </a>
-<a class="sourceLine" id="cb94-11" title="11"></a>
-<a class="sourceLine" id="cb94-12" title="12"><span class="co"># Create a boxplot, grouped by weekday</span></a>
-<a class="sourceLine" id="cb94-13" title="13"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(weekday, obs)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb94-14" title="14"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> weekday <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>)), <span class="dt">show.legend =</span> F) <span class="op">+</span></a>
-<a class="sourceLine" id="cb94-15" title="15"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Ozone by day of the week&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="time-series.html#cb94-1"></a><span class="co"># Generate sample data</span></span>
+<span id="cb94-2"><a href="time-series.html#cb94-2"></a>df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2017-04-01&quot;</span>), <span class="kw">as.Date</span>(<span class="st">&quot;2018-02-01&quot;</span>), <span class="dv">1</span>), </span>
+<span id="cb94-3"><a href="time-series.html#cb94-3"></a>             <span class="dt">obs  =</span> <span class="kw">rnorm</span>(<span class="kw">length</span>(time), <span class="dv">55</span>, <span class="dv">12</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb94-4"><a href="time-series.html#cb94-4"></a><span class="st">       </span><span class="kw">mutate</span>(<span class="dt">n       =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>(),</span>
+<span id="cb94-5"><a href="time-series.html#cb94-5"></a>              <span class="dt">weekday =</span> <span class="kw">wday</span>(time, <span class="dt">label =</span> T))</span>
+<span id="cb94-6"><a href="time-series.html#cb94-6"></a></span>
+<span id="cb94-7"><a href="time-series.html#cb94-7"></a>df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb94-8"><a href="time-series.html#cb94-8"></a><span class="st">      </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span></span>
+<span id="cb94-9"><a href="time-series.html#cb94-9"></a><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">obs =</span> <span class="kw">mean</span>(df<span class="op">$</span>obs[<span class="kw">max</span>(<span class="dv">0</span>, n <span class="op">-</span><span class="st"> </span><span class="dv">5</span>)<span class="op">:</span>(n <span class="op">+</span><span class="st"> </span><span class="dv">3</span>)], <span class="dt">na.rm =</span> T),</span>
+<span id="cb94-10"><a href="time-series.html#cb94-10"></a>             <span class="dt">obs =</span> <span class="kw">ifelse</span>(weekday <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>), obs<span class="op">+</span><span class="dv">3</span>, obs))   </span>
+<span id="cb94-11"><a href="time-series.html#cb94-11"></a></span>
+<span id="cb94-12"><a href="time-series.html#cb94-12"></a><span class="co"># Create a boxplot, grouped by weekday</span></span>
+<span id="cb94-13"><a href="time-series.html#cb94-13"></a><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(weekday, obs)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb94-14"><a href="time-series.html#cb94-14"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> weekday <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>)), <span class="dt">show.legend =</span> F) <span class="op">+</span></span>
+<span id="cb94-15"><a href="time-series.html#cb94-15"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Ozone by day of the week&quot;</span>)</span></code></pre></div>
 <p><img src="air-methods_files/figure-html/week_day_chart-1.png" width="672" /></p>
 </div>
 </div>
@@ -366,24 +377,24 @@ Show <strong>R</strong> code
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb95-2" title="2"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb95-3" title="3"></a>
-<a class="sourceLine" id="cb95-4" title="4"><span class="co"># Sample data</span></a>
-<a class="sourceLine" id="cb95-5" title="5">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2016-01-01&quot;</span>), <span class="kw">as.Date</span>(<span class="st">&quot;2018-02-01&quot;</span>), <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb95-6" title="6">                 <span class="dt">obs  =</span> <span class="kw">sample</span>(<span class="dv">25</span><span class="op">:</span><span class="dv">110</span>, <span class="dv">763</span>, <span class="dt">replace =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb95-7" title="7"><span class="st">       </span><span class="kw">mutate</span>(<span class="dt">n       =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb95-8" title="8">              <span class="dt">quarter =</span> <span class="kw">quarter</span>(time))</a>
-<a class="sourceLine" id="cb95-9" title="9"></a>
-<a class="sourceLine" id="cb95-10" title="10"> df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb95-11" title="11"><span class="st">         </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb95-12" title="12"><span class="st">         </span><span class="kw">mutate</span>(<span class="dt">obs =</span> <span class="kw">mean</span>(df<span class="op">$</span>obs[<span class="kw">max</span>(<span class="dv">0</span>, n <span class="op">-</span><span class="st"> </span><span class="dv">5</span>)<span class="op">:</span>(n <span class="op">+</span><span class="st"> </span><span class="dv">3</span>)], <span class="dt">na.rm =</span> T))   </a>
-<a class="sourceLine" id="cb95-13" title="13"></a>
-<a class="sourceLine" id="cb95-14" title="14"><span class="co"># Dotted line plot </span></a>
-<a class="sourceLine" id="cb95-15" title="15"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(time, obs)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb95-16" title="16"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb95-17" title="17"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> quarter)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb95-18" title="18"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="kw">guide_legend</span>(<span class="dt">title =</span> <span class="st">&quot;Quarter&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="time-series.html#cb95-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb95-2"><a href="time-series.html#cb95-2"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb95-3"><a href="time-series.html#cb95-3"></a></span>
+<span id="cb95-4"><a href="time-series.html#cb95-4"></a><span class="co"># Sample data</span></span>
+<span id="cb95-5"><a href="time-series.html#cb95-5"></a>df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">time =</span> <span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2016-01-01&quot;</span>), <span class="kw">as.Date</span>(<span class="st">&quot;2018-02-01&quot;</span>), <span class="dv">1</span>), </span>
+<span id="cb95-6"><a href="time-series.html#cb95-6"></a>                 <span class="dt">obs  =</span> <span class="kw">sample</span>(<span class="dv">25</span><span class="op">:</span><span class="dv">110</span>, <span class="dv">763</span>, <span class="dt">replace =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb95-7"><a href="time-series.html#cb95-7"></a><span class="st">       </span><span class="kw">mutate</span>(<span class="dt">n       =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>(),</span>
+<span id="cb95-8"><a href="time-series.html#cb95-8"></a>              <span class="dt">quarter =</span> <span class="kw">quarter</span>(time))</span>
+<span id="cb95-9"><a href="time-series.html#cb95-9"></a></span>
+<span id="cb95-10"><a href="time-series.html#cb95-10"></a> df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb95-11"><a href="time-series.html#cb95-11"></a><span class="st">         </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span></span>
+<span id="cb95-12"><a href="time-series.html#cb95-12"></a><span class="st">         </span><span class="kw">mutate</span>(<span class="dt">obs =</span> <span class="kw">mean</span>(df<span class="op">$</span>obs[<span class="kw">max</span>(<span class="dv">0</span>, n <span class="op">-</span><span class="st"> </span><span class="dv">5</span>)<span class="op">:</span>(n <span class="op">+</span><span class="st"> </span><span class="dv">3</span>)], <span class="dt">na.rm =</span> T))   </span>
+<span id="cb95-13"><a href="time-series.html#cb95-13"></a></span>
+<span id="cb95-14"><a href="time-series.html#cb95-14"></a><span class="co"># Dotted line plot </span></span>
+<span id="cb95-15"><a href="time-series.html#cb95-15"></a><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(time, obs)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb95-16"><a href="time-series.html#cb95-16"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></span>
+<span id="cb95-17"><a href="time-series.html#cb95-17"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> quarter)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb95-18"><a href="time-series.html#cb95-18"></a><span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="kw">guide_legend</span>(<span class="dt">title =</span> <span class="st">&quot;Quarter&quot;</span>))</span></code></pre></div>
 <p><img src="air-methods_files/figure-html/test_series2-1.png" width="672" /></p>
 </div>
 <p><br><a href="time-series.html#time-series">Back to top</a></p>

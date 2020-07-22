@@ -69,9 +69,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -80,14 +80,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -96,9 +98,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -217,8 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-mdls"><i class="fa fa-check"></i><b>6.2</b> Calculating MDLs</a></li>
 <li class="chapter" data-level="6.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-mpca-detection-limits"><i class="fa fa-check"></i><b>6.3</b> Finding MPCA detection limits</a></li>
 <li class="chapter" data-level="6.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>6.4</b> Qualifier Codes for Detection Limits</a></li>
-<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
-<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.6</b> Below detection values</a></li>
+<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values</a></li>
+<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#recommended-steps"><i class="fa fa-check"></i><b>6.6</b> Recommended Steps</a></li>
 <li class="chapter" data-level="6.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.7</b> Multiple detection limits</a></li>
 <li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#reporting-limits"><i class="fa fa-check"></i><b>6.8</b> Reporting limits</a></li>
 <li class="chapter" data-level="6.9" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.9</b> References</a></li>
@@ -237,14 +239,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>9</b> Site comparisons</a><ul>
 <li class="chapter" data-level="9.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a></li>
-<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize data</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>9.2.1</b> Beeswarm Plots</a></li>
-<li class="chapter" data-level="9.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.2.2</b> Correlation matrices</a></li>
+<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-differences"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize differences</a><ul>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i>Beeswarm Plots</a></li>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i>Correlation matrices</a></li>
 </ul></li>
+<li><a href="site-comparisons.html#references-1"><em>References</em></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> From start to finish</a><ul>
-<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>10.1</b> Functions</a></li>
-<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>10.2</b> Analysis steps</a></li>
+<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#using-functions"><i class="fa fa-check"></i><b>10.1</b> Using functions</a></li>
+<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#a-simpler-analysis"><i class="fa fa-check"></i><b>10.2</b> A simpler analysis</a></li>
 </ul></li>
 <li><a href="visuals.html#visuals"><strong>Visuals</strong></a></li>
 <li class="chapter" data-level="11" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>11</b> Charts</a><ul>
@@ -263,17 +266,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
 <li class="chapter" data-level="14" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>14</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>14.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="14.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="14.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>14.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="14.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.1.4</b> Producing Annual Summaries</a></li>
+<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1</b> Data Cleaning</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#null-results"><i class="fa fa-check"></i>Null Results</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#duplicate-observations"><i class="fa fa-check"></i>Duplicate Observations</a></li>
 </ul></li>
+<li class="chapter" data-level="14.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.2</b> Data Validation</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i>Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-completeness"><i class="fa fa-check"></i>Data Completeness</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#below-the-detection-limit"><i class="fa fa-check"></i>Below the detection limit</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.3</b> Producing Annual Summaries</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-annual-means"><i class="fa fa-check"></i>Calculating annual means</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-upper-confidence-limits"><i class="fa fa-check"></i>Calculating upper confidence limits</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#comparing-sites"><i class="fa fa-check"></i><b>14.4</b> Comparing sites</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
 <li class="chapter" data-level="16" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>16</b> AQI explorer</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
-<li class="chapter" data-level="16.1" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.1</b> References</a></li>
+<li><a href="edit-this-book.html#references-2"><em>References</em></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -326,91 +337,91 @@ Large monitoring data sets often contain observations with missing concentration
 Show <strong>R</strong> code
 </button>
 <p><br> Load example monitoring data</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb25-2" title="2"></a>
-<a class="sourceLine" id="cb25-3" title="3">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas</span></a>
-<a class="sourceLine" id="cb25-4" title="4"><span class="st">                  271231003,1,12101,&quot;2004-01-04&quot;,-999.99,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb25-5" title="5"><span class="st">                  271231003,1,12101,&quot;2004-01-10&quot;,0.23,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb25-6" title="6"><span class="st">                  271231003,1,12101,&quot;2004-01-16&quot;,0.35,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb25-7" title="7"><span class="st">                  271231003,1,12101,&quot;2004-01-22&quot;,0.22,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb25-8" title="8"><span class="st">                  271231003,1,12101,&quot;2004-01-28&quot;,NA,NA,0.08,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb25-9" title="9"><span class="st">                  271231003,1,12101,&quot;2004-02-03&quot;,0.07,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb25-10" title="10"><span class="st">                  271231003,1,12101,&quot;2004-02-09&quot;,0.02,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb25-11" title="11"><span class="st">                  271231003,1,12101,&quot;2004-02-15&quot;,&quot; &quot;,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb25-12" title="12"><span class="st">                  271231003,1,12101,&quot;2004-02-21&quot;,0.03,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb25-13" title="13"><span class="st">                  271231003,1,12101,&quot;2004-02-27&quot;,0.21,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb25-14" title="14"><span class="st">                  271377001,1,12101,&quot;2007-09-21&quot;,NULL,a,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb25-15" title="15"><span class="st">                  271377001,1,12101,&quot;2007-09-21&quot;,0.14,NA,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-cleaning.html#cb25-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb25-2"><a href="data-cleaning.html#cb25-2"></a></span>
+<span id="cb25-3"><a href="data-cleaning.html#cb25-3"></a>data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas</span></span>
+<span id="cb25-4"><a href="data-cleaning.html#cb25-4"></a><span class="st">                  271231003,1,12101,&quot;2004-01-04&quot;,-999.99,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb25-5"><a href="data-cleaning.html#cb25-5"></a><span class="st">                  271231003,1,12101,&quot;2004-01-10&quot;,0.23,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb25-6"><a href="data-cleaning.html#cb25-6"></a><span class="st">                  271231003,1,12101,&quot;2004-01-16&quot;,0.35,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb25-7"><a href="data-cleaning.html#cb25-7"></a><span class="st">                  271231003,1,12101,&quot;2004-01-22&quot;,0.22,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb25-8"><a href="data-cleaning.html#cb25-8"></a><span class="st">                  271231003,1,12101,&quot;2004-01-28&quot;,NA,NA,0.08,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb25-9"><a href="data-cleaning.html#cb25-9"></a><span class="st">                  271231003,1,12101,&quot;2004-02-03&quot;,0.07,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb25-10"><a href="data-cleaning.html#cb25-10"></a><span class="st">                  271231003,1,12101,&quot;2004-02-09&quot;,0.02,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb25-11"><a href="data-cleaning.html#cb25-11"></a><span class="st">                  271231003,1,12101,&quot;2004-02-15&quot;,&quot; &quot;,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb25-12"><a href="data-cleaning.html#cb25-12"></a><span class="st">                  271231003,1,12101,&quot;2004-02-21&quot;,0.03,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb25-13"><a href="data-cleaning.html#cb25-13"></a><span class="st">                  271231003,1,12101,&quot;2004-02-27&quot;,0.21,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb25-14"><a href="data-cleaning.html#cb25-14"></a><span class="st">                  271377001,1,12101,&quot;2007-09-21&quot;,NULL,a,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb25-15"><a href="data-cleaning.html#cb25-15"></a><span class="st">                  271377001,1,12101,&quot;2007-09-21&quot;,0.14,NA,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;&#39;</span>)</span></code></pre></div>
 <p><br> <em>Sample monitoring data</em>
-<div id="htmlwidget-dfc983907e8f0d4bc183" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dfc983907e8f0d4bc183">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03"],["-999.99","0.23","0.35","0.22",null,"0.07"],[null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.08,0.06],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,6]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-8d6212cebfa97c4bd378" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8d6212cebfa97c4bd378">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03"],["-999.99","0.23","0.35","0.22",null,"0.07"],[null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.08,0.06],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,6]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 <p><br> Create a function to test for missing concentration values.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># Test for missing concentrations, non-numeric values, and -999</span></a>
-<a class="sourceLine" id="cb26-2" title="2">missing_conc &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb26-3" title="3">  </a>
-<a class="sourceLine" id="cb26-4" title="4">  <span class="kw">is.na</span>(<span class="kw">as.numeric</span>(x)) <span class="op">||</span><span class="st"> </span><span class="kw">as.numeric</span>(x) <span class="op">&lt;</span><span class="st"> </span><span class="dv">-900</span></a>
-<a class="sourceLine" id="cb26-5" title="5">  </a>
-<a class="sourceLine" id="cb26-6" title="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-cleaning.html#cb26-1"></a><span class="co"># Test for missing concentrations, non-numeric values, and -999</span></span>
+<span id="cb26-2"><a href="data-cleaning.html#cb26-2"></a>missing_conc &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb26-3"><a href="data-cleaning.html#cb26-3"></a>  </span>
+<span id="cb26-4"><a href="data-cleaning.html#cb26-4"></a>  <span class="kw">is.na</span>(<span class="kw">as.numeric</span>(x)) <span class="op">||</span><span class="st"> </span><span class="kw">as.numeric</span>(x) <span class="op">&lt;</span><span class="st"> </span><span class="dv">-900</span></span>
+<span id="cb26-5"><a href="data-cleaning.html#cb26-5"></a>  </span>
+<span id="cb26-6"><a href="data-cleaning.html#cb26-6"></a>}</span></code></pre></div>
 <p><br> Use the function to add a column to your data <code>conc_missing</code> that tests for missing concentration values.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># Create a new TRUE/FALSE column labeling each result as missing or not</span></a>
-<a class="sourceLine" id="cb27-2" title="2">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-3" title="3"><span class="st">        </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-4" title="4"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">conc_missing =</span> <span class="kw">missing_conc</span>(conc))</a>
-<a class="sourceLine" id="cb27-5" title="5"></a>
-<a class="sourceLine" id="cb27-6" title="6"><span class="co"># Select all missing observations</span></a>
-<a class="sourceLine" id="cb27-7" title="7">missing_values &lt;-<span class="st"> </span><span class="kw">filter</span>(data, conc_missing <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-cleaning.html#cb27-1"></a><span class="co"># Create a new TRUE/FALSE column labeling each result as missing or not</span></span>
+<span id="cb27-2"><a href="data-cleaning.html#cb27-2"></a>data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb27-3"><a href="data-cleaning.html#cb27-3"></a><span class="st">        </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb27-4"><a href="data-cleaning.html#cb27-4"></a><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">conc_missing =</span> <span class="kw">missing_conc</span>(conc))</span>
+<span id="cb27-5"><a href="data-cleaning.html#cb27-5"></a></span>
+<span id="cb27-6"><a href="data-cleaning.html#cb27-6"></a><span class="co"># Select all missing observations</span></span>
+<span id="cb27-7"><a href="data-cleaning.html#cb27-7"></a>missing_values &lt;-<span class="st"> </span><span class="kw">filter</span>(data, conc_missing <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) </span></code></pre></div>
 <p><br> <em>Missing values</em>
-<div id="htmlwidget-a62dbbf1a3298d4ce0a6" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a62dbbf1a3298d4ce0a6">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271377001],[1,1,1,1],[12101,12101,12101,12101],["2004-01-04","2004-01-28","2004-02-15","2007-09-21"],["-999.99",null,null,"NULL"],[0.06,0.08,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[true,true,true,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,5]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-9ffe5c7e5c3d4806427d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9ffe5c7e5c3d4806427d">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271377001],[1,1,1,1],[12101,12101,12101,12101],["2004-01-04","2004-01-28","2004-02-15","2007-09-21"],["-999.99",null,null,"NULL"],[0.06,0.08,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[true,true,true,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,5]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 <p><br> Filter the data to only non-missing observations.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">data &lt;-<span class="st"> </span><span class="kw">filter</span>(data, conc_missing <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-cleaning.html#cb28-1"></a>data &lt;-<span class="st"> </span><span class="kw">filter</span>(data, conc_missing <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</span></code></pre></div>
 <p><br> <em>The new and improved cleaner data</em><br />
-<div id="htmlwidget-ebb9a2f7594d567bd3ad" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ebb9a2f7594d567bd3ad">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-10","2004-01-16","2004-01-22","2004-02-03","2004-02-09","2004-02-21","2004-02-27","2007-09-21"],["0.23","0.35","0.22","0.07","0.02","0.03","0.21","0.14"],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[false,false,false,false,false,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,5]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-5a02af2641358d10b4b1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5a02af2641358d10b4b1">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-10","2004-01-16","2004-01-22","2004-02-03","2004-02-09","2004-02-21","2004-02-27","2007-09-21"],["0.23","0.35","0.22","0.07","0.02","0.03","0.21","0.14"],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[false,false,false,false,false,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,5]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 <p><br> You can create similar functions to test for missing dates, site IDs, detection limits, and parameter codes.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="co"># Test for missing dates</span></a>
-<a class="sourceLine" id="cb29-2" title="2">missing_dates &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb29-3" title="3">  <span class="kw">is.na</span>(<span class="kw">as.character</span>(x)) <span class="op">||</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-4" title="4"><span class="st">    </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">11</span> <span class="op">||</span><span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) <span class="op">&lt;</span><span class="st"> </span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb29-5" title="5">}</a>
-<a class="sourceLine" id="cb29-6" title="6"></a>
-<a class="sourceLine" id="cb29-7" title="7"><span class="co"># Test for missing site IDs</span></a>
-<a class="sourceLine" id="cb29-8" title="8">missing_sites &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb29-9" title="9">  <span class="kw">is.na</span>(<span class="kw">as.character</span>(x)) <span class="op">||</span><span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span> </a>
-<a class="sourceLine" id="cb29-10" title="10">}</a>
-<a class="sourceLine" id="cb29-11" title="11"></a>
-<a class="sourceLine" id="cb29-12" title="12"><span class="co"># Test for missing detection limits</span></a>
-<a class="sourceLine" id="cb29-13" title="13">missing_dls &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb29-14" title="14">  <span class="kw">is.na</span>(<span class="kw">as.numeric</span>(x)) <span class="op">||</span><span class="st"> </span><span class="kw">as.numeric</span>(x) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb29-15" title="15">}</a>
-<a class="sourceLine" id="cb29-16" title="16"></a>
-<a class="sourceLine" id="cb29-17" title="17"><span class="co"># Test for missing parameter codes</span></a>
-<a class="sourceLine" id="cb29-18" title="18">missing_param &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb29-19" title="19">  <span class="kw">is.na</span>(<span class="kw">as.numeric</span>(x)) <span class="op">||</span><span class="st"> </span><span class="kw">as.numeric</span>(x) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">||</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb29-20" title="20"><span class="st">    </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span> <span class="op">||</span><span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">9</span></a>
-<a class="sourceLine" id="cb29-21" title="21">}</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-cleaning.html#cb29-1"></a><span class="co"># Test for missing dates</span></span>
+<span id="cb29-2"><a href="data-cleaning.html#cb29-2"></a>missing_dates &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb29-3"><a href="data-cleaning.html#cb29-3"></a>  <span class="kw">is.na</span>(<span class="kw">as.character</span>(x)) <span class="op">||</span><span class="st"> </span></span>
+<span id="cb29-4"><a href="data-cleaning.html#cb29-4"></a><span class="st">    </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">11</span> <span class="op">||</span><span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) <span class="op">&lt;</span><span class="st"> </span><span class="dv">6</span></span>
+<span id="cb29-5"><a href="data-cleaning.html#cb29-5"></a>}</span>
+<span id="cb29-6"><a href="data-cleaning.html#cb29-6"></a></span>
+<span id="cb29-7"><a href="data-cleaning.html#cb29-7"></a><span class="co"># Test for missing site IDs</span></span>
+<span id="cb29-8"><a href="data-cleaning.html#cb29-8"></a>missing_sites &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb29-9"><a href="data-cleaning.html#cb29-9"></a>  <span class="kw">is.na</span>(<span class="kw">as.character</span>(x)) <span class="op">||</span><span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span> </span>
+<span id="cb29-10"><a href="data-cleaning.html#cb29-10"></a>}</span>
+<span id="cb29-11"><a href="data-cleaning.html#cb29-11"></a></span>
+<span id="cb29-12"><a href="data-cleaning.html#cb29-12"></a><span class="co"># Test for missing detection limits</span></span>
+<span id="cb29-13"><a href="data-cleaning.html#cb29-13"></a>missing_dls &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb29-14"><a href="data-cleaning.html#cb29-14"></a>  <span class="kw">is.na</span>(<span class="kw">as.numeric</span>(x)) <span class="op">||</span><span class="st"> </span><span class="kw">as.numeric</span>(x) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span></span>
+<span id="cb29-15"><a href="data-cleaning.html#cb29-15"></a>}</span>
+<span id="cb29-16"><a href="data-cleaning.html#cb29-16"></a></span>
+<span id="cb29-17"><a href="data-cleaning.html#cb29-17"></a><span class="co"># Test for missing parameter codes</span></span>
+<span id="cb29-18"><a href="data-cleaning.html#cb29-18"></a>missing_param &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb29-19"><a href="data-cleaning.html#cb29-19"></a>  <span class="kw">is.na</span>(<span class="kw">as.numeric</span>(x)) <span class="op">||</span><span class="st"> </span><span class="kw">as.numeric</span>(x) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">||</span><span class="st"> </span></span>
+<span id="cb29-20"><a href="data-cleaning.html#cb29-20"></a><span class="st">    </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span> <span class="op">||</span><span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(x)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">9</span></span>
+<span id="cb29-21"><a href="data-cleaning.html#cb29-21"></a>}</span></code></pre></div>
 <p><br> To apply these functions all at once use <code>dplyr</code>’s great function called <code>mutate()</code>.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># Create new TRUE/FALSE columns labeling each result as missing or not</span></a>
-<a class="sourceLine" id="cb30-2" title="2">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-3" title="3"><span class="st">        </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-4" title="4"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">conc_missing  =</span> <span class="kw">missing_conc</span>(conc),</a>
-<a class="sourceLine" id="cb30-5" title="5">              <span class="dt">date_missing   =</span> <span class="kw">missing_dates</span>(date),</a>
-<a class="sourceLine" id="cb30-6" title="6">              <span class="dt">site_missing   =</span> <span class="kw">missing_sites</span>(aqs_id),</a>
-<a class="sourceLine" id="cb30-7" title="7">              <span class="dt">dl_missing     =</span> <span class="kw">missing_dls</span>(md_limit),</a>
-<a class="sourceLine" id="cb30-8" title="8">              <span class="dt">param_missing  =</span> <span class="kw">missing_param</span>(param_code)) </a>
-<a class="sourceLine" id="cb30-9" title="9"></a>
-<a class="sourceLine" id="cb30-10" title="10"><span class="co"># Filter to remove any rows with a missing parameter.</span></a>
-<a class="sourceLine" id="cb30-11" title="11"><span class="co"># We use sum() to count the number of missing parameters.</span></a>
-<a class="sourceLine" id="cb30-12" title="12"><span class="co"># In this case we will drop any row with at least one missing parameter.</span></a>
-<a class="sourceLine" id="cb30-13" title="13">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-14" title="14"><span class="st">        </span><span class="kw">filter</span>(<span class="kw">sum</span>(<span class="kw">c</span>(conc_missing, </a>
-<a class="sourceLine" id="cb30-15" title="15">                     date_missing, </a>
-<a class="sourceLine" id="cb30-16" title="16">                     site_missing, </a>
-<a class="sourceLine" id="cb30-17" title="17">                     dl_missing, </a>
-<a class="sourceLine" id="cb30-18" title="18">                     param_missing), <span class="dt">na.rm =</span> T) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-cleaning.html#cb30-1"></a><span class="co"># Create new TRUE/FALSE columns labeling each result as missing or not</span></span>
+<span id="cb30-2"><a href="data-cleaning.html#cb30-2"></a>data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-3"><a href="data-cleaning.html#cb30-3"></a><span class="st">        </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-4"><a href="data-cleaning.html#cb30-4"></a><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">conc_missing  =</span> <span class="kw">missing_conc</span>(conc),</span>
+<span id="cb30-5"><a href="data-cleaning.html#cb30-5"></a>              <span class="dt">date_missing   =</span> <span class="kw">missing_dates</span>(date),</span>
+<span id="cb30-6"><a href="data-cleaning.html#cb30-6"></a>              <span class="dt">site_missing   =</span> <span class="kw">missing_sites</span>(aqs_id),</span>
+<span id="cb30-7"><a href="data-cleaning.html#cb30-7"></a>              <span class="dt">dl_missing     =</span> <span class="kw">missing_dls</span>(md_limit),</span>
+<span id="cb30-8"><a href="data-cleaning.html#cb30-8"></a>              <span class="dt">param_missing  =</span> <span class="kw">missing_param</span>(param_code)) </span>
+<span id="cb30-9"><a href="data-cleaning.html#cb30-9"></a></span>
+<span id="cb30-10"><a href="data-cleaning.html#cb30-10"></a><span class="co"># Filter to remove any rows with a missing parameter.</span></span>
+<span id="cb30-11"><a href="data-cleaning.html#cb30-11"></a><span class="co"># We use sum() to count the number of missing parameters.</span></span>
+<span id="cb30-12"><a href="data-cleaning.html#cb30-12"></a><span class="co"># In this case we will drop any row with at least one missing parameter.</span></span>
+<span id="cb30-13"><a href="data-cleaning.html#cb30-13"></a>data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb30-14"><a href="data-cleaning.html#cb30-14"></a><span class="st">        </span><span class="kw">filter</span>(<span class="kw">sum</span>(<span class="kw">c</span>(conc_missing, </span>
+<span id="cb30-15"><a href="data-cleaning.html#cb30-15"></a>                     date_missing, </span>
+<span id="cb30-16"><a href="data-cleaning.html#cb30-16"></a>                     site_missing, </span>
+<span id="cb30-17"><a href="data-cleaning.html#cb30-17"></a>                     dl_missing, </span>
+<span id="cb30-18"><a href="data-cleaning.html#cb30-18"></a>                     param_missing), <span class="dt">na.rm =</span> T) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
 <p><br> <em>The super cleaner data</em><br />
-<div id="htmlwidget-bf6afa91648c5fda72f2" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bf6afa91648c5fda72f2">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8"],[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-10","2004-01-16","2004-01-22","2004-02-03","2004-02-09","2004-02-21","2004-02-27","2007-09-21"],["0.23","0.35","0.22","0.07","0.02","0.03","0.21","0.14"],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n      <th>date_missing<\/th>\n      <th>site_missing<\/th>\n      <th>dl_missing<\/th>\n      <th>param_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,7]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-190498d22340ccd0e88c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-190498d22340ccd0e88c">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8"],[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-10","2004-01-16","2004-01-22","2004-02-03","2004-02-09","2004-02-21","2004-02-27","2007-09-21"],["0.23","0.35","0.22","0.07","0.02","0.03","0.21","0.14"],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>conc_missing<\/th>\n      <th>date_missing<\/th>\n      <th>site_missing<\/th>\n      <th>dl_missing<\/th>\n      <th>param_missing<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,2,3,7]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 </div>
 </div>
 <div id="quals" class="section level2">
@@ -429,46 +440,47 @@ Valid sample results may have data qualifiers. These qualifiers provide contextu
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb31-2" title="2"></a>
-<a class="sourceLine" id="cb31-3" title="3">qualifier_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods/qualifier_date.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb31-4" title="4"></a>
-<a class="sourceLine" id="cb31-5" title="5"><span class="co">#qualifier data is your data set with qualifier codes</span></a>
-<a class="sourceLine" id="cb31-6" title="6"><span class="co">#names are what you want to name the output objects</span></a>
-<a class="sourceLine" id="cb31-7" title="7"></a>
-<a class="sourceLine" id="cb31-8" title="8">view_qualifiers &lt;-<span class="st"> </span><span class="cf">function</span>(qualifier_data, </a>
-<a class="sourceLine" id="cb31-9" title="9">                            <span class="dt">names =</span> <span class="kw">c</span>(<span class="st">&quot;data_with_qual_desc&quot;</span>, <span class="st">&quot;qualified_data&quot;</span>, <span class="st">&quot;qualifiers_present&quot;</span>, <span class="st">&quot;non_qualified_data&quot;</span>)) {</a>
-<a class="sourceLine" id="cb31-10" title="10">  </a>
-<a class="sourceLine" id="cb31-11" title="11">  <span class="kw">library</span>(RCurl)</a>
-<a class="sourceLine" id="cb31-12" title="12">  <span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb31-13" title="13">  <span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb31-14" title="14"></a>
-<a class="sourceLine" id="cb31-15" title="15">  download &lt;-<span class="st"> </span><span class="kw">getURL</span>(<span class="st">&quot;https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb31-16" title="16">  </a>
-<a class="sourceLine" id="cb31-17" title="17">  qualifiers &lt;-<span class="st"> </span><span class="kw">read_csv</span>(download)</a>
-<a class="sourceLine" id="cb31-18" title="18">  </a>
-<a class="sourceLine" id="cb31-19" title="19">  qualifiers &lt;-<span class="st"> </span>qualifiers <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb31-20" title="20"><span class="st">    </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">Qualifier Code</span><span class="st">`</span>, <span class="st">`</span><span class="dt">Qualifier Description</span><span class="st">`</span>, <span class="st">`</span><span class="dt">Qualifier Type</span><span class="st">`</span>)</a>
-<a class="sourceLine" id="cb31-21" title="21"></a>
-<a class="sourceLine" id="cb31-22" title="22">  qualifier_data &lt;-<span class="st"> </span><span class="kw">left_join</span>(qualifier_data, qualifiers, </a>
-<a class="sourceLine" id="cb31-23" title="23">                              <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;qual_code&quot;</span> =<span class="st"> &quot;Qualifier Code&quot;</span>))</a>
-<a class="sourceLine" id="cb31-24" title="24">  </a>
-<a class="sourceLine" id="cb31-25" title="25">  qualified_data &lt;-<span class="st"> </span><span class="kw">filter</span>(qualifier_data, <span class="op">!</span><span class="kw">is.na</span>(qual_code))</a>
-<a class="sourceLine" id="cb31-26" title="26">  </a>
-<a class="sourceLine" id="cb31-27" title="27"><span class="co">## review qualifier types in the data</span></a>
-<a class="sourceLine" id="cb31-28" title="28">  qualifiers_present &lt;-<span class="st"> </span><span class="kw">unique</span>(qualified_data<span class="op">$</span><span class="st">`</span><span class="dt">Qualifier Description</span><span class="st">`</span>)</a>
-<a class="sourceLine" id="cb31-29" title="29">  <span class="kw">print</span>(qualifiers_present)</a>
-<a class="sourceLine" id="cb31-30" title="30"></a>
-<a class="sourceLine" id="cb31-31" title="31"><span class="co">## remove qualified data if appropriate</span></a>
-<a class="sourceLine" id="cb31-32" title="32">  non_qualified_data &lt;-<span class="st"> </span><span class="kw">filter</span>(qualifier_data, <span class="kw">is.na</span>(qual_code)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb31-33" title="33"><span class="st">                        </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="st">`</span><span class="dt">Qualifier Description</span><span class="st">`</span>, <span class="st">`</span><span class="dt">Qualifier Type</span><span class="st">`</span>))</a>
-<a class="sourceLine" id="cb31-34" title="34"></a>
-<a class="sourceLine" id="cb31-35" title="35">  <span class="kw">list2env</span>(<span class="kw">list</span>(qualifier_data, qualified_data, qualifiers_present, non_qualified_data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">set_names</span>(names), <span class="dt">envir =</span> .GlobalEnv)</a>
-<a class="sourceLine" id="cb31-36" title="36"></a>
-<a class="sourceLine" id="cb31-37" title="37">  <span class="kw">return</span>(<span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb31-38" title="38">}</a>
-<a class="sourceLine" id="cb31-39" title="39"></a>
-<a class="sourceLine" id="cb31-40" title="40"><span class="kw">view_qualifiers</span>(qualifier_data)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="data-cleaning.html#cb31-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb31-2"><a href="data-cleaning.html#cb31-2"></a></span>
+<span id="cb31-3"><a href="data-cleaning.html#cb31-3"></a>qualifier_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/0 Methods and documentation/3. Analysis methods/Web book/air-methods/qualifier_date.csv&quot;</span>)</span>
+<span id="cb31-4"><a href="data-cleaning.html#cb31-4"></a></span>
+<span id="cb31-5"><a href="data-cleaning.html#cb31-5"></a><span class="co">#qualifier data is your data set with qualifier codes</span></span>
+<span id="cb31-6"><a href="data-cleaning.html#cb31-6"></a><span class="co">#names are what you want to name the output objects</span></span>
+<span id="cb31-7"><a href="data-cleaning.html#cb31-7"></a></span>
+<span id="cb31-8"><a href="data-cleaning.html#cb31-8"></a>view_qualifiers &lt;-<span class="st"> </span><span class="cf">function</span>(qualifier_data, </span>
+<span id="cb31-9"><a href="data-cleaning.html#cb31-9"></a>                            <span class="dt">names =</span> <span class="kw">c</span>(<span class="st">&quot;data_with_qual_desc&quot;</span>, <span class="st">&quot;qualified_data&quot;</span>, <span class="st">&quot;qualifiers_present&quot;</span>, <span class="st">&quot;non_qualified_data&quot;</span>)) {</span>
+<span id="cb31-10"><a href="data-cleaning.html#cb31-10"></a>  </span>
+<span id="cb31-11"><a href="data-cleaning.html#cb31-11"></a>  <span class="kw">library</span>(RCurl)</span>
+<span id="cb31-12"><a href="data-cleaning.html#cb31-12"></a>  <span class="kw">library</span>(dplyr)</span>
+<span id="cb31-13"><a href="data-cleaning.html#cb31-13"></a>  <span class="kw">library</span>(tidyr)</span>
+<span id="cb31-14"><a href="data-cleaning.html#cb31-14"></a></span>
+<span id="cb31-15"><a href="data-cleaning.html#cb31-15"></a>  download &lt;-<span class="st"> &quot;https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.csv&quot;</span></span>
+<span id="cb31-16"><a href="data-cleaning.html#cb31-16"></a>  </span>
+<span id="cb31-17"><a href="data-cleaning.html#cb31-17"></a>  qualifiers &lt;-<span class="st"> </span><span class="kw">read_csv</span>(download)</span>
+<span id="cb31-18"><a href="data-cleaning.html#cb31-18"></a>  </span>
+<span id="cb31-19"><a href="data-cleaning.html#cb31-19"></a>  qualifiers &lt;-<span class="st"> </span>qualifiers <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb31-20"><a href="data-cleaning.html#cb31-20"></a><span class="st">                </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">Qualifier Code</span><span class="st">`</span>, <span class="st">`</span><span class="dt">Qualifier Description</span><span class="st">`</span>, <span class="st">`</span><span class="dt">Qualifier Type</span><span class="st">`</span>)</span>
+<span id="cb31-21"><a href="data-cleaning.html#cb31-21"></a></span>
+<span id="cb31-22"><a href="data-cleaning.html#cb31-22"></a>  qualifier_data &lt;-<span class="st"> </span><span class="kw">left_join</span>(qualifier_data, qualifiers, </span>
+<span id="cb31-23"><a href="data-cleaning.html#cb31-23"></a>                              <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;qual_code&quot;</span> =<span class="st"> &quot;Qualifier Code&quot;</span>))</span>
+<span id="cb31-24"><a href="data-cleaning.html#cb31-24"></a>  </span>
+<span id="cb31-25"><a href="data-cleaning.html#cb31-25"></a>  qualified_data &lt;-<span class="st"> </span><span class="kw">filter</span>(qualifier_data, <span class="op">!</span><span class="kw">is.na</span>(qual_code))</span>
+<span id="cb31-26"><a href="data-cleaning.html#cb31-26"></a>  </span>
+<span id="cb31-27"><a href="data-cleaning.html#cb31-27"></a><span class="co">## review qualifier types in the data</span></span>
+<span id="cb31-28"><a href="data-cleaning.html#cb31-28"></a>  qualifiers_present &lt;-<span class="st"> </span><span class="kw">unique</span>(qualified_data<span class="op">$</span><span class="st">`</span><span class="dt">Qualifier Description</span><span class="st">`</span>)</span>
+<span id="cb31-29"><a href="data-cleaning.html#cb31-29"></a>  </span>
+<span id="cb31-30"><a href="data-cleaning.html#cb31-30"></a>  <span class="kw">print</span>(qualifiers_present)</span>
+<span id="cb31-31"><a href="data-cleaning.html#cb31-31"></a></span>
+<span id="cb31-32"><a href="data-cleaning.html#cb31-32"></a><span class="co">## remove qualified data if appropriate</span></span>
+<span id="cb31-33"><a href="data-cleaning.html#cb31-33"></a>  non_qualified_data &lt;-<span class="st"> </span><span class="kw">filter</span>(qualifier_data, <span class="kw">is.na</span>(qual_code)) <span class="op">%&gt;%</span></span>
+<span id="cb31-34"><a href="data-cleaning.html#cb31-34"></a><span class="st">                        </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="st">`</span><span class="dt">Qualifier Description</span><span class="st">`</span>, <span class="st">`</span><span class="dt">Qualifier Type</span><span class="st">`</span>))</span>
+<span id="cb31-35"><a href="data-cleaning.html#cb31-35"></a></span>
+<span id="cb31-36"><a href="data-cleaning.html#cb31-36"></a>  <span class="kw">list2env</span>(<span class="kw">list</span>(qualifier_data, qualified_data, qualifiers_present, non_qualified_data) <span class="op">%&gt;%</span><span class="st"> </span>purrr<span class="op">::</span><span class="kw">set_names</span>(names), <span class="dt">envir =</span> .GlobalEnv)</span>
+<span id="cb31-37"><a href="data-cleaning.html#cb31-37"></a></span>
+<span id="cb31-38"><a href="data-cleaning.html#cb31-38"></a>  <span class="kw">return</span>()</span>
+<span id="cb31-39"><a href="data-cleaning.html#cb31-39"></a>}</span>
+<span id="cb31-40"><a href="data-cleaning.html#cb31-40"></a></span>
+<span id="cb31-41"><a href="data-cleaning.html#cb31-41"></a><span class="kw">view_qualifiers</span>(qualifier_data)</span></code></pre></div>
 <pre><code>## [1] &quot;Filter Temperature Difference or Average out of Spec.&quot;
 ## [2] &quot;Elapsed Sample Time out of Spec.&quot;                     
 ## [3] &quot;Field Issue.&quot;                                         
@@ -477,7 +489,7 @@ Show <strong>R</strong> code
 ## [6] &quot;Sample pick-up hold time exceeded.&quot;                   
 ## [7] &quot;Lab Issue.&quot;                                           
 ## [8] &quot;Outlier.&quot;</code></pre>
-<pre><code>## [1] &quot;&quot;</code></pre>
+<pre><code>## NULL</code></pre>
 </div>
 <p><br></p>
 </div>
@@ -513,83 +525,83 @@ Show <strong>R</strong> code
 </button>
 <p><br></p>
 <p>Load the sample monitoring data.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">text =</span> <span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb34-2" title="2"><span class="st">aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas</span></a>
-<a class="sourceLine" id="cb34-3" title="3"><span class="st">271231003,1,12101,&quot;2004-01-04&quot;,0.05,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-4" title="4"><span class="st">271231003,1,12101,&quot;2004-01-10&quot;,0.23,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-5" title="5"><span class="st">271231003,1,12101,&quot;2004-01-16&quot;,0.35,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-6" title="6"><span class="st">271231003,1,12101,&quot;2004-01-22&quot;,0.22,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-7" title="7"><span class="st">271231003,1,12101,&quot;2004-01-28&quot;,0.01,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-8" title="8"><span class="st">271231003,1,12101,&quot;2004-02-03&quot;,0.07,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-9" title="9"><span class="st">271231003,1,12101,&quot;2004-02-09&quot;,0.02,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-10" title="10"><span class="st">271231003,1,12101,&quot;2004-02-15&quot;,0.07,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-11" title="11"><span class="st">271231003,1,12101,&quot;2004-02-21&quot;,0.03,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-12" title="12"><span class="st">271231003,1,12101,&quot;2004-02-21&quot;,0.02,NA,0.05,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-13" title="13"><span class="st">271231003,1,12101,&quot;2004-02-27&quot;,0.04,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-14" title="14"><span class="st">271231003,1,12101,&quot;2004-02-27&quot;,0.21,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-15" title="15"><span class="st">271377001,1,12101,&quot;2007-09-21&quot;,0.18,NA,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-16" title="16"><span class="st">271377001,1,12101,&quot;2007-09-21&quot;,0.14,NA,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-17" title="17"><span class="st">271377001,1,12101,&quot;2007-09-21&quot;,0.14,NA,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></a>
-<a class="sourceLine" id="cb34-18" title="18"><span class="st">&#39;</span>, <span class="dt">stringsAsFactor =</span> F)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-cleaning.html#cb34-1"></a>data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">text =</span> <span class="st">&#39;</span></span>
+<span id="cb34-2"><a href="data-cleaning.html#cb34-2"></a><span class="st">aqs_id,poc,param_code,date,conc,null_code,md_limit,pollutant,cas</span></span>
+<span id="cb34-3"><a href="data-cleaning.html#cb34-3"></a><span class="st">271231003,1,12101,&quot;2004-01-04&quot;,0.05,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-4"><a href="data-cleaning.html#cb34-4"></a><span class="st">271231003,1,12101,&quot;2004-01-10&quot;,0.23,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-5"><a href="data-cleaning.html#cb34-5"></a><span class="st">271231003,1,12101,&quot;2004-01-16&quot;,0.35,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-6"><a href="data-cleaning.html#cb34-6"></a><span class="st">271231003,1,12101,&quot;2004-01-22&quot;,0.22,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-7"><a href="data-cleaning.html#cb34-7"></a><span class="st">271231003,1,12101,&quot;2004-01-28&quot;,0.01,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-8"><a href="data-cleaning.html#cb34-8"></a><span class="st">271231003,1,12101,&quot;2004-02-03&quot;,0.07,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-9"><a href="data-cleaning.html#cb34-9"></a><span class="st">271231003,1,12101,&quot;2004-02-09&quot;,0.02,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-10"><a href="data-cleaning.html#cb34-10"></a><span class="st">271231003,1,12101,&quot;2004-02-15&quot;,0.07,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-11"><a href="data-cleaning.html#cb34-11"></a><span class="st">271231003,1,12101,&quot;2004-02-21&quot;,0.03,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-12"><a href="data-cleaning.html#cb34-12"></a><span class="st">271231003,1,12101,&quot;2004-02-21&quot;,0.02,NA,0.05,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-13"><a href="data-cleaning.html#cb34-13"></a><span class="st">271231003,1,12101,&quot;2004-02-27&quot;,0.04,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-14"><a href="data-cleaning.html#cb34-14"></a><span class="st">271231003,1,12101,&quot;2004-02-27&quot;,0.21,NA,0.06,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-15"><a href="data-cleaning.html#cb34-15"></a><span class="st">271377001,1,12101,&quot;2007-09-21&quot;,0.18,NA,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-16"><a href="data-cleaning.html#cb34-16"></a><span class="st">271377001,1,12101,&quot;2007-09-21&quot;,0.14,NA,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-17"><a href="data-cleaning.html#cb34-17"></a><span class="st">271377001,1,12101,&quot;2007-09-21&quot;,0.14,NA,0.04,&quot;Aluminum&quot;,&quot;7429-90-5&quot;</span></span>
+<span id="cb34-18"><a href="data-cleaning.html#cb34-18"></a><span class="st">&#39;</span>, <span class="dt">stringsAsFactor =</span> F)</span></code></pre></div>
 <p><br> <em>Sample monitoring data</em>
-<div id="htmlwidget-5cd73f047d700b897ba6" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5cd73f047d700b897ba6">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001,271377001,271377001],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15","2004-02-21","2004-02-21","2004-02-27","2004-02-27","2007-09-21","2007-09-21","2007-09-21"],[0.05,0.23,0.35,0.22,0.01,0.07,0.02,0.07,0.03,0.02,0.04,0.21,0.18,0.14,0.14],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.05,0.06,0.06,0.04,0.04,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-30e9e5cfee8afd56194b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-30e9e5cfee8afd56194b">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001,271377001,271377001],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15","2004-02-21","2004-02-21","2004-02-27","2004-02-27","2007-09-21","2007-09-21","2007-09-21"],[0.05,0.23,0.35,0.22,0.01,0.07,0.02,0.07,0.03,0.02,0.04,0.21,0.18,0.14,0.14],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.05,0.06,0.06,0.04,0.04,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 <p><br> Delete rows of data that are exact duplicates.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># Check for exact duplicate rows</span></a>
-<a class="sourceLine" id="cb35-2" title="2">dup_rows &lt;-<span class="st"> </span>data[<span class="kw">duplicated</span>(data), ]</a>
-<a class="sourceLine" id="cb35-3" title="3"></a>
-<a class="sourceLine" id="cb35-4" title="4"><span class="co"># Drop the exact duplicates</span></a>
-<a class="sourceLine" id="cb35-5" title="5">data    &lt;-<span class="st"> </span>data[<span class="op">!</span><span class="kw">duplicated</span>(data), ]</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data-cleaning.html#cb35-1"></a><span class="co"># Check for exact duplicate rows</span></span>
+<span id="cb35-2"><a href="data-cleaning.html#cb35-2"></a>dup_rows &lt;-<span class="st"> </span>data[<span class="kw">duplicated</span>(data), ]</span>
+<span id="cb35-3"><a href="data-cleaning.html#cb35-3"></a></span>
+<span id="cb35-4"><a href="data-cleaning.html#cb35-4"></a><span class="co"># Drop the exact duplicates</span></span>
+<span id="cb35-5"><a href="data-cleaning.html#cb35-5"></a>data    &lt;-<span class="st"> </span>data[<span class="op">!</span><span class="kw">duplicated</span>(data), ]</span></code></pre></div>
 <p><br> Add a unique column ID to each <code>site/poc/param-code/date</code> combination.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="co"># Add unique key to each row</span></a>
-<a class="sourceLine" id="cb36-2" title="2">data<span class="op">$</span>key &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data)</a>
-<a class="sourceLine" id="cb36-3" title="3"></a>
-<a class="sourceLine" id="cb36-4" title="4"><span class="co"># Create a unique ID for each site/poc/param-code/date combination</span></a>
-<a class="sourceLine" id="cb36-5" title="5">data<span class="op">$</span>unique_sample_id &lt;-<span class="st"> </span><span class="kw">paste</span>(data<span class="op">$</span>aqs_id, data<span class="op">$</span>poc, data<span class="op">$</span>param_code, data<span class="op">$</span>date, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="data-cleaning.html#cb36-1"></a><span class="co"># Add unique key to each row</span></span>
+<span id="cb36-2"><a href="data-cleaning.html#cb36-2"></a>data<span class="op">$</span>key &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(data)</span>
+<span id="cb36-3"><a href="data-cleaning.html#cb36-3"></a></span>
+<span id="cb36-4"><a href="data-cleaning.html#cb36-4"></a><span class="co"># Create a unique ID for each site/poc/param-code/date combination</span></span>
+<span id="cb36-5"><a href="data-cleaning.html#cb36-5"></a>data<span class="op">$</span>unique_sample_id &lt;-<span class="st"> </span><span class="kw">paste</span>(data<span class="op">$</span>aqs_id, data<span class="op">$</span>poc, data<span class="op">$</span>param_code, data<span class="op">$</span>date, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-39"></span>
-<div id="htmlwidget-6f01038cb3c4dad231e3" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6f01038cb3c4dad231e3">{"x":{"filter":"none","data":[[1,2,3,4,5,6],["271231003_1_12101_2004-01-04","271231003_1_12101_2004-01-10","271231003_1_12101_2004-01-16","271231003_1_12101_2004-01-22","271231003_1_12101_2004-01-28","271231003_1_12101_2004-02-03"],[271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03"],[0.05,0.23,0.35,0.22,0.01,0.07],[null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>key<\/th>\n      <th>unique_sample_id<\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,2,3,4,6,8]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8ff89de1a6c869425e7e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8ff89de1a6c869425e7e">{"x":{"filter":"none","data":[[1,2,3,4,5,6],["271231003_1_12101_2004-01-04","271231003_1_12101_2004-01-10","271231003_1_12101_2004-01-16","271231003_1_12101_2004-01-22","271231003_1_12101_2004-01-28","271231003_1_12101_2004-02-03"],[271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03"],[0.05,0.23,0.35,0.22,0.01,0.07],[null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>key<\/th>\n      <th>unique_sample_id<\/th>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,2,3,4,6,8]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 3.1: Unique ID column added.
 </p>
 </div>
 <p><br> Test for duplicate observations.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co"># Label duplicate samples</span></a>
-<a class="sourceLine" id="cb37-2" title="2">data &lt;-<span class="st"> </span><span class="kw">group_by</span>(data, unique_sample_id) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">duplicate =</span> <span class="kw">n</span>() <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb37-3" title="3"></a>
-<a class="sourceLine" id="cb37-4" title="4"><span class="co"># Create duplicate table</span></a>
-<a class="sourceLine" id="cb37-5" title="5">dupes &lt;-<span class="st"> </span><span class="kw">filter</span>(data, duplicate <span class="op">==</span><span class="st"> </span>T)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="data-cleaning.html#cb37-1"></a><span class="co"># Label duplicate samples</span></span>
+<span id="cb37-2"><a href="data-cleaning.html#cb37-2"></a>data &lt;-<span class="st"> </span><span class="kw">group_by</span>(data, unique_sample_id) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">duplicate =</span> <span class="kw">n</span>() <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb37-3"><a href="data-cleaning.html#cb37-3"></a></span>
+<span id="cb37-4"><a href="data-cleaning.html#cb37-4"></a><span class="co"># Create duplicate table</span></span>
+<span id="cb37-5"><a href="data-cleaning.html#cb37-5"></a>dupes &lt;-<span class="st"> </span><span class="kw">filter</span>(data, duplicate <span class="op">==</span><span class="st"> </span>T)</span></code></pre></div>
 <p><br> <em>Duplicate observations</em>
-<div id="htmlwidget-99b8ec9f4c12d41e1a19" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-99b8ec9f4c12d41e1a19">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271377001,271377001],[1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101],["2004-02-21","2004-02-21","2004-02-27","2004-02-27","2007-09-21","2007-09-21"],[0.03,0.02,0.04,0.21,0.18,0.14],[null,null,null,null,null,null],[0.06,0.05,0.06,0.06,0.04,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[9,10,11,12,13,14],["271231003_1_12101_2004-02-21","271231003_1_12101_2004-02-21","271231003_1_12101_2004-02-27","271231003_1_12101_2004-02-27","271377001_1_12101_2007-09-21","271377001_1_12101_2007-09-21"],[true,true,true,true,true,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>key<\/th>\n      <th>unique_sample_id<\/th>\n      <th>duplicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,9]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-feabd4948289db4aa316" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-feabd4948289db4aa316">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271377001,271377001],[1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101],["2004-02-21","2004-02-21","2004-02-27","2004-02-27","2007-09-21","2007-09-21"],[0.03,0.02,0.04,0.21,0.18,0.14],[null,null,null,null,null,null],[0.06,0.05,0.06,0.06,0.04,0.04],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],[9,10,11,12,13,14],["271231003_1_12101_2004-02-21","271231003_1_12101_2004-02-21","271231003_1_12101_2004-02-27","271231003_1_12101_2004-02-27","271377001_1_12101_2007-09-21","271377001_1_12101_2007-09-21"],[true,true,true,true,true,true]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>key<\/th>\n      <th>unique_sample_id<\/th>\n      <th>duplicate<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,9]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 <p><br> If duplicates are found, use the following hierarchy to remove duplicates:</p>
 <ol style="list-style-type: decimal">
 <li>Calculate the mean concentration of all non-censored observations.</li>
 <li>If all observations are censored, select the observation with the lowest detection limit.</li>
 <li>If all observations are censored and the detection limits are equal, select a single observation.</li>
 </ol>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="co"># Replace censored observations with NA</span></a>
-<a class="sourceLine" id="cb38-2" title="2">dupes &lt;-<span class="st"> </span>dupes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">conc =</span> <span class="kw">ifelse</span>(conc <span class="op">&gt;=</span><span class="st"> </span>md_limit, conc, <span class="ot">NA</span>))</a>
-<a class="sourceLine" id="cb38-3" title="3"></a>
-<a class="sourceLine" id="cb38-4" title="4"><span class="co"># Calculate the mean of non-censored observations</span></a>
-<a class="sourceLine" id="cb38-5" title="5">dupes &lt;-<span class="st"> </span><span class="kw">group_by</span>(dupes, unique_sample_id) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-6" title="6"><span class="st">         </span><span class="kw">mutate</span>(<span class="dt">conc =</span> <span class="kw">mean</span>(conc, <span class="dt">na.rm =</span> T))</a>
-<a class="sourceLine" id="cb38-7" title="7"></a>
-<a class="sourceLine" id="cb38-8" title="8"><span class="co"># Arrange by concentration and detection limit, then select the first observation</span></a>
-<a class="sourceLine" id="cb38-9" title="9">dupes &lt;-<span class="st"> </span><span class="kw">group_by</span>(dupes, unique_sample_id) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-10" title="10"><span class="st">         </span><span class="kw">arrange</span>(<span class="kw">desc</span>(conc), md_limit) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb38-11" title="11"><span class="st">         </span><span class="kw">filter</span>(key <span class="op">==</span><span class="st"> </span>key[<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb38-12" title="12"></a>
-<a class="sourceLine" id="cb38-13" title="13"><span class="co"># Remove Unique IDs with duplicates from data</span></a>
-<a class="sourceLine" id="cb38-14" title="14">data &lt;-<span class="st"> </span><span class="kw">filter</span>(data, <span class="op">!</span>duplicate)</a>
-<a class="sourceLine" id="cb38-15" title="15"></a>
-<a class="sourceLine" id="cb38-16" title="16"><span class="co"># Attach the selected duplicates with highest result and lowest detection limit</span></a>
-<a class="sourceLine" id="cb38-17" title="17">data &lt;-<span class="st"> </span><span class="kw">rbind</span>(data, dupes)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="data-cleaning.html#cb38-1"></a><span class="co"># Replace censored observations with NA</span></span>
+<span id="cb38-2"><a href="data-cleaning.html#cb38-2"></a>dupes &lt;-<span class="st"> </span>dupes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">conc =</span> <span class="kw">ifelse</span>(conc <span class="op">&gt;=</span><span class="st"> </span>md_limit, conc, <span class="ot">NA</span>))</span>
+<span id="cb38-3"><a href="data-cleaning.html#cb38-3"></a></span>
+<span id="cb38-4"><a href="data-cleaning.html#cb38-4"></a><span class="co"># Calculate the mean of non-censored observations</span></span>
+<span id="cb38-5"><a href="data-cleaning.html#cb38-5"></a>dupes &lt;-<span class="st"> </span><span class="kw">group_by</span>(dupes, unique_sample_id) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb38-6"><a href="data-cleaning.html#cb38-6"></a><span class="st">         </span><span class="kw">mutate</span>(<span class="dt">conc =</span> <span class="kw">mean</span>(conc, <span class="dt">na.rm =</span> T))</span>
+<span id="cb38-7"><a href="data-cleaning.html#cb38-7"></a></span>
+<span id="cb38-8"><a href="data-cleaning.html#cb38-8"></a><span class="co"># Arrange by concentration and detection limit, then select the first observation</span></span>
+<span id="cb38-9"><a href="data-cleaning.html#cb38-9"></a>dupes &lt;-<span class="st"> </span><span class="kw">group_by</span>(dupes, unique_sample_id) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb38-10"><a href="data-cleaning.html#cb38-10"></a><span class="st">         </span><span class="kw">arrange</span>(<span class="kw">desc</span>(conc), md_limit) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb38-11"><a href="data-cleaning.html#cb38-11"></a><span class="st">         </span><span class="kw">filter</span>(key <span class="op">==</span><span class="st"> </span>key[<span class="dv">1</span>])</span>
+<span id="cb38-12"><a href="data-cleaning.html#cb38-12"></a></span>
+<span id="cb38-13"><a href="data-cleaning.html#cb38-13"></a><span class="co"># Remove Unique IDs with duplicates from data</span></span>
+<span id="cb38-14"><a href="data-cleaning.html#cb38-14"></a>data &lt;-<span class="st"> </span><span class="kw">filter</span>(data, <span class="op">!</span>duplicate)</span>
+<span id="cb38-15"><a href="data-cleaning.html#cb38-15"></a></span>
+<span id="cb38-16"><a href="data-cleaning.html#cb38-16"></a><span class="co"># Attach the selected duplicates with highest result and lowest detection limit</span></span>
+<span id="cb38-17"><a href="data-cleaning.html#cb38-17"></a>data &lt;-<span class="st"> </span><span class="kw">rbind</span>(data, dupes)</span></code></pre></div>
 <br> <em>The new cleaner data</em><br />
 
 <div class="figure"><span id="fig:unnamed-chunk-43"></span>
-<div id="htmlwidget-d9e933e45d7d9650400b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d9e933e45d7d9650400b">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001,271231003],[1,1,1,1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15","2004-02-27","2007-09-21","2004-02-21"],[0.05,0.23,0.35,0.22,0.01,0.07,0.02,0.07,0.21,0.16,null],[null,null,null,null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04,0.05],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],["271231003_1_12101_2004-01-04","271231003_1_12101_2004-01-10","271231003_1_12101_2004-01-16","271231003_1_12101_2004-01-22","271231003_1_12101_2004-01-28","271231003_1_12101_2004-02-03","271231003_1_12101_2004-02-09","271231003_1_12101_2004-02-15","271231003_1_12101_2004-02-27","271377001_1_12101_2007-09-21","271231003_1_12101_2004-02-21"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>unique_sample_id<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-66a98816fea059aff2c7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-66a98816fea059aff2c7">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003,271377001,271231003],[1,1,1,1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15","2004-02-27","2007-09-21","2004-02-21"],[0.05,0.23,0.35,0.22,0.01,0.07,0.02,0.07,0.21,0.16,null],[null,null,null,null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.06,0.04,0.05],["Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum","Aluminum"],["7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5","7429-90-5"],["271231003_1_12101_2004-01-04","271231003_1_12101_2004-01-10","271231003_1_12101_2004-01-16","271231003_1_12101_2004-01-22","271231003_1_12101_2004-01-28","271231003_1_12101_2004-02-03","271231003_1_12101_2004-02-09","271231003_1_12101_2004-02-15","271231003_1_12101_2004-02-27","271377001_1_12101_2007-09-21","271231003_1_12101_2004-02-21"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n      <th>pollutant<\/th>\n      <th>cas<\/th>\n      <th>unique_sample_id<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 3.2: Final data set with 1 duplicate removed.
 </p>

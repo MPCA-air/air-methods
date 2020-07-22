@@ -31,11 +31,13 @@ Leaving observations for multiple POCs in the data set is likely to bias calcula
 
 <br> __Recommended steps__   
 
-Viewing a scatterplot of collocated measurements is suggested as it helps to view both obvious and subtle irregularities between collocated measurements. If there is evidence of bias in one of the monitors (values from one collocated monitor are usually higher than the other), or there is large variance between the collocated monitors (values differ from each other by significant margins), then both collocated monitors need to be investigated further.
+Viewing a scatterplot of collocated measurements helps to see both obvious and subtle irregularities between collocated measurements. If there is evidence of bias in one of the monitors (values from one collocated monitor are usually higher than the other), or there is large variance between the collocated monitors (values differ from each other by significant margins), then both collocated monitors need to be investigated further.
 
-EPA recommends that collocated monitors have no higher than a 15% coefficient of variation between their measurements. Calculating the CV for every measurement pair does not make sense as small differences (i.e. 0.001 and 0.002) have the same CV as large differences (i.e. 10 and 20). Therefore, we chose to look at the median CV for each site, pollutant, and year then flag collocated monitors if the median CV is greater than 15 which suggests differences between the collocated monitors are systematic. We only calculate the CV for collocated monitors on days which both have valid measurements greater than or equal to the MDL since there is lower confidence in values below the MDL. We only compare the median CV to the threshold of 15 if there are at least 10 calculated CV values since it does not make sense to flag monitors where only a few values are above detection.
+EPA recommends that collocated monitors have no higher than a 15% coefficient of variation (CoV) between their measurements. Calculating the CoV for every measurement pair does not make sense as small differences (i.e. 0.001 and 0.002) have the same CoV as large differences (i.e. 10 and 20). Therefore, we choose to look at the median CoV for each site, pollutant, and year. We then flag collocated monitors if the median CoV is greater than 15%, which suggests the differences between the collocated monitors are systematic. 
 
-If collocated monitors do not agree, then consult with the lab, field or quality assurance team to determine if there is a problem with one of the POCs. If they determine that one of POCs is reliable and the other is not, then only use data from the reliable POC. If they cannot determine which POC is the problem, then confidence in the measurements from both collocated monitors is reduced and * no measurements taken from either collocated monitor should be used.* More than likely, we will be asked to report results. We will have lower confidence in the accuracy of those results
+Since there is lower confidence in values below the MDL, we only calculate the CoV for collocated monitors on days that have valid measurements greater than or equal to the MDL. Lastly, we only compare the median CoV to the threshold of 15% if there are at least 10 calculated CoV values. You are much more likely to find differences between monitors when there are only a few values above detection.
+
+If collocated monitors do not agree, consult with the lab, field or quality assurance team to determine if there is a problem with one of the POCs. If they cannot determine which POC is the problem, then confidence in the measurements from both collocated monitors is reduced and *no measurements taken from either collocated monitor should be used.* If you are required to report the results, the site should be flagged for the low confidence in the accuracy of the results.
  
 
 
@@ -48,10 +50,11 @@ Click below to view the script.
 <div class="toggle">
 <button class="btn_code">Show __R__ code</button>
 
-```{r message=F, echo=T, eval=F, warning = FALSE}
+```{r, eval=F}
 library(tidyverse)
 
 data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+
 names(data) <- c("AQSID", "POC", "Parameter", "Date", "Result", "null_code", "MDL", "Pollutant", "Year", "cas")
 
 POC_compare = function(data) {
@@ -60,13 +63,16 @@ library(shiny)
 library(tidyverse)
 library(rsconnect)  
   
-data = distinct(data, AQSID, POC, Parameter, Date, Pollutant, Year, .keep_all = T) #replace with better cleaning function
-data = spread(data, POC, Result) %>% mutate(Status = ifelse(`1` < MDL  & `2` < MDL, "POCs 1 and 2 below MDL", ifelse(`1` < MDL, "POC 1 below MDL", ifelse(`2` < MDL, "POC 2 below MDL", "POCs 1 and 2 above MDL") ) ) ) %>% drop_na(Status)
+data <- distinct(data, AQSID, POC, Parameter, Date, Pollutant, Year, .keep_all = T) #replace with better cleaning function
 
+data <- spread(data, POC, Result) %>% 
+        mutate(Status = ifelse(`1` < MDL  & `2` < MDL, "POCs 1 and 2 below MDL", ifelse(`1` < MDL, "POC 1 below MDL", ifelse(`2` < MDL, "POC 2 below MDL", "POCs 1 and 2 above MDL") ) ) ) %>% drop_na(Status)
 
 
 Pollutant <- unique(data$Pollutant)
+
 Site <- unique(data$AQSID)
+
 Year <- unique(data$Year)
 
 shinyApp(
@@ -84,18 +90,24 @@ shinyApp(
   
   server = function(input, output) {
     
-    
-    
-    
     output$normviz <- renderPlot({
+      
       print(input$Pollutant)
+      
       print(input$Site)
+      
       print(input$Year)
-      data_sub = filter(data, Pollutant==input$Pollutant, AQSID == input$Site, Year == input$Year)
+      
+      data_sub <- filter(data, Pollutant==input$Pollutant, AQSID == input$Site, Year == input$Year)
+      
       ggplot(data_sub, aes(x = `1`, y = `2`, color = Status)) +
         geom_point(size = 3) +
-        geom_segment(x=-1000, xend=1000, y=-1000, yend=1000, color="red", size=1) +
-        labs(title = "POC comparison chart", x = "POC 1", y = "POC 2", subtitle = paste("Correlation =", round(cor(data_sub$`1`,data_sub$`2`, use = "complete"), 2) ) )
+        geom_segment(x = -1000, xend = 1000, y = -1000, yend = 1000, color = "red", size = 1) +
+        labs(title    = "POC comparison chart", 
+             x = "POC 1", 
+             y = "POC 2", 
+             subtitle = paste("Correlation =", round(cor(data_sub$`1`,data_sub$`2`, use = "complete"), 2)) )
+      
     })
     
   })
@@ -103,6 +115,7 @@ shinyApp(
 }
 
 POC_compare(data)
+
 ```  
 
 <br>
@@ -121,13 +134,13 @@ For air toxics, measurements from collocated monitors are considered equally val
 
 2. If one monitor has a valid measurement greater than or equal to the MDL and the other has a valid measurement less than the MDL, then the measurement above the MDL is used as a conservative approach as there is greater confidence in the value above the MDL.
 
-3. If both monitors have valid measurements above the MDL, then those values are averaged since both values are equally valid and the "true" value is assumed to likely be between the two values.
+3. If both monitors have valid measurements above the MDL, then those values are averaged since both values are equally valid and the `true` value is assumed to likely be between the two values.
 
 <br> __Sample `R` script__ 
 
 The script below uses the `POC_average()` function to combine results from multiple POCs into one combined site result according to the rules listed above.
 
-Click below to view example R script.
+Click below to view an example R script.
 
 <div class="toggle">
 <button class="btn_code">Show __R__ code</button>
@@ -136,15 +149,18 @@ Click below to view example R script.
 library(tidyverse)
 
 data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
+
 names(data) <- c("AQSID", "POC", "Parameter", "Date", "Result", "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
 
 POC_average = function(data) {
+  
   library(tidyverse)
   
-  POC_averaging = function(Result, Censored) {
+  POC_averaging <- function(Result, Censored) {
     
-    Result = Result[!is.na(Result)]
-    Censored = Censored[!is.na(Censored)]
+    Result <- Result[!is.na(Result)]
+    
+    Censored <- Censored[!is.na(Censored)]
     
     if(all(Censored, na.rm = T)) {
       return (mean(Result, na.rm = T))
@@ -155,17 +171,22 @@ POC_average = function(data) {
     
   }
   
-  data = data %>% group_by(AQSID, Parameter, Pollutant, Date, MDL) %>% summarise(Result = POC_averaging(Result, Censored), Censored = all(Censored, na.rm = T) ) %>%
-    mutate(Result = ifelse(is.na(Result), NA, Result), Censored = ifelse(is.na(Result), NA, Censored))
+  data <- data %>% 
+          group_by(AQSID, Parameter, Pollutant, Date, MDL) %>% 
+          summarise(Result = POC_averaging(Result, Censored), Censored = all(Censored, na.rm = T) ) %>%
+          mutate(Result = ifelse(is.na(Result), NA, Result), Censored = ifelse(is.na(Result), NA, Censored))
+  
   return (select(data, AQSID, Parameter, Pollutant, Date, Result, MDL, Censored) ) %>% ungroup()
 }
 
-POC_averaged_data = data %>% mutate(Censored = Result < MDL) %>% POC_average()
+POC_averaged_data <- data %>% mutate(Censored = Result < MDL) %>% POC_average()
 ```  
 
 </div>
  
  
-<br> [Back to top](#collocated-monitors)
+<br> 
+
+> [Back to top](#collocated-monitors)
 
   

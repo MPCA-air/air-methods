@@ -13,9 +13,10 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F, ordering = F, leng
 __Recommended steps__
 
 
-- Chart data with box and whisker plots. Some site differences may be very apparent and not require statistical comparisons. The data analyst should use careful judgement to determine whether site means are obviously different enough that a statistical test is not necessary. Even if site means appear to be almost exactly the same, a statistical test should still be used to confirm that since boxplots can be deceiving when trying to determine that two means are not significantly different.
-- Check for normality Chi-squared test. If the data are normal, and there is equal variance complete an ANOVA to compare sites. If there are more than 2 sites, follow with a post hoc test.
-- If the data are not normal, and there is not equal variance, complete a Kruskal Wallis test (or other test depending on the number of valid samples for each site). If there are more than 2 sites to compare, use Dunn's test for post hoc site by site comparisons.
+- Start by charting data with box and whisker plots. Some site differences may be easily apparent and will not require statistical comparisons. The analyst can use their judgement if site means are obviously different. In some cases a statistical test may not be necessary. 
+- Even when site means appear to be nearly identical, a statistical test should be used to confirm. Boxplots can be deceiving when trying to determine that two means are not significantly different.  
+- Check for normality Chi-squared test. If the data are normal, and there is equal variance complete an ANOVA to compare sites. If there are more than 2 sites, follow with a post hoc test.  
+- If the data are not normal, and there is not equal variance, complete a Kruskal Wallis test (or other test depending on the number of valid samples for each site). If there are more than 2 sites to compare, use Dunn's test for post hoc site by site comparisons.  
 
 
 
@@ -29,7 +30,8 @@ The script below uses bootstrap sampling to generate 1,000 differences in site m
 
 <br>
 
-The code below shows an example R script for calculating confidence intervals.
+
+_Click below to view an example calculating confidence intervals._
 
 
 <div class="toggle">
@@ -59,25 +61,30 @@ site_compare <- function(data, site_number, Boot_Repeats = 1000) {
     group_by(AQSID, Pollutant, Year, MDL) %>% 
     summarise(Complete = all(Complete) )
   
-  enough_detects = air_toxics %>% group_by(AQSID, Pollutant, Year, MDL) %>% summarise(Detected = mean(Censored, na.rm = T) <= 0.8 )
+  enough_detects <- air_toxics %>% 
+                    group_by(AQSID, Pollutant, Year, MDL) %>% 
+                    summarise(Detected = mean(Censored, na.rm = T) <= 0.8 )
   
-  site_means = air_toxics %>% group_by(AQSID, Pollutant, Year, MDL) %>% summarise(Mean = ifelse(length(unique(Result[!is.na(Result) & !Censored] ) ) < 2, NA,
+  site_means <- air_toxics %>% 
+                group_by(AQSID, Pollutant, Year, MDL) %>% 
+                summarise(Mean = ifelse(length(unique(Result[!is.na(Result) & !Censored] ) ) < 2, NA,
      ifelse (any(Censored, na.rm = T), elnormAltCensored(Result, Censored, method = "impute.w.mle", ci = F)$parameters[[1]], mean(Result, na.rm = T) ) ) )
   
-  site_means = left_join(site_means, sample_complete, by = c("AQSID", "Pollutant", "Year", "MDL") ) %>%
-    left_join(enough_detects, by = c("AQSID", "Pollutant", "Year", "MDL") ) %>% mutate(Mean = ifelse(Complete & Detected, Mean, NA), ID = paste(AQSID, Pollutant, Year) )
+  site_means <- left_join(site_means, sample_complete, by = c("AQSID", "Pollutant", "Year", "MDL") ) %>%
+                left_join(enough_detects, by = c("AQSID", "Pollutant", "Year", "MDL") ) %>% 
+                mutate(Mean = ifelse(Complete & Detected, Mean, NA), ID = paste(AQSID, Pollutant, Year) )
 
   return(site_means)
 }
   
   MLE_est <- function(data){
     
-    results = data$Result
-    censored = data$Censored
-    n = sum(!is.na(results))
+    results  <- data$Result
+    censored <- data$Censored
+    n <- sum(!is.na(results))
     
     if (length(unique(results[!is.na(results) & !censored] ) ) < 2 ) {
-      MLE_means = NA
+      MLE_means <- NA
     }
     
     else {
@@ -136,14 +143,14 @@ compare = site_compare(data, site_number, 50) #minimum 50 repeats
 </div>
 
 
-## Tools to visualize data
+## Tools to visualize differences
 
 
-### Beeswarm Plots
+### Beeswarm Plots {-}
 
 Beeswarm plots are useful for visualizing concentrations measured at different sites with more detail than boxplots.
 
-Click below to view an example R script.
+_Click below to view an example R script._
 
 <div class="toggle">
 <button class="btn_code">Show __R__ code</button>
@@ -184,45 +191,41 @@ beeswarm_plot(data, "Benzene", 2013)
 ```
 </div>
 
-<br> 
 
-_References_  
 
-- [Visualizing uncertainty in housing data](http://lenkiefer.com/2017/04/26/housing-data-uncertainty/)
-- R packages: [Beeswarm](https://github.com/eclarke/ggbeeswarm)
-
-<br>
-
-### Correlation matrices
+### Correlation matrices {-}
 
 Correlation matrices help visualize the relationship between different pollutants at a site.
 
-Click below to view an example R script.
+_Click below to view an example R script._
 
 <div class="toggle">
 <button class="btn_code">Show __R__ code</button>
-<br>
 
-```{r, warning=F}
-library(tidyverse)
+```{r}
 
 correlation_plots = function(data, site) {
   library(tidyverse)
   library(corrplot)
   
   data_site <- filter(data, AQSID %in% site) %>% select(Date, Pollutant, Result)
-  analytes <- spread(data_site, Pollutant, Result, drop=T)
+  
+  analytes <- spread(data_site, Pollutant, Result, drop = T)
+  
   analytes$Date <- NULL
 
   coranalytes <- cor(analytes, method="kendall", use="pairwise.complete.obs") %>% as.data.frame()
-  coranalytes <- select_if(coranalytes, function(x) !all(is.na(x))) %>% filter_all(any_vars(!is.na(.))) %>% 
-    as.matrix()
+  
+  coranalytes <- select_if(coranalytes, function(x) !all(is.na(x))) %>% 
+                 filter_all(any_vars(!is.na(.))) %>% 
+                 as.matrix()
+  
   rownames(coranalytes) <- colnames(coranalytes)
 
   corrplot(coranalytes, method = "circle", type="lower", tl.cex=0.6) #plot matrix
 }
 
-data <- read.csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv', stringsAsFactors = F)
+data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
 
 names(data)[1:10] <- c("AQSID", "POC", "Param_Code", "Date","Result",
                        "Null_Data_Code", "MDL", "Pollutant", "Year", "CAS")
@@ -231,6 +234,15 @@ data %>% correlation_plots(270530962)
 ```
 
 </div>
+
+<br>
+
+## _References_  {-}
+
+- [Visualizing uncertainty in housing data](http://lenkiefer.com/2017/04/26/housing-data-uncertainty/)
+- R packages: [Beeswarm](https://github.com/eclarke/ggbeeswarm)
+
+<br>
 
 <br> [Back to top](#site-comparisons)
 

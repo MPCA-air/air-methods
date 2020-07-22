@@ -232,12 +232,12 @@ view_qualifiers <- function(qualifier_data,
   library(dplyr)
   library(tidyr)
 
-  download <- getURL("https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.csv")
+  download <- "https://aqs.epa.gov/aqsweb/documents/codetables/qualifiers.csv"
   
   qualifiers <- read_csv(download)
   
   qualifiers <- qualifiers %>% 
-    select(`Qualifier Code`, `Qualifier Description`, `Qualifier Type`)
+                select(`Qualifier Code`, `Qualifier Description`, `Qualifier Type`)
 
   qualifier_data <- left_join(qualifier_data, qualifiers, 
                               by = c("qual_code" = "Qualifier Code"))
@@ -246,15 +246,16 @@ view_qualifiers <- function(qualifier_data,
   
 ## review qualifier types in the data
   qualifiers_present <- unique(qualified_data$`Qualifier Description`)
+  
   print(qualifiers_present)
 
 ## remove qualified data if appropriate
   non_qualified_data <- filter(qualifier_data, is.na(qual_code)) %>%
                         select(-c(`Qualifier Description`, `Qualifier Type`))
 
-  list2env(list(qualifier_data, qualified_data, qualifiers_present, non_qualified_data) %>% set_names(names), envir = .GlobalEnv)
+  list2env(list(qualifier_data, qualified_data, qualifiers_present, non_qualified_data) %>% purrr::set_names(names), envir = .GlobalEnv)
 
-  return("")
+  return()
 }
 
 view_qualifiers(qualifier_data)

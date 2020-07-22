@@ -8,7 +8,7 @@ dt_options <- list(scrollX = T, autoWidth = T, searching = F,
 
 
 
-```{r air-sites-intro, echo=F} 
+```{r air-sites-intro, echo=F, fig.height=4} 
 library(tidyverse)
 library(leaflet)
 
@@ -16,7 +16,7 @@ library(leaflet)
 sites <- read_csv('https://raw.githubusercontent.com/MPCA-air/aqi-watch/master/data-raw/locations.csv')
 
 # Add basemap
-leaflet(sites[1, ]) %>%
+leaflet(sites[c(70, 152, sample(5:150, 15, replace = F)), ]) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addMarkers()
 ```
@@ -119,3 +119,7 @@ point_sources_tracts_ej <- unique(point_sources_tracts_ej)
 ```
 
 </div>
+
+<br>[Back to top](#maps)
+
+

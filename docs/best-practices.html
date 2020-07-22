@@ -69,9 +69,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -80,14 +80,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -96,9 +98,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -217,8 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-mdls"><i class="fa fa-check"></i><b>6.2</b> Calculating MDLs</a></li>
 <li class="chapter" data-level="6.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-mpca-detection-limits"><i class="fa fa-check"></i><b>6.3</b> Finding MPCA detection limits</a></li>
 <li class="chapter" data-level="6.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>6.4</b> Qualifier Codes for Detection Limits</a></li>
-<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
-<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.6</b> Below detection values</a></li>
+<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values</a></li>
+<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#recommended-steps"><i class="fa fa-check"></i><b>6.6</b> Recommended Steps</a></li>
 <li class="chapter" data-level="6.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.7</b> Multiple detection limits</a></li>
 <li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#reporting-limits"><i class="fa fa-check"></i><b>6.8</b> Reporting limits</a></li>
 <li class="chapter" data-level="6.9" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.9</b> References</a></li>
@@ -237,14 +239,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>9</b> Site comparisons</a><ul>
 <li class="chapter" data-level="9.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a></li>
-<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize data</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>9.2.1</b> Beeswarm Plots</a></li>
-<li class="chapter" data-level="9.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.2.2</b> Correlation matrices</a></li>
+<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-differences"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize differences</a><ul>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i>Beeswarm Plots</a></li>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i>Correlation matrices</a></li>
 </ul></li>
+<li><a href="site-comparisons.html#references-1"><em>References</em></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> From start to finish</a><ul>
-<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>10.1</b> Functions</a></li>
-<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>10.2</b> Analysis steps</a></li>
+<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#using-functions"><i class="fa fa-check"></i><b>10.1</b> Using functions</a></li>
+<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#a-simpler-analysis"><i class="fa fa-check"></i><b>10.2</b> A simpler analysis</a></li>
 </ul></li>
 <li><a href="visuals.html#visuals"><strong>Visuals</strong></a></li>
 <li class="chapter" data-level="11" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>11</b> Charts</a><ul>
@@ -263,17 +266,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
 <li class="chapter" data-level="14" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>14</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>14.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="14.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="14.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>14.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="14.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.1.4</b> Producing Annual Summaries</a></li>
+<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1</b> Data Cleaning</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#null-results"><i class="fa fa-check"></i>Null Results</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#duplicate-observations"><i class="fa fa-check"></i>Duplicate Observations</a></li>
 </ul></li>
+<li class="chapter" data-level="14.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.2</b> Data Validation</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i>Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-completeness"><i class="fa fa-check"></i>Data Completeness</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#below-the-detection-limit"><i class="fa fa-check"></i>Below the detection limit</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.3</b> Producing Annual Summaries</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-annual-means"><i class="fa fa-check"></i>Calculating annual means</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-upper-confidence-limits"><i class="fa fa-check"></i>Calculating upper confidence limits</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#comparing-sites"><i class="fa fa-check"></i><b>14.4</b> Comparing sites</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
 <li class="chapter" data-level="16" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>16</b> AQI explorer</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
-<li class="chapter" data-level="16.1" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.1</b> References</a></li>
+<li><a href="edit-this-book.html#references-2"><em>References</em></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -382,10 +393,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="keep-r-updated" class="section level2">
 <h2><span class="header-section-number">1.2</span> Keep R updated</h2>
 <p><strong>Get the <em>installr</em> package</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">&#39;installr&#39;</span>) </a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(<span class="st">&#39;installr&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="best-practices.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&#39;installr&#39;</span>) </span>
+<span id="cb1-2"><a href="best-practices.html#cb1-2"></a><span class="kw">library</span>(<span class="st">&#39;installr&#39;</span>)</span></code></pre></div>
 <p><strong>Update your R version</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">updateR</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="best-practices.html#cb2-1"></a><span class="kw">updateR</span>()</span></code></pre></div>
 <ul>
 <li>When a popup suggests closing RStudio and running the update from <em>RGUI</em>,
 click <strong>NO</strong>.</li>
@@ -408,38 +419,38 @@ click <strong>NO</strong>.</li>
 <blockquote>
 <p><strong>An example R script</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># name_of_script.R</span></a>
-<a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co"># Purpose: This script does amazing things.</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co"># Assumptions: The monitoring data for the sites is from different years, </span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co">#              but we compare them anyways. </span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co"># Warning! Don&#39;t use this script for Kryptonite. It will break everything.</span></a>
-<a class="sourceLine" id="cb3-7" title="7"></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co"># Load packages</span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb3-10" title="10"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb3-11" title="11"></a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="co"># Set parameters</span></a>
-<a class="sourceLine" id="cb3-13" title="13">year &lt;-<span class="st"> </span><span class="dv">2017</span></a>
-<a class="sourceLine" id="cb3-14" title="14"></a>
-<a class="sourceLine" id="cb3-15" title="15">data_file &lt;-<span class="st"> &quot;monitors 1 and 2.csv&quot;</span></a>
-<a class="sourceLine" id="cb3-16" title="16"></a>
-<a class="sourceLine" id="cb3-17" title="17"></a>
-<a class="sourceLine" id="cb3-18" title="18"><span class="co"># Load data</span></a>
-<a class="sourceLine" id="cb3-19" title="19">air_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(data_file)</a>
-<a class="sourceLine" id="cb3-20" title="20"></a>
-<a class="sourceLine" id="cb3-21" title="21"><span class="co"># My functions</span></a>
-<a class="sourceLine" id="cb3-22" title="22">calc_stat &lt;-<span class="st"> </span><span class="cf">function</span>(data) {</a>
-<a class="sourceLine" id="cb3-23" title="23">  </a>
-<a class="sourceLine" id="cb3-24" title="24">  new_stat &lt;-<span class="st"> </span><span class="kw">step1</span>(data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step2</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step3</span>()</a>
-<a class="sourceLine" id="cb3-25" title="25">  </a>
-<a class="sourceLine" id="cb3-26" title="26">}</a>
-<a class="sourceLine" id="cb3-27" title="27"></a>
-<a class="sourceLine" id="cb3-28" title="28"><span class="co"># My analysis</span></a>
-<a class="sourceLine" id="cb3-29" title="29">results &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">stat =</span> <span class="kw">calc_stat</span>(concentration))</a>
-<a class="sourceLine" id="cb3-30" title="30"></a>
-<a class="sourceLine" id="cb3-31" title="31"><span class="co"># Save results to local folder</span></a>
-<a class="sourceLine" id="cb3-32" title="32"><span class="kw">write_csv</span>(results, <span class="st">&quot;results/summary_results.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="best-practices.html#cb3-1"></a><span class="co"># name_of_script.R</span></span>
+<span id="cb3-2"><a href="best-practices.html#cb3-2"></a></span>
+<span id="cb3-3"><a href="best-practices.html#cb3-3"></a><span class="co"># Purpose: This script does amazing things.</span></span>
+<span id="cb3-4"><a href="best-practices.html#cb3-4"></a><span class="co"># Assumptions: The monitoring data for the sites is from different years, </span></span>
+<span id="cb3-5"><a href="best-practices.html#cb3-5"></a><span class="co">#              but we compare them anyways. </span></span>
+<span id="cb3-6"><a href="best-practices.html#cb3-6"></a><span class="co"># Warning! Don&#39;t use this script for Kryptonite. It will break everything.</span></span>
+<span id="cb3-7"><a href="best-practices.html#cb3-7"></a></span>
+<span id="cb3-8"><a href="best-practices.html#cb3-8"></a><span class="co"># Load packages</span></span>
+<span id="cb3-9"><a href="best-practices.html#cb3-9"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb3-10"><a href="best-practices.html#cb3-10"></a><span class="kw">library</span>(readr)</span>
+<span id="cb3-11"><a href="best-practices.html#cb3-11"></a></span>
+<span id="cb3-12"><a href="best-practices.html#cb3-12"></a><span class="co"># Set parameters</span></span>
+<span id="cb3-13"><a href="best-practices.html#cb3-13"></a>year &lt;-<span class="st"> </span><span class="dv">2017</span></span>
+<span id="cb3-14"><a href="best-practices.html#cb3-14"></a></span>
+<span id="cb3-15"><a href="best-practices.html#cb3-15"></a>data_file &lt;-<span class="st"> &quot;monitors 1 and 2.csv&quot;</span></span>
+<span id="cb3-16"><a href="best-practices.html#cb3-16"></a></span>
+<span id="cb3-17"><a href="best-practices.html#cb3-17"></a></span>
+<span id="cb3-18"><a href="best-practices.html#cb3-18"></a><span class="co"># Load data</span></span>
+<span id="cb3-19"><a href="best-practices.html#cb3-19"></a>air_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(data_file)</span>
+<span id="cb3-20"><a href="best-practices.html#cb3-20"></a></span>
+<span id="cb3-21"><a href="best-practices.html#cb3-21"></a><span class="co"># My functions</span></span>
+<span id="cb3-22"><a href="best-practices.html#cb3-22"></a>calc_stat &lt;-<span class="st"> </span><span class="cf">function</span>(data) {</span>
+<span id="cb3-23"><a href="best-practices.html#cb3-23"></a>  </span>
+<span id="cb3-24"><a href="best-practices.html#cb3-24"></a>  new_stat &lt;-<span class="st"> </span><span class="kw">step1</span>(data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step2</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">step3</span>()</span>
+<span id="cb3-25"><a href="best-practices.html#cb3-25"></a>  </span>
+<span id="cb3-26"><a href="best-practices.html#cb3-26"></a>}</span>
+<span id="cb3-27"><a href="best-practices.html#cb3-27"></a></span>
+<span id="cb3-28"><a href="best-practices.html#cb3-28"></a><span class="co"># My analysis</span></span>
+<span id="cb3-29"><a href="best-practices.html#cb3-29"></a>results &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">stat =</span> <span class="kw">calc_stat</span>(concentration))</span>
+<span id="cb3-30"><a href="best-practices.html#cb3-30"></a></span>
+<span id="cb3-31"><a href="best-practices.html#cb3-31"></a><span class="co"># Save results to local folder</span></span>
+<span id="cb3-32"><a href="best-practices.html#cb3-32"></a><span class="kw">write_csv</span>(results, <span class="st">&quot;results/summary_results.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="divide-and-conquer" class="section level2">
 <h2><span class="header-section-number">1.4</span> Divide and conquer</h2>
@@ -477,17 +488,17 @@ click <strong>NO</strong>.</li>
 <h2><span class="header-section-number">1.5</span> Codebooks, metadata, and data dictionaries</h2>
 <p>A <strong>codebook</strong> provides essential technical details and references for the variables in a dataset. The codebook ensures someone unfamiliar with your data will have the necessary information to complete their analysis and help them to estimate the uncertainty of their results. An R package named <code>dataMaid</code> is available to assist with creating documentation for your data sets.</p>
 <p><strong>An example codebook generated with <em>dataMaid</em> </strong></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">library</span>(dataMaid)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb4-3" title="3"></a>
-<a class="sourceLine" id="cb4-4" title="4">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</a>
-<a class="sourceLine" id="cb4-5" title="5"></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="kw">names</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)</a>
-<a class="sourceLine" id="cb4-7" title="7"></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="kw">attr</span>(data<span class="op">$</span>aqs_id, <span class="st">&quot;labels&quot;</span>) &lt;-<span class="st"> &quot;Monitor ID&quot;</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="kw">attr</span>(data<span class="op">$</span>aqs_id, <span class="st">&quot;shortDescription&quot;</span>) &lt;-<span class="st"> &quot;EPA assigned monitor ID for the national Air Quality System (AQS).&quot;</span></a>
-<a class="sourceLine" id="cb4-10" title="10"></a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="kw">makeCodebook</span>(data, <span class="dt">vol =</span> <span class="dv">1</span>, <span class="dt">reportTitle =</span> <span class="st">&quot;Codebook for air toxics monitoring data&quot;</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="best-practices.html#cb4-1"></a><span class="kw">library</span>(dataMaid)</span>
+<span id="cb4-2"><a href="best-practices.html#cb4-2"></a><span class="kw">library</span>(readr)</span>
+<span id="cb4-3"><a href="best-practices.html#cb4-3"></a></span>
+<span id="cb4-4"><a href="best-practices.html#cb4-4"></a>data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</span>
+<span id="cb4-5"><a href="best-practices.html#cb4-5"></a></span>
+<span id="cb4-6"><a href="best-practices.html#cb4-6"></a><span class="kw">names</span>(data) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;aqs_id&quot;</span>, <span class="st">&quot;poc&quot;</span>, <span class="st">&quot;param_code&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;conc&quot;</span>, <span class="st">&quot;null_code&quot;</span>, <span class="st">&quot;md_limit&quot;</span>, <span class="st">&quot;pollutant&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;cas&quot;</span>)</span>
+<span id="cb4-7"><a href="best-practices.html#cb4-7"></a></span>
+<span id="cb4-8"><a href="best-practices.html#cb4-8"></a><span class="kw">attr</span>(data<span class="op">$</span>aqs_id, <span class="st">&quot;labels&quot;</span>) &lt;-<span class="st"> &quot;Monitor ID&quot;</span></span>
+<span id="cb4-9"><a href="best-practices.html#cb4-9"></a><span class="kw">attr</span>(data<span class="op">$</span>aqs_id, <span class="st">&quot;shortDescription&quot;</span>) &lt;-<span class="st"> &quot;EPA assigned monitor ID for the national Air Quality System (AQS).&quot;</span></span>
+<span id="cb4-10"><a href="best-practices.html#cb4-10"></a></span>
+<span id="cb4-11"><a href="best-practices.html#cb4-11"></a><span class="kw">makeCodebook</span>(data, <span class="dt">vol =</span> <span class="dv">1</span>, <span class="dt">reportTitle =</span> <span class="st">&quot;Codebook for air toxics monitoring data&quot;</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="data-formatting" class="section level2">
 <h2><span class="header-section-number">1.6</span> Data formatting</h2>
@@ -506,8 +517,8 @@ click <strong>NO</strong>.</li>
 <p><br></p>
 <blockquote>
 <p><strong>Example Tidy data</strong>
-<div id="htmlwidget-455277b93cb8161c1385" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-455277b93cb8161c1385">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15"],[null,null,null,null,null,null,null,null],[-999.99,0.23,0.35,0.22,null,0.07,0.02,0.06],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.08,0.06,0.06,0.08]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>duration<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,5,7]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-46fc090cbd2effb89cfa" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-46fc090cbd2effb89cfa">{"x":{"filter":"none","data":[[271231003,271231003,271231003,271231003,271231003,271231003,271231003,271231003],[1,1,1,1,1,1,1,1],[12101,12101,12101,12101,12101,12101,12101,12101],["2004-01-04","2004-01-10","2004-01-16","2004-01-22","2004-01-28","2004-02-03","2004-02-09","2004-02-15"],[null,null,null,null,null,null,null,null],[-999.99,0.23,0.35,0.22,null,0.07,0.02,0.06],[null,null,null,null,null,null,null,null],[0.06,0.06,0.06,0.06,0.08,0.06,0.06,0.08]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>aqs_id<\/th>\n      <th>poc<\/th>\n      <th>param_code<\/th>\n      <th>date<\/th>\n      <th>duration<\/th>\n      <th>conc<\/th>\n      <th>null_code<\/th>\n      <th>md_limit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,5,7]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script></p>
 </blockquote>
 <p><br></p>
 <p>Additional columns may include qualifier codes and method detection limits. Fields directly associated with one or more of the columns above can be removed and stored in their own tables whenever possible. For example, the site address and site name are both fields that are directly associated with the monitor’s AQS ID. If your data file already has the AQS ID column, you can perform all analysis based on AQS ID and then join the site information after the analysis is completed. EPA’s AQS data is stored in a recommended format for air monitoring data, as it meets all of the requirements for tidy data.</p>
@@ -517,6 +528,10 @@ click <strong>NO</strong>.</li>
 <div id="pollutant-names" class="section level2">
 <h2><span class="header-section-number">1.7</span> Pollutant names</h2>
 <p>Pollutants often go by different names depending on the context. To prevent confusion it helps to include a unique <code>CAS #</code> or parameter code in your analysis results and summary data. If you are working with monitoring data that is missing a unique identifier for each pollutant, an R package named <code>aircas</code> is available to help join CAS numbers to pollutant names.</p>
+<p><br></p>
+<blockquote>
+<p><a href="best-practices.html#best-practices">Back to top</a></p>
+</blockquote>
 
 </div>
 </div>

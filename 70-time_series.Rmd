@@ -131,8 +131,6 @@ ggplot(df, aes(time, obs)) +
 </div>
 
 
-
-
 <br>[Back to top](#time-series)
 
 

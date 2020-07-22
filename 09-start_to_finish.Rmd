@@ -1,15 +1,18 @@
 # From start to finish {#start-finish}
 
 
-> We can pull all these steps together with a few functions to streamline the cleaning and analysis steps.
+> Let's pull all these steps together into a few functions.
 
 
 The script below shows an example workflow that starts with 24-hour air toxics data from MPCA's Air Toxics database, walks through each of the analysis steps outlined in the previous sections, and produces a suite of data validation tools, POC analysis tools, completeness checks, annual summaries, site comparisons, and pollution roses.
 
 
-## Functions  
+## Using functions  
 
-Click below to view the example R script.
+The first step is to put our analysis methods into a few reusable functions, which can then be re-used for all of our monitoring conditions. 
+
+
+_Click below to view the example functions._
 
 <div class="toggle">
 <button class="btn_code">Show __R__ code</button>
@@ -655,20 +658,23 @@ pollution_roses = function(data, met_data, num_breaks = 5) {
 
 <br>
 
-## Analysis steps
 
-Click below to view the example R script.
+## A simpler analysis 
+
+Now we use our functions above to write a simpler and easier to read analysis script.
+
+
+_Click below to view the example._
 
 <div class="toggle">
 <button class="btn_code">Show __R__ code</button>
 
 ```{r, eval=F, message=F, warning=F}
 
-#Import data
+library(tidyverse)
 MPCA_air_libraries()
 
-library(tidyverse)
-
+#Import data
 data <- read_csv('https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv')
 
 names(data)[1:10] <- c("AQSID", "POC", "Parameter", "Date","Result",
@@ -676,41 +682,40 @@ names(data)[1:10] <- c("AQSID", "POC", "Parameter", "Date","Result",
 
 # Data cleaning
 
-flagged = data %>% flag() #Check with QA about flagged values if necessary.
+flagged <- data %>% flag() #Check with QA about flagged values if necessary.
 
-duplicates_flagged = data %>% flag_duplicates()
+duplicates_flagged <- data %>% flag_duplicates()
 
-data = data %>% mutate(Censored = Result < MDL) %>% average_duplicates() #We decide to average the duplicates here
+data <- data %>% mutate(Censored = Result < MDL) %>% average_duplicates() #We decide to average the duplicates here
 
 # Data Validation
+time_series <- data %>% time_series_plots()
 
-time_series = data %>% time_series_plots()
 
 # Collocated monitors
+poc_comparisons <- data %>% POC_compare()
 
-poc_comparisons = data %>% POC_compare()
-
-data = data %>% POC_average()
+data <- data %>% POC_average()
 
 
 # Completeness checks
+complete <- data %>% completeness_check()
 
-complete = data %>% completeness_check()
 
 # Summary statistics
+annual_summary <- data %>% filter(AQSID == 270370020) %>% UCL_95(100)
 
-annual_summary = data %>% filter(AQSID == 270370020) %>% UCL_95(100)
 
 # Site Comparisons
+site_number <- 270370020 #Our favorite site
 
-site_number = 270370020 #Our favorite site
+comparisons_to_FH <- data %>% 
+                    filter(AQSID %in% c(270370020, 270370470, 271230871) ) %>%
+                    site_compare(site_number, 50)
 
-comparisons_to_FH = data %>% filter(AQSID %in% c(270370020, 270370470, 271230871) ) %>%
-  site_compare(site_number, 50)
+pollutant_correlations <- data %>% correlation_plots()
 
-pollutant_correlations = data %>% correlation_plots()
-
-beeswarms = data %>% beeswarm_plot()
+beeswarms <- data %>% beeswarm_plot()
 
 
 # Pollution Roses

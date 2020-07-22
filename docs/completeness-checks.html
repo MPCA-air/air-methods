@@ -69,9 +69,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -80,14 +80,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -96,9 +98,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -217,8 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-mdls"><i class="fa fa-check"></i><b>6.2</b> Calculating MDLs</a></li>
 <li class="chapter" data-level="6.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-mpca-detection-limits"><i class="fa fa-check"></i><b>6.3</b> Finding MPCA detection limits</a></li>
 <li class="chapter" data-level="6.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>6.4</b> Qualifier Codes for Detection Limits</a></li>
-<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
-<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.6</b> Below detection values</a></li>
+<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values</a></li>
+<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#recommended-steps"><i class="fa fa-check"></i><b>6.6</b> Recommended Steps</a></li>
 <li class="chapter" data-level="6.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.7</b> Multiple detection limits</a></li>
 <li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#reporting-limits"><i class="fa fa-check"></i><b>6.8</b> Reporting limits</a></li>
 <li class="chapter" data-level="6.9" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.9</b> References</a></li>
@@ -237,14 +239,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>9</b> Site comparisons</a><ul>
 <li class="chapter" data-level="9.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a></li>
-<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize data</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>9.2.1</b> Beeswarm Plots</a></li>
-<li class="chapter" data-level="9.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.2.2</b> Correlation matrices</a></li>
+<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-differences"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize differences</a><ul>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i>Beeswarm Plots</a></li>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i>Correlation matrices</a></li>
 </ul></li>
+<li><a href="site-comparisons.html#references-1"><em>References</em></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> From start to finish</a><ul>
-<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>10.1</b> Functions</a></li>
-<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>10.2</b> Analysis steps</a></li>
+<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#using-functions"><i class="fa fa-check"></i><b>10.1</b> Using functions</a></li>
+<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#a-simpler-analysis"><i class="fa fa-check"></i><b>10.2</b> A simpler analysis</a></li>
 </ul></li>
 <li><a href="visuals.html#visuals"><strong>Visuals</strong></a></li>
 <li class="chapter" data-level="11" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>11</b> Charts</a><ul>
@@ -263,17 +266,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
 <li class="chapter" data-level="14" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>14</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>14.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="14.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="14.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>14.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="14.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.1.4</b> Producing Annual Summaries</a></li>
+<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1</b> Data Cleaning</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#null-results"><i class="fa fa-check"></i>Null Results</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#duplicate-observations"><i class="fa fa-check"></i>Duplicate Observations</a></li>
 </ul></li>
+<li class="chapter" data-level="14.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.2</b> Data Validation</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i>Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-completeness"><i class="fa fa-check"></i>Data Completeness</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#below-the-detection-limit"><i class="fa fa-check"></i>Below the detection limit</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.3</b> Producing Annual Summaries</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-annual-means"><i class="fa fa-check"></i>Calculating annual means</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-upper-confidence-limits"><i class="fa fa-check"></i>Calculating upper confidence limits</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#comparing-sites"><i class="fa fa-check"></i><b>14.4</b> Comparing sites</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
 <li class="chapter" data-level="16" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>16</b> AQI explorer</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
-<li class="chapter" data-level="16.1" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.1</b> References</a></li>
+<li><a href="edit-this-book.html#references-2"><em>References</em></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -335,20 +346,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Mark annual results as <em>incomplete</em> if one or both seasons do not fulfill the completeness checks.</li>
 </ol>
 <p><br> <strong>Example <code>R</code> script</strong></p>
-<p>Click below to view an example.</p>
+<p><strong>Click below to view an example.</strong></p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
 <p><br>
 Packages</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb52-2" title="2"><span class="kw">library</span>(lubridate)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="completeness-checks.html#cb52-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb52-2"><a href="completeness-checks.html#cb52-2"></a><span class="kw">library</span>(lubridate)</span></code></pre></div>
 <p>Our example data is organized by monitoring site and date.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="completeness-checks.html#cb53-1"></a>data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-72"></span>
-<div id="htmlwidget-fc60847649997c63734c" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fc60847649997c63734c">{"x":{"filter":"none","data":[[270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1],[12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22"],[0.00127,0.00223,0.0037,0.0018,0.0027],[null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Param_Code<\/th>\n      <th>Date<\/th>\n      <th>Concentration<\/th>\n      <th>Null_Code<\/th>\n      <th>Dlimit<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>CAS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,8]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7dda239934e330feb7be" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7dda239934e330feb7be">{"x":{"filter":"none","data":[[270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1],[12102,12102,12102,12102,12102],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22"],[0.00127,0.00223,0.0037,0.0018,0.0027],[null,null,null,null,null],[0.0028236,0.0028236,0.0028236,0.0028236,0.0028236],["Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009],["7440-36-0","7440-36-0","7440-36-0","7440-36-0","7440-36-0"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Param_Code<\/th>\n      <th>Date<\/th>\n      <th>Concentration<\/th>\n      <th>Null_Code<\/th>\n      <th>Dlimit<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>CAS<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4,6,8]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 7.1: Sample data table.
 </p>
@@ -357,126 +368,127 @@ Figure 7.1: Sample data table.
 <p><strong>Step 1:</strong> Find the expected number of samples.</p>
 <p>Monitors in EPA’s Air Quality System are required to follow the <a href="https://www3.epa.gov/ttn/amtic/calendar.html">Air Toxics Monitoring Calendar</a>. The sampling schedule for air toxics is generally 1 sample per every 6 days. Depending on the sampling start date and whether it is a leap year or not, the expected number of samples for the year will range from 60 to 61. If you are uncertain about the sampling schedule for your data consult the lab to confirm the expected number of samples.</p>
 <p>Entering the start and end date into the <code>sample_calendar()</code> function below will create a list of the expected sampling dates based on EPA’s air toxics monitoring schedule.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="co"># Create a sampling calendar based on EPA&#39;s air toxics monitoring schedule</span></a>
-<a class="sourceLine" id="cb54-2" title="2">sample_calendar &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">start         =</span> <span class="st">&quot;2012-01-01&quot;</span>, </a>
-<a class="sourceLine" id="cb54-3" title="3">                            <span class="dt">end           =</span> <span class="st">&quot;2016-12-31&quot;</span>, </a>
-<a class="sourceLine" id="cb54-4" title="4">                            <span class="dt">day_interval  =</span> <span class="dv">6</span>,</a>
-<a class="sourceLine" id="cb54-5" title="5">                            <span class="dt">type          =</span> <span class="st">&quot;air_toxics&quot;</span>) {</a>
-<a class="sourceLine" id="cb54-6" title="6">  </a>
-<a class="sourceLine" id="cb54-7" title="7">  <span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb54-8" title="8">  </a>
-<a class="sourceLine" id="cb54-9" title="9">  <span class="co"># Convert &#39;start&#39; and &#39;end&#39; to class date</span></a>
-<a class="sourceLine" id="cb54-10" title="10">  start &lt;-<span class="st"> </span><span class="kw">ymd</span>(start)</a>
-<a class="sourceLine" id="cb54-11" title="11">  end   &lt;-<span class="st"> </span><span class="kw">ymd</span>(end)</a>
-<a class="sourceLine" id="cb54-12" title="12">  </a>
-<a class="sourceLine" id="cb54-13" title="13">  <span class="co"># Set official start date to selected EPA calendar</span></a>
-<a class="sourceLine" id="cb54-14" title="14">  <span class="cf">if</span> (type <span class="op">==</span><span class="st"> &quot;air_toxics&quot;</span>) {</a>
-<a class="sourceLine" id="cb54-15" title="15">       epa_start &lt;-<span class="st"> </span><span class="kw">ymd</span>(<span class="st">&quot;1990-01-09&quot;</span>)</a>
-<a class="sourceLine" id="cb54-16" title="16">  } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb54-17" title="17">       epa_start &lt;-<span class="st"> </span>start</a>
-<a class="sourceLine" id="cb54-18" title="18">  }</a>
-<a class="sourceLine" id="cb54-19" title="19">  </a>
-<a class="sourceLine" id="cb54-20" title="20">  <span class="co"># Create full table of sampling dates</span></a>
-<a class="sourceLine" id="cb54-21" title="21">  calendar &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> epa_start, </a>
-<a class="sourceLine" id="cb54-22" title="22">                  <span class="dt">to   =</span> end, </a>
-<a class="sourceLine" id="cb54-23" title="23">                  <span class="dt">by   =</span> <span class="kw">paste</span>(day_interval, <span class="st">&quot;days&quot;</span>))</a>
-<a class="sourceLine" id="cb54-24" title="24">  </a>
-<a class="sourceLine" id="cb54-25" title="25">  </a>
-<a class="sourceLine" id="cb54-26" title="26">  <span class="co"># Subset to user&#39;s date range</span></a>
-<a class="sourceLine" id="cb54-27" title="27">  calendar &lt;-<span class="st"> </span>calendar[calendar <span class="op">&gt;=</span><span class="st"> </span>start <span class="op">&amp;</span><span class="st"> </span>calendar <span class="op">&lt;=</span><span class="st"> </span>end]</a>
-<a class="sourceLine" id="cb54-28" title="28">  </a>
-<a class="sourceLine" id="cb54-29" title="29">  <span class="co"># Print total sampling days and date range</span></a>
-<a class="sourceLine" id="cb54-30" title="30">  <span class="kw">cat</span>(<span class="kw">length</span>(calendar), <span class="st">&quot;sampling days from&quot;</span>, <span class="kw">as.character</span>(<span class="kw">min</span>(calendar)), <span class="st">&quot;to&quot;</span>, <span class="kw">as.character</span>(<span class="kw">max</span>(calendar)))</a>
-<a class="sourceLine" id="cb54-31" title="31">  </a>
-<a class="sourceLine" id="cb54-32" title="32">  <span class="kw">return</span>(calendar)</a>
-<a class="sourceLine" id="cb54-33" title="33">  </a>
-<a class="sourceLine" id="cb54-34" title="34">}</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="completeness-checks.html#cb54-1"></a><span class="co"># Create a sampling calendar based on EPA&#39;s air toxics monitoring schedule</span></span>
+<span id="cb54-2"><a href="completeness-checks.html#cb54-2"></a>sample_calendar &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">start         =</span> <span class="st">&quot;2012-01-01&quot;</span>, </span>
+<span id="cb54-3"><a href="completeness-checks.html#cb54-3"></a>                            <span class="dt">end           =</span> <span class="st">&quot;2016-12-31&quot;</span>, </span>
+<span id="cb54-4"><a href="completeness-checks.html#cb54-4"></a>                            <span class="dt">day_interval  =</span> <span class="dv">6</span>,</span>
+<span id="cb54-5"><a href="completeness-checks.html#cb54-5"></a>                            <span class="dt">type          =</span> <span class="st">&quot;air_toxics&quot;</span>) {</span>
+<span id="cb54-6"><a href="completeness-checks.html#cb54-6"></a>  </span>
+<span id="cb54-7"><a href="completeness-checks.html#cb54-7"></a>  <span class="kw">library</span>(lubridate)</span>
+<span id="cb54-8"><a href="completeness-checks.html#cb54-8"></a>  </span>
+<span id="cb54-9"><a href="completeness-checks.html#cb54-9"></a>  <span class="co"># Convert &#39;start&#39; and &#39;end&#39; to class date</span></span>
+<span id="cb54-10"><a href="completeness-checks.html#cb54-10"></a>  start &lt;-<span class="st"> </span><span class="kw">ymd</span>(start)</span>
+<span id="cb54-11"><a href="completeness-checks.html#cb54-11"></a>  end   &lt;-<span class="st"> </span><span class="kw">ymd</span>(end)</span>
+<span id="cb54-12"><a href="completeness-checks.html#cb54-12"></a>  </span>
+<span id="cb54-13"><a href="completeness-checks.html#cb54-13"></a>  <span class="co"># Set official start date to selected EPA calendar</span></span>
+<span id="cb54-14"><a href="completeness-checks.html#cb54-14"></a>  <span class="cf">if</span> (type <span class="op">==</span><span class="st"> &quot;air_toxics&quot;</span>) {</span>
+<span id="cb54-15"><a href="completeness-checks.html#cb54-15"></a>       epa_start &lt;-<span class="st"> </span><span class="kw">ymd</span>(<span class="st">&quot;1990-01-09&quot;</span>)</span>
+<span id="cb54-16"><a href="completeness-checks.html#cb54-16"></a>  } <span class="cf">else</span> {</span>
+<span id="cb54-17"><a href="completeness-checks.html#cb54-17"></a>       epa_start &lt;-<span class="st"> </span>start</span>
+<span id="cb54-18"><a href="completeness-checks.html#cb54-18"></a>  }</span>
+<span id="cb54-19"><a href="completeness-checks.html#cb54-19"></a>  </span>
+<span id="cb54-20"><a href="completeness-checks.html#cb54-20"></a>  <span class="co"># Create full table of sampling dates</span></span>
+<span id="cb54-21"><a href="completeness-checks.html#cb54-21"></a>  calendar &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> epa_start, </span>
+<span id="cb54-22"><a href="completeness-checks.html#cb54-22"></a>                  <span class="dt">to   =</span> end, </span>
+<span id="cb54-23"><a href="completeness-checks.html#cb54-23"></a>                  <span class="dt">by   =</span> <span class="kw">paste</span>(day_interval, <span class="st">&quot;days&quot;</span>))</span>
+<span id="cb54-24"><a href="completeness-checks.html#cb54-24"></a>  </span>
+<span id="cb54-25"><a href="completeness-checks.html#cb54-25"></a>  </span>
+<span id="cb54-26"><a href="completeness-checks.html#cb54-26"></a>  <span class="co"># Subset to user&#39;s date range</span></span>
+<span id="cb54-27"><a href="completeness-checks.html#cb54-27"></a>  calendar &lt;-<span class="st"> </span>calendar[calendar <span class="op">&gt;=</span><span class="st"> </span>start <span class="op">&amp;</span><span class="st"> </span>calendar <span class="op">&lt;=</span><span class="st"> </span>end]</span>
+<span id="cb54-28"><a href="completeness-checks.html#cb54-28"></a>  </span>
+<span id="cb54-29"><a href="completeness-checks.html#cb54-29"></a>  <span class="co"># Print total sampling days and date range</span></span>
+<span id="cb54-30"><a href="completeness-checks.html#cb54-30"></a>  <span class="kw">cat</span>(<span class="kw">length</span>(calendar), <span class="st">&quot; sampling days from &quot;</span>, <span class="kw">as.character</span>(<span class="kw">min</span>(calendar)), <span class="st">&quot;to&quot;</span>, <span class="kw">as.character</span>(<span class="kw">max</span>(calendar)))</span>
+<span id="cb54-31"><a href="completeness-checks.html#cb54-31"></a>  </span>
+<span id="cb54-32"><a href="completeness-checks.html#cb54-32"></a>  <span class="kw">return</span>(calendar)</span>
+<span id="cb54-33"><a href="completeness-checks.html#cb54-33"></a>  </span>
+<span id="cb54-34"><a href="completeness-checks.html#cb54-34"></a>}</span></code></pre></div>
 <p>Find the date range of the data and create the expected sampling schedule with the function above.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="co"># Find the year range of your data</span></a>
-<a class="sourceLine" id="cb55-2" title="2">date_range &lt;-<span class="st"> </span><span class="kw">range</span>(data<span class="op">$</span>Date)</a>
-<a class="sourceLine" id="cb55-3" title="3"></a>
-<a class="sourceLine" id="cb55-4" title="4"><span class="co"># Create expected sample calendar</span></a>
-<a class="sourceLine" id="cb55-5" title="5">epa_schedule &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">Date =</span> <span class="kw">sample_calendar</span>(<span class="dt">start =</span> <span class="kw">format</span>(date_range[<span class="dv">1</span>], <span class="st">&quot;%Y-01-01&quot;</span>), <span class="co">#Extend range to first day of the year</span></a>
-<a class="sourceLine" id="cb55-6" title="6">                                                  <span class="dt">end   =</span> <span class="kw">format</span>(date_range[<span class="dv">2</span>], <span class="st">&quot;%Y-12-31&quot;</span>), <span class="co">#Extend range to last day of the year</span></a>
-<a class="sourceLine" id="cb55-7" title="7">                                                  <span class="dt">day_interval =</span> <span class="dv">6</span>))</a></code></pre></div>
-<pre><code>## 304 sampling days from 2009-01-05 to 2013-12-28</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co"># Add year and calendar quarter columns</span></a>
-<a class="sourceLine" id="cb57-2" title="2">epa_schedule &lt;-<span class="st"> </span>epa_schedule <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Year        =</span> <span class="kw">year</span>(Date),</a>
-<a class="sourceLine" id="cb57-3" title="3">                                        <span class="dt">cal_quarter =</span> <span class="kw">quarter</span>(Date))</a>
-<a class="sourceLine" id="cb57-4" title="4"></a>
-<a class="sourceLine" id="cb57-5" title="5"></a>
-<a class="sourceLine" id="cb57-6" title="6"><span class="co"># Count the expected number of samples per quarter and year.</span></a>
-<a class="sourceLine" id="cb57-7" title="7">epa_schedule &lt;-<span class="st"> </span>epa_schedule <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb57-8" title="8"><span class="st">                </span><span class="kw">group_by</span>(Year, cal_quarter) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb57-9" title="9"><span class="st">                </span><span class="kw">summarize</span>(<span class="dt">expected_quarter_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb57-10" title="10"><span class="st">                </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb57-11" title="11"><span class="st">                </span><span class="kw">mutate</span>(<span class="dt">expected_annual_samples =</span> <span class="kw">sum</span>(expected_quarter_samples))</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="completeness-checks.html#cb55-1"></a><span class="co"># Find the year range of your data</span></span>
+<span id="cb55-2"><a href="completeness-checks.html#cb55-2"></a>date_range &lt;-<span class="st"> </span><span class="kw">range</span>(data<span class="op">$</span>Date)</span>
+<span id="cb55-3"><a href="completeness-checks.html#cb55-3"></a></span>
+<span id="cb55-4"><a href="completeness-checks.html#cb55-4"></a><span class="co"># Create expected sample calendar</span></span>
+<span id="cb55-5"><a href="completeness-checks.html#cb55-5"></a>epa_schedule &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">Date =</span> <span class="kw">sample_calendar</span>(<span class="dt">start =</span> <span class="kw">format</span>(date_range[<span class="dv">1</span>], <span class="st">&quot;%Y-01-01&quot;</span>), <span class="co"># Extend range to first day of the year</span></span>
+<span id="cb55-6"><a href="completeness-checks.html#cb55-6"></a>                                                  <span class="dt">end   =</span> <span class="kw">format</span>(date_range[<span class="dv">2</span>], <span class="st">&quot;%Y-12-31&quot;</span>), <span class="co"># Extend range to last day of the year</span></span>
+<span id="cb55-7"><a href="completeness-checks.html#cb55-7"></a>                                                  <span class="dt">day_interval =</span> <span class="dv">6</span>))</span></code></pre></div>
+<pre><code>## 304  sampling days from  2009-01-05 to 2013-12-28</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="completeness-checks.html#cb57-1"></a><span class="co"># Add year and calendar quarter columns</span></span>
+<span id="cb57-2"><a href="completeness-checks.html#cb57-2"></a>epa_schedule &lt;-<span class="st"> </span>epa_schedule <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Year        =</span> <span class="kw">year</span>(Date),</span>
+<span id="cb57-3"><a href="completeness-checks.html#cb57-3"></a>                                        <span class="dt">cal_quarter =</span> <span class="kw">quarter</span>(Date))</span>
+<span id="cb57-4"><a href="completeness-checks.html#cb57-4"></a></span>
+<span id="cb57-5"><a href="completeness-checks.html#cb57-5"></a></span>
+<span id="cb57-6"><a href="completeness-checks.html#cb57-6"></a><span class="co"># Count the expected number of samples per quarter and year.</span></span>
+<span id="cb57-7"><a href="completeness-checks.html#cb57-7"></a>epa_schedule &lt;-<span class="st"> </span>epa_schedule <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb57-8"><a href="completeness-checks.html#cb57-8"></a><span class="st">                </span><span class="kw">group_by</span>(Year, cal_quarter) <span class="op">%&gt;%</span></span>
+<span id="cb57-9"><a href="completeness-checks.html#cb57-9"></a><span class="st">                </span><span class="kw">summarize</span>(<span class="dt">expected_quarter_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date))) <span class="op">%&gt;%</span></span>
+<span id="cb57-10"><a href="completeness-checks.html#cb57-10"></a><span class="st">                </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span></span>
+<span id="cb57-11"><a href="completeness-checks.html#cb57-11"></a><span class="st">                </span><span class="kw">mutate</span>(<span class="dt">expected_annual_samples =</span> <span class="kw">sum</span>(expected_quarter_samples))</span></code></pre></div>
 <br>
 <strong>Expected number of samples.</strong>
 <div class="figure"><span id="fig:unnamed-chunk-75"></span>
-<div id="htmlwidget-8adab4bddad2a0af4cd9" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8adab4bddad2a0af4cd9">{"x":{"filter":"none","data":[[2009,2009,2009,2009,2010,2010,2010,2010,2011,2011,2011,2011,2012,2012,2012,2012,2013,2013,2013,2013],[1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4],[15,15,15,16,15,15,15,15,15,16,15,15,15,16,15,15,15,15,16,15],[61,61,61,61,60,60,60,60,61,61,61,61,61,61,61,61,61,61,61,61]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>cal_quarter<\/th>\n      <th>expected_quarter_samples<\/th>\n      <th>expected_annual_samples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-58a03391e178ffc4884f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-58a03391e178ffc4884f">{"x":{"filter":"none","data":[[2009,2009,2009,2009,2010,2010,2010,2010,2011,2011,2011,2011,2012,2012,2012,2012,2013,2013,2013,2013],[1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4],[15,15,15,16,15,15,15,15,15,16,15,15,15,16,15,15,15,15,16,15],[61,61,61,61,60,60,60,60,61,61,61,61,61,61,61,61,61,61,61,61]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>cal_quarter<\/th>\n      <th>expected_quarter_samples<\/th>\n      <th>expected_annual_samples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 7.2: Expected number of samples.
 </p>
 </div>
 <p><br></p>
 <p><strong>Step 2:</strong> Count number of valid samples.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="co"># Assign each date to a calendar quarter</span></a>
-<a class="sourceLine" id="cb58-2" title="2">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">cal_quarter =</span> <span class="kw">quarter</span>(Date))</a>
-<a class="sourceLine" id="cb58-3" title="3"></a>
-<a class="sourceLine" id="cb58-4" title="4"><span class="co"># Count the number of sampling dates for each quarter and year.</span></a>
-<a class="sourceLine" id="cb58-5" title="5">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb58-6" title="6"><span class="st">          </span><span class="kw">group_by</span>(AQSID, Param_Code, CAS, Year, cal_quarter) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb58-7" title="7"><span class="st">          </span><span class="kw">mutate</span>(<span class="dt">valid_quarter_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date[<span class="op">!</span><span class="kw">is.na</span>(Concentration)]))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb58-8" title="8"><span class="st">          </span><span class="kw">group_by</span>(AQSID, Param_Code, CAS, Year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb58-9" title="9"><span class="st">          </span><span class="kw">mutate</span>(<span class="dt">valid_annual_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date[<span class="op">!</span><span class="kw">is.na</span>(Concentration)]))) </a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="completeness-checks.html#cb58-1"></a><span class="co"># Assign each date to a calendar quarter</span></span>
+<span id="cb58-2"><a href="completeness-checks.html#cb58-2"></a>data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">cal_quarter =</span> <span class="kw">quarter</span>(Date))</span>
+<span id="cb58-3"><a href="completeness-checks.html#cb58-3"></a></span>
+<span id="cb58-4"><a href="completeness-checks.html#cb58-4"></a><span class="co"># Count the number of sampling dates for each quarter and year.</span></span>
+<span id="cb58-5"><a href="completeness-checks.html#cb58-5"></a>data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb58-6"><a href="completeness-checks.html#cb58-6"></a><span class="st">          </span><span class="kw">group_by</span>(AQSID, Param_Code, CAS, Year, cal_quarter) <span class="op">%&gt;%</span></span>
+<span id="cb58-7"><a href="completeness-checks.html#cb58-7"></a><span class="st">          </span><span class="kw">mutate</span>(<span class="dt">valid_quarter_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date[<span class="op">!</span><span class="kw">is.na</span>(Concentration)]))) <span class="op">%&gt;%</span></span>
+<span id="cb58-8"><a href="completeness-checks.html#cb58-8"></a><span class="st">          </span><span class="kw">group_by</span>(AQSID, Param_Code, CAS, Year) <span class="op">%&gt;%</span></span>
+<span id="cb58-9"><a href="completeness-checks.html#cb58-9"></a><span class="st">          </span><span class="kw">mutate</span>(<span class="dt">valid_annual_samples =</span> <span class="kw">length</span>(<span class="kw">unique</span>(Date[<span class="op">!</span><span class="kw">is.na</span>(Concentration)]))) </span></code></pre></div>
 <p><br></p>
 <p><strong>Step 3:</strong> Divide the number of valid samples by the number of expected samples.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="co"># Join expected sample table to data by quarter and year columns</span></a>
-<a class="sourceLine" id="cb59-2" title="2">data &lt;-<span class="st"> </span><span class="kw">left_join</span>(data, epa_schedule, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;cal_quarter&quot;</span>))</a>
-<a class="sourceLine" id="cb59-3" title="3"></a>
-<a class="sourceLine" id="cb59-4" title="4"></a>
-<a class="sourceLine" id="cb59-5" title="5"><span class="co"># Divide valid samples by expected samples</span></a>
-<a class="sourceLine" id="cb59-6" title="6">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb59-7" title="7"><span class="st">          </span><span class="kw">group_by</span>(AQSID, CAS, Year, cal_quarter) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb59-8" title="8"><span class="st">          </span><span class="kw">mutate</span>(<span class="dt">pct_quarter_samples =</span> valid_quarter_samples <span class="op">/</span><span class="st"> </span>expected_quarter_samples) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb59-9" title="9"><span class="st">          </span><span class="kw">group_by</span>(AQSID, CAS, Year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb59-10" title="10"><span class="st">          </span><span class="kw">mutate</span>(<span class="dt">pct_annual_samples =</span> valid_annual_samples <span class="op">/</span><span class="st"> </span>expected_annual_samples) </a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="completeness-checks.html#cb59-1"></a><span class="co"># Join expected sample table to data by quarter and year columns</span></span>
+<span id="cb59-2"><a href="completeness-checks.html#cb59-2"></a>data &lt;-<span class="st"> </span><span class="kw">left_join</span>(data, epa_schedule, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;Year&quot;</span>, <span class="st">&quot;cal_quarter&quot;</span>))</span>
+<span id="cb59-3"><a href="completeness-checks.html#cb59-3"></a></span>
+<span id="cb59-4"><a href="completeness-checks.html#cb59-4"></a></span>
+<span id="cb59-5"><a href="completeness-checks.html#cb59-5"></a><span class="co"># Divide valid samples by expected samples</span></span>
+<span id="cb59-6"><a href="completeness-checks.html#cb59-6"></a>data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb59-7"><a href="completeness-checks.html#cb59-7"></a><span class="st">          </span><span class="kw">group_by</span>(AQSID, CAS, Year, cal_quarter) <span class="op">%&gt;%</span></span>
+<span id="cb59-8"><a href="completeness-checks.html#cb59-8"></a><span class="st">          </span><span class="kw">mutate</span>(<span class="dt">pct_quarter_samples =</span> valid_quarter_samples <span class="op">/</span><span class="st"> </span>expected_quarter_samples) <span class="op">%&gt;%</span></span>
+<span id="cb59-9"><a href="completeness-checks.html#cb59-9"></a><span class="st">          </span><span class="kw">group_by</span>(AQSID, CAS, Year) <span class="op">%&gt;%</span></span>
+<span id="cb59-10"><a href="completeness-checks.html#cb59-10"></a><span class="st">          </span><span class="kw">mutate</span>(<span class="dt">pct_annual_samples =</span> valid_annual_samples <span class="op">/</span><span class="st"> </span>expected_annual_samples) </span></code></pre></div>
 <p><br></p>
 <p><strong>Step 4:</strong> Mark results as incomplete if they fail one of the completeness checks.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="co"># Set incomplete to zero if any completeness checks fail</span></a>
-<a class="sourceLine" id="cb60-2" title="2">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb60-3" title="3"><span class="st">        </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb60-4" title="4"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">complete =</span> <span class="kw">sum</span>(<span class="kw">c</span>(pct_quarter_samples <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span>, </a>
-<a class="sourceLine" id="cb60-5" title="5">                                pct_annual_samples  <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="completeness-checks.html#cb60-1"></a><span class="co"># Set incomplete to zero if any completeness checks fail</span></span>
+<span id="cb60-2"><a href="completeness-checks.html#cb60-2"></a>data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb60-3"><a href="completeness-checks.html#cb60-3"></a><span class="st">        </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span></span>
+<span id="cb60-4"><a href="completeness-checks.html#cb60-4"></a><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">complete =</span> <span class="kw">sum</span>(<span class="kw">c</span>(pct_quarter_samples <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span>, </span>
+<span id="cb60-5"><a href="completeness-checks.html#cb60-5"></a>                                pct_annual_samples  <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb60-6"><a href="completeness-checks.html#cb60-6"></a><span class="st">       </span><span class="kw">ungroup</span>()</span></code></pre></div>
 <p><br></p>
 <strong>Final table with added <code>complete</code> column.</strong>
 <div class="figure"><span id="fig:unnamed-chunk-79"></span>
-<div id="htmlwidget-6d16868519e6c7361fad" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6d16868519e6c7361fad">{"x":{"filter":"none","data":[[270370470,270530963,270370423,271630436,271230871,271377555,271630438,270531007,270031002,271630436],[1,1,1,1,1,1,1,1,1,2],["2009-01-31","2013-06-09","2011-05-09","2009-11-21","2011-10-18","2009-12-15","2012-04-15","2011-10-30","2012-06-02","2011-08-13"],["Freon 114","Manganese","Carbon Tetrachloride","Cyclohexane","Butyraldehyde","Barium","Benzene","Carbon Tetrachloride","Freon 114","N-Hexane"],[2009,2013,2011,2009,2011,2009,2012,2011,2012,2011],[1,2,2,4,4,4,2,4,2,3],[15,15,14,14,15,15,14,14,14,11],[60,53,51,58,57,60,52,37,50,52],[15,15,16,16,15,16,16,15,16,15],[61,61,61,61,61,61,61,61,61,61],[1,1,0.875,0.875,1,0.9375,0.875,0.933333333333333,0.875,0.733333333333333],[0.983606557377049,0.868852459016393,0.836065573770492,0.950819672131147,0.934426229508197,0.983606557377049,0.852459016393443,0.60655737704918,0.819672131147541,0.852459016393443],[true,true,true,true,true,true,true,false,true,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Date<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>cal_quarter<\/th>\n      <th>valid_quarter_samples<\/th>\n      <th>valid_annual_samples<\/th>\n      <th>expected_quarter_samples<\/th>\n      <th>expected_annual_samples<\/th>\n      <th>pct_quarter_samples<\/th>\n      <th>pct_annual_samples<\/th>\n      <th>complete<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,4,5,6,7,8,9,10,11]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-51a1cb1f615273fe94d3" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-51a1cb1f615273fe94d3">{"x":{"filter":"none","data":[[270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501,270535501],[1,1,1,1,1,1,1,1,1,1],["2009-07-30","2009-08-05","2009-08-11","2009-09-16","2009-09-22","2009-08-17","2009-08-23","2009-08-29","2009-09-04","2009-09-10"],["Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony","Antimony"],[2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],[3,3,3,3,3,3,3,3,3,3],[11,11,11,11,11,11,11,11,11,11],[11,11,11,11,11,11,11,11,11,11],[15,15,15,15,15,15,15,15,15,15],[61,61,61,61,61,61,61,61,61,61],[0.733333333333333,0.733333333333333,0.733333333333333,0.733333333333333,0.733333333333333,0.733333333333333,0.733333333333333,0.733333333333333,0.733333333333333,0.733333333333333],[0.180327868852459,0.180327868852459,0.180327868852459,0.180327868852459,0.180327868852459,0.180327868852459,0.180327868852459,0.180327868852459,0.180327868852459,0.180327868852459],[false,false,false,false,false,false,false,false,false,false]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>POC<\/th>\n      <th>Date<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>cal_quarter<\/th>\n      <th>valid_quarter_samples<\/th>\n      <th>valid_annual_samples<\/th>\n      <th>expected_quarter_samples<\/th>\n      <th>expected_annual_samples<\/th>\n      <th>pct_quarter_samples<\/th>\n      <th>pct_annual_samples<\/th>\n      <th>complete<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,1,4,5,6,7,8,9,10,11]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 7.3: Final table with added <code>complete</code> column.
 </p>
 </div>
 <p><br></p>
 <p><strong>Step 6 (Optional):</strong> By collapsing the <code>complete</code> status to 1 row per site-pollutant-quarter combination, you can save the table and attach a site’s <em>completeness</em> status to a future data analysis as needed.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="co"># Collapse table to 1 row per unique site-pollutant-quarter</span></a>
-<a class="sourceLine" id="cb61-2" title="2"> data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb61-3" title="3"><span class="st">         </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, cal_quarter) <span class="op">%&gt;%</span><span class="st">  </span><span class="co">#Check completeness for every quarter</span></a>
-<a class="sourceLine" id="cb61-4" title="4"><span class="st">         </span><span class="kw">summarize</span>(<span class="dt">complete              =</span> complete[<span class="dv">1</span>], </a>
-<a class="sourceLine" id="cb61-5" title="5">                   <span class="dt">valid_annual_samples  =</span> valid_annual_samples[<span class="dv">1</span>],</a>
-<a class="sourceLine" id="cb61-6" title="6">                   <span class="dt">valid_quarter_samples =</span> valid_quarter_samples[<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb61-7" title="7"></a>
-<a class="sourceLine" id="cb61-8" title="8"><span class="co"># Collapse table to 1 row per unique site-pollutant-year</span></a>
-<a class="sourceLine" id="cb61-9" title="9"> data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st">          </span></a>
-<a class="sourceLine" id="cb61-10" title="10"><span class="st">         </span><span class="kw">group_by</span>(AQSID, Pollutant, Year) <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb61-11" title="11"><span class="st">         </span><span class="kw">summarize</span>(<span class="dt">complete            =</span> <span class="kw">sum</span>(complete, <span class="dt">na.rm =</span> T) <span class="op">==</span><span class="st"> </span><span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb61-12" title="12">                   <span class="dt">annual_samples      =</span> valid_annual_samples[<span class="dv">1</span>],</a>
-<a class="sourceLine" id="cb61-13" title="13">                   <span class="dt">min_quarter_samples =</span> <span class="kw">min</span>(valid_quarter_samples, <span class="dt">na.rm =</span> T))</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="completeness-checks.html#cb61-1"></a><span class="co"># Collapse table to 1 row per unique site-pollutant-quarter</span></span>
+<span id="cb61-2"><a href="completeness-checks.html#cb61-2"></a> data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb61-3"><a href="completeness-checks.html#cb61-3"></a><span class="st">         </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, cal_quarter) <span class="op">%&gt;%</span><span class="st">  </span><span class="co">#Check completeness for every quarter</span></span>
+<span id="cb61-4"><a href="completeness-checks.html#cb61-4"></a><span class="st">         </span><span class="kw">summarize</span>(<span class="dt">complete              =</span> complete[<span class="dv">1</span>], </span>
+<span id="cb61-5"><a href="completeness-checks.html#cb61-5"></a>                   <span class="dt">valid_annual_samples  =</span> valid_annual_samples[<span class="dv">1</span>],</span>
+<span id="cb61-6"><a href="completeness-checks.html#cb61-6"></a>                   <span class="dt">valid_quarter_samples =</span> valid_quarter_samples[<span class="dv">1</span>])</span>
+<span id="cb61-7"><a href="completeness-checks.html#cb61-7"></a></span>
+<span id="cb61-8"><a href="completeness-checks.html#cb61-8"></a><span class="co"># Collapse table to 1 row per unique site-pollutant-year</span></span>
+<span id="cb61-9"><a href="completeness-checks.html#cb61-9"></a> data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st">          </span></span>
+<span id="cb61-10"><a href="completeness-checks.html#cb61-10"></a><span class="st">         </span><span class="kw">group_by</span>(AQSID, Pollutant, Year) <span class="op">%&gt;%</span><span class="st">  </span></span>
+<span id="cb61-11"><a href="completeness-checks.html#cb61-11"></a><span class="st">         </span><span class="kw">summarize</span>(<span class="dt">complete            =</span> <span class="kw">sum</span>(complete, <span class="dt">na.rm =</span> T) <span class="op">==</span><span class="st"> </span><span class="dv">4</span>,</span>
+<span id="cb61-12"><a href="completeness-checks.html#cb61-12"></a>                   <span class="dt">annual_samples      =</span> valid_annual_samples[<span class="dv">1</span>],</span>
+<span id="cb61-13"><a href="completeness-checks.html#cb61-13"></a>                   <span class="dt">min_quarter_samples =</span> <span class="kw">min</span>(valid_quarter_samples, <span class="dt">na.rm =</span> T))</span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-81"></span>
-<div id="htmlwidget-c1bca33e705241f673c0" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c1bca33e705241f673c0">{"x":{"filter":"none","data":[[270031002,270031002,270031002,270031002,270031002,270031002,270031002,270031002,270031002,270031002],["1,3-Butadiene","1,3-Butadiene","Acetaldehyde","Acetaldehyde","Antimony","Antimony","Antimony","Arsenic","Arsenic","Arsenic"],[2012,2013,2012,2013,2011,2012,2013,2011,2012,2013],[false,false,false,false,false,true,true,false,true,true],[50,51,51,54,1,59,60,1,59,60],[7,8,7,8,1,14,15,1,14,15]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>complete<\/th>\n      <th>annual_samples<\/th>\n      <th>min_quarter_samples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,2,4,5]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-1f78026923c118066240" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1f78026923c118066240">{"x":{"filter":"none","data":[[270031002,270031002,270031002,270031002,270031002,270031002,270031002,270031002,270031002,270031002],["1,3-Butadiene","1,3-Butadiene","Acetaldehyde","Acetaldehyde","Antimony","Antimony","Antimony","Arsenic","Arsenic","Arsenic"],[2012,2013,2012,2013,2011,2012,2013,2011,2012,2013],[false,false,false,false,false,true,true,false,true,true],[50,51,51,54,1,59,60,1,59,60],[7,8,7,8,1,14,15,1,14,15]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>AQSID<\/th>\n      <th>Pollutant<\/th>\n      <th>Year<\/th>\n      <th>complete<\/th>\n      <th>annual_samples<\/th>\n      <th>min_quarter_samples<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"autoWidth":true,"searching":false,"ordering":false,"lengthChange":false,"paginate":false,"info":false,"columnDefs":[{"className":"dt-right","targets":[0,2,4,5]}],"order":[],"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 7.4: Collapsed table showing <code>completeness</code> status.
 </p>

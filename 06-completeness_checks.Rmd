@@ -60,7 +60,7 @@ In general, these rules apply:
 
 <br> __Example `R` script__ 
 
-Click below to view an example.
+__Click below to view an example.__
 
 <div class="toggle"><button class="btn_code">Show __R__ code</button>
 
@@ -130,7 +130,7 @@ sample_calendar <- function(start         = "2012-01-01",
   calendar <- calendar[calendar >= start & calendar <= end]
   
   # Print total sampling days and date range
-  cat(length(calendar), "sampling days from", as.character(min(calendar)), "to", as.character(max(calendar)))
+  cat(length(calendar), " sampling days from ", as.character(min(calendar)), "to", as.character(max(calendar)))
   
   return(calendar)
   
@@ -146,8 +146,8 @@ Find the date range of the data and create the expected sampling schedule with t
 date_range <- range(data$Date)
 
 # Create expected sample calendar
-epa_schedule <- data_frame(Date = sample_calendar(start = format(date_range[1], "%Y-01-01"), #Extend range to first day of the year
-                                                  end   = format(date_range[2], "%Y-12-31"), #Extend range to last day of the year
+epa_schedule <- tibble(Date = sample_calendar(start = format(date_range[1], "%Y-01-01"), # Extend range to first day of the year
+                                                  end   = format(date_range[2], "%Y-12-31"), # Extend range to last day of the year
                                                   day_interval = 6))
 
 # Add year and calendar quarter columns
@@ -219,7 +219,8 @@ __Step 4:__ Mark results as incomplete if they fail one of the completeness chec
 data <- data %>% 
         rowwise() %>%
         mutate(complete = sum(c(pct_quarter_samples >= 0.75, 
-                                pct_annual_samples  >= 0.75)) > 1)
+                                pct_annual_samples  >= 0.75)) > 1) %>%
+       ungroup()
 
 ```
 
@@ -229,7 +230,7 @@ data <- data %>%
 __Final table with added `complete` column.__
 ```{r message=F, echo=F, fig.cap = "Final table with added `complete` column."}
 
-DT::datatable(sample_n(select(data, -c(Param_Code, Concentration, Null_Code, Dlimit, CAS)), 10, replace = F), options = dt_options, rownames = F)
+DT::datatable(select(data, -c(Param_Code, Concentration, Null_Code, Dlimit, CAS))[1:10, ], options = dt_options, rownames = F)
 ```
 
 <br>

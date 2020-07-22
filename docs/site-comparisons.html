@@ -69,9 +69,9 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -80,14 +80,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -96,9 +98,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -217,8 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="detection-limits.html"><a href="detection-limits.html#calculating-mdls"><i class="fa fa-check"></i><b>6.2</b> Calculating MDLs</a></li>
 <li class="chapter" data-level="6.3" data-path="detection-limits.html"><a href="detection-limits.html#finding-mpca-detection-limits"><i class="fa fa-check"></i><b>6.3</b> Finding MPCA detection limits</a></li>
 <li class="chapter" data-level="6.4" data-path="detection-limits.html"><a href="detection-limits.html#qualifier-codes-for-detection-limits"><i class="fa fa-check"></i><b>6.4</b> Qualifier Codes for Detection Limits</a></li>
-<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values-what-not-to-do"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values <em>(what not to do)</em></a></li>
-<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#below-detection-values"><i class="fa fa-check"></i><b>6.6</b> Below detection values</a></li>
+<li class="chapter" data-level="6.5" data-path="detection-limits.html"><a href="detection-limits.html#estimating-below-detection-values"><i class="fa fa-check"></i><b>6.5</b> Estimating below detection values</a></li>
+<li class="chapter" data-level="6.6" data-path="detection-limits.html"><a href="detection-limits.html#recommended-steps"><i class="fa fa-check"></i><b>6.6</b> Recommended Steps</a></li>
 <li class="chapter" data-level="6.7" data-path="detection-limits.html"><a href="detection-limits.html#multiple-detection-limits"><i class="fa fa-check"></i><b>6.7</b> Multiple detection limits</a></li>
 <li class="chapter" data-level="6.8" data-path="detection-limits.html"><a href="detection-limits.html#reporting-limits"><i class="fa fa-check"></i><b>6.8</b> Reporting limits</a></li>
 <li class="chapter" data-level="6.9" data-path="detection-limits.html"><a href="detection-limits.html#references"><i class="fa fa-check"></i><b>6.9</b> References</a></li>
@@ -237,14 +239,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="site-comparisons.html"><a href="site-comparisons.html"><i class="fa fa-check"></i><b>9</b> Site comparisons</a><ul>
 <li class="chapter" data-level="9.1" data-path="site-comparisons.html"><a href="site-comparisons.html#confidence-intervals"><i class="fa fa-check"></i><b>9.1</b> Confidence intervals</a></li>
-<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-data"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize data</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i><b>9.2.1</b> Beeswarm Plots</a></li>
-<li class="chapter" data-level="9.2.2" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i><b>9.2.2</b> Correlation matrices</a></li>
+<li class="chapter" data-level="9.2" data-path="site-comparisons.html"><a href="site-comparisons.html#tools-to-visualize-differences"><i class="fa fa-check"></i><b>9.2</b> Tools to visualize differences</a><ul>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#beeswarm-plots"><i class="fa fa-check"></i>Beeswarm Plots</a></li>
+<li class="chapter" data-level="" data-path="site-comparisons.html"><a href="site-comparisons.html#correlation-matrices"><i class="fa fa-check"></i>Correlation matrices</a></li>
 </ul></li>
+<li><a href="site-comparisons.html#references-1"><em>References</em></a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="start-finish.html"><a href="start-finish.html"><i class="fa fa-check"></i><b>10</b> From start to finish</a><ul>
-<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#functions"><i class="fa fa-check"></i><b>10.1</b> Functions</a></li>
-<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#analysis-steps"><i class="fa fa-check"></i><b>10.2</b> Analysis steps</a></li>
+<li class="chapter" data-level="10.1" data-path="start-finish.html"><a href="start-finish.html#using-functions"><i class="fa fa-check"></i><b>10.1</b> Using functions</a></li>
+<li class="chapter" data-level="10.2" data-path="start-finish.html"><a href="start-finish.html#a-simpler-analysis"><i class="fa fa-check"></i><b>10.2</b> A simpler analysis</a></li>
 </ul></li>
 <li><a href="visuals.html#visuals"><strong>Visuals</strong></a></li>
 <li class="chapter" data-level="11" data-path="charts.html"><a href="charts.html"><i class="fa fa-check"></i><b>11</b> Charts</a><ul>
@@ -263,17 +266,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="mpca-data-tools.html#mpca-data-tools"><strong>MPCA data tools</strong></a></li>
 <li class="chapter" data-level="14" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html"><i class="fa fa-check"></i><b>14</b> Air toxics explorer</a><ul>
-<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#mpca-air-toxics-methods"><i class="fa fa-check"></i><b>14.1</b> MPCA Air Toxics Methods</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1.1</b> Data Cleaning</a></li>
-<li class="chapter" data-level="14.1.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.1.2</b> Data Validation</a></li>
-<li class="chapter" data-level="14.1.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i><b>14.1.3</b> Parameter Occurrence Codes (POCs)</a></li>
-<li class="chapter" data-level="14.1.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.1.4</b> Producing Annual Summaries</a></li>
+<li class="chapter" data-level="14.1" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-cleaning-1"><i class="fa fa-check"></i><b>14.1</b> Data Cleaning</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#null-results"><i class="fa fa-check"></i>Null Results</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#duplicate-observations"><i class="fa fa-check"></i>Duplicate Observations</a></li>
 </ul></li>
+<li class="chapter" data-level="14.2" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-validation-1"><i class="fa fa-check"></i><b>14.2</b> Data Validation</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#parameter-occurrence-codes-pocs"><i class="fa fa-check"></i>Parameter Occurrence Codes (POCs)</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#data-completeness"><i class="fa fa-check"></i>Data Completeness</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#below-the-detection-limit"><i class="fa fa-check"></i>Below the detection limit</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#producing-annual-summaries"><i class="fa fa-check"></i><b>14.3</b> Producing Annual Summaries</a><ul>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-annual-means"><i class="fa fa-check"></i>Calculating annual means</a></li>
+<li class="chapter" data-level="" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#calculating-upper-confidence-limits"><i class="fa fa-check"></i>Calculating upper confidence limits</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="air-toxics-explorer.html"><a href="air-toxics-explorer.html#comparing-sites"><i class="fa fa-check"></i><b>14.4</b> Comparing sites</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="criteria-pollutant-explorer.html"><a href="criteria-pollutant-explorer.html"><i class="fa fa-check"></i><b>15</b> Criteria pollutant explorer</a></li>
 <li class="chapter" data-level="16" data-path="aqi-explorer.html"><a href="aqi-explorer.html"><i class="fa fa-check"></i><b>16</b> AQI explorer</a></li>
 <li class="chapter" data-level="" data-path="edit-this-book.html"><a href="edit-this-book.html"><i class="fa fa-check"></i>Edit this book</a><ul>
-<li class="chapter" data-level="16.1" data-path="edit-this-book.html"><a href="edit-this-book.html#references-1"><i class="fa fa-check"></i><b>16.1</b> References</a></li>
+<li><a href="edit-this-book.html#references-2"><em>References</em></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/MPCA-air" target="blank">Created by MPCA-air</a></li>
@@ -300,8 +311,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/cover8.jpg" align="right" style="margin-top: -4px; margin-left: 24px; width: 38%;" /></p>
 <p><strong>Recommended steps</strong></p>
 <ul>
-<li>Chart data with box and whisker plots. Some site differences may be very apparent and not require statistical comparisons. The data analyst should use careful judgement to determine whether site means are obviously different enough that a statistical test is not necessary. Even if site means appear to be almost exactly the same, a statistical test should still be used to confirm that since boxplots can be deceiving when trying to determine that two means are not significantly different.</li>
-<li>Check for normality Chi-squared test. If the data are normal, and there is equal variance complete an ANOVA to compare sites. If there are more than 2 sites, follow with a post hoc test.</li>
+<li>Start by charting data with box and whisker plots. Some site differences may be easily apparent and will not require statistical comparisons. The analyst can use their judgement if site means are obviously different. In some cases a statistical test may not be necessary.</li>
+<li>Even when site means appear to be nearly identical, a statistical test should be used to confirm. Boxplots can be deceiving when trying to determine that two means are not significantly different.<br />
+</li>
+<li>Check for normality Chi-squared test. If the data are normal, and there is equal variance complete an ANOVA to compare sites. If there are more than 2 sites, follow with a post hoc test.<br />
+</li>
 <li>If the data are not normal, and there is not equal variance, complete a Kruskal Wallis test (or other test depending on the number of valid samples for each site). If there are more than 2 sites to compare, use Dunn’s test for post hoc site by site comparisons.</li>
 </ul>
 <div id="confidence-intervals" class="section level2">
@@ -310,195 +324,204 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It is not effective to do pairwise comparisons of individual samples due to null data and non-detects. You cannot automatically use an ANOVA test since most ambient air concentration data more closely resembles a log-normal distribution than a normal distribution and for a log-normal distribution, the variance is not independent of the mean which means that transforming the data and doing an ANOVA test would bias the confidence interval for the difference. MPCA uses bootstrap sampling to generate confidence intervals since bootstrap sampling is non-parametric and makes no assumptions about the distribution of the data or its variance.</p>
 <p>The script below uses bootstrap sampling to generate 1,000 differences in site means which are then ordered to create a 95% confidence interval for the difference in means. If the lower bound of the interval is greater than zero, then the second site has a higher mean concentration than the first site. If the upper bound of the confidence interval is less than zero, then the second site has a lower mean concentration than the first site.</p>
 <p><br></p>
-<p>The code below shows an example R script for calculating confidence intervals.</p>
+<p><em>Click below to view an example calculating confidence intervals.</em></p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
 <p><br></p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb78-2" title="2"><span class="kw">library</span>(EnvStats)</a>
-<a class="sourceLine" id="cb78-3" title="3"></a>
-<a class="sourceLine" id="cb78-4" title="4">site_compare &lt;-<span class="st"> </span><span class="cf">function</span>(data, site_number, <span class="dt">Boot_Repeats =</span> <span class="dv">1000</span>) {</a>
-<a class="sourceLine" id="cb78-5" title="5">  </a>
-<a class="sourceLine" id="cb78-6" title="6">  <span class="kw">library</span>(EnvStats)</a>
-<a class="sourceLine" id="cb78-7" title="7">  </a>
-<a class="sourceLine" id="cb78-8" title="8">  <span class="kw">set.seed</span>(<span class="dv">2017</span>)</a>
-<a class="sourceLine" id="cb78-9" title="9">  </a>
-<a class="sourceLine" id="cb78-10" title="10">  annual_AT_means &lt;-<span class="st"> </span><span class="cf">function</span>(air_toxics) {</a>
-<a class="sourceLine" id="cb78-11" title="11">  </a>
-<a class="sourceLine" id="cb78-12" title="12">  air_toxics &lt;-<span class="st"> </span><span class="kw">mutate</span>(air_toxics, <span class="dt">Year =</span> <span class="kw">year</span>(<span class="kw">ymd</span>(Date)), <span class="dt">Quarter =</span> <span class="kw">quarter</span>(<span class="kw">ymd</span>(Date)) )</a>
-<a class="sourceLine" id="cb78-13" title="13">  </a>
-<a class="sourceLine" id="cb78-14" title="14">  sample_complete &lt;-<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb78-15" title="15"><span class="st">    </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, Quarter, MDL) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb78-16" title="16"><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> ( (<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(Result) ) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(Result) ) <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span> ) ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb78-17" title="17"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Complete =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(Complete), F, Complete) ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb78-18" title="18"><span class="st">    </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb78-19" title="19"><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> <span class="kw">all</span>(Complete) )</a>
-<a class="sourceLine" id="cb78-20" title="20">  </a>
-<a class="sourceLine" id="cb78-21" title="21">  enough_detects =<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Detected =</span> <span class="kw">mean</span>(Censored, <span class="dt">na.rm =</span> T) <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.8</span> )</a>
-<a class="sourceLine" id="cb78-22" title="22">  </a>
-<a class="sourceLine" id="cb78-23" title="23">  site_means =<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(<span class="kw">length</span>(<span class="kw">unique</span>(Result[<span class="op">!</span><span class="kw">is.na</span>(Result) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>Censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="ot">NA</span>,</a>
-<a class="sourceLine" id="cb78-24" title="24">     <span class="kw">ifelse</span> (<span class="kw">any</span>(Censored, <span class="dt">na.rm =</span> T), <span class="kw">elnormAltCensored</span>(Result, Censored, <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]], <span class="kw">mean</span>(Result, <span class="dt">na.rm =</span> T) ) ) )</a>
-<a class="sourceLine" id="cb78-25" title="25">  </a>
-<a class="sourceLine" id="cb78-26" title="26">  site_means =<span class="st"> </span><span class="kw">left_join</span>(site_means, sample_complete, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb78-27" title="27"><span class="st">    </span><span class="kw">left_join</span>(enough_detects, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Mean, <span class="ot">NA</span>), <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year) )</a>
-<a class="sourceLine" id="cb78-28" title="28"></a>
-<a class="sourceLine" id="cb78-29" title="29">  <span class="kw">return</span>(site_means)</a>
-<a class="sourceLine" id="cb78-30" title="30">}</a>
-<a class="sourceLine" id="cb78-31" title="31">  </a>
-<a class="sourceLine" id="cb78-32" title="32">  MLE_est &lt;-<span class="st"> </span><span class="cf">function</span>(data){</a>
-<a class="sourceLine" id="cb78-33" title="33">    </a>
-<a class="sourceLine" id="cb78-34" title="34">    results =<span class="st"> </span>data<span class="op">$</span>Result</a>
-<a class="sourceLine" id="cb78-35" title="35">    censored =<span class="st"> </span>data<span class="op">$</span>Censored</a>
-<a class="sourceLine" id="cb78-36" title="36">    n =<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(results))</a>
-<a class="sourceLine" id="cb78-37" title="37">    </a>
-<a class="sourceLine" id="cb78-38" title="38">    <span class="cf">if</span> (<span class="kw">length</span>(<span class="kw">unique</span>(results[<span class="op">!</span><span class="kw">is.na</span>(results) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span> ) {</a>
-<a class="sourceLine" id="cb78-39" title="39">      MLE_means =<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb78-40" title="40">    }</a>
-<a class="sourceLine" id="cb78-41" title="41">    </a>
-<a class="sourceLine" id="cb78-42" title="42">    <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb78-43" title="43">      </a>
-<a class="sourceLine" id="cb78-44" title="44">      random.rows =<span class="st"> </span><span class="ot">NULL</span> </a>
-<a class="sourceLine" id="cb78-45" title="45">      </a>
-<a class="sourceLine" id="cb78-46" title="46">      random.rows =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored) <span class="op">&amp;</span><span class="st"> </span>(<span class="op">!</span>censored) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">duplicated</span>(results) ), <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb78-47" title="47">      </a>
-<a class="sourceLine" id="cb78-48" title="48">      random.rows =<span class="st"> </span><span class="kw">c</span>(random.rows, <span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored)), n<span class="dv">-2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb78-49" title="49">      </a>
-<a class="sourceLine" id="cb78-50" title="50">      MLE_means &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">sum</span>(censored[random.rows], <span class="dt">na.rm =</span> T) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">mean</span>(results[random.rows]), <span class="kw">elnormAltCensored</span>(results[random.rows], censored[random.rows], <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]] )</a>
-<a class="sourceLine" id="cb78-51" title="51">    }</a>
-<a class="sourceLine" id="cb78-52" title="52">    </a>
-<a class="sourceLine" id="cb78-53" title="53">    <span class="kw">return</span>(MLE_means)</a>
-<a class="sourceLine" id="cb78-54" title="54">  }</a>
-<a class="sourceLine" id="cb78-55" title="55">  </a>
-<a class="sourceLine" id="cb78-56" title="56">  data &lt;-<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">Result =</span> <span class="kw">ifelse</span>(Censored, MDL, Result), <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year))</a>
-<a class="sourceLine" id="cb78-57" title="57">  </a>
-<a class="sourceLine" id="cb78-58" title="58">  Bootstrap_means =<span class="st"> </span><span class="kw">replicate</span>(Boot_Repeats, (<span class="kw">by</span>(data, data<span class="op">$</span>ID, MLE_est) ) )</a>
-<a class="sourceLine" id="cb78-59" title="59">  </a>
-<a class="sourceLine" id="cb78-60" title="60">  Bootstrap_means =<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">as.data.frame</span>(Bootstrap_means), <span class="st">&quot;ID&quot;</span> )</a>
-<a class="sourceLine" id="cb78-61" title="61">  </a>
-<a class="sourceLine" id="cb78-62" title="62">  Bootstrap_means =<span class="st"> </span><span class="kw">right_join</span>(<span class="kw">annual_AT_means</span>(data), Bootstrap_means, <span class="dt">by =</span> <span class="st">&quot;ID&quot;</span>)</a>
-<a class="sourceLine" id="cb78-63" title="63">  </a>
-<a class="sourceLine" id="cb78-64" title="64">  Bootstrap_means =<span class="st"> </span>Bootstrap_means <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Pollutant, Year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number), <span class="dt">.by_group =</span> T ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb78-65" title="65"><span class="st">    </span><span class="kw">group_by</span>(Pollutant, Year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats)), <span class="kw">funs</span>(<span class="kw">c</span>(<span class="kw">first</span>(.), (. <span class="op">-</span><span class="st"> </span><span class="kw">first</span>(.))[<span class="op">-</span><span class="dv">1</span>])) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()</a>
-<a class="sourceLine" id="cb78-66" title="66">  </a>
-<a class="sourceLine" id="cb78-67" title="67">  LB =<span class="st"> </span><span class="kw">select</span>(Bootstrap_means, <span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(<span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(<span class="op">-</span>x)[<span class="kw">floor</span>(<span class="fl">0.025</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)] )</a>
-<a class="sourceLine" id="cb78-68" title="68">  UB =<span class="st"> </span><span class="kw">select</span>(Bootstrap_means, <span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(<span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(<span class="op">-</span>x)[<span class="kw">ceiling</span>(<span class="fl">0.975</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)] )</a>
-<a class="sourceLine" id="cb78-69" title="69">  </a>
-<a class="sourceLine" id="cb78-70" title="70">  CI =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Lower =</span> LB, <span class="dt">Upper =</span> UB)</a>
-<a class="sourceLine" id="cb78-71" title="71">  CI =<span class="st"> </span><span class="kw">bind_cols</span>(CI, Bootstrap_means) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Lower<span class="op">:</span>ID) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Lower =</span> <span class="kw">ifelse</span>(<span class="kw">any</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected) <span class="op">&amp;</span><span class="st"> </span>AQSID <span class="op">!=</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Lower, <span class="ot">NA</span>),</a>
-<a class="sourceLine" id="cb78-72" title="72">                                                                      <span class="dt">Upper =</span> <span class="kw">ifelse</span>(<span class="kw">any</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected) <span class="op">&amp;</span><span class="st"> </span>AQSID <span class="op">!=</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Upper, <span class="ot">NA</span>),</a>
-<a class="sourceLine" id="cb78-73" title="73">                                                                      <span class="dt">Comparison =</span> <span class="kw">ifelse</span>(Lower <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Higher&quot;</span>, <span class="kw">ifelse</span>(Upper <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Lower&quot;</span>, <span class="st">&quot;Same&quot;</span>) ) )</a>
-<a class="sourceLine" id="cb78-74" title="74">  </a>
-<a class="sourceLine" id="cb78-75" title="75">  <span class="kw">return</span>(CI)</a>
-<a class="sourceLine" id="cb78-76" title="76">  </a>
-<a class="sourceLine" id="cb78-77" title="77">}</a>
-<a class="sourceLine" id="cb78-78" title="78"></a>
-<a class="sourceLine" id="cb78-79" title="79">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</a>
-<a class="sourceLine" id="cb78-80" title="80"></a>
-<a class="sourceLine" id="cb78-81" title="81"><span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Parameter&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,</a>
-<a class="sourceLine" id="cb78-82" title="82">                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)</a>
-<a class="sourceLine" id="cb78-83" title="83"></a>
-<a class="sourceLine" id="cb78-84" title="84">data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb78-85" title="85"><span class="st">        </span><span class="kw">filter</span>(AQSID <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">270370020</span>, <span class="dv">270370470</span>, <span class="dv">271230871</span>) ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb78-86" title="86"><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">Censored =</span> Result <span class="op">&lt;</span><span class="st"> </span>MDL)</a>
-<a class="sourceLine" id="cb78-87" title="87"></a>
-<a class="sourceLine" id="cb78-88" title="88">site_number =<span class="st"> </span><span class="dv">271230871</span></a>
-<a class="sourceLine" id="cb78-89" title="89">seed =<span class="st"> </span><span class="dv">2017</span></a>
-<a class="sourceLine" id="cb78-90" title="90"><span class="kw">set.seed</span>(seed)</a>
-<a class="sourceLine" id="cb78-91" title="91"></a>
-<a class="sourceLine" id="cb78-92" title="92">compare =<span class="st"> </span><span class="kw">site_compare</span>(data, site_number, <span class="dv">50</span>) <span class="co">#minimum 50 repeats</span></a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="site-comparisons.html#cb78-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb78-2"><a href="site-comparisons.html#cb78-2"></a><span class="kw">library</span>(EnvStats)</span>
+<span id="cb78-3"><a href="site-comparisons.html#cb78-3"></a></span>
+<span id="cb78-4"><a href="site-comparisons.html#cb78-4"></a>site_compare &lt;-<span class="st"> </span><span class="cf">function</span>(data, site_number, <span class="dt">Boot_Repeats =</span> <span class="dv">1000</span>) {</span>
+<span id="cb78-5"><a href="site-comparisons.html#cb78-5"></a>  </span>
+<span id="cb78-6"><a href="site-comparisons.html#cb78-6"></a>  <span class="kw">library</span>(EnvStats)</span>
+<span id="cb78-7"><a href="site-comparisons.html#cb78-7"></a>  </span>
+<span id="cb78-8"><a href="site-comparisons.html#cb78-8"></a>  <span class="kw">set.seed</span>(<span class="dv">2017</span>)</span>
+<span id="cb78-9"><a href="site-comparisons.html#cb78-9"></a>  </span>
+<span id="cb78-10"><a href="site-comparisons.html#cb78-10"></a>  annual_AT_means &lt;-<span class="st"> </span><span class="cf">function</span>(air_toxics) {</span>
+<span id="cb78-11"><a href="site-comparisons.html#cb78-11"></a>  </span>
+<span id="cb78-12"><a href="site-comparisons.html#cb78-12"></a>  air_toxics &lt;-<span class="st"> </span><span class="kw">mutate</span>(air_toxics, <span class="dt">Year =</span> <span class="kw">year</span>(<span class="kw">ymd</span>(Date)), <span class="dt">Quarter =</span> <span class="kw">quarter</span>(<span class="kw">ymd</span>(Date)) )</span>
+<span id="cb78-13"><a href="site-comparisons.html#cb78-13"></a>  </span>
+<span id="cb78-14"><a href="site-comparisons.html#cb78-14"></a>  sample_complete &lt;-<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-15"><a href="site-comparisons.html#cb78-15"></a><span class="st">    </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, Quarter, MDL) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-16"><a href="site-comparisons.html#cb78-16"></a><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> ( (<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(Result) ) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(Result) ) <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.75</span> ) ) <span class="op">%&gt;%</span></span>
+<span id="cb78-17"><a href="site-comparisons.html#cb78-17"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Complete =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(Complete), F, Complete) ) <span class="op">%&gt;%</span></span>
+<span id="cb78-18"><a href="site-comparisons.html#cb78-18"></a><span class="st">    </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-19"><a href="site-comparisons.html#cb78-19"></a><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Complete =</span> <span class="kw">all</span>(Complete) )</span>
+<span id="cb78-20"><a href="site-comparisons.html#cb78-20"></a>  </span>
+<span id="cb78-21"><a href="site-comparisons.html#cb78-21"></a>  enough_detects &lt;-<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-22"><a href="site-comparisons.html#cb78-22"></a><span class="st">                    </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-23"><a href="site-comparisons.html#cb78-23"></a><span class="st">                    </span><span class="kw">summarise</span>(<span class="dt">Detected =</span> <span class="kw">mean</span>(Censored, <span class="dt">na.rm =</span> T) <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.8</span> )</span>
+<span id="cb78-24"><a href="site-comparisons.html#cb78-24"></a>  </span>
+<span id="cb78-25"><a href="site-comparisons.html#cb78-25"></a>  site_means &lt;-<span class="st"> </span>air_toxics <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-26"><a href="site-comparisons.html#cb78-26"></a><span class="st">                </span><span class="kw">group_by</span>(AQSID, Pollutant, Year, MDL) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-27"><a href="site-comparisons.html#cb78-27"></a><span class="st">                </span><span class="kw">summarise</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(<span class="kw">length</span>(<span class="kw">unique</span>(Result[<span class="op">!</span><span class="kw">is.na</span>(Result) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>Censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>, <span class="ot">NA</span>,</span>
+<span id="cb78-28"><a href="site-comparisons.html#cb78-28"></a>     <span class="kw">ifelse</span> (<span class="kw">any</span>(Censored, <span class="dt">na.rm =</span> T), <span class="kw">elnormAltCensored</span>(Result, Censored, <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]], <span class="kw">mean</span>(Result, <span class="dt">na.rm =</span> T) ) ) )</span>
+<span id="cb78-29"><a href="site-comparisons.html#cb78-29"></a>  </span>
+<span id="cb78-30"><a href="site-comparisons.html#cb78-30"></a>  site_means &lt;-<span class="st"> </span><span class="kw">left_join</span>(site_means, sample_complete, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span></span>
+<span id="cb78-31"><a href="site-comparisons.html#cb78-31"></a><span class="st">                </span><span class="kw">left_join</span>(enough_detects, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;MDL&quot;</span>) ) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-32"><a href="site-comparisons.html#cb78-32"></a><span class="st">                </span><span class="kw">mutate</span>(<span class="dt">Mean =</span> <span class="kw">ifelse</span>(Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Mean, <span class="ot">NA</span>), <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year) )</span>
+<span id="cb78-33"><a href="site-comparisons.html#cb78-33"></a></span>
+<span id="cb78-34"><a href="site-comparisons.html#cb78-34"></a>  <span class="kw">return</span>(site_means)</span>
+<span id="cb78-35"><a href="site-comparisons.html#cb78-35"></a>}</span>
+<span id="cb78-36"><a href="site-comparisons.html#cb78-36"></a>  </span>
+<span id="cb78-37"><a href="site-comparisons.html#cb78-37"></a>  MLE_est &lt;-<span class="st"> </span><span class="cf">function</span>(data){</span>
+<span id="cb78-38"><a href="site-comparisons.html#cb78-38"></a>    </span>
+<span id="cb78-39"><a href="site-comparisons.html#cb78-39"></a>    results  &lt;-<span class="st"> </span>data<span class="op">$</span>Result</span>
+<span id="cb78-40"><a href="site-comparisons.html#cb78-40"></a>    censored &lt;-<span class="st"> </span>data<span class="op">$</span>Censored</span>
+<span id="cb78-41"><a href="site-comparisons.html#cb78-41"></a>    n &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(results))</span>
+<span id="cb78-42"><a href="site-comparisons.html#cb78-42"></a>    </span>
+<span id="cb78-43"><a href="site-comparisons.html#cb78-43"></a>    <span class="cf">if</span> (<span class="kw">length</span>(<span class="kw">unique</span>(results[<span class="op">!</span><span class="kw">is.na</span>(results) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>censored] ) ) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span> ) {</span>
+<span id="cb78-44"><a href="site-comparisons.html#cb78-44"></a>      MLE_means &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb78-45"><a href="site-comparisons.html#cb78-45"></a>    }</span>
+<span id="cb78-46"><a href="site-comparisons.html#cb78-46"></a>    </span>
+<span id="cb78-47"><a href="site-comparisons.html#cb78-47"></a>    <span class="cf">else</span> {</span>
+<span id="cb78-48"><a href="site-comparisons.html#cb78-48"></a>      </span>
+<span id="cb78-49"><a href="site-comparisons.html#cb78-49"></a>      random.rows =<span class="st"> </span><span class="ot">NULL</span> </span>
+<span id="cb78-50"><a href="site-comparisons.html#cb78-50"></a>      </span>
+<span id="cb78-51"><a href="site-comparisons.html#cb78-51"></a>      random.rows =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored) <span class="op">&amp;</span><span class="st"> </span>(<span class="op">!</span>censored) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">duplicated</span>(results) ), <span class="dv">2</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb78-52"><a href="site-comparisons.html#cb78-52"></a>      </span>
+<span id="cb78-53"><a href="site-comparisons.html#cb78-53"></a>      random.rows =<span class="st"> </span><span class="kw">c</span>(random.rows, <span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(censored)), n<span class="dv">-2</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb78-54"><a href="site-comparisons.html#cb78-54"></a>      </span>
+<span id="cb78-55"><a href="site-comparisons.html#cb78-55"></a>      MLE_means &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">sum</span>(censored[random.rows], <span class="dt">na.rm =</span> T) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">mean</span>(results[random.rows]), <span class="kw">elnormAltCensored</span>(results[random.rows], censored[random.rows], <span class="dt">method =</span> <span class="st">&quot;impute.w.mle&quot;</span>, <span class="dt">ci =</span> F)<span class="op">$</span>parameters[[<span class="dv">1</span>]] )</span>
+<span id="cb78-56"><a href="site-comparisons.html#cb78-56"></a>    }</span>
+<span id="cb78-57"><a href="site-comparisons.html#cb78-57"></a>    </span>
+<span id="cb78-58"><a href="site-comparisons.html#cb78-58"></a>    <span class="kw">return</span>(MLE_means)</span>
+<span id="cb78-59"><a href="site-comparisons.html#cb78-59"></a>  }</span>
+<span id="cb78-60"><a href="site-comparisons.html#cb78-60"></a>  </span>
+<span id="cb78-61"><a href="site-comparisons.html#cb78-61"></a>  data &lt;-<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">Result =</span> <span class="kw">ifelse</span>(Censored, MDL, Result), <span class="dt">ID =</span> <span class="kw">paste</span>(AQSID, Pollutant, Year))</span>
+<span id="cb78-62"><a href="site-comparisons.html#cb78-62"></a>  </span>
+<span id="cb78-63"><a href="site-comparisons.html#cb78-63"></a>  Bootstrap_means =<span class="st"> </span><span class="kw">replicate</span>(Boot_Repeats, (<span class="kw">by</span>(data, data<span class="op">$</span>ID, MLE_est) ) )</span>
+<span id="cb78-64"><a href="site-comparisons.html#cb78-64"></a>  </span>
+<span id="cb78-65"><a href="site-comparisons.html#cb78-65"></a>  Bootstrap_means =<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">as.data.frame</span>(Bootstrap_means), <span class="st">&quot;ID&quot;</span> )</span>
+<span id="cb78-66"><a href="site-comparisons.html#cb78-66"></a>  </span>
+<span id="cb78-67"><a href="site-comparisons.html#cb78-67"></a>  Bootstrap_means =<span class="st"> </span><span class="kw">right_join</span>(<span class="kw">annual_AT_means</span>(data), Bootstrap_means, <span class="dt">by =</span> <span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb78-68"><a href="site-comparisons.html#cb78-68"></a>  </span>
+<span id="cb78-69"><a href="site-comparisons.html#cb78-69"></a>  Bootstrap_means =<span class="st"> </span>Bootstrap_means <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Pollutant, Year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number), <span class="dt">.by_group =</span> T ) <span class="op">%&gt;%</span></span>
+<span id="cb78-70"><a href="site-comparisons.html#cb78-70"></a><span class="st">    </span><span class="kw">group_by</span>(Pollutant, Year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(<span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats)), <span class="kw">funs</span>(<span class="kw">c</span>(<span class="kw">first</span>(.), (. <span class="op">-</span><span class="st"> </span><span class="kw">first</span>(.))[<span class="op">-</span><span class="dv">1</span>])) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()</span>
+<span id="cb78-71"><a href="site-comparisons.html#cb78-71"></a>  </span>
+<span id="cb78-72"><a href="site-comparisons.html#cb78-72"></a>  LB =<span class="st"> </span><span class="kw">select</span>(Bootstrap_means, <span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(<span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(<span class="op">-</span>x)[<span class="kw">floor</span>(<span class="fl">0.025</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)] )</span>
+<span id="cb78-73"><a href="site-comparisons.html#cb78-73"></a>  UB =<span class="st"> </span><span class="kw">select</span>(Bootstrap_means, <span class="kw">num_range</span>(<span class="st">&quot;V&quot;</span>, <span class="dv">1</span><span class="op">:</span>Boot_Repeats) ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(<span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sort</span>(<span class="op">-</span>x)[<span class="kw">ceiling</span>(<span class="fl">0.975</span> <span class="op">*</span><span class="st"> </span>Boot_Repeats)] )</span>
+<span id="cb78-74"><a href="site-comparisons.html#cb78-74"></a>  </span>
+<span id="cb78-75"><a href="site-comparisons.html#cb78-75"></a>  CI =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Lower =</span> LB, <span class="dt">Upper =</span> UB)</span>
+<span id="cb78-76"><a href="site-comparisons.html#cb78-76"></a>  CI =<span class="st"> </span><span class="kw">bind_cols</span>(CI, Bootstrap_means) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Lower<span class="op">:</span>ID) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Lower =</span> <span class="kw">ifelse</span>(<span class="kw">any</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected) <span class="op">&amp;</span><span class="st"> </span>AQSID <span class="op">!=</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Lower, <span class="ot">NA</span>),</span>
+<span id="cb78-77"><a href="site-comparisons.html#cb78-77"></a>                                                                      <span class="dt">Upper =</span> <span class="kw">ifelse</span>(<span class="kw">any</span>(AQSID <span class="op">==</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected) <span class="op">&amp;</span><span class="st"> </span>AQSID <span class="op">!=</span><span class="st"> </span>site_number <span class="op">&amp;</span><span class="st"> </span>Complete <span class="op">&amp;</span><span class="st"> </span>Detected, Upper, <span class="ot">NA</span>),</span>
+<span id="cb78-78"><a href="site-comparisons.html#cb78-78"></a>                                                                      <span class="dt">Comparison =</span> <span class="kw">ifelse</span>(Lower <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Higher&quot;</span>, <span class="kw">ifelse</span>(Upper <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;Lower&quot;</span>, <span class="st">&quot;Same&quot;</span>) ) )</span>
+<span id="cb78-79"><a href="site-comparisons.html#cb78-79"></a>  </span>
+<span id="cb78-80"><a href="site-comparisons.html#cb78-80"></a>  <span class="kw">return</span>(CI)</span>
+<span id="cb78-81"><a href="site-comparisons.html#cb78-81"></a>  </span>
+<span id="cb78-82"><a href="site-comparisons.html#cb78-82"></a>}</span>
+<span id="cb78-83"><a href="site-comparisons.html#cb78-83"></a></span>
+<span id="cb78-84"><a href="site-comparisons.html#cb78-84"></a>data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</span>
+<span id="cb78-85"><a href="site-comparisons.html#cb78-85"></a></span>
+<span id="cb78-86"><a href="site-comparisons.html#cb78-86"></a><span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Parameter&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,</span>
+<span id="cb78-87"><a href="site-comparisons.html#cb78-87"></a>                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)</span>
+<span id="cb78-88"><a href="site-comparisons.html#cb78-88"></a></span>
+<span id="cb78-89"><a href="site-comparisons.html#cb78-89"></a>data &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb78-90"><a href="site-comparisons.html#cb78-90"></a><span class="st">        </span><span class="kw">filter</span>(AQSID <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">270370020</span>, <span class="dv">270370470</span>, <span class="dv">271230871</span>) ) <span class="op">%&gt;%</span></span>
+<span id="cb78-91"><a href="site-comparisons.html#cb78-91"></a><span class="st">        </span><span class="kw">mutate</span>(<span class="dt">Censored =</span> Result <span class="op">&lt;</span><span class="st"> </span>MDL)</span>
+<span id="cb78-92"><a href="site-comparisons.html#cb78-92"></a></span>
+<span id="cb78-93"><a href="site-comparisons.html#cb78-93"></a>site_number =<span class="st"> </span><span class="dv">271230871</span></span>
+<span id="cb78-94"><a href="site-comparisons.html#cb78-94"></a>seed =<span class="st"> </span><span class="dv">2017</span></span>
+<span id="cb78-95"><a href="site-comparisons.html#cb78-95"></a><span class="kw">set.seed</span>(seed)</span>
+<span id="cb78-96"><a href="site-comparisons.html#cb78-96"></a></span>
+<span id="cb78-97"><a href="site-comparisons.html#cb78-97"></a>compare =<span class="st"> </span><span class="kw">site_compare</span>(data, site_number, <span class="dv">50</span>) <span class="co">#minimum 50 repeats</span></span></code></pre></div>
 </div>
 </div>
-<div id="tools-to-visualize-data" class="section level2">
-<h2><span class="header-section-number">9.2</span> Tools to visualize data</h2>
-<div id="beeswarm-plots" class="section level3">
-<h3><span class="header-section-number">9.2.1</span> Beeswarm Plots</h3>
+<div id="tools-to-visualize-differences" class="section level2">
+<h2><span class="header-section-number">9.2</span> Tools to visualize differences</h2>
+<div id="beeswarm-plots" class="section level3 unnumbered">
+<h3>Beeswarm Plots</h3>
 <p>Beeswarm plots are useful for visualizing concentrations measured at different sites with more detail than boxplots.</p>
-<p>Click below to view an example R script.</p>
+<p><em>Click below to view an example R script.</em></p>
 <div class="toggle">
 <button class="btn_code">
 Show <strong>R</strong> code
 </button>
 <p><br></p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb79-2" title="2"></a>
-<a class="sourceLine" id="cb79-3" title="3">beeswarm_plot &lt;-<span class="st"> </span><span class="cf">function</span>(data, pollutant, year) {</a>
-<a class="sourceLine" id="cb79-4" title="4">  </a>
-<a class="sourceLine" id="cb79-5" title="5">  <span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb79-6" title="6">  <span class="kw">library</span>(ggbeeswarm)</a>
-<a class="sourceLine" id="cb79-7" title="7">  <span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb79-8" title="8">  </a>
-<a class="sourceLine" id="cb79-9" title="9">  data &lt;-<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">AQSID =</span> <span class="kw">as.factor</span>(AQSID))</a>
-<a class="sourceLine" id="cb79-10" title="10">  </a>
-<a class="sourceLine" id="cb79-11" title="11">  <span class="kw">filter</span>(data, Pollutant <span class="op">==</span><span class="st"> </span>pollutant, Year <span class="op">==</span><span class="st"> </span>year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb79-12" title="12"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y =</span> AQSID, <span class="dt">x =</span> Result, <span class="dt">color =</span> Censored) ) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb79-13" title="13"><span class="st">    </span><span class="kw">geom_quasirandom</span>(<span class="dt">groupOnX =</span> F) <span class="op">+</span><span class="st">   </span></a>
-<a class="sourceLine" id="cb79-14" title="14"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste</span>(pollutant, year), <span class="dt">x =</span> <span class="st">&quot;Result (ug/m^3)&quot;</span>)</a>
-<a class="sourceLine" id="cb79-15" title="15">  </a>
-<a class="sourceLine" id="cb79-16" title="16">}</a>
-<a class="sourceLine" id="cb79-17" title="17"></a>
-<a class="sourceLine" id="cb79-18" title="18"></a>
-<a class="sourceLine" id="cb79-19" title="19">data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</a>
-<a class="sourceLine" id="cb79-20" title="20"></a>
-<a class="sourceLine" id="cb79-21" title="21"><span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Param_Code&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,</a>
-<a class="sourceLine" id="cb79-22" title="22">                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)</a>
-<a class="sourceLine" id="cb79-23" title="23"></a>
-<a class="sourceLine" id="cb79-24" title="24">data &lt;-<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">Censored =</span> Result <span class="op">&lt;</span><span class="st"> </span>MDL)</a>
-<a class="sourceLine" id="cb79-25" title="25"></a>
-<a class="sourceLine" id="cb79-26" title="26"><span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Lead&quot;</span>, <span class="dv">2013</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="site-comparisons.html#cb79-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb79-2"><a href="site-comparisons.html#cb79-2"></a></span>
+<span id="cb79-3"><a href="site-comparisons.html#cb79-3"></a>beeswarm_plot &lt;-<span class="st"> </span><span class="cf">function</span>(data, pollutant, year) {</span>
+<span id="cb79-4"><a href="site-comparisons.html#cb79-4"></a>  </span>
+<span id="cb79-5"><a href="site-comparisons.html#cb79-5"></a>  <span class="kw">library</span>(dplyr)</span>
+<span id="cb79-6"><a href="site-comparisons.html#cb79-6"></a>  <span class="kw">library</span>(ggbeeswarm)</span>
+<span id="cb79-7"><a href="site-comparisons.html#cb79-7"></a>  <span class="kw">library</span>(ggplot2)</span>
+<span id="cb79-8"><a href="site-comparisons.html#cb79-8"></a>  </span>
+<span id="cb79-9"><a href="site-comparisons.html#cb79-9"></a>  data &lt;-<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">AQSID =</span> <span class="kw">as.factor</span>(AQSID))</span>
+<span id="cb79-10"><a href="site-comparisons.html#cb79-10"></a>  </span>
+<span id="cb79-11"><a href="site-comparisons.html#cb79-11"></a>  <span class="kw">filter</span>(data, Pollutant <span class="op">==</span><span class="st"> </span>pollutant, Year <span class="op">==</span><span class="st"> </span>year) <span class="op">%&gt;%</span></span>
+<span id="cb79-12"><a href="site-comparisons.html#cb79-12"></a><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y =</span> AQSID, <span class="dt">x =</span> Result, <span class="dt">color =</span> Censored) ) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb79-13"><a href="site-comparisons.html#cb79-13"></a><span class="st">    </span><span class="kw">geom_quasirandom</span>(<span class="dt">groupOnX =</span> F) <span class="op">+</span><span class="st">   </span></span>
+<span id="cb79-14"><a href="site-comparisons.html#cb79-14"></a><span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="kw">paste</span>(pollutant, year), <span class="dt">x =</span> <span class="st">&quot;Result (ug/m^3)&quot;</span>)</span>
+<span id="cb79-15"><a href="site-comparisons.html#cb79-15"></a>  </span>
+<span id="cb79-16"><a href="site-comparisons.html#cb79-16"></a>}</span>
+<span id="cb79-17"><a href="site-comparisons.html#cb79-17"></a></span>
+<span id="cb79-18"><a href="site-comparisons.html#cb79-18"></a></span>
+<span id="cb79-19"><a href="site-comparisons.html#cb79-19"></a>data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</span>
+<span id="cb79-20"><a href="site-comparisons.html#cb79-20"></a></span>
+<span id="cb79-21"><a href="site-comparisons.html#cb79-21"></a><span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Param_Code&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,</span>
+<span id="cb79-22"><a href="site-comparisons.html#cb79-22"></a>                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)</span>
+<span id="cb79-23"><a href="site-comparisons.html#cb79-23"></a></span>
+<span id="cb79-24"><a href="site-comparisons.html#cb79-24"></a>data &lt;-<span class="st"> </span><span class="kw">mutate</span>(data, <span class="dt">Censored =</span> Result <span class="op">&lt;</span><span class="st"> </span>MDL)</span>
+<span id="cb79-25"><a href="site-comparisons.html#cb79-25"></a></span>
+<span id="cb79-26"><a href="site-comparisons.html#cb79-26"></a><span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Lead&quot;</span>, <span class="dv">2013</span>)</span></code></pre></div>
 <p><img src="air-methods_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Arsenic&quot;</span>, <span class="dv">2013</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="site-comparisons.html#cb80-1"></a><span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Arsenic&quot;</span>, <span class="dv">2013</span>)</span></code></pre></div>
 <p><img src="air-methods_files/figure-html/unnamed-chunk-94-2.png" width="672" /></p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Benzene&quot;</span>, <span class="dv">2013</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="site-comparisons.html#cb81-1"></a><span class="kw">beeswarm_plot</span>(data, <span class="st">&quot;Benzene&quot;</span>, <span class="dv">2013</span>)</span></code></pre></div>
 <p><img src="air-methods_files/figure-html/unnamed-chunk-94-3.png" width="672" /></p>
 </div>
+</div>
+<div id="correlation-matrices" class="section level3 unnumbered">
+<h3>Correlation matrices</h3>
+<p>Correlation matrices help visualize the relationship between different pollutants at a site.</p>
+<p><em>Click below to view an example R script.</em></p>
+<div class="toggle">
+<button class="btn_code">
+Show <strong>R</strong> code
+</button>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="site-comparisons.html#cb82-1"></a>correlation_plots =<span class="st"> </span><span class="cf">function</span>(data, site) {</span>
+<span id="cb82-2"><a href="site-comparisons.html#cb82-2"></a>  <span class="kw">library</span>(tidyverse)</span>
+<span id="cb82-3"><a href="site-comparisons.html#cb82-3"></a>  <span class="kw">library</span>(corrplot)</span>
+<span id="cb82-4"><a href="site-comparisons.html#cb82-4"></a>  </span>
+<span id="cb82-5"><a href="site-comparisons.html#cb82-5"></a>  data_site &lt;-<span class="st"> </span><span class="kw">filter</span>(data, AQSID <span class="op">%in%</span><span class="st"> </span>site) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Date, Pollutant, Result)</span>
+<span id="cb82-6"><a href="site-comparisons.html#cb82-6"></a>  </span>
+<span id="cb82-7"><a href="site-comparisons.html#cb82-7"></a>  analytes &lt;-<span class="st"> </span><span class="kw">spread</span>(data_site, Pollutant, Result, <span class="dt">drop =</span> T)</span>
+<span id="cb82-8"><a href="site-comparisons.html#cb82-8"></a>  </span>
+<span id="cb82-9"><a href="site-comparisons.html#cb82-9"></a>  analytes<span class="op">$</span>Date &lt;-<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb82-10"><a href="site-comparisons.html#cb82-10"></a></span>
+<span id="cb82-11"><a href="site-comparisons.html#cb82-11"></a>  coranalytes &lt;-<span class="st"> </span><span class="kw">cor</span>(analytes, <span class="dt">method=</span><span class="st">&quot;kendall&quot;</span>, <span class="dt">use=</span><span class="st">&quot;pairwise.complete.obs&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()</span>
+<span id="cb82-12"><a href="site-comparisons.html#cb82-12"></a>  </span>
+<span id="cb82-13"><a href="site-comparisons.html#cb82-13"></a>  coranalytes &lt;-<span class="st"> </span><span class="kw">select_if</span>(coranalytes, <span class="cf">function</span>(x) <span class="op">!</span><span class="kw">all</span>(<span class="kw">is.na</span>(x))) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb82-14"><a href="site-comparisons.html#cb82-14"></a><span class="st">                 </span><span class="kw">filter_all</span>(<span class="kw">any_vars</span>(<span class="op">!</span><span class="kw">is.na</span>(.))) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb82-15"><a href="site-comparisons.html#cb82-15"></a><span class="st">                 </span><span class="kw">as.matrix</span>()</span>
+<span id="cb82-16"><a href="site-comparisons.html#cb82-16"></a>  </span>
+<span id="cb82-17"><a href="site-comparisons.html#cb82-17"></a>  <span class="kw">rownames</span>(coranalytes) &lt;-<span class="st"> </span><span class="kw">colnames</span>(coranalytes)</span>
+<span id="cb82-18"><a href="site-comparisons.html#cb82-18"></a></span>
+<span id="cb82-19"><a href="site-comparisons.html#cb82-19"></a>  <span class="kw">corrplot</span>(coranalytes, <span class="dt">method =</span> <span class="st">&quot;circle&quot;</span>, <span class="dt">type=</span><span class="st">&quot;lower&quot;</span>, <span class="dt">tl.cex=</span><span class="fl">0.6</span>) <span class="co">#plot matrix</span></span>
+<span id="cb82-20"><a href="site-comparisons.html#cb82-20"></a>}</span>
+<span id="cb82-21"><a href="site-comparisons.html#cb82-21"></a></span>
+<span id="cb82-22"><a href="site-comparisons.html#cb82-22"></a>data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>)</span>
+<span id="cb82-23"><a href="site-comparisons.html#cb82-23"></a></span>
+<span id="cb82-24"><a href="site-comparisons.html#cb82-24"></a><span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Param_Code&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,</span>
+<span id="cb82-25"><a href="site-comparisons.html#cb82-25"></a>                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)</span>
+<span id="cb82-26"><a href="site-comparisons.html#cb82-26"></a></span>
+<span id="cb82-27"><a href="site-comparisons.html#cb82-27"></a>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">correlation_plots</span>(<span class="dv">270530962</span>)</span></code></pre></div>
+<p><img src="air-methods_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+</div>
 <p><br></p>
-<p><em>References</em></p>
+</div>
+</div>
+<div id="references-1" class="section level2 unnumbered">
+<h2><em>References</em></h2>
 <ul>
 <li><a href="http://lenkiefer.com/2017/04/26/housing-data-uncertainty/">Visualizing uncertainty in housing data</a></li>
 <li>R packages: <a href="https://github.com/eclarke/ggbeeswarm">Beeswarm</a></li>
 </ul>
 <p><br></p>
-</div>
-<div id="correlation-matrices" class="section level3">
-<h3><span class="header-section-number">9.2.2</span> Correlation matrices</h3>
-<p>Correlation matrices help visualize the relationship between different pollutants at a site.</p>
-<p>Click below to view an example R script.</p>
-<div class="toggle">
-<button class="btn_code">
-Show <strong>R</strong> code
-</button>
-<p><br></p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb82-2" title="2"></a>
-<a class="sourceLine" id="cb82-3" title="3">correlation_plots =<span class="st"> </span><span class="cf">function</span>(data, site) {</a>
-<a class="sourceLine" id="cb82-4" title="4">  <span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb82-5" title="5">  <span class="kw">library</span>(corrplot)</a>
-<a class="sourceLine" id="cb82-6" title="6">  </a>
-<a class="sourceLine" id="cb82-7" title="7">  data_site &lt;-<span class="st"> </span><span class="kw">filter</span>(data, AQSID <span class="op">%in%</span><span class="st"> </span>site) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Date, Pollutant, Result)</a>
-<a class="sourceLine" id="cb82-8" title="8">  analytes &lt;-<span class="st"> </span><span class="kw">spread</span>(data_site, Pollutant, Result, <span class="dt">drop=</span>T)</a>
-<a class="sourceLine" id="cb82-9" title="9">  analytes<span class="op">$</span>Date &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb82-10" title="10"></a>
-<a class="sourceLine" id="cb82-11" title="11">  coranalytes &lt;-<span class="st"> </span><span class="kw">cor</span>(analytes, <span class="dt">method=</span><span class="st">&quot;kendall&quot;</span>, <span class="dt">use=</span><span class="st">&quot;pairwise.complete.obs&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()</a>
-<a class="sourceLine" id="cb82-12" title="12">  coranalytes &lt;-<span class="st"> </span><span class="kw">select_if</span>(coranalytes, <span class="cf">function</span>(x) <span class="op">!</span><span class="kw">all</span>(<span class="kw">is.na</span>(x))) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_all</span>(<span class="kw">any_vars</span>(<span class="op">!</span><span class="kw">is.na</span>(.))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb82-13" title="13"><span class="st">    </span><span class="kw">as.matrix</span>()</a>
-<a class="sourceLine" id="cb82-14" title="14">  <span class="kw">rownames</span>(coranalytes) &lt;-<span class="st"> </span><span class="kw">colnames</span>(coranalytes)</a>
-<a class="sourceLine" id="cb82-15" title="15"></a>
-<a class="sourceLine" id="cb82-16" title="16">  <span class="kw">corrplot</span>(coranalytes, <span class="dt">method =</span> <span class="st">&quot;circle&quot;</span>, <span class="dt">type=</span><span class="st">&quot;lower&quot;</span>, <span class="dt">tl.cex=</span><span class="fl">0.6</span>) <span class="co">#plot matrix</span></a>
-<a class="sourceLine" id="cb82-17" title="17">}</a>
-<a class="sourceLine" id="cb82-18" title="18"></a>
-<a class="sourceLine" id="cb82-19" title="19">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/MPCA-air/air-methods/master/airtoxics_data_2009_2013.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> F)</a>
-<a class="sourceLine" id="cb82-20" title="20"></a>
-<a class="sourceLine" id="cb82-21" title="21"><span class="kw">names</span>(data)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AQSID&quot;</span>, <span class="st">&quot;POC&quot;</span>, <span class="st">&quot;Param_Code&quot;</span>, <span class="st">&quot;Date&quot;</span>,<span class="st">&quot;Result&quot;</span>,</a>
-<a class="sourceLine" id="cb82-22" title="22">                       <span class="st">&quot;Null_Data_Code&quot;</span>, <span class="st">&quot;MDL&quot;</span>, <span class="st">&quot;Pollutant&quot;</span>, <span class="st">&quot;Year&quot;</span>, <span class="st">&quot;CAS&quot;</span>)</a>
-<a class="sourceLine" id="cb82-23" title="23"></a>
-<a class="sourceLine" id="cb82-24" title="24">data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">correlation_plots</span>(<span class="dv">270530962</span>)</a></code></pre></div>
-<p><img src="air-methods_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
-</div>
 <p><br> <a href="site-comparisons.html#site-comparisons">Back to top</a></p>
 
-</div>
 </div>
 </div>
 <script>
