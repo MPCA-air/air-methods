@@ -85,11 +85,9 @@ Registered users can access the AQS database via a web application at https://ww
 
 
 ### Retrieving data from AQS DataMart {#rqamd}
-The AQS Data Mart provides a convenient API to access air quality data stored in the EPA's AQS database, [AQS Data Mart] (https://aqs.epa.gov/aqsweb/documents/data_mart_welcome.html)
+The AQS Data Mart provides a convenient API to access air quality data stored in the EPA's AQS database, [AQS Data Mart](https://aqs.epa.gov/aqsweb/documents/data_mart_welcome.html)
 
 Note: The AQS Data Mart requires a user name and password. The username and password is not the same as your AQS User Account. To request a Data Mart account, follow the instructions on the Data Mart page. 
-
-The `RQAMD` package allows users to query the AQS Data Mart in R, see [RQAMD](https://github.com/ebailey78/raqdm) on Github.
 
 Warning: Data from AQS Data Mart does not include null results.
 
@@ -102,42 +100,10 @@ Click the button below to view a step by step example.
 
 ```{r, eval=FALSE }
 
-##install raqdm package
-library(devtools)
-devtools::install_github("ebailey78/raqdm")
-library(raqdm)
+library(tidyverse)
 
-##set Data Mart username and password.
-
-setAQDMuser("User Name","PW",save=TRUE) #Note save=TRUE creates a file that stores username and password locally, you will not need to run setuser info each time you load raqdm. 
-
-setAQDMdefaults(pc="CRITERIA", state="27", save=TRUE) #Set defaults that are locally stored for queries. This eliminates need to define the data type and state code. 
-
-
-## Single parameter query
-
-x <- getAQDMdata(state="27",pc="CRITERIA",param="42602",format="AQCSV",bdate="20140101",edate="20141231",synchronous = FALSE) # Queries Data Mart DataBase
-
-aqcsv <- getAQDMrequest(x) # Wait for email confirming file is ready. 
-
-
-## Multiple parameter loops
-
-
-params <- c("45201", "42602", "44201") #Create a vector with the parameters you are interested in
-
-# Use lapply to loop through the params vector, requesting each one from AQDM. A list of requests will be returned to the x variable
-x <- lapply(params, function(p) {
-  return(getAQDMdata(param=p))
-})
-
-# Now loop through the requests to retrieve the data
-y <- lapply(x, function(r) {
-  return(getAQDMrequest(r))
-})
-
-# Use do.call and rbind to combine them into one data.frame
-d <- do.call(rbind, y)
+# Step 1. Don't use raqdm
+# That's it!
 
 ```
 </div>
