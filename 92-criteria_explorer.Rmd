@@ -1,6 +1,230 @@
 # Criteria pollutant explorer
 
-
 This section describes the methods used to summarize the data shown in MPCA's Criteria pollutant explorer.
 
-_Coming soon..._
+## Documentation
+
+Methods for calculating NAAQS design values are explained in [40 CFR Part 50](https://www.ecfr.gov/cgi-bin/text-idx?SID=c118ce8b63f65737a282c4281a59abf0&mc=true&node=pt40.2.50&rgn=div5). All design values are calculated exactly as written.
+
+## Data Sources
+
+Data for all NAAQS Criteria pollutants except lead are in [WAIR](http://rainier.pca.state.mn.us/documentation/DataDictionary/wair/index.html). Lead data can be accessed via the AQS API. TSP data are currently in StarLIMS. Design Values for PM2.5 and ozone are calculated automatically in WAIR and are in the aqs.vm_pm25_design_value and aqs.vm_ozone_design_value schemas respectively.
+
+<br> __`R` script for pulling lead data from AQS API__ 
+
+Click the button below for code.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+
+```{r, eval=FALSE}
+library(data.table)
+library(tidyverse)
+library(lubridate)
+library(glue)
+library(httr)
+library(jsonlite)
+library(htmltools)
+
+#Pull data for last year
+year <- year(today()) - 1
+
+api_email <- "" #your email
+api_key <- "" #your AQS API key, to create account see: https://aqs.epa.gov/aqsweb/documents/data_api.html#signup
+
+col_names <- fread("X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/Air Data Analysis Supporting Information/Information Tables/AQS Raw Data format.csv") %>%
+  pull(Name)
+
+outcomes <- rawToChar(GET(
+    glue(
+      "https://aqs.epa.gov/data/api/transactionsSample/byState?email={api_email}&key={api_key}&param=14129&bdate={year}0101&edate={year}1231&state=27"
+    ),
+    
+    encode = "json"
+    
+  )$content)
+
+raw_data <- purrr::map(outcomes, ~ if (str_detect(.x, '\\"status\\": \\"Success\\"'))
+  fromJSON(.x)$Data else
+    NULL
+) %>%
+  rbindlist(fill = T) %>%
+  setkey()
+
+pb_data <- mutate(raw_data, TT = "RD", AC = "I") %>%
+  select(TT, AC, state_code:uncertainty) %>%
+  set_names(col_names)
+
+fwrite(pb_data, glue("X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/6 Air Data/Monitoring Data/Ambient Air Monitoring Data - Test/MPCA Statewide Results/Criteria Pollutants/Lead/Raw Data/Lead Results MN {year}.txt"), sep = "|")
+```
+
+</div>
+
+<br> __`R` script for pulling TSP data from Tableau__ 
+
+Click the button below for code.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(data.table)
+library(lubridate)
+library(RODBC)
+library(glue)
+
+options(scipen = 999)
+
+#Years of data you want to pull
+years <- 2020
+
+#Use the name of your LIMS connection (check odbc data sources)
+lims_cnx <- odbcConnect("LIMS32_2", uid = "kgavin", pwd = "tableau_12")  #Connect to LIMS
+
+colnames <- c("Transaction Type", "Action Indicator", "State Code / Tribal Indicator",
+              "County Code / Tribal Code", "Site Number", "Parameter", "POC",  "Duration Code",
+              "Reported Unit", "Method Code", "Sample Date",  "Sample Begin Time",
+              "Reported Sample Value", "Null Data Code",  "Collection Frequency Code",
+              "Monitor Protocol ID", "Qualifier Code - 1",  "Qualifier Code - 2", "Qualifier Code - 3",
+              "Qualifier Code - 4",  "Qualifier Code - 5", "Qualifier Code - 6", "Qualifier Code - 7",
+              "Qualifier Code - 8", "Qualifier Code - 9", "Qualifier Code - 10",
+              "Alternate Method Detection Limit", "Uncertainty Value")
+
+for(i in years){
+  print(i)
+  data <- sqlQuery(lims_cnx, glue("SELECT 'RD', 'I', STATECODE, COUNTYCODE, SITECODE, PARAMCODE, POC, SAMPDURATION, UNITCODE, METHODCODE,
+                       TO_CHAR(RUNDATE, 'YYYYMMDD'), TO_CHAR(RUNDATE, 'HH24:MI'), VALUE, NULLDATACODE
+                       FROM   LIMSSUPER.DAILYDATA        
+                       WHERE  (RUNDATE>={{ts '{i}-01-01 00:00:00'}} AND RUNDATE<{{ts '{i+1}-01-01 00:00:00'}}
+                       AND PARAMCODE = '11101')  
+                       ORDER BY PARAMCODE, SITEID, RUNDATE"),
+                   as.is = T, max = 0
+  )
+  
+  if(nrow(data) > 0) {
+    
+    for(j in as.character(1:14)) data[[j]] <- NA
+    data <- set_names(data, colnames)
+    
+    fwrite(data,
+           glue("X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/6 Air Data/Monitoring Data/Ambient Air Monitoring Data - Test/MPCA Statewide Results/Criteria Pollutants/TSP/Raw Data/TSP Results MN {i}.txt"),
+           sep = "|",
+           col.names = T)
+  }
+  rm(data)
+}
+```
+
+</div>
+
+## R scripts
+
+Scripts for calculating NAAQS/MAAQS Design Values are in [this folder](X:\Programs\Air_Quality_Programs\Air Monitoring Data and Risks\Air Data Analysis Supporting Information\Criteria Pollutant Design Value Calculations\R Files for DVs\Update DV Scripts). The PM2.5 and ozone scripts are deprecated as their Design Values are calculated in WAIR.
+
+Once design values have been calculated for all pollutants, use this R script to merge together in one file.
+
+<div class="toggle">
+<button class = "btn_code">Show __R__ code</button>
+
+```{r, eval=FALSE}
+###Compile all calculted NAAQS DVs into 1 File
+### Includes connection to site table and standards
+library(tidyverse)
+library(RPostgreSQL)
+library(data.table)
+
+standards_file = "X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/Air Data Analysis Supporting Information/Information Tables/AQ Standards.csv"
+
+#CSV file with your WAIR "username" and "password"
+WAIR_credentials_file = "H:/WAIR credentials.csv"
+
+WAIR_creds = fread(WAIR_credentials_file)
+
+drv <- dbDriver("PostgreSQL")
+
+con <- dbConnect(drv, dbname = "wair", host = 'eiger', user = WAIR_creds$username, password = WAIR_creds$password)
+
+sites = dbGetQuery(con, statement = paste("SELECT * FROM aqs.site
+LEFT JOIN core.counties_contiguousus counties
+ON aqs.site.stateid = counties.state_fips AND aqs.site.cntyid = counties.cnty_fips
+                                          LEFT JOIN aqs.city_fips
+ON aqs.site.stateid = aqs.city_fips.stateid AND aqs.site.cntyid = aqs.city_fips.cntyid AND
+                                          aqs.site.cityid = aqs.city_fips.cityid")) %>% setDT()
+
+monitor_types = dbGetQuery(con, statement = "SELECT * FROM aqs.monitor_type")
+
+setDT(monitor_types)
+
+monitor_types = monitor_types[mon_type %in% c("SLAMS", "TRIBAL", "NON-EPA FEDERAL", "EPA")
+                              ][, monitor_id := substr(monitor_id, 1, 11)
+                                ][, .SD[1, .(mon_type)], by = .(monitor_id)] %>%
+  separate(monitor_id, c("stateid", "cntyid", "siteid"), convert = T) %>% setDT()
+
+
+read_dvs = function() {
+  library(data.table)
+  folder = "X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/3 Data Analysis Results/Criteria Pollutant Analysis/DV Indicator Files/DVs - Final"
+  list.files(folder, pattern = "NAAQS Final DV", full.names = T) %>% lapply(fread) %>% rbindlist(fill = T)
+}
+
+format_addresses = function(addresses) {
+  street_numbers = c("0th", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th")
+  addresses = str_to_title(addresses) %>%
+    str_replace_all(street_numbers %>% str_to_title() %>% paste(collapse = "|"), street_numbers)
+  return(addresses)
+}
+
+alldvs = read_dvs()
+
+alldvs = alldvs[Pollutant %in% c("PM10"), `:=` (POC = str_sub(AQSID, -1, -1))
+       ][, `:=`(AQSID_POC = AQSID, AQSID = str_sub(AQSID, 1, 11), stdjoin = paste(Pollutant, Indicator, sep=": "))] %>%
+  separate(AQSID, c("stateid", "cntyid", "siteid"), remove = F, convert = T) %>% setDT()
+
+alldvs[Indicator == "Daily Background Concentration", DV_Valid := "Yes"]
+
+standards=fread(standards_file)
+
+alldvs = standards[monitor_types[sites[alldvs, on = c("stateid", "cntyid", "siteid")], on = c("stateid", "cntyid", "siteid")], on = "stdjoin"]
+
+alldvs = alldvs[!is.na(site_name) & !is.na(mon_type), .(
+  Pollutant,
+  Indicator,
+  PrimaryStandard,
+  SecondaryStandard,
+  Standards_Unit = Units,
+  YearPromulgated,
+  NAAQS = as.logical(NAAQS),
+  MAAQS = as.logical(MAAQS),
+  Active = as.logical(Active),
+  AQSID_POC,
+  DVYear,
+  DV,
+  FinalDV_Units = Units,
+  DV_Valid,
+  Address = format_addresses(street_addr),
+  Cityname = lapply(city_name, function(x) str_split(x, "\\ \\(RR")[[1]][1]),
+  County = cnty_name,
+  CountyFIPS = fips,
+  Latitude = lat,
+  Longitude = lon,
+  Siteid = siteid,
+  Sitename = site_name,
+  AveragingTime,
+  ComplianceTest,
+  StandardDescription,
+  DataYears,
+  ChartName = ifelse(is.na(city_name), paste0(site_name, " (", str_sub(AQSID_POC, 8, 13), ")"),
+                     paste0(lapply(city_name, function(x) str_split(x, "\\ \\(RR")[[1]][1]), " (", str_sub(AQSID_POC, 8, 13), ")") )
+  
+)] 
+
+##Write files
+fwrite(alldvs,"X:/Programs/Air_Quality_Programs/Air Monitoring Data and Risks/3 Data Analysis Results/Criteria Pollutant Analysis/DV Indicator Files/DVs - Final/NAAQS_DVs.csv")
+```
+
+</div>
+
+## Tableau
+
+The Criteria Data Explorer workbook is located [here](X:\Programs\Air_Quality_Programs\Air Monitoring Data and Risks\5 Web Apps\Criteria Pollutants Web Application\Criteria Tableau Workbook\Criteria Pollutant Design Values 2021.twb). Refresh the extract and adjust date ranges then publish to the PCA Tableau server. Email the MPCA Data Desk to update the [workbook on the PCA website](https://www.pca.state.mn.us/air/criteria-pollutant-data-explorer).
