@@ -31,7 +31,7 @@ __Recommended packages__
 
 `RODBC`     Load data from Access and Oracle databases such as DELTA.
 
-`RMySQL`, `RPostgresSQL`, and `RSQLite`  Connect to SQL databases.
+`RPostgresSQL`, `RMySQL`, and `RSQLite`  Connect to SQL databases.
 
 `rvest`     Read and scrape content from webpages.
 
