@@ -29,7 +29,7 @@ __Recommended packages__
 
 `readxl`    Load data from Excel.
 
-`RODBC`     Load data from Access and Oracle databases such as DELTA.
+`RODBC`     Load data from Access and Oracle DBs such as DELTA/TEMPO.
 
 `RPostgresSQL`, `RMySQL`, and `RSQLite`  Connect to SQL databases.
 
