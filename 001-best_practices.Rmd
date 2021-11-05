@@ -33,7 +33,7 @@ __Recommended packages__
 
 `RPostgresSQL`, `RMySQL`, and `RSQLite`  Connect to SQL databases.
 
-`rvest`     Read and scrape content from webpages.
+`rvest`     Read and scrape content from web pages.
 
 `pdftools`  Read PDF documents.
 
