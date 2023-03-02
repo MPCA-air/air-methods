@@ -1765,9 +1765,7 @@ library(readr)
 
 You can view available database connections in R using the function `odbcDataSources()`.
 ```{r}
-
 odbcDataSources()
-
 ```
 
 <br>
@@ -1777,20 +1775,11 @@ To connect to `deltaw`, use the function `odbcConnect()`.
 
 ```{r, warning = F}
 
-# Load credentials
-credentials <- read_csv("X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Student Folder/credentials.csv")
 
-user      <- credentials$delta_user
-password  <- credentials$delta_pwd
-
-# Alternatively, use your own
-#user      <- "ta*******"
-#password  <- "da**_*******"
-  
 # Connect to DELTA
 deltaw <- odbcConnect("deltaw", 
-                      uid = user, 
-                      pwd = password,
+                      uid = "username", 
+                      pwd = "password",
                       believeNRows = FALSE)
 
 
