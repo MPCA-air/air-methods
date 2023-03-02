@@ -1856,16 +1856,7 @@ Show <strong>R</strong> code
 ##        &quot;Amazon Redshift (x64)&quot;</code></pre>
 <p><br></p>
 <p>To connect to <code>deltaw</code>, use the function <code>odbcConnect()</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="get-data.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load credentials</span></span>
-<span id="cb12-2"><a href="get-data.html#cb12-2" aria-hidden="true" tabindex="-1"></a>credentials <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Student Folder/credentials.csv&quot;</span>)</span>
-<span id="cb12-3"><a href="get-data.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="get-data.html#cb12-4" aria-hidden="true" tabindex="-1"></a>user      <span class="ot">&lt;-</span> credentials<span class="sc">$</span>delta_user</span>
-<span id="cb12-5"><a href="get-data.html#cb12-5" aria-hidden="true" tabindex="-1"></a>password  <span class="ot">&lt;-</span> credentials<span class="sc">$</span>delta_pwd</span>
-<span id="cb12-6"><a href="get-data.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="get-data.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, use your own</span></span>
-<span id="cb12-8"><a href="get-data.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#user      &lt;- &quot;ta*******&quot;</span></span>
-<span id="cb12-9"><a href="get-data.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#password  &lt;- &quot;da**_*******&quot;</span></span>
-<span id="cb12-10"><a href="get-data.html#cb12-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r">
 <span id="cb12-11"><a href="get-data.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to DELTA</span></span>
 <span id="cb12-12"><a href="get-data.html#cb12-12" aria-hidden="true" tabindex="-1"></a>deltaw <span class="ot">&lt;-</span> <span class="fu">odbcConnect</span>(<span class="st">&quot;deltaw&quot;</span>, </span>
 <span id="cb12-13"><a href="get-data.html#cb12-13" aria-hidden="true" tabindex="-1"></a>                      <span class="at">uid =</span> user, </span>
